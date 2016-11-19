@@ -1,30 +1,44 @@
-Libsetila
-==========
+####Libsetila
 
-Libsetila is a Linux user space library written in C for communication with sensors present on Raspberry Pi Sense HAT.
-It provides access to sensors on Sense HAT using I2C kernel module present on the system.
-The low level I2C communication is done by the kernel module, while the library implements the data exchange protocols
-supported by the sensors on Sense HAT.
+Libsetila is a Linux user space library written in C++ for communication with diffrent types of popular sensors.
 
-Supported Sensors
------------------
+Currently only I2C sensors are supported. The low level I2C communication is done by the Linux kernel module, while 
+the library implements the data exchange protocols and features supported by the sensors. 
 
-Current version of the library implements support for HTS221 humidity sensor.
-It can read the temperature and humidity from HTS221.
+###Supported I2C Sensors
 
+Humidity sensors:
 
-Installation
----------------
+- ST HTS221 humidity and temperature sensor.
+
+Pressure sensors:
+
+- ST LPS25H pressure and temperature sensor;
+- Bosh BMP085 pressure and temperature sensor;
+- Bosh BMP180 pressure and temperature sensor.
+
+###Installation
 
 Installation instruction can be found in the INSTALL file.
 
 
-Documentation
----------------
+###Documentation
+
 Check the doc folder for detailed library documentation.
 
 
-Tested on Raspberry Pi 2 with Sense HAT.
+###Hardware for testing 
+
+The library functionality has been tested using the following hardware:
+
+- Adafruit BMP085 module (Adafruit product ID 391);
+- Adafruit BMP180 module (Adafruit product ID 1603);
+- Pi Sense HAT;
+- Raspbery Pi 1 model B;
+- Raspbery Pi 2 model B.  
+
+The library is distributed with examples that demonstrate the library use.
+
 
 **WARNING:** 
 The source is provided as it is without any warranty. Use it on your own risk!

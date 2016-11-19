@@ -8,24 +8,34 @@ HEADERS_PATH = /usr/include
 LIBRARY_PATH = /usr/lib
 
 # List of source files
-SOURCES += libsetila_example.c
+SOURCES += libsetila-BMP085.cpp libsetila-SenseHAT.cpp
 
 #List of object files
-OBJECTS += $(SOURCES:.c=.o)
+OBJECTS += $(SOURCES:.cpp=.o)
+
+all: libsetila-BMP085 libsetila-SenseHAT
 
 #Compile all of the source files
-%.o: %.c
+%.o: %.cpp
 	@echo Compiling file: $<
-	gcc -c $^ -o $@
+	g++ -I $(HEADERS_PATH) -std=c++0x -c $^ -o $@
 	@echo
 
-#Building libMAX7221example executable
-libsetila_example: libsetila_example.o
+#Building libsetila-BMP085 executable
+libsetila-BMP085: libsetila-BMP085.o
 	@echo Building target file: $@. 
-	gcc -o $@ $^ -L$(LIBRARY_PATH) -lsetila
+	g++ -L$(LIBRARY_PATH) -o $@ $^ -lsetila 
 	@echo 
+
+#Building libsetila-SenseHAT executable
+libsetila-SenseHAT: libsetila-SenseHAT.o
+	@echo Building target file: $@. 
+	g++ -L$(LIBRARY_PATH) -o $@ $^ -lsetila 
+	@echo 
+
 
 .PHONY: clean
 
 clean:
-	rm -f *.o libsetila_example
+	rm -f *.o *.d libsetila-BMP085 libsetila-SeseHAT
+

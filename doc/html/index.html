@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.7"/>
-<title>libsetila: Libsetila</title>
+<title>libsetila: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -18,9 +18,8 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">libsetila
-   &#160;<span id="projectnumber">v0.1</span>
+   &#160;<span id="projectnumber">v0.2</span>
    </div>
-   <div id="projectbrief">Libsetila is a Linux user space library written in C for communication with sensors present on Raspberry Pi Sense HAT.</div>
   </td>
  </tr>
  </tbody>
@@ -31,7 +30,6 @@
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="modules.html"><span>Modules</span></a></li>
       <li><a href="annotated.html"><span>Data&#160;Structures</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -40,28 +38,41 @@
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Libsetila </div>  </div>
+<div class="title">libsetila Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><dl class="section author"><dt>Author</dt><dd>Goce Boshkovski</dd></dl>
-<h1><a class="anchor" id="desc"></a>
-Short Description</h1>
-<p>Libsetila is a Linux user space library written in C for communication with sensors present on Raspberry Pi Sense HAT. It provides access to sensors on Sense HAT using I2C kernel module present on the system. The low level I2C communication is done by the kernel module, while the library implements the data exchange protocols supported by the sensors on Sense HAT.</p>
-<h1><a class="anchor" id="hwsupp"></a>
-Supported Sensors</h1>
-<p>The library is compatible with every 8-bit AVR microcontroller.</p>
-<h1><a class="anchor" id="sensorsupp"></a>
-DS18S20 support and implemented functions</h1>
-<p>Current version of the library implements support for HTS221 humidity sensor. It can read the temperature and humidity from HTS221.</p>
-<h1><a class="anchor" id="install"></a>
-Installation</h1>
+<div class="textblock"><p>Libsetila is a Linux user space library written in C++ for communication with diffrent types of popular sensors.</p>
+<p>Currently only I2C sensors are supported. The low level I2C communication is done by the Linux kernel module, while the library implements the data exchange protocols and features supported by the sensors.</p>
+<h3>Supported I2C Sensors</h3>
+<p>Humidity sensors:</p>
+<ul>
+<li>ST <a class="el" href="classHTS221.html" title="A class derived from I2CSensor class that describes a HTS221 sensor. ">HTS221</a> humidity and temperature sensor.</li>
+</ul>
+<p>Pressure sensors:</p>
+<ul>
+<li>ST <a class="el" href="classLPS25H.html" title="A class derived from I2CSensor class that describes LPS25H sensor. ">LPS25H</a> pressure and temperature sensor;</li>
+<li>Bosh <a class="el" href="classBMP085.html" title="A class derived from I2CSensor class. It represents BMP085/BMP180 pressure and temperature sensor...">BMP085</a> pressure and temperature sensor;</li>
+<li>Bosh BMP180 pressure and temperature sensor.</li>
+</ul>
+<h3>Installation</h3>
 <p>Installation instruction can be found in the INSTALL file.</p>
-<p>Tested on Raspberry Pi 2 with Sense HAT.</p>
-<dl class="section warning"><dt>Warning</dt><dd>The source is provided as it is without any warranty. Use it on your own risk! The author does not take any responsibility for the damage caused while using this software. </dd></dl>
+<h3>Documentation</h3>
+<p>Check the doc folder for detailed library documentation.</p>
+<h3>Hardware for testing</h3>
+<p>The library functionality has been tested using the following hardware:</p>
+<ul>
+<li>Adafruit <a class="el" href="classBMP085.html" title="A class derived from I2CSensor class. It represents BMP085/BMP180 pressure and temperature sensor...">BMP085</a> module (Adafruit product ID 391);</li>
+<li>Adafruit BMP180 module (Adafruit product ID 1603);</li>
+<li>Pi Sense HAT;</li>
+<li>Raspbery Pi 1 model B;</li>
+<li>Raspbery Pi 2 model B.</li>
+</ul>
+<p>The library is distributed with examples that demonstrate the library use.</p>
+<p><b>WARNING:</b> The source is provided as it is without any warranty. Use it on your own risk! The author does not take any responsibility for the damage caused while using this software. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 26 2016 22:48:05 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Nov 20 2016 00:15:26 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>
