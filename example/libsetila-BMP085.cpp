@@ -85,7 +85,7 @@ int main(int argc, char *argv[])
 		if (measurePressure)
 			std::cout << "Pressure: P=" << BMP085Sensor.getPressureReading() << "[hPa]" << std::endl;
 		if (calculateAltitude)
-			std::cout << "Altitude above the see level: h=" << altitude((double)BMP085Sensor.getPressureReading(),(double)AVERAGE_SEA_LEVEL_PRESSURE) << "[m]" << std::endl;
+			std::cout << "Altitude above the see level: h=" << SetilaAUX::altitude((double)BMP085Sensor.getPressureReading(),(double)AVERAGE_SEA_LEVEL_PRESSURE) << "[m]" << std::endl;
 	}
 
 	/* Close the access to the I2C bus. */

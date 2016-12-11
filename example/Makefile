@@ -37,5 +37,5 @@ libsetila-SenseHAT: libsetila-SenseHAT.o
 .PHONY: clean
 
 clean:
-	rm -f *.o *.d libsetila-BMP085 libsetila-SeseHAT
+	rm -f *.o *.d libsetila-BMP085 libsetila-SenseHAT
 

@@ -48,14 +48,14 @@ install:
 
 # Uninstall the library from the system
 uninstall:
-	rm $(PREFIX)/lib/$(LIBRARY_NAME).so
-	install -m 0644 I2CBus.h $(PREFIX)/include
-	install -m 0644 I2CSensor.h $(PREFIX)/include
-	install -m 0644 LPS25H.h $(PREFIX)/include
-	install -m 0644 HTS221.h $(PREFIX)/include
-	install -m 0644 BMP085.h $(PREFIX)/include
-	install -m 0644 setila_aux.h $(PREFIX)/include
-	install -m 0644 setila_errors.h $(PREFIX)/include
+	rm -f $(PREFIX)/lib/$(LIBRARY_NAME).so
+	rm -f $(PREFIX)/include/I2CBus.h
+	rm -f $(PREFIX)/include/I2CSensor.h
+	rm -f $(PREFIX)/include/LPS25H.h
+	rm -f $(PREFIX)/include/HTS221.h
+	rm -f $(PREFIX)/include/BMP085.h
+	rm -f $(PREFIX)/include/setila_aux.h
+	rm -f $(PREFIX)/include/setila_errors.h
 
 .PHONY: clean
 clean:

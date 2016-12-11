@@ -11,7 +11,7 @@
 #include "setila_aux.h"
 #include "math.h"
 
-int altitude(double lastPressureReading,double baseLinePressure)
+int SetilaAUX::altitude(double lastPressureReading,double baseLinePressure)
 {
 	return round(44330*(1-pow((lastPressureReading/baseLinePressure),(1/5.255))));
 }
