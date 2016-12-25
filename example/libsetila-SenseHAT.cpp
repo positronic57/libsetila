@@ -49,16 +49,24 @@ int main(void)
 
 	std::cout << "LPS25H readings:" << std::endl;
 	std::cout << "Pressure P=" << LPS25HSensor.getPressureReading() << "[hPa]" << std::endl;
-	std::cout << "Temperature T=" << LPS25HSensor.getTemperaturReading() << "[°C]" << std::endl;
+	std::cout << "Temperature T=" << LPS25HSensor.getTemperaturReading() << "[°C]\n" << std::endl;
 
+#if 0
 	/* Init HTS221 Sensor for one shot measurement */
 	HTS221Sensor.initSensor(0x1B,0x84,0x00,0x00);
 	/* Start a one shot humidity measurement */
-	HTS221Sensor.startHumidityMeasurement();
+	HTS221Sensor.doOneShotMeasurement();
+#endif
 
+	/* Init HTS221 Sensor with ODR = 1Hz */
+	HTS221Sensor.initSensor(0x1B, 0x85, 0x00, 0x00);
+	/* Get the humidity and temperature readings from the sensor and calculate the current temperature and humidity values. */
+	HTS221Sensor.getSensorReadings();
+
+	/* Print the humidity and temperature value. */
 	std::cout << "HTS221 readings:" << std::endl;
- 	std::cout << "Relative Humidity R=" << HTS221Sensor.getHumidityReading() << "[%rH]" << std::endl;
-	std::cout << "Temperature T=" << HTS221Sensor.getTemperatureReading() << "[°C]" << std::endl;
+ 	std::cout << "Relative Humidity R=" << HTS221Sensor.HumidityReading() << "[%rH]" << std::endl;
+	std::cout << "Temperature T=" << HTS221Sensor.TemperatureReading() << "[°C]" << std::endl;
 
 	// Close the access to the I2C bus.
 	i2cbus.closeI2CBus();

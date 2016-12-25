@@ -103,6 +103,7 @@ private:
     unsigned char HTS221CalibrationTable[16];	/**< HTS221 calibration table. */
     unsigned char HTS221HumidityOut[2];			/**< A humidity buffer. */
     unsigned char HTS221TemperatureOut[2];		/**< A temperature buffer. */
+    unsigned char CTRL_REG1;					/**< Holds CTRL_REG2 value between power ON and OFF requests. */
 
 public:
     /**
@@ -125,14 +126,14 @@ public:
 	 *
 	 * @return float returns the value of the class member temperatureReading.
 	 */
-	float getTemperatureReading();
+	float TemperatureReading();
 
 	/**
 	 * @brief Provides the value of the sensor humidity reading.
 	 *
 	 * @return float returns the value of the class member humidityReading.
 	 */
-	float getHumidityReading();
+	float HumidityReading();
 
 	/**
 	 * @brief Configures the sensor by setting the values of the main config registers.
@@ -152,16 +153,33 @@ public:
 	int initSensor(unsigned char AV_CONF_value,unsigned char CTRL_REG1_value,unsigned char CTRL_REG2_value,unsigned char CTRL_REG3_value);
 
 	/**
+	 * @brief Configure the sensor for single acquisition of temperature and humidity (ONE_SHOT mode).
+	 *
+	 * @return int returns an error code in case of a failure in communication with the sensor, 0 for success.
+	 */
+	int setOneShotMode(void);
+
+	/**
 	 * @brief Initiate the measurement process for humidity and temperature.
 	 *
-	 * The function starts the measurement process by setting the value of the less significant bit of HTS221_CTRL_REG2 register.
+	 * The function starts a single acquisition of temperature and humidity by setting the ONE_SHOT bit of CTRL_REG2 register.
 	 * After the measuring is done, it reads of the temperature and humidity registers and calculates the
 	 * temperature and the humidity values using the private class functions: calculateRealtiveHumidity() and
 	 * calculateTemperature().
 	 *
 	 * @return int returns an error code in case there is a failure in communication with the sensor, 0 for successful measurement cycle.
 	 */
-	int startHumidityMeasurement();
+	int doOneShotMeasurement(void);
+
+	/**
+	 * @brief Reads the content of HTS221 temperature and humidity registers.
+	 * After that it calculates the temperature and humidity values.
+	 *
+	 * This function doesn't work when output data rate is set to ONE_SHOT.
+	 *
+	 * @return int returns an error code in case there is a failure in communication with the sensor, 0 for successful measurement cycle.
+	 */
+	int getSensorReadings(void);
 
 private:
 	/**
@@ -182,9 +200,24 @@ private:
      * The start address of the calibration table is HTS221_CALB_0.
      * The MSB bit of the register address is set to 1 for enabling address auto-increment.
      *
-     * @return int returns an error code in case there is a failure in communication with the sensor, 0 for successul read.
+     * @return int returns an error code in case there is a failure in communication with the sensor, 0 for successful read.
      */
     int readSensorCalibrationTable();
+
+    /**
+     * @brief Switch the sensor into a power-down mode by setting PD bit of CTRL_REG1 to 0.
+     *
+     * @return int an error code in case there is a failure in the communication with the sensor, 0 for success.
+     */
+    int powerDown(void);
+
+    /**
+     * @brief Activate the device by setting PD bit of CTRL_REG1 to 1.
+     *
+     * @return int an error code in case there is a failure in the communication with the sensor, 0 for success.
+     */
+    int powerUp(void);
+
 };
 
 #endif /* HTS221_H_ */

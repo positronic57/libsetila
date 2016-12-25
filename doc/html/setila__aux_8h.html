@@ -44,8 +44,8 @@
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#define-members">Macros</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#nested-classes">Data Structures</a> &#124;
+<a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
 <div class="title">setila_aux.h File Reference</div>  </div>
 </div><!--header-->
@@ -56,16 +56,16 @@
 
 <p><a href="setila__aux_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Data Structures</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSetilaAUX.html">SetilaAUX</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class that provides auxiliary functions. For example: calculate an altitude based on a pressure reading from a sensor.  <a href="classSetilaAUX.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
 Macros</h2></td></tr>
 <tr class="memitem:gaa3475bbfd97d768815f6f88c2dea0071"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__CONST.html#gaa3475bbfd97d768815f6f88c2dea0071">AVERAGE_SEA_LEVEL_PRESSURE</a>&#160;&#160;&#160;1013.25</td></tr>
 <tr class="separator:gaa3475bbfd97d768815f6f88c2dea0071"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:a1a389445bb69574fb664410a9c6c4a04"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="setila__aux_8h.html#a1a389445bb69574fb664410a9c6c4a04">altitude</a> (double lastPressureReading, double baseLinePressure)</td></tr>
-<tr class="memdesc:a1a389445bb69574fb664410a9c6c4a04"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the relative altitude changes in [m] based on pressure difference between two measurement points.  <a href="#a1a389445bb69574fb664410a9c6c4a04">More...</a><br /></td></tr>
-<tr class="separator:a1a389445bb69574fb664410a9c6c4a04"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A header file from libsetila library. It contains the definitions of the auxiliary functions for processing the sensor readings. </p>
@@ -76,48 +76,10 @@ Functions</h2></td></tr>
 <dl class="section author"><dt>Author</dt><dd>Goce Boshkovski </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>3-Nov-16 </dd></dl>
 <dl class="section copyright"><dt>Copyright</dt><dd>GNU General Public License v2. </dd></dl>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="a1a389445bb69574fb664410a9c6c4a04"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int altitude </td>
-          <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>lastPressureReading</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>baseLinePressure</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Calculates the relative altitude changes in [m] based on pressure difference between two measurement points. </p>
-<p>If the average sea level pressure is used as a reference point, the function will return the altitude above sea level in [m].</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramdir">[in]</td><td class="paramname">lastPressureReading</td><td>Last pressure reading. </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">baseLinePressure</td><td>Reference pressure for calculating the relative altitude changes. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>int The relative altitude change due to difference in pressure values. </dd></dl>
-
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 20 2016 00:15:26 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Dec 25 2016 01:16:32 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

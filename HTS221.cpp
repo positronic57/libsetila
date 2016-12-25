@@ -13,20 +13,16 @@
 #include "setila_errors.h"
 
 
-HTS221::HTS221(unsigned char sensorAddress):I2CSensor(sensorAddress),temperatureReading(0.0),humidityReading(0.0){
+HTS221::HTS221(unsigned char sensorAddress):I2CSensor(sensorAddress),temperatureReading(0.0),humidityReading(0.0), CTRL_REG1(0x00){}
 
-}
+HTS221::~HTS221() {}
 
-HTS221::~HTS221() {
-
-}
-
-float HTS221::getTemperatureReading()
+float HTS221::TemperatureReading()
 {
 	return temperatureReading;
 }
 
-float HTS221::getHumidityReading()
+float HTS221::HumidityReading()
 {
 	return humidityReading;
 }
@@ -104,7 +100,7 @@ int HTS221::calculateRealtiveHumidity()
 }
 
 
-int HTS221::startHumidityMeasurement()
+int HTS221::doOneShotMeasurement()
 {
 	/* Start a humidity and temperature measurement */
 	if (I2CSensor_Write(HTS221_CTRL_REG2,1))
@@ -172,7 +168,53 @@ int HTS221::initSensor(unsigned char AV_CONF_value,unsigned char CTRL_REG1_value
 	return 0;
 }
 
+int HTS221::setOneShotMode(void)
+{
+	return initSensor(0x1B,0x84,0x00,0x00);
+}
 
+int HTS221::getSensorReadings(void)
+{
+	/* Read humidity registers. MSB bit of HTS221_HUMIDITY_OUT_L address is set to 1 forr
+	 * enabling address auto-increment.
+	 */
+	if (I2CSensor_Read((HTS221_HUMIDITY_OUT_L | 0x80),HTS221HumidityOut,2))
+		return ERROR_HTS221_MEASUREMENT_FAILED;
 
+	/* Read temperature registers. MSB bit of HTS221_TEMP_OUT_L address is set to 1 for
+	 * enabling address auto-increment.
+	 */
+	if (I2CSensor_Read((HTS221_TEMP_OUT_L | 0x80),HTS221TemperatureOut,2))
+		return ERROR_HTS221_MEASUREMENT_FAILED;
+
+	/* Calculate the relative humidity value based on the measurement data. */
+	calculateRealtiveHumidity();
+	/* Calculate the temperature value based on the measurement data. */
+	calculateTemperature();
+
+	return 0;
+}
+
+int HTS221::powerDown(void)
+{
+	/* Read the value of the CTRL_REG1 */
+	if (I2CSensor_Read(HTS221_CTRL_REG1, &CTRL_REG1, 1))
+		return ERROR_I2C_READ_FAILED;
+
+	/* Write the new value of the CTRL_REG1 with PD bit set to 0. */
+	if (I2CSensor_Write(HTS221_CTRL_REG1, (CTRL_REG1 | (~(1 << HTS221_CTRL_REG1_PD)))))
+		return ERROR_I2C_WRITE_FAILED;
+
+	return 0;
+}
+
+int HTS221::powerUp(void)
+{
+	/* Set the value of the PD bit from CTRL_REG1 to 1. */
+	if (I2CSensor_Write(HTS221_CTRL_REG1, (CTRL_REG1 | (1 << HTS221_CTRL_REG1_PD))))
+		return ERROR_I2C_WRITE_FAILED;
+
+	return 0;
+}
 
 
