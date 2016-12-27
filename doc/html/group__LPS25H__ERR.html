@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.7"/>
-<title>libsetila: Error codes related to LPS25H sensor.</title>
+<title>libsetila: Error codes related to LPS25H sensor</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -18,7 +18,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">libsetila
-   &#160;<span id="projectnumber">v0.2</span>
+   &#160;<span id="projectnumber">v0.3</span>
    </div>
   </td>
  </tr>
@@ -40,7 +40,7 @@
   <div class="summary">
 <a href="#define-members">Macros</a>  </div>
   <div class="headertitle">
-<div class="title">Error codes related to LPS25H sensor.</div>  </div>
+<div class="title">Error codes related to LPS25H sensor<div class="ingroups"><a class="el" href="group__ERROR__DEF.html">Error codes definitions</a></div></div>  </div>
 </div><!--header-->
 <div class="contents">
 <table class="memberdecls">
@@ -52,6 +52,14 @@ Macros</h2></td></tr>
 <tr class="separator:ga31547dd7493acbcaf403025e5dac8232"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga2b226dc5ca4854d0b94e8655625ae391"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__LPS25H__ERR.html#ga2b226dc5ca4854d0b94e8655625ae391">ERROR_LPS25H_REGISTRY_WRITE</a>&#160;&#160;&#160;0x07		-22</td></tr>
 <tr class="separator:ga2b226dc5ca4854d0b94e8655625ae391"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga9973cec812b7dd2832b9cd4e2629ca53"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__LPS25H__ERR.html#ga9973cec812b7dd2832b9cd4e2629ca53">ERROR_LPS25H_NBR_AVERAGED_SAMPLES</a>&#160;&#160;&#160;-23</td></tr>
+<tr class="separator:ga9973cec812b7dd2832b9cd4e2629ca53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga37de3c56df482cbea5d0a44152253b0d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__LPS25H__ERR.html#ga37de3c56df482cbea5d0a44152253b0d">ERROR_LPS25H_ENABLE_FIFO_MEAN</a>&#160;&#160;&#160;-24</td></tr>
+<tr class="separator:ga37de3c56df482cbea5d0a44152253b0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0374fd666b5cf85db22ed8d16a04c7c0"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__LPS25H__ERR.html#ga0374fd666b5cf85db22ed8d16a04c7c0">ERROR_LPS25H_DISABLE_FIFO_MEAN</a>&#160;&#160;&#160;-25</td></tr>
+<tr class="separator:ga0374fd666b5cf85db22ed8d16a04c7c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabf089045752d37799f8528f9d23e3f05"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__LPS25H__ERR.html#gabf089045752d37799f8528f9d23e3f05">ERROR_LPS25H_SW_RESET</a>&#160;&#160;&#160;-26</td></tr>
+<tr class="separator:gabf089045752d37799f8528f9d23e3f05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <h2 class="groupheader">Macro Definition Documentation</h2>
@@ -61,6 +69,30 @@ Macros</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">#define ERROR_INIT_LPS25H_SENSOR&#160;&#160;&#160;0x02			-20</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga0374fd666b5cf85db22ed8d16a04c7c0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_LPS25H_DISABLE_FIFO_MEAN&#160;&#160;&#160;-25</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="ga37de3c56df482cbea5d0a44152253b0d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_LPS25H_ENABLE_FIFO_MEAN&#160;&#160;&#160;-24</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -79,6 +111,18 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="ga9973cec812b7dd2832b9cd4e2629ca53"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_LPS25H_NBR_AVERAGED_SAMPLES&#160;&#160;&#160;-23</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a class="anchor" id="ga2b226dc5ca4854d0b94e8655625ae391"></a>
 <div class="memitem">
 <div class="memproto">
@@ -91,10 +135,22 @@ Macros</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="gabf089045752d37799f8528f9d23e3f05"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ERROR_LPS25H_SW_RESET&#160;&#160;&#160;-26</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 25 2016 01:16:32 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 28 2016 00:43:21 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

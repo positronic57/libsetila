@@ -13,8 +13,13 @@
 #ifndef SETILA_AUX_H_
 #define SETILA_AUX_H_
 
-/** \defgroup CONST Average sea level pressure. */
+/** \defgroup AUX_DESC Auxiliary definitions */
+
+/** \defgroup CONST Constants
+ * @ingroup AUX_DESC
+ */
 /* @{ */
+/** @brief The average pressure at the sea level. Required for calculating the altitude from the pressure measurement.*/
 #define AVERAGE_SEA_LEVEL_PRESSURE 1013.25
 /* @} */
 

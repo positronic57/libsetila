@@ -106,14 +106,34 @@ int HTS221::doOneShotMeasurement()
 	if (I2CSensor_Write(HTS221_CTRL_REG2,1))
 		return ERROR_HTS221_MEASUREMENT_FAILED;
 
+	unsigned char STATUS_REG;
+
+	/* Check to see whenever a new humidity sample is available. */
+	do
+	{
+		if (I2CSensor_Read(HTS221_STATUS_REG, &STATUS_REG, 1))
+			return ERROR_HTS221_MEASUREMENT_FAILED;
+
+	} while (!(STATUS_REG & 2));
+
+#if 0
 	/* Wait around 5ms for finishing the measurement and start reading the sensor output */
 	tdelay(5000000L);
+#endif
 
 	/* Read humidity registers. MSB bit of HTS221_HUMIDITY_OUT_L address is set to 1 for
 	 * enabling address auto-increment.
 	 */
 	if (I2CSensor_Read((HTS221_HUMIDITY_OUT_L | 0x80),HTS221HumidityOut,2))
 		return ERROR_HTS221_MEASUREMENT_FAILED;
+
+	/* Check to see whenever a new temperature sample is available. */
+	do
+	{
+		if (I2CSensor_Read(HTS221_STATUS_REG, &STATUS_REG, 1))
+			return ERROR_HTS221_MEASUREMENT_FAILED;
+
+	} while (!(STATUS_REG & 1));
 
 	/* Read temperature registers. MSB bit of HTS221_TEMP_OUT_L address is set to 1 for
 	 * enabling address auto-increment.
@@ -138,15 +158,16 @@ int HTS221::readSensorCalibrationTable()
 	return 0;
 }
 
-int HTS221::initSensor(unsigned char AV_CONF_value,unsigned char CTRL_REG1_value,unsigned char CTRL_REG2_value,unsigned char CTRL_REG3_value)
+int HTS221::initSensor(unsigned char AV_CONF_value,unsigned char CTRL_REG1_value)
 {
 	unsigned char registryValue;
 
 	/*Check the device ID by reading WHO_AM_I register*/
 	if (I2CSensor_Read(HTS221_WHO_AM_I,&registryValue,1))
 		return ERROR_INIT_HTS221_SENSOR;
+
 	if (registryValue!=0xBC)
-		return ERROR_INIT_HTS221_SENSOR;
+		return ERROR_NOT_A_HTS221_SENSOR;
 
 	/* Read HTS221 calibration table. */
 	if (readSensorCalibrationTable())
@@ -155,31 +176,71 @@ int HTS221::initSensor(unsigned char AV_CONF_value,unsigned char CTRL_REG1_value
 	/* Set the values of AV_CONF registers. */
 	if (I2CSensor_Write(HTS221_AV_CONF,AV_CONF_value))
 		return ERROR_INIT_HTS221_SENSOR;
+
 	/* Set the value of the HTS221_CTRL_REG1. */
 	if (I2CSensor_Write(HTS221_CTRL_REG1,CTRL_REG1_value))
 		return ERROR_INIT_HTS221_SENSOR;
-	/* Set the value of the HTS221_CTRL_REG2. */
-	if (I2CSensor_Write(HTS221_CTRL_REG2,CTRL_REG2_value))
+
+	return 0;
+}
+
+int HTS221::initSensor(void)
+{
+	unsigned char registryValue;
+
+	/*Check the device ID by reading WHO_AM_I register*/
+	if (I2CSensor_Read(HTS221_WHO_AM_I,&registryValue,1))
+		return ERROR_NOT_A_HTS221_SENSOR;
+
+	if (registryValue!=0xBC)
+		return ERROR_NOT_A_HTS221_SENSOR;
+
+	/* Set the pressure and temperature internal average to: AVGT = 32 and AVGP = 64. */
+	if (I2CSensor_Write(HTS221_AV_CONF, 0x24))
 		return ERROR_INIT_HTS221_SENSOR;
-	/* Set the value of the HTS221_CTRL_REG3. */
-	if (I2CSensor_Write(HTS221_CTRL_REG3,CTRL_REG3_value))
-    		return ERROR_INIT_HTS221_SENSOR;
+
+	/* Set the ODR to 12.5Hz, enable block data update and power on the sensor. */
+	if (I2CSensor_Write(HTS221_CTRL_REG1, 0x87))
+		return ERROR_INIT_HTS221_SENSOR;
 
 	return 0;
 }
 
 int HTS221::setOneShotMode(void)
 {
-	return initSensor(0x1B,0x84,0x00,0x00);
+	/* Set one shot mode with the following parameters:
+	 * - pressure and temperature internal average values: AVGT = 256 and AVGP = 512;
+	 * - block data update bit in CTRL_REG1 set to 1;
+	 * - power ON the sensor.
+	 */
+	return initSensor(0x3F,0x84);
 }
 
 int HTS221::getSensorReadings(void)
 {
+	unsigned char STATUS_REG;
+
+	/* Check to see whenever a new humidity sample is available. */
+	do
+	{
+		if (I2CSensor_Read(HTS221_STATUS_REG, &STATUS_REG, 1))
+			return ERROR_HTS221_MEASUREMENT_FAILED;
+
+	} while (!(STATUS_REG & 2));
+
 	/* Read humidity registers. MSB bit of HTS221_HUMIDITY_OUT_L address is set to 1 forr
 	 * enabling address auto-increment.
 	 */
 	if (I2CSensor_Read((HTS221_HUMIDITY_OUT_L | 0x80),HTS221HumidityOut,2))
 		return ERROR_HTS221_MEASUREMENT_FAILED;
+
+	/* Check to see whenever a new temperature sample is available. */
+	do
+	{
+		if (I2CSensor_Read(HTS221_STATUS_REG, &STATUS_REG, 1))
+			return ERROR_HTS221_MEASUREMENT_FAILED;
+
+	} while (!(STATUS_REG & 1));
 
 	/* Read temperature registers. MSB bit of HTS221_TEMP_OUT_L address is set to 1 for
 	 * enabling address auto-increment.

@@ -9,13 +9,13 @@ the library implements the data exchange protocols and features supported by the
 
 Humidity sensors:
 
-- ST HTS221 humidity and temperature sensor (Only a single acquisition(ONE_SHOT) reading is currently implemented. No FIFO support) .
+- ST HTS221 humidity and temperature sensor: single acquisition(ONE SHOT measurement), FIFO_MEAN mode, adjustable output data rate and resolution.
 
 Pressure sensors:
 
-- ST LPS25H pressure and temperature sensor (fully supported);
-- Bosh BMP085 pressure and temperature sensor (fully supported);
-- Bosh BMP180 pressure and temperature sensor (fully supported).
+- ST LPS25H pressure and temperature sensor: single acquisition(ONE SHOT measurement), adjustable output data rate and resolution.
+- Bosh BMP085 pressure and temperature sensor. Fully supported.
+- Bosh BMP180 pressure and temperature sensor. Fully supported.
 
 ###Installation
 

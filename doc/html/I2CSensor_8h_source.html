@@ -18,7 +18,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">libsetila
-   &#160;<span id="projectnumber">v0.2</span>
+   &#160;<span id="projectnumber">v0.3</span>
    </div>
   </td>
  </tr>
@@ -67,30 +67,33 @@
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classI2CSensor.html#ac93275ec1655f764cb9d0e675ea8168f">~I2CSensor</a>();</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="classI2CSensor.html#aeafe0c8ddf7f0e594028c60534b47730">getSensorAddress</a>();</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classI2CSensor.html#a49b4d64a549daaa14d342cb1e9a435b5">initSensor</a>(<span class="keywordtype">void</span>) = 0;</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classI2CSensor.html#aee6fdd765e088571baa38c167ac9bea1">setSensorAddress</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="classI2CSensor.html#a44491726c51e977663b38c4740188201">I2CAddress</a>);</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classI2CSensor.html#a49c4da3e83f37049d88a5625270e2a7f">attachSensorToI2CBus</a>(<span class="keywordtype">int</span> <a class="code" href="classI2CSensor.html#a38e8e1796b2c250e6e1f9e78c6eab781">i2cbus</a>);</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* I2CSENSOR_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="classI2CSensor.html#aeafe0c8ddf7f0e594028c60534b47730">getSensorAddress</a>();</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classI2CSensor.html#aee6fdd765e088571baa38c167ac9bea1">setSensorAddress</a>(<span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="classI2CSensor.html#a44491726c51e977663b38c4740188201">I2CAddress</a>);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classI2CSensor.html#a49c4da3e83f37049d88a5625270e2a7f">attachSensorToI2CBus</a>(<span class="keywordtype">int</span> <a class="code" href="classI2CSensor.html#a38e8e1796b2c250e6e1f9e78c6eab781">i2cbus</a>);</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;};</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* I2CSENSOR_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classI2CSensor_html_a79aed5ffa5dee3584e564fadd16e40b5"><div class="ttname"><a href="classI2CSensor.html#a79aed5ffa5dee3584e564fadd16e40b5">I2CSensor::tdelay</a></div><div class="ttdeci">virtual void tdelay(long interval)</div><div class="ttdoc">Time delay function. </div><div class="ttdef"><b>Definition:</b> I2CSensor.cpp:51</div></div>
 <div class="ttc" id="classI2CSensor_html_a44491726c51e977663b38c4740188201"><div class="ttname"><a href="classI2CSensor.html#a44491726c51e977663b38c4740188201">I2CSensor::I2CAddress</a></div><div class="ttdeci">unsigned char I2CAddress</div><div class="ttdef"><b>Definition:</b> I2CSensor.h:22</div></div>
 <div class="ttc" id="classI2CSensor_html"><div class="ttname"><a href="classI2CSensor.html">I2CSensor</a></div><div class="ttdoc">A parent class for all I2C sensors defined in the library. </div><div class="ttdef"><b>Definition:</b> I2CSensor.h:20</div></div>
 <div class="ttc" id="classI2CSensor_html_a06f6276a72ce305e9f65e253a8aca381"><div class="ttname"><a href="classI2CSensor.html#a06f6276a72ce305e9f65e253a8aca381">I2CSensor::I2CSensor_Read</a></div><div class="ttdeci">virtual int I2CSensor_Read(unsigned char registry, unsigned char *buffer, int nbytes)</div><div class="ttdoc">Reads &#39;nbytes&#39; number of bytes from the sensor starting from address &#39;registry&#39; into the buffer &#39;buff...</div><div class="ttdef"><b>Definition:</b> I2CSensor.cpp:62</div></div>
 <div class="ttc" id="classI2CSensor_html_a70973fbc02979cd9601cc119f3a45b58"><div class="ttname"><a href="classI2CSensor.html#a70973fbc02979cd9601cc119f3a45b58">I2CSensor::I2CSensor</a></div><div class="ttdeci">I2CSensor(unsigned char I2CAddr=0x01)</div><div class="ttdoc">The constructor of the class. </div><div class="ttdef"><b>Definition:</b> I2CSensor.cpp:25</div></div>
 <div class="ttc" id="classI2CSensor_html_a49c4da3e83f37049d88a5625270e2a7f"><div class="ttname"><a href="classI2CSensor.html#a49c4da3e83f37049d88a5625270e2a7f">I2CSensor::attachSensorToI2CBus</a></div><div class="ttdeci">int attachSensorToI2CBus(int i2cbus)</div><div class="ttdoc">Associate the sensor with the I2C bus which it physically belongs to. </div><div class="ttdef"><b>Definition:</b> I2CSensor.cpp:42</div></div>
-<div class="ttc" id="classI2CSensor_html_aeafe0c8ddf7f0e594028c60534b47730"><div class="ttname"><a href="classI2CSensor.html#aeafe0c8ddf7f0e594028c60534b47730">I2CSensor::getSensorAddress</a></div><div class="ttdeci">unsigned char getSensorAddress()</div><div class="ttdef"><b>Definition:</b> I2CSensor.cpp:32</div></div>
-<div class="ttc" id="classI2CSensor_html_aee6fdd765e088571baa38c167ac9bea1"><div class="ttname"><a href="classI2CSensor.html#aee6fdd765e088571baa38c167ac9bea1">I2CSensor::setSensorAddress</a></div><div class="ttdeci">void setSensorAddress(unsigned char I2CAddress)</div><div class="ttdef"><b>Definition:</b> I2CSensor.cpp:37</div></div>
+<div class="ttc" id="classI2CSensor_html_aeafe0c8ddf7f0e594028c60534b47730"><div class="ttname"><a href="classI2CSensor.html#aeafe0c8ddf7f0e594028c60534b47730">I2CSensor::getSensorAddress</a></div><div class="ttdeci">unsigned char getSensorAddress()</div><div class="ttdoc">Provides I2C address of the sensor. </div><div class="ttdef"><b>Definition:</b> I2CSensor.cpp:32</div></div>
+<div class="ttc" id="classI2CSensor_html_a49b4d64a549daaa14d342cb1e9a435b5"><div class="ttname"><a href="classI2CSensor.html#a49b4d64a549daaa14d342cb1e9a435b5">I2CSensor::initSensor</a></div><div class="ttdeci">virtual int initSensor(void)=0</div><div class="ttdoc">Applies some default parameterization on the sensor. </div></div>
+<div class="ttc" id="classI2CSensor_html_aee6fdd765e088571baa38c167ac9bea1"><div class="ttname"><a href="classI2CSensor.html#aee6fdd765e088571baa38c167ac9bea1">I2CSensor::setSensorAddress</a></div><div class="ttdeci">void setSensorAddress(unsigned char I2CAddress)</div><div class="ttdoc">Define I2C address of the sensor on the I2C bus. </div><div class="ttdef"><b>Definition:</b> I2CSensor.cpp:37</div></div>
 <div class="ttc" id="classI2CSensor_html_a8c9849db194887ac1b0c477bdc6b1cec"><div class="ttname"><a href="classI2CSensor.html#a8c9849db194887ac1b0c477bdc6b1cec">I2CSensor::I2CSensor_Write</a></div><div class="ttdeci">virtual int I2CSensor_Write(unsigned char registry, unsigned char value)</div><div class="ttdoc">Writes the data &#39;value&#39; in the register with internal address registry. </div><div class="ttdef"><b>Definition:</b> I2CSensor.cpp:79</div></div>
 <div class="ttc" id="classI2CSensor_html_ac93275ec1655f764cb9d0e675ea8168f"><div class="ttname"><a href="classI2CSensor.html#ac93275ec1655f764cb9d0e675ea8168f">I2CSensor::~I2CSensor</a></div><div class="ttdeci">virtual ~I2CSensor()</div><div class="ttdef"><b>Definition:</b> I2CSensor.cpp:27</div></div>
 <div class="ttc" id="classI2CSensor_html_a38e8e1796b2c250e6e1f9e78c6eab781"><div class="ttname"><a href="classI2CSensor.html#a38e8e1796b2c250e6e1f9e78c6eab781">I2CSensor::i2cbus</a></div><div class="ttdeci">int i2cbus</div><div class="ttdef"><b>Definition:</b> I2CSensor.h:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 25 2016 01:16:32 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 28 2016 00:43:21 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

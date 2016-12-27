@@ -18,7 +18,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">libsetila
-   &#160;<span id="projectnumber">v0.2</span>
+   &#160;<span id="projectnumber">v0.3</span>
    </div>
   </td>
  </tr>
@@ -50,7 +50,7 @@
 <a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a>  </div>
   <div class="headertitle">
-<div class="title">I2CSensor Class Reference</div>  </div>
+<div class="title">I2CSensor Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -77,9 +77,14 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a70973fbc02979cd9601cc119f3a45b58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac93275ec1655f764cb9d0e675ea8168f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2CSensor.html#ac93275ec1655f764cb9d0e675ea8168f">~I2CSensor</a> ()</td></tr>
 <tr class="separator:ac93275ec1655f764cb9d0e675ea8168f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49b4d64a549daaa14d342cb1e9a435b5"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2CSensor.html#a49b4d64a549daaa14d342cb1e9a435b5">initSensor</a> (void)=0</td></tr>
+<tr class="memdesc:a49b4d64a549daaa14d342cb1e9a435b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies some default parameterization on the sensor.  <a href="#a49b4d64a549daaa14d342cb1e9a435b5">More...</a><br /></td></tr>
+<tr class="separator:a49b4d64a549daaa14d342cb1e9a435b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeafe0c8ddf7f0e594028c60534b47730"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2CSensor.html#aeafe0c8ddf7f0e594028c60534b47730">getSensorAddress</a> ()</td></tr>
+<tr class="memdesc:aeafe0c8ddf7f0e594028c60534b47730"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides I2C address of the sensor.  <a href="#aeafe0c8ddf7f0e594028c60534b47730">More...</a><br /></td></tr>
 <tr class="separator:aeafe0c8ddf7f0e594028c60534b47730"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee6fdd765e088571baa38c167ac9bea1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2CSensor.html#aee6fdd765e088571baa38c167ac9bea1">setSensorAddress</a> (unsigned char <a class="el" href="classI2CSensor.html#a44491726c51e977663b38c4740188201">I2CAddress</a>)</td></tr>
+<tr class="memdesc:aee6fdd765e088571baa38c167ac9bea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define I2C address of the sensor on the I2C bus.  <a href="#aee6fdd765e088571baa38c167ac9bea1">More...</a><br /></td></tr>
 <tr class="separator:aee6fdd765e088571baa38c167ac9bea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49c4da3e83f37049d88a5625270e2a7f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2CSensor.html#a49c4da3e83f37049d88a5625270e2a7f">attachSensorToI2CBus</a> (int <a class="el" href="classI2CSensor.html#a38e8e1796b2c250e6e1f9e78c6eab781">i2cbus</a>)</td></tr>
 <tr class="memdesc:a49c4da3e83f37049d88a5625270e2a7f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Associate the sensor with the I2C bus which it physically belongs to.  <a href="#a49c4da3e83f37049d88a5625270e2a7f">More...</a><br /></td></tr>
@@ -194,7 +199,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>Provides I2C address of the sensor. </p>
+<dl class="section return"><dt>Returns</dt><dd>unsigned char the value of the class member I2CAddress. </dd></dl>
 
 </div>
 </div>
@@ -294,6 +301,35 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a49b4d64a549daaa14d342cb1e9a435b5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual int I2CSensor::initSensor </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Applies some default parameterization on the sensor. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p>Implemented in <a class="el" href="classLPS25H.html#a6e480370d9d167ef10bf0696df11ca33">LPS25H</a>, <a class="el" href="classHTS221.html#a823375e7386461bab03f71bbd2738967">HTS221</a>, and <a class="el" href="classBMP085.html#a60839f9d4dc83ad3de56d5abfbfcd9b6">BMP085</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="aee6fdd765e088571baa38c167ac9bea1"></a>
 <div class="memitem">
 <div class="memproto">
@@ -307,9 +343,11 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Define I2C address of the sensor on the I2C bus. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">I2CAddress</td><td></td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">I2CAddress</td><td>the I2C address of the sensor on the I2C bus. </td></tr>
   </table>
   </dd>
 </dl>
@@ -399,7 +437,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 25 2016 01:16:32 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 28 2016 00:43:21 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

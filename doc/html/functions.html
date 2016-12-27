@@ -18,7 +18,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">libsetila
-   &#160;<span id="projectnumber">v0.2</span>
+   &#160;<span id="projectnumber">v0.3</span>
    </div>
   </td>
  </tr>
@@ -56,6 +56,7 @@
       <li><a href="#index_b"><span>b</span></a></li>
       <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_d"><span>d</span></a></li>
+      <li><a href="#index_e"><span>e</span></a></li>
       <li><a href="#index_f"><span>f</span></a></li>
       <li><a href="#index_g"><span>g</span></a></li>
       <li><a href="#index_h"><span>h</span></a></li>
@@ -106,13 +107,25 @@
 </li>
 <li>CTRL_REG1
 : <a class="el" href="classHTS221.html#ad4f1700c13349e694a0e1585ea801c02">HTS221</a>
+, <a class="el" href="classLPS25H.html#ada58cbb8012752a7e45e58b93ff8e1c5">LPS25H</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
+<li>disableFIFO_MEAN()
+: <a class="el" href="classLPS25H.html#af68b7c7eefe7e65977fbe1a8b90f44d6">LPS25H</a>
+</li>
 <li>doOneShotMeasurement()
 : <a class="el" href="classHTS221.html#a7ecebd395e9bdd43bf8879ea85e8ec1a">HTS221</a>
+, <a class="el" href="classLPS25H.html#a0e5b690ad31124d366c8c5b70a1d0a06">LPS25H</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_e"></a>- e -</h3><ul>
+<li>enableFIFO_MEAN()
+: <a class="el" href="classLPS25H.html#a5036ee6e19a35d04ed56a66638ae48c2">LPS25H</a>
 </li>
 </ul>
 
@@ -130,19 +143,16 @@
 </li>
 <li>getPressureReading()
 : <a class="el" href="classBMP085.html#ac42cb2d2ef50353d9ddcd084f7ded445">BMP085</a>
-, <a class="el" href="classLPS25H.html#a9bd82564ca035e79ce82ad61df86f9ff">LPS25H</a>
 </li>
 <li>getSensorAddress()
 : <a class="el" href="classI2CSensor.html#aeafe0c8ddf7f0e594028c60534b47730">I2CSensor</a>
 </li>
 <li>getSensorReadings()
 : <a class="el" href="classHTS221.html#a5a9943c96dadede36aa773968a262813">HTS221</a>
+, <a class="el" href="classLPS25H.html#a241c39e7fc03e63faecad58117a5a1cb">LPS25H</a>
 </li>
 <li>getTemperatureReading()
 : <a class="el" href="classBMP085.html#a01e329bb71617532203157acdb9789d6">BMP085</a>
-</li>
-<li>getTemperaturReading()
-: <a class="el" href="classLPS25H.html#ad9f94de7731555adfdce56a6a9b7f833">LPS25H</a>
 </li>
 </ul>
 
@@ -178,7 +188,12 @@
 </li>
 <li>i2cbus
 : <a class="el" href="classI2CBus.html#aa30db6db84d84139cb54b961bf94c282">I2CBus</a>
-, <a class="el" href="classI2CSensor.html#a38e8e1796b2c250e6e1f9e78c6eab781">I2CSensor</a>
+</li>
+<li>I2CBus()
+: <a class="el" href="classI2CBus.html#a4f041a99b5653b7344b27623644d102c">I2CBus</a>
+</li>
+<li>i2cbus
+: <a class="el" href="classI2CSensor.html#a38e8e1796b2c250e6e1f9e78c6eab781">I2CSensor</a>
 </li>
 <li>I2CSensor()
 : <a class="el" href="classI2CSensor.html#a70973fbc02979cd9601cc119f3a45b58">I2CSensor</a>
@@ -191,8 +206,9 @@
 </li>
 <li>initSensor()
 : <a class="el" href="classBMP085.html#a60839f9d4dc83ad3de56d5abfbfcd9b6">BMP085</a>
-, <a class="el" href="classHTS221.html#a493e3c90041fee868122a6a8035847c1">HTS221</a>
-, <a class="el" href="classLPS25H.html#a2d01b35e819b4850e0f0c22f443f55a6">LPS25H</a>
+, <a class="el" href="classHTS221.html#a44d0e0fc72b994b5153f461d77d10ba9">HTS221</a>
+, <a class="el" href="classI2CSensor.html#a49b4d64a549daaa14d342cb1e9a435b5">I2CSensor</a>
+, <a class="el" href="classLPS25H.html#acda481e6f421e53c95817d1433cbba5a">LPS25H</a>
 </li>
 </ul>
 
@@ -227,13 +243,18 @@
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
 <li>powerDown()
 : <a class="el" href="classHTS221.html#ae8742b30631732c32de61fbdcc01c01f">HTS221</a>
+, <a class="el" href="classLPS25H.html#aaaf306ce685adde9087ed09ecce56e4a">LPS25H</a>
 </li>
 <li>powerUp()
 : <a class="el" href="classHTS221.html#a6c1ee1ddeb9386fb6012019ca25979d9">HTS221</a>
+, <a class="el" href="classLPS25H.html#ac372ea0c1f72abedc368c5a6e918aefa">LPS25H</a>
 </li>
 <li>pressureReading
 : <a class="el" href="classBMP085.html#a63b0b9b1be5fd0b67136c7e15077d73e">BMP085</a>
 , <a class="el" href="classLPS25H.html#aa1dfefea0f34107e456e49359eb1b20c">LPS25H</a>
+</li>
+<li>PressureReading()
+: <a class="el" href="classLPS25H.html#a294dbff13e62b08790370a91081be82d">LPS25H</a>
 </li>
 </ul>
 
@@ -257,6 +278,7 @@
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
 <li>setOneShotMode()
 : <a class="el" href="classHTS221.html#a18042134bf76497088c0a8ebda981172">HTS221</a>
+, <a class="el" href="classLPS25H.html#a160fc0650ddc927b1700f1f8851f50a6">LPS25H</a>
 </li>
 <li>setOversampling()
 : <a class="el" href="classBMP085.html#a93011a131f1aa1255a329a94f6320daf">BMP085</a>
@@ -264,8 +286,8 @@
 <li>setSensorAddress()
 : <a class="el" href="classI2CSensor.html#aee6fdd765e088571baa38c167ac9bea1">I2CSensor</a>
 </li>
-<li>startPressureMeasurement()
-: <a class="el" href="classLPS25H.html#a69f72b604f80b2145d18f3f8eaced874">LPS25H</a>
+<li>SWReset()
+: <a class="el" href="classLPS25H.html#a458c70c461176f2912b2b025ad7101d5">LPS25H</a>
 </li>
 </ul>
 
@@ -283,6 +305,9 @@
 <li>temperatureReading
 : <a class="el" href="classHTS221.html#a7b08a62e059d257795d42a37f2c318fc">HTS221</a>
 , <a class="el" href="classLPS25H.html#a754525360013fc643be730f8831fa563">LPS25H</a>
+</li>
+<li>TemperaturReading()
+: <a class="el" href="classLPS25H.html#a774fc8e17478927dca5341f7309ebd9c">LPS25H</a>
 </li>
 </ul>
 
@@ -307,7 +332,7 @@
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 25 2016 01:16:32 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 28 2016 00:43:21 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

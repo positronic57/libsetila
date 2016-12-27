@@ -18,7 +18,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">libsetila
-   &#160;<span id="projectnumber">v0.2</span>
+   &#160;<span id="projectnumber">v0.3</span>
    </div>
   </td>
  </tr>
@@ -138,11 +138,26 @@
 <li>ERROR_INIT_LPS25H_SENSOR
 : <a class="el" href="group__LPS25H__ERR.html#ga96123d3b601e642666115ad5b31c2688">setila_errors.h</a>
 </li>
+<li>ERROR_LPS25H_DISABLE_FIFO_MEAN
+: <a class="el" href="group__LPS25H__ERR.html#ga0374fd666b5cf85db22ed8d16a04c7c0">setila_errors.h</a>
+</li>
+<li>ERROR_LPS25H_ENABLE_FIFO_MEAN
+: <a class="el" href="group__LPS25H__ERR.html#ga37de3c56df482cbea5d0a44152253b0d">setila_errors.h</a>
+</li>
 <li>ERROR_LPS25H_MEASUREMENT_FAILED
 : <a class="el" href="group__LPS25H__ERR.html#ga31547dd7493acbcaf403025e5dac8232">setila_errors.h</a>
 </li>
+<li>ERROR_LPS25H_NBR_AVERAGED_SAMPLES
+: <a class="el" href="group__LPS25H__ERR.html#ga9973cec812b7dd2832b9cd4e2629ca53">setila_errors.h</a>
+</li>
 <li>ERROR_LPS25H_REGISTRY_WRITE
 : <a class="el" href="group__LPS25H__ERR.html#ga2b226dc5ca4854d0b94e8655625ae391">setila_errors.h</a>
+</li>
+<li>ERROR_LPS25H_SW_RESET
+: <a class="el" href="group__LPS25H__ERR.html#gabf089045752d37799f8528f9d23e3f05">setila_errors.h</a>
+</li>
+<li>ERROR_NOT_A_HTS221_SENSOR
+: <a class="el" href="group__HTS221__ERR.html#gace24a4361596133bf642cad607a886b1">setila_errors.h</a>
 </li>
 <li>ERROR_OPEN_I2C_BUS
 : <a class="el" href="group__I2CBUS__ERR.html#gae143c321012cae19ca745bcc8e6c6500">setila_errors.h</a>
@@ -154,6 +169,15 @@
 
 
 <h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>FIFO_CTRL_F_MODE0
+: <a class="el" href="group__LPS25H__FIFO__CTRL__REG__DESC.html#ga2c7ea76e5e470483bbf3bfb6cdf90764">LPS25H.h</a>
+</li>
+<li>FIFO_CTRL_F_MODE1
+: <a class="el" href="group__LPS25H__FIFO__CTRL__REG__DESC.html#gad0d3278e191e465dc2d0c6ee82287f7b">LPS25H.h</a>
+</li>
+<li>FIFO_CTRL_F_MODE2
+: <a class="el" href="group__LPS25H__FIFO__CTRL__REG__DESC.html#gad20988adab95500904747ba0baa19d95">LPS25H.h</a>
+</li>
 <li>FIFO_MEAN_MODE_16_SAMPLES
 : <a class="el" href="group__LPS25H__FIFO__WATERMARKS.html#ga057ed2703de40b20bfa83959c7dc1e3e">LPS25H.h</a>
 </li>
@@ -168,18 +192,6 @@
 </li>
 <li>FIFO_MEAN_MODE_8_SAMPLES
 : <a class="el" href="group__LPS25H__FIFO__WATERMARKS.html#ga1c192f088db029fe658ab7630f03a180">LPS25H.h</a>
-</li>
-<li>FIFO_MODE_BYPASS
-: <a class="el" href="group__LPS25H__FIFO__MODES.html#gac1fa6d80177014f73556c022793c86e0">LPS25H.h</a>
-</li>
-<li>FIFO_MODE_FIFO
-: <a class="el" href="group__LPS25H__FIFO__MODES.html#gabdfb0961b1c677e65647f4fff98940a5">LPS25H.h</a>
-</li>
-<li>FIFO_MODE_FIFO_MEAN
-: <a class="el" href="group__LPS25H__FIFO__MODES.html#ga931edaeb0b0bf9d0d7e972684a56d553">LPS25H.h</a>
-</li>
-<li>FIFO_MODE_STREAM
-: <a class="el" href="group__LPS25H__FIFO__MODES.html#gab2f2fd62e489f150af6ae401b5252272">LPS25H.h</a>
 </li>
 </ul>
 
@@ -269,6 +281,9 @@
 <li>HTS221_CTRL_REG1_ODR0
 : <a class="el" href="group__HTS221__CTRL__REG1__REG__DESC.html#ga858ceaab1a82387453a375180f6f8e3b">HTS221.h</a>
 </li>
+<li>HTS221_CTRL_REG1_ODR1
+: <a class="el" href="group__HTS221__CTRL__REG1__REG__DESC.html#gab3cb61c97fe63ae2087f34d284afcb51">HTS221.h</a>
+</li>
 <li>HTS221_CTRL_REG1_PD
 : <a class="el" href="group__HTS221__CTRL__REG1__REG__DESC.html#ga2f10f6548d0b163827cfdb4ea888c7d6">HTS221.h</a>
 </li>
@@ -301,9 +316,6 @@
 </li>
 <li>HTS221_CTRL_REG3_PP_OD
 : <a class="el" href="group__HTS221__CTRL__REG3__REG__DESC.html#ga735978c6a4a9b96977fb819f832d83e8">HTS221.h</a>
-</li>
-<li>HTS221_CTRL_REGint
-: <a class="el" href="group__HTS221__CTRL__REG1__REG__DESC.html#ga75b5a52eca8d150a605dec17f2f6883d">HTS221.h</a>
 </li>
 <li>HTS221_HUMIDITY_OUT_H
 : <a class="el" href="group__HTS221__REG__DEF.html#gaa7c122ae76caf83bf8cda0ce80c7c6fc">HTS221.h</a>
@@ -387,32 +399,8 @@
 <li>LPS25H_CTRL_REG3
 : <a class="el" href="group__LPS25H__REG__DEF.html#ga501b28e753607559b374ae0568d2494d">LPS25H.h</a>
 </li>
-<li>LPS25H_CTRL_REG3_INT1_S1
-: <a class="el" href="group__LPS25H__CTRL__REG3__REG__DESC.html#gae6072186b810896d409da197bf3375c2">LPS25H.h</a>
-</li>
-<li>LPS25H_CTRL_REG3_INT1_S2
-: <a class="el" href="group__LPS25H__CTRL__REG3__REG__DESC.html#ga62eb56937a7c24ad9ca9389606f67f1a">LPS25H.h</a>
-</li>
-<li>LPS25H_CTRL_REG3_INT_H_L
-: <a class="el" href="group__LPS25H__CTRL__REG3__REG__DESC.html#ga5cd718233eb6bdb3a8090abeedf97a78">LPS25H.h</a>
-</li>
-<li>LPS25H_CTRL_REG3_PP_OD
-: <a class="el" href="group__LPS25H__CTRL__REG3__REG__DESC.html#ga9c69d99293e4d3b05ea47c102b9fa44a">LPS25H.h</a>
-</li>
 <li>LPS25H_CTRL_REG4
 : <a class="el" href="group__LPS25H__REG__DEF.html#gad4e0cdc307cb7a205220607401f378db">LPS25H.h</a>
-</li>
-<li>LPS25H_CTRL_REG4_P1_DRDY
-: <a class="el" href="group__LPS25H__CTRL__REG4__REG__DESC.html#gadfd0f6e77eb7656e9d46b4398b310c46">LPS25H.h</a>
-</li>
-<li>LPS25H_CTRL_REG4_P1_EMPTY
-: <a class="el" href="group__LPS25H__CTRL__REG4__REG__DESC.html#gae9678ad6d4c633474225c2b0bdb3d910">LPS25H.h</a>
-</li>
-<li>LPS25H_CTRL_REG4_P1_Overrun
-: <a class="el" href="group__LPS25H__CTRL__REG4__REG__DESC.html#gaf826420a2ef884c98b9d760a3f7d1463">LPS25H.h</a>
-</li>
-<li>LPS25H_CTRL_REG4_P1_WTM
-: <a class="el" href="group__LPS25H__CTRL__REG4__REG__DESC.html#gab57f31d152b19bf0d90876970398620f">LPS25H.h</a>
 </li>
 <li>LPS25H_FIFO_CTRL
 : <a class="el" href="group__LPS25H__REG__DEF.html#ga200f5b2df3bf46da22cd960e9181bf77">LPS25H.h</a>
@@ -465,20 +453,20 @@
 <li>LPS25H_RPDS_L
 : <a class="el" href="group__LPS25H__REG__DEF.html#ga07f0a2f3261893b108683cc9da04b006">LPS25H.h</a>
 </li>
-<li>LPS25H_STATUS_P_OR
-: <a class="el" href="group__LPS25H__STATUS__REG__REG__DESC.html#gac01462af4384b66ce912735da807f93d">LPS25H.h</a>
-</li>
 <li>LPS25H_STATUS_REG
 : <a class="el" href="group__LPS25H__REG__DEF.html#ga454ece409b3c23d3eae767bbcc49de1b">LPS25H.h</a>
 </li>
 <li>LPS25H_STATUS_REG_P_DA
 : <a class="el" href="group__LPS25H__STATUS__REG__REG__DESC.html#gadc751acb8a6fc7b2ff7fae6bb4bc5160">LPS25H.h</a>
 </li>
+<li>LPS25H_STATUS_REG_P_OR
+: <a class="el" href="group__LPS25H__STATUS__REG__REG__DESC.html#gad051972025e14321a0af5f36ad87e1ea">LPS25H.h</a>
+</li>
 <li>LPS25H_STATUS_REG_T_DA
 : <a class="el" href="group__LPS25H__STATUS__REG__REG__DESC.html#ga0dde7b0c5e224fffb49e61da71e754a3">LPS25H.h</a>
 </li>
-<li>LPS25H_STATUS_T_OR
-: <a class="el" href="group__LPS25H__STATUS__REG__REG__DESC.html#ga78fe16e5df7b88215b3a6614485d61dc">LPS25H.h</a>
+<li>LPS25H_STATUS_REG_T_OR
+: <a class="el" href="group__LPS25H__STATUS__REG__REG__DESC.html#gab3de3bac1ea356924913546c4bd33fb8">LPS25H.h</a>
 </li>
 <li>LPS25H_TEMP_OUT_H
 : <a class="el" href="group__LPS25H__REG__DEF.html#ga9e73ac751d0fdcc24a9b993efb4429dd">LPS25H.h</a>
@@ -499,7 +487,7 @@
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 25 2016 01:16:32 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 28 2016 00:43:21 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>

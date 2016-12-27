@@ -29,21 +29,38 @@
 #define createSword(MSB,LSB) (short)((MSB << 8) | LSB)
 /* @} */
 
-/** \defgroup BMP085_REGISTER BMP085 Register address map */
+/** \defgroup BMP085_DESC BMP085 related definitions */
+
+/** \defgroup BMP085_REGISTER BMP085 Register address map
+ * @ingroup BMP085_DESC
+ */
 /* @{ */
+/** @brief Address of the first register from the calibration table. */
 #define BMP085_CALIBRATION_TABLE 0xAA
+/** @brief REG_MSB register address. */
 #define BMP085_DATA_REG_MSB 0xF6
+/** @brief REG_LSB register address. */
 #define BMP085_DATA_REG_LSB 0xF7
+/** @brief REG_XLSB register address. */
 #define BMP085_DATA_REG_XLASB 0xF8
+/** @brief CONTROL_REG register address. */
 #define BMP085_CONTROL_REG 0xF4
 /* @} */
 
-/** \defgroup BMP085_COMMANDS BMP085 Commands */
+/** \defgroup BMP085_COMMANDS BMP085 Commands
+ * @ingroup BMP085_DESC
+ */
 /* @{ */
+/** @brief Start a temperature measurement by writing this value in CONTROL_REG. */
 #define BMP085_START_TEMPERATURE_MEASUREMENT 0x2E
+/** @brief Start a pressure measurement by writing this value in CONTROL_REG. */
 #define BMP085_START_PRESSURE_MEASUREMENT 0x34
 /* @} */
 
+/** \defgroup BMP085_MODES BMP085 modes of operation
+ * @ingroup BMP085_DESC
+ */
+/* @{ */
 /**
  * \enum BMP085_OverSampling
  *
@@ -55,7 +72,12 @@ enum BMP085_OverSampling {
 							highResolution,	/**< High resolution mode (oversampling setting = 2). */
 							ultraHighResolution	/**< Ultra high resolution mode (oversampling setting = 3). */
 							};
+/* @} */
 
+/** \defgroup BMP085_TIME BMP085 conversion times
+ * @ingroup BMP085_DESC
+ */
+/* @{ */
 /**
  * BMP085/BMP180 conversion time for each mode of operation.
  */
@@ -65,6 +87,9 @@ const long BMP085_PressureConversionTime[]={
 		14000000L,	// Conversion time for high resolution.
 		26000000L	// Conversion time for ultra high resolution.
 		};
+/* @} */
+
+
 
 /** \class BMP085
  *  @brief A class derived from I2CSensor class. It represents BMP085/BMP180 pressure and temperature sensor.

@@ -70,14 +70,22 @@ public:
 	virtual ~I2CSensor();
 
 	/**
-	 *
+	 * @brief Applies some default parameterization on the sensor.
 	 * @return
+	 */
+	virtual int initSensor(void) = 0;
+
+	/**
+	 * @brief Provides I2C address of the sensor.
+	 *
+	 * @return unsigned char the value of the class member I2CAddress.
 	 */
 	unsigned char getSensorAddress();
 
 	/**
+	 * @brief Define I2C address of the sensor on the I2C bus.
 	 *
-	 * @param I2CAddress
+	 * @param[in] I2CAddress the I2C address of the sensor on the I2C bus.
 	 */
 	void setSensorAddress(unsigned char I2CAddress);
 

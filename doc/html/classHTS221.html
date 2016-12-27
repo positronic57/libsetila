@@ -18,7 +18,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">libsetila
-   &#160;<span id="projectnumber">v0.2</span>
+   &#160;<span id="projectnumber">v0.3</span>
    </div>
   </td>
  </tr>
@@ -82,11 +82,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9c0bafe812b32dc8873720bd181174f0"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHTS221.html#a9c0bafe812b32dc8873720bd181174f0">HumidityReading</a> ()</td></tr>
 <tr class="memdesc:a9c0bafe812b32dc8873720bd181174f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the value of the sensor humidity reading.  <a href="#a9c0bafe812b32dc8873720bd181174f0">More...</a><br /></td></tr>
 <tr class="separator:a9c0bafe812b32dc8873720bd181174f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a493e3c90041fee868122a6a8035847c1"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHTS221.html#a493e3c90041fee868122a6a8035847c1">initSensor</a> (unsigned char AV_CONF_value, unsigned char CTRL_REG1_value, unsigned char CTRL_REG2_value, unsigned char CTRL_REG3_value)</td></tr>
-<tr class="memdesc:a493e3c90041fee868122a6a8035847c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the sensor by setting the values of the main config registers.  <a href="#a493e3c90041fee868122a6a8035847c1">More...</a><br /></td></tr>
-<tr class="separator:a493e3c90041fee868122a6a8035847c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44d0e0fc72b994b5153f461d77d10ba9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHTS221.html#a44d0e0fc72b994b5153f461d77d10ba9">initSensor</a> (unsigned char AV_CONF_value, unsigned char CTRL_REG1_value)</td></tr>
+<tr class="memdesc:a44d0e0fc72b994b5153f461d77d10ba9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the sensor by setting the values of the main config registers.  <a href="#a44d0e0fc72b994b5153f461d77d10ba9">More...</a><br /></td></tr>
+<tr class="separator:a44d0e0fc72b994b5153f461d77d10ba9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a823375e7386461bab03f71bbd2738967"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHTS221.html#a823375e7386461bab03f71bbd2738967">initSensor</a> (void)</td></tr>
+<tr class="memdesc:a823375e7386461bab03f71bbd2738967"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initializes the sensor with the following configuration:  <a href="#a823375e7386461bab03f71bbd2738967">More...</a><br /></td></tr>
+<tr class="separator:a823375e7386461bab03f71bbd2738967"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a18042134bf76497088c0a8ebda981172"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHTS221.html#a18042134bf76497088c0a8ebda981172">setOneShotMode</a> (void)</td></tr>
-<tr class="memdesc:a18042134bf76497088c0a8ebda981172"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the sensor for single acquisition of temperature and humidity (ONE_SHOT mode).  <a href="#a18042134bf76497088c0a8ebda981172">More...</a><br /></td></tr>
+<tr class="memdesc:a18042134bf76497088c0a8ebda981172"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the sensor for single acquisition of temperature and humidity (ONE_SHOT mode) with the following settings:  <a href="#a18042134bf76497088c0a8ebda981172">More...</a><br /></td></tr>
 <tr class="separator:a18042134bf76497088c0a8ebda981172"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ecebd395e9bdd43bf8879ea85e8ec1a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHTS221.html#a7ecebd395e9bdd43bf8879ea85e8ec1a">doOneShotMeasurement</a> (void)</td></tr>
 <tr class="memdesc:a7ecebd395e9bdd43bf8879ea85e8ec1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiate the measurement process for humidity and temperature.  <a href="#a7ecebd395e9bdd43bf8879ea85e8ec1a">More...</a><br /></td></tr>
@@ -94,6 +97,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5a9943c96dadede36aa773968a262813"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHTS221.html#a5a9943c96dadede36aa773968a262813">getSensorReadings</a> (void)</td></tr>
 <tr class="memdesc:a5a9943c96dadede36aa773968a262813"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the content of <a class="el" href="classHTS221.html" title="A class derived from I2CSensor class that describes a HTS221 sensor. ">HTS221</a> temperature and humidity registers. After that it calculates the temperature and humidity values.  <a href="#a5a9943c96dadede36aa773968a262813">More...</a><br /></td></tr>
 <tr class="separator:a5a9943c96dadede36aa773968a262813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8742b30631732c32de61fbdcc01c01f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHTS221.html#ae8742b30631732c32de61fbdcc01c01f">powerDown</a> (void)</td></tr>
+<tr class="memdesc:ae8742b30631732c32de61fbdcc01c01f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch the sensor into a power-down mode by setting PD bit of CTRL_REG1 to 0.  <a href="#ae8742b30631732c32de61fbdcc01c01f">More...</a><br /></td></tr>
+<tr class="separator:ae8742b30631732c32de61fbdcc01c01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c1ee1ddeb9386fb6012019ca25979d9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHTS221.html#a6c1ee1ddeb9386fb6012019ca25979d9">powerUp</a> (void)</td></tr>
+<tr class="memdesc:a6c1ee1ddeb9386fb6012019ca25979d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate the device by setting PD bit of CTRL_REG1 to 1.  <a href="#a6c1ee1ddeb9386fb6012019ca25979d9">More...</a><br /></td></tr>
+<tr class="separator:a6c1ee1ddeb9386fb6012019ca25979d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classI2CSensor"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classI2CSensor')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classI2CSensor.html">I2CSensor</a></td></tr>
 <tr class="memitem:a70973fbc02979cd9601cc119f3a45b58 inherit pub_methods_classI2CSensor"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2CSensor.html#a70973fbc02979cd9601cc119f3a45b58">I2CSensor</a> (unsigned char I2CAddr=0x01)</td></tr>
 <tr class="memdesc:a70973fbc02979cd9601cc119f3a45b58 inherit pub_methods_classI2CSensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">The constructor of the class.  <a href="#a70973fbc02979cd9601cc119f3a45b58">More...</a><br /></td></tr>
@@ -101,8 +110,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac93275ec1655f764cb9d0e675ea8168f inherit pub_methods_classI2CSensor"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2CSensor.html#ac93275ec1655f764cb9d0e675ea8168f">~I2CSensor</a> ()</td></tr>
 <tr class="separator:ac93275ec1655f764cb9d0e675ea8168f inherit pub_methods_classI2CSensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeafe0c8ddf7f0e594028c60534b47730 inherit pub_methods_classI2CSensor"><td class="memItemLeft" align="right" valign="top">unsigned char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2CSensor.html#aeafe0c8ddf7f0e594028c60534b47730">getSensorAddress</a> ()</td></tr>
+<tr class="memdesc:aeafe0c8ddf7f0e594028c60534b47730 inherit pub_methods_classI2CSensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides I2C address of the sensor.  <a href="#aeafe0c8ddf7f0e594028c60534b47730">More...</a><br /></td></tr>
 <tr class="separator:aeafe0c8ddf7f0e594028c60534b47730 inherit pub_methods_classI2CSensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee6fdd765e088571baa38c167ac9bea1 inherit pub_methods_classI2CSensor"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2CSensor.html#aee6fdd765e088571baa38c167ac9bea1">setSensorAddress</a> (unsigned char <a class="el" href="classI2CSensor.html#a44491726c51e977663b38c4740188201">I2CAddress</a>)</td></tr>
+<tr class="memdesc:aee6fdd765e088571baa38c167ac9bea1 inherit pub_methods_classI2CSensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Define I2C address of the sensor on the I2C bus.  <a href="#aee6fdd765e088571baa38c167ac9bea1">More...</a><br /></td></tr>
 <tr class="separator:aee6fdd765e088571baa38c167ac9bea1 inherit pub_methods_classI2CSensor"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a49c4da3e83f37049d88a5625270e2a7f inherit pub_methods_classI2CSensor"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2CSensor.html#a49c4da3e83f37049d88a5625270e2a7f">attachSensorToI2CBus</a> (int <a class="el" href="classI2CSensor.html#a38e8e1796b2c250e6e1f9e78c6eab781">i2cbus</a>)</td></tr>
 <tr class="memdesc:a49c4da3e83f37049d88a5625270e2a7f inherit pub_methods_classI2CSensor"><td class="mdescLeft">&#160;</td><td class="mdescRight">Associate the sensor with the I2C bus which it physically belongs to.  <a href="#a49c4da3e83f37049d88a5625270e2a7f">More...</a><br /></td></tr>
@@ -119,12 +130,6 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a454942b3d161e3a45fd3ec5eda273abc"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHTS221.html#a454942b3d161e3a45fd3ec5eda273abc">readSensorCalibrationTable</a> ()</td></tr>
 <tr class="memdesc:a454942b3d161e3a45fd3ec5eda273abc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads the content of the calibration table from <a class="el" href="classHTS221.html" title="A class derived from I2CSensor class that describes a HTS221 sensor. ">HTS221</a> sensor.  <a href="#a454942b3d161e3a45fd3ec5eda273abc">More...</a><br /></td></tr>
 <tr class="separator:a454942b3d161e3a45fd3ec5eda273abc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae8742b30631732c32de61fbdcc01c01f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHTS221.html#ae8742b30631732c32de61fbdcc01c01f">powerDown</a> (void)</td></tr>
-<tr class="memdesc:ae8742b30631732c32de61fbdcc01c01f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Switch the sensor into a power-down mode by setting PD bit of CTRL_REG1 to 0.  <a href="#ae8742b30631732c32de61fbdcc01c01f">More...</a><br /></td></tr>
-<tr class="separator:ae8742b30631732c32de61fbdcc01c01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c1ee1ddeb9386fb6012019ca25979d9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classHTS221.html#a6c1ee1ddeb9386fb6012019ca25979d9">powerUp</a> (void)</td></tr>
-<tr class="memdesc:a6c1ee1ddeb9386fb6012019ca25979d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate the device by setting PD bit of CTRL_REG1 to 1.  <a href="#a6c1ee1ddeb9386fb6012019ca25979d9">More...</a><br /></td></tr>
-<tr class="separator:a6c1ee1ddeb9386fb6012019ca25979d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -248,7 +253,7 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Calculates the temperature bases on the sensor reading and place the result in the class member "temperatureReading". </p>
-<dl class="section return"><dt>Returns</dt><dd>int alaways returns 0. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>int always returns 0. </dd></dl>
 
 </div>
 </div>
@@ -310,7 +315,7 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a493e3c90041fee868122a6a8035847c1"></a>
+<a class="anchor" id="a44d0e0fc72b994b5153f461d77d10ba9"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -324,19 +329,7 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>CTRL_REG1_value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>CTRL_REG2_value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned char&#160;</td>
-          <td class="paramname"><em>CTRL_REG3_value</em>&#160;</td>
+          <td class="paramname"><em>CTRL_REG1_value</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -347,13 +340,11 @@ Additional Inherited Members</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Configures the sensor by setting the values of the main config registers. </p>
-<p>The function sets the content of the following registers to the desired values: AV_CONF, CTRL_REG1, CTRL_REG2 and CTR_REG3. Before writing the new values to the registers, the function checks if the target is <a class="el" href="classHTS221.html" title="A class derived from I2CSensor class that describes a HTS221 sensor. ">HTS221</a> sensor, then reads the calibration table using <a class="el" href="classHTS221.html#a454942b3d161e3a45fd3ec5eda273abc" title="Reads the content of the calibration table from HTS221 sensor. ">readSensorCalibrationTable()</a> and after that proceeds with register changes.</p>
+<p>The function sets the content of the registers: AV_CONF and CTRL_REG1 to the desired values. Before writing the new values to the registers, the function checks if the target is <a class="el" href="classHTS221.html" title="A class derived from I2CSensor class that describes a HTS221 sensor. ">HTS221</a> sensor, then reads the calibration table using <a class="el" href="classHTS221.html#a454942b3d161e3a45fd3ec5eda273abc" title="Reads the content of the calibration table from HTS221 sensor. ">readSensorCalibrationTable()</a> and after that proceeds with register changes.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramdir">[in]</td><td class="paramname">AV_CONF_value</td><td>the new value of the AV_CONF register </td></tr>
     <tr><td class="paramdir">[in]</td><td class="paramname">CTRL_REG1_value</td><td>the new value of the CTRL_REG1 register </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">CTRL_REG2_value</td><td>the new value of the CTRL_REG2 register </td></tr>
-    <tr><td class="paramdir">[in]</td><td class="paramname">CTRL_REG3_value</td><td>the new value of the CTRL_REG3 register </td></tr>
   </table>
   </dd>
 </dl>
@@ -361,12 +352,43 @@ Additional Inherited Members</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="ae8742b30631732c32de61fbdcc01c01f"></a>
+<a class="anchor" id="a823375e7386461bab03f71bbd2738967"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int HTS221::initSensor </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function initializes the sensor with the following configuration: </p>
+<ul>
+<li>block data update bit of CTRL_REG1 set to 1 (inhibit the output register update between the reading of the upper and lower register parts);</li>
+<li>set the output data rate to 12.5Hz;</li>
+<li>pressure and temperature internal average to: AVGT = 32 and AVGP = 64.</li>
+</ul>
+<dl class="section return"><dt>Returns</dt><dd>int 0 in case of success, _INIT_HTS221_SENSOR error code in case of a failure. </dd></dl>
+
+<p>Implements <a class="el" href="classI2CSensor.html#a49b4d64a549daaa14d342cb1e9a435b5">I2CSensor</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae8742b30631732c32de61fbdcc01c01f"></a>
+<div class="memitem">
+<div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">int HTS221::powerDown </td>
@@ -376,11 +398,6 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Switch the sensor into a power-down mode by setting PD bit of CTRL_REG1 to 0. </p>
@@ -391,9 +408,6 @@ Additional Inherited Members</h2></td></tr>
 <a class="anchor" id="a6c1ee1ddeb9386fb6012019ca25979d9"></a>
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">int HTS221::powerUp </td>
@@ -403,11 +417,6 @@ Additional Inherited Members</h2></td></tr>
           <td></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
 <p>Activate the device by setting PD bit of CTRL_REG1 to 1. </p>
@@ -456,7 +465,12 @@ Additional Inherited Members</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Configure the sensor for single acquisition of temperature and humidity (ONE_SHOT mode). </p>
+<p>Configure the sensor for single acquisition of temperature and humidity (ONE_SHOT mode) with the following settings: </p>
+<ul>
+<li>pressure and temperature internal average values: AVGT = 256 and AVGP = 512;</li>
+<li>block data update bit in CTRL_REG1 set to 1;</li>
+<li>power ON the sensor.</li>
+</ul>
 <dl class="section return"><dt>Returns</dt><dd>int returns an error code in case of a failure in communication with the sensor, 0 for success. </dd></dl>
 
 </div>
@@ -613,7 +627,7 @@ Additional Inherited Members</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Dec 25 2016 01:16:32 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Dec 28 2016 00:43:21 for libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>
