@@ -1,11 +1,11 @@
-####Libsetila
+### Libsetila
 
 Libsetila is a Linux user space library written in C++ for communication with diffrent types of popular sensors.
 
 Currently only I2C sensors are supported. The low level I2C communication is done by the Linux kernel module, while 
 the library implements the data exchange protocols and features supported by the sensors. 
 
-###Supported I2C Sensors
+#### Supported I2C Sensors
 
 Humidity sensors:
 
@@ -17,17 +17,17 @@ Pressure sensors:
 - Bosh BMP085 pressure and temperature sensor. Fully supported.
 - Bosh BMP180 pressure and temperature sensor. Fully supported.
 
-###Installation
+#### Installation
 
 Installation instruction can be found in the INSTALL file.
 
 
-###Documentation
+#### Documentation
 
 Check the doc folder for detailed library documentation.
 
 
-###Hardware for testing 
+#### Hardware for testing 
 
 The library functionality has been tested using the following hardware:
 
