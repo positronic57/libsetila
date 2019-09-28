@@ -1,0 +1,12 @@
+<map id="slave_device.h" name="slave_device.h">
+<area shape="rect" id="node2" href="$i2c__slave__device_8h.html" title="Contains the definition of the I2C_Slave_Device class/. " alt="" coords="248,80,381,107"/>
+<area shape="rect" id="node9" href="$spi__slave__device_8h.html" title="Contains the definition of the SPI_Slave_Device class. " alt="" coords="501,80,635,107"/>
+<area shape="rect" id="node3" href="$BMP085_8h.html" title="A Header file from libsetila library. It defines BMP085 class for communication with BOSCH BMP085 pre..." alt="" coords="5,155,88,181"/>
+<area shape="rect" id="node5" href="$HTS221_8h.html" title="A header file from libsetila library. It defines HTS221 class for communication with HT221 sensor..." alt="" coords="113,155,194,181"/>
+<area shape="rect" id="node6" href="$LPS25H_8h.html" title="A header file from libsetila library. It defines LPS25H class for communication with LPS25H sensor..." alt="" coords="219,155,301,181"/>
+<area shape="rect" id="node7" href="$setila__i2c_8h.html" title="Contains all header files required for working with I2C slave devices. " alt="" coords="325,155,413,181"/>
+<area shape="rect" id="node8" href="$srf02_8h.html" title="Contains the definition of SRF02 class for communication with SRF02 sonar sensor. ..." alt="" coords="438,155,501,181"/>
+<area shape="rect" id="node4" href="$setila_8h.html" title="Includes all of header files from libsetila project. " alt="" coords="283,229,347,256"/>
+<area shape="rect" id="node10" href="$mcp3204_8h.html" title="A header file from libsetila library. It defines MCP3204 class for communication with Microchip MCP32..." alt="" coords="525,155,611,181"/>
+<area shape="rect" id="node11" href="$setila__spi_8h.html" title="Contains all header files required for working with SPI slave devices. " alt="" coords="636,155,724,181"/>
+</map>

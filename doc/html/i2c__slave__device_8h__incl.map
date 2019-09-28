@@ -1,0 +1,5 @@
+<map id="i2c_slave_device.h" name="i2c_slave_device.h">
+<area shape="rect" id="node3" href="$slave__device_8h.html" title="Contains the definition of Slave_Device class. " alt="" coords="29,80,138,107"/>
+<area shape="rect" id="node4" href="$i2c__bus__master_8h.html" title="Contains the definition of I2C_Bus_Master_Device class. " alt="" coords="162,80,287,107"/>
+<area shape="rect" id="node5" href="$bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class. " alt="" coords="151,155,298,181"/>
+</map>

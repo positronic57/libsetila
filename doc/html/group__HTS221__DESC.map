@@ -1,0 +1,10 @@
+<map id="HTS221" name="HTS221">
+<area shape="rect" id="node1" href="$group__HTS221__REG__DEF.html" title="HTS221 Register Address Map" alt="" coords="362,5,566,32"/>
+<area shape="rect" id="node2" href="$group__HTS221__CTRL__REG3__REG__DESC.html" title="HTS221 CTRL_REG3 register\l description" alt="" coords="365,57,563,98"/>
+<area shape="rect" id="node3" href="$group__DEV__REG__CMD.html" title="Device Register Descriptors\l and Commands" alt="" coords="5,187,192,229"/>
+<area shape="rect" id="node4" href="$group__HTS221__DEFAULT__REG__VALUE.html" title="HTS221 Default values\l of the registers" alt="" coords="385,122,543,163"/>
+<area shape="rect" id="node5" href="$group__HTS221__STATUS__REG__REG__DESC.html" title="HTS221 STATUS_REG register\l description" alt="" coords="359,187,569,229"/>
+<area shape="rect" id="node6" href="$group__HTS221__CTRL__REG1__REG__DESC.html" title="HTS221 CTRL_REG1 register\l description" alt="" coords="365,253,563,294"/>
+<area shape="rect" id="node7" href="$group__HTS221__AV__CONF__REG__DESC.html" title="HTS221 AV_CONF register\l description" alt="" coords="372,318,556,359"/>
+<area shape="rect" id="node9" href="$group__HTS221__CTRL__REG2__REG__DESC.html" title="HTS221 CTRL_REG2 register\l description" alt="" coords="365,383,563,425"/>
+</map>
