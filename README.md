@@ -1,4 +1,4 @@
-##Libsetila
+## Libsetila
 
 Libsetila is a library written in C++ for communication with I2C/SPI slave devices from Linux user space. It provides classes for representing SPI and I2C slave devices and implements data exchange methods that can be used for communication with target devices on I2C/SPI bus. The main purpose of the library is to simplify the process of writing software for communication with different I2C/SPI devices from user space on Linux.
 
@@ -6,15 +6,15 @@ The low level I2C and SPI communication is done by the appropriate Linux kernel 
 
 The library is not thread safe. 
 
-###Software Requirements
+### Software Requirements
 
 The library requires C++ compiler that supports C++11 standard.
 
-###Supported Hardware
+### Supported Hardware
 
 Besides being a general purpose tool for talking with target I2C/SPI devices, it integrates support for some popular devices like: pressure/humidity/temperature sensors, ADC etc.. Those devices were mainly used as test devices during the code development. 
 
-####I2C Devices
+#### I2C Devices
 
 - ST HTS221 humidity and temperature sensor: single acquisition(ONE SHOT measurement), FIFO_MEAN mode, adjustable output data rate and resolution.
 - ST LPS25H pressure and temperature sensor: single acquisition(ONE SHOT measurement), adjustable output data rate and resolution.
@@ -22,11 +22,11 @@ Besides being a general purpose tool for talking with target I2C/SPI devices, it
 - Bosh BMP180 pressure and temperature sensor. Fully supported.
 - SRF02 ultra sonic range finder
 
-####SPI Devices
+#### SPI Devices
 
 - Microchip MCP3204 Analog Digital Converter
 
-####Hardware Platforms
+#### Hardware Platforms
 
 Libsetila is tested on different models and generations of Raspbery Pi all running Rasbian GNU/Linux version 10 ("buster"). The library should work on any other Linux system with: I2C/SPI master controller, appropriate kernel drivers for the master controllers and C++11 compiler.
 
@@ -34,16 +34,16 @@ Libsetila is tested on different models and generations of Raspbery Pi all runni
 
 For installing instructions check INSTALL file.
 
-###Documentation
+### Documentation
 
 Check the doc folder for detailed library documentation.
 
-###Usage and Examples
+### Usage and Examples
 
 The library is distributed with examples that demonstrate the library use. Check the code in the devices folder
 as an example for communication with different I2C and SPI devices.
 
-###Hardware for testing 
+### Hardware for testing 
 
 The library functionality has been tested using the following hardware:
 
