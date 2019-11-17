@@ -15,13 +15,10 @@
 #include "setila_errors.h"
 
 BMP085::BMP085(uint8_t i2c_slave_address):
-	I2C_Slave_Device(i2c_slave_address),
-	m_pressure_reading(0.0),
-	m_temperature_reading(0.0),
-	oss(BMP085_Over_Sampling::STANDARD)
-{};
+	I2C_Slave_Device(i2c_slave_address)
+{}
 
-BMP085::~BMP085() {};
+BMP085::~BMP085() {}
 
 int BMP085::read_calibration_table()
 {
@@ -30,11 +27,8 @@ int BMP085::read_calibration_table()
 
 BMP085::BMP085(uint8_t i2c_slave_address, BMP085_Over_Sampling oss):
 	I2C_Slave_Device(i2c_slave_address),
-	m_pressure_reading(0.0),
-	m_temperature_reading(0.0)
-{
-	this->oss=oss;
-}
+	m_oss(oss)
+{}
 
 int BMP085::init_sensor()
 {
@@ -43,7 +37,7 @@ int BMP085::init_sensor()
 
 void BMP085::over_sampling(BMP085_Over_Sampling oss)
 {
-	this->oss=oss;
+	m_oss=oss;
 }
 
 int BMP085::measure_temperature_pressure()
@@ -82,13 +76,13 @@ int BMP085::measure_temperature_pressure()
     rawTemperature = (long)((m_raw_temperature_data[0]<<8)+m_raw_temperature_data[1]);
 
 	/* Start the pressure measurement by setting the value of the BMP085 control register.*/
-    if (this->write_byte(static_cast<uint8_t>(BMP085_Register::CONTROL_REG), (static_cast<uint8_t>(BMP085_Command::START_PRESSURE_MEASUREMENT) + (static_cast<uint8_t>(oss) << 6))))
+    if (this->write_byte(static_cast<uint8_t>(BMP085_Register::CONTROL_REG), (static_cast<uint8_t>(BMP085_Command::START_PRESSURE_MEASUREMENT) + (static_cast<uint8_t>(m_oss) << 6))))
     {
     	return ERROR_BMP085_START_PRESSURE_MEASUREMENT_FAILED;
     }
 
 	/* Wait for the pressure conversion to be done. */
-	time_delay_ms(BMP085_Pressure_Conversion_Time[static_cast<int>(oss)]);
+	time_delay_ms(BMP085_Pressure_Conversion_Time[static_cast<int>(m_oss)]);
 
 	/* Read the pressure raw value. */
 	if (this->read(static_cast<uint8_t>(BMP085_Register::DATA_REG_MSB), m_raw_pressure_data, 2))
@@ -101,7 +95,7 @@ int BMP085::measure_temperature_pressure()
     	return ERROR_BMP085_READ_PRESSURE_FAILED;
     }
 
-    rawPressure = ((m_raw_pressure_data[0] << 16) + (m_raw_pressure_data[1] << 8) + m_raw_pressure_data[2]) >> (8 - static_cast<uint8_t>(oss));
+    rawPressure = ((m_raw_pressure_data[0] << 16) + (m_raw_pressure_data[1] << 8) + m_raw_pressure_data[2]) >> (8 - static_cast<uint8_t>(m_oss));
 
 	/* Calculate the actual temperature value. */
     x1 = ((rawTemperature - ac6)*ac5)>>15;
@@ -115,12 +109,12 @@ int BMP085::measure_temperature_pressure()
 	x1 = (b2 * ((b6 * b6) >> 12)) >> 11;
 	x2 = (ac2 * b6) >> 11;
 	x3 = x1 + x2;
-	b3 = ((( ac1 * 4 + x3 ) << static_cast<long>(oss)) + 2 ) / 4;
+	b3 = ((( ac1 * 4 + x3 ) << static_cast<long>(m_oss)) + 2 ) / 4;
 	x1 = (ac3 * b6) >> 13;
 	x2 = (b1 * ((b6 * b6) >> 12)) >> 16;
 	x3 = ((x1 + x2) + 2) >> 2;
 	b4 = (ac4 * (unsigned long)(x3 + 32768)) >> 15;
-	b7 = ((unsigned long)rawPressure - b3) * (50000 >> static_cast<uint8_t>(oss));
+	b7 = ((unsigned long)rawPressure - b3) * (50000 >> static_cast<uint8_t>(m_oss));
 
 	if (b7 < 0x80000000)
 	{

@@ -23,10 +23,10 @@
 
 Bus_Master_Device::Bus_Master_Device(const std::string &bus_master_device_file_name, BUS_TYPE bus_type):
 	m_bus_type(bus_type),
-	m_bus_master_device_file_name(bus_master_device_file_name),
-	m_number_of_salve_devices(0)
+	m_bus_master_device_file_name(bus_master_device_file_name)
+	//m_number_of_salve_devices(0)
 {
-	m_bus_master_fd = -1;
+	//m_bus_master_fd = -1;
 }
 
 Bus_Master_Device::~Bus_Master_Device()

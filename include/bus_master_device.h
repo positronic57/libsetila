@@ -36,18 +36,20 @@ enum class BUS_TYPE: int {
 class Bus_Master_Device
 {
 private:
-	BUS_TYPE m_bus_type;							/**< Defines the bus type: SPI or I2C. */
-	int m_bus_master_fd;							/**< File descriptor for data exchange with the bus master driver. */
-	std::string m_bus_master_device_file_name;		/**< Name of the Linux device file created by the bus master driver. */
-	int m_number_of_salve_devices;					/**< Number of connected slave devices. */
+	BUS_TYPE m_bus_type = BUS_TYPE::DUMMY;						/**< Defines the bus type: SPI or I2C. */
+	int m_bus_master_fd = -1;									/**< File descriptor for data exchange with the bus master driver. */
+	std::string m_bus_master_device_file_name = "/dev/null";	/**< Name of the Linux device file created by the bus master driver. */
+	int m_number_of_salve_devices = 0;							/**< Number of connected slave devices. */
 
 public:
+	Bus_Master_Device() = default;
+
 	/**
 	 * @brief Constructor.
 	 * @param[in] bus_master_device_file_name name of the Linux device file created by the master driver
 	 * @param[in] bus_type	bus type managed by the master driver
 	 */
-	explicit Bus_Master_Device(const std::string &bus_master_device_file_name, BUS_TYPE bus_type = BUS_TYPE::DUMMY);
+	explicit Bus_Master_Device(const std::string &bus_master_device_file_name, BUS_TYPE bus_type);
 
 	/**
 	 * @brief Default destructor.

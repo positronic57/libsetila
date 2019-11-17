@@ -89,14 +89,17 @@ const unsigned int BMP085_Pressure_Conversion_Time[] = {
  */
 class BMP085: public I2C_Slave_Device {
 private:
-	uint8_t m_calibration_table[22];		/**< Calibration table */
-	float m_pressure_reading;				/**<  The last pressure value measured by the sensor in hPa. */
-	float m_temperature_reading;			/**<  The last temperature value measured by the sensor. */
-	uint8_t m_raw_pressure_data[3];			/**<  Buffer for raw pressure data. */
-	uint8_t m_raw_temperature_data[2];		/**<  Buffer for raw temperature data. */
-	BMP085_Over_Sampling oss;				/**< Over sampling mode */
+	uint8_t m_calibration_table[22] = { 0x00 };						/**< Calibration table */
+	float m_pressure_reading = 0.00;								/**<  The last pressure value measured by the sensor in hPa. */
+	float m_temperature_reading = 0.00;								/**<  The last temperature value measured by the sensor. */
+	uint8_t m_raw_pressure_data[3] = { 0x00 };						/**<  Buffer for raw pressure data. */
+	uint8_t m_raw_temperature_data[2] = { 0x00 };					/**<  Buffer for raw temperature data. */
+	BMP085_Over_Sampling m_oss = BMP085_Over_Sampling::STANDARD;	/**< Over sampling mode */
 
 public:
+
+	BMP085(): I2C_Slave_Device(0x77) {};
+
 	/**
 	 * @brief A constructor.
 	 *
@@ -105,7 +108,7 @@ public:
 	 *
 	 * @param[in] SensorAddress defines the I2C address of the sensor.
 	 */
-	BMP085(uint8_t SensorAddress);
+	explicit BMP085(uint8_t SensorAddress);
 
 	/**
 	 * @brief A constructor.
@@ -116,7 +119,7 @@ public:
 	 * @param[in] SensorAddress defines the I2C address of the sensor.
 	 * @param[in] oss defines the sensor mode of operation.
 	 */
-	BMP085(uint8_t SensorAddress, BMP085_Over_Sampling oss);
+	explicit BMP085(uint8_t SensorAddress, BMP085_Over_Sampling oss);
 
 	/**
 	 * @brief A class destructor.

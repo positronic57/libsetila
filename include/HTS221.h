@@ -165,14 +165,15 @@
 class HTS221:public I2C_Slave_Device
 {
 private:
-	float m_temperature_reading;					/**< A sensor temperature reading.*/
-	float m_humidity_reading;						/**< A sensor humidity reading. */
-    uint8_t m_calibration_table[16];				/**< HTS221 calibration table. */
-    uint8_t m_humidity_out[2];						/**< A humidity buffer. */
-    uint8_t m_temperature_out[2];					/**< A temperature buffer. */
-    uint8_t CTRL_REG1;								/**< Holds CTRL_REG2 value between power ON and OFF requests. */
+	float m_temperature_reading = 0.0;					/**< A sensor temperature reading.*/
+	float m_humidity_reading = 0.0;						/**< A sensor humidity reading. */
+    uint8_t m_calibration_table[16] = { 0x00 };			/**< HTS221 calibration table. */
+    uint8_t m_humidity_out[2] = { 0x00 };				/**< A humidity buffer. */
+    uint8_t m_temperature_out[2] = { 0x00 };			/**< A temperature buffer. */
+    uint8_t CTRL_REG1 = { 0x00 };						/**< Holds CTRL_REG2 value between power ON and OFF requests. */
 
 public:
+    HTS221(): I2C_Slave_Device(0x5F) {};
     /**
      * @brief A constructor.
      *
@@ -181,12 +182,7 @@ public:
      *
      * @param[in] I2C_slave_address Address of the sensor on the I2C bus.
      */
-    HTS221(uint8_t I2C_slave_address):
-    	I2C_Slave_Device(I2C_slave_address),
-    	m_temperature_reading(0.0),
-    	m_humidity_reading(0.0),
-    	CTRL_REG1(0x00)
-	{};
+    HTS221(uint8_t I2C_slave_address): I2C_Slave_Device(I2C_slave_address) {};
 
 	/**
 	 * @brief A destructor of the class.

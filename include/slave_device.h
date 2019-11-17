@@ -40,9 +40,11 @@ class Bus_Master_Device;
 class Slave_Device
 {
 private:
-  Slave_Device_Type m_slave_device_type;	/**< Defines the slave device type based on the underlying bus. */
+  Slave_Device_Type m_slave_device_type = Slave_Device_Type::GENERIC_SLAVE_DEVICE;	/**< Defines the slave device type based on the underlying bus. */
 
 public:
+  Slave_Device() = default;
+
   /**
    * @brief The class destructor.
    */

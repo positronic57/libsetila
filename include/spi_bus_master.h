@@ -36,12 +36,13 @@ enum class SPI_BUS_MODE: uint8_t {
  */
 class SPI_Bus_Master_Device: public Bus_Master_Device
 {
-	uint32_t m_spi_bus_max_speed_hz;	/**< Maximal SPI bus speed in Hz. Value dictated by the SPI slave. */
-	SPI_BUS_MODE m_spi_bus_mode;		/**< SPI mode (polarity and phase of the bus signal). */
-	uint16_t m_spi_delay;				/**< how long to delay after the last bit transfer before optionally deselecting the device before the next transfer. As described in the description of the spi_ioc_transfer structure. */
-	uint8_t m_spi_bits_per_word;		/**< Device's word size. Defined based on slave devices requirements. */
+	uint32_t m_spi_bus_max_speed_hz = 0;					/**< Maximal SPI bus speed in Hz. Value dictated by the SPI slave. */
+	SPI_BUS_MODE m_spi_bus_mode = SPI_BUS_MODE::MODE_0;		/**< SPI mode (polarity and phase of the bus signal). */
+	uint16_t m_spi_delay = 0;								/**< how long to delay after the last bit transfer before optionally deselecting the device before the next transfer. As described in the description of the spi_ioc_transfer structure. */
+	uint8_t m_spi_bits_per_word = 8;						/**< Device's word size. Defined based on slave devices requirements. */
 
 public:
+	SPI_Bus_Master_Device(): Bus_Master_Device("/dev/spidev0.1", BUS_TYPE::SPI_BUS) {};
 	/**
 	 * @brief Class constructor. Provides the values of the SPI bus properties and the data required
 	 * for parent class initialization.
@@ -49,11 +50,7 @@ public:
 	 * @param bus_master_device_file_name
 	 */
 	explicit SPI_Bus_Master_Device(const std::string &bus_master_device_file_name):
-		Bus_Master_Device(bus_master_device_file_name, BUS_TYPE::SPI_BUS),
-		m_spi_bus_max_speed_hz(0),
-		m_spi_bus_mode(SPI_BUS_MODE::MODE_0),
-		m_spi_delay(0),
-		m_spi_bits_per_word(8)
+		Bus_Master_Device(bus_master_device_file_name, BUS_TYPE::SPI_BUS)
 	{};
 
 	/**

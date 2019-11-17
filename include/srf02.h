@@ -72,20 +72,18 @@ typedef enum {
 class SRF02 : public I2C_Slave_Device
 {
 private:
-	uint8_t m_software_version;		/**< Holds the firmware version of the sensor read from the internal sensor registers. */
-	uint16_t m_distance;			/**< Holds the distance value measured by the sensor. */
+	uint8_t m_software_version = 0x00;		/**< Holds the firmware version of the sensor read from the internal sensor registers. */
+	uint16_t m_distance = 0x00;				/**< Holds the distance value measured by the sensor. */
 
 public:
+	SRF02(): I2C_Slave_Device(0x70) {};
+
 	/**
 	 * @brief Class constructor.
 	 *
 	 * @param[in] i2c_slave_address	Address of the slave device on I2C bus.
 	 */
-	explicit SRF02(uint8_t i2c_slave_address):
-		I2C_Slave_Device(i2c_slave_address),
-		m_software_version(0),
-		m_distance(0)
-	{};
+	explicit SRF02(uint8_t i2c_slave_address): I2C_Slave_Device(i2c_slave_address) {};
 
 	/**
 	 * @brief Class destructor.

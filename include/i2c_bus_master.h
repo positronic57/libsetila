@@ -25,6 +25,7 @@
 class I2C_Bus_Master_Device: public Bus_Master_Device
 {
 public:
+	I2C_Bus_Master_Device(): Bus_Master_Device("/dev/i2c-1", BUS_TYPE::I2C_BUS) {};
 	/**
 	 * @brief Class constructor. Sets the value of the bus type in the master class to I2C_BUS.
 	 *

@@ -186,11 +186,13 @@ enum class LPS25H_NBR_AVERAGED_SAMPLES {
 class LPS25H: public I2C_Slave_Device
 {
 private:
-	float m_pressure_reading;			/**<  The last pressure value measured by the sensor. */
-	float m_temperature_reading;		/**<  The last temperature value measured by the sensor. */
-	uint8_t m_CTRL_REG1;		/**< Holds the value of the CTRL_REG1 between two power ON/Down commands. */
+	float m_pressure_reading = 0.0;			/**<  The last pressure value measured by the sensor. */
+	float m_temperature_reading = 0.0;		/**<  The last temperature value measured by the sensor. */
+	uint8_t m_CTRL_REG1 = 0x00;				/**< Holds the value of the CTRL_REG1 between two power ON/Down commands. */
 
 public:
+	LPS25H() = default;
+
 	/**
 	* @brief A constructor.
 	*
@@ -202,12 +204,7 @@ public:
 	*
 	* @param[in] I2C_slave_address an I2C address of the sensor.
 	*/
-	LPS25H(uint8_t I2C_slave_address):
-		I2C_Slave_Device(I2C_slave_address),
-		m_pressure_reading(0.0),
-		m_temperature_reading(0.0),
-		m_CTRL_REG1(0x00)
-	{};
+	explicit LPS25H(uint8_t I2C_slave_address):	I2C_Slave_Device(I2C_slave_address)	{};
 
 	/**
 	 * @brief A destructor of the class.

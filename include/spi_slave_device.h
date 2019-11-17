@@ -32,17 +32,14 @@
 class SPI_Slave_Device: public Slave_Device
 {
 private:
-	SPI_Bus_Master_Device *m_bus_master;	/**< The salve will be reachable via this master device. */
+	SPI_Bus_Master_Device *m_bus_master = nullptr;	/**< The salve will be reachable via this master device. */
 
 public:
 
 	/**
 	 * @brief The class constructor.
 	 */
-  explicit SPI_Slave_Device():
-    Slave_Device(Slave_Device_Type::SPI_SLAVE_DEVICE),
-	m_bus_master(nullptr)
-  {};
+	SPI_Slave_Device(): Slave_Device(Slave_Device_Type::SPI_SLAVE_DEVICE) {};
 
   /**
    * @brief The class destructor.

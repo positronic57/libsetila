@@ -64,18 +64,14 @@ enum class MCP3204_INPUT_CHANNEL: uint8_t
 class MCP3204: public SPI_Slave_Device
 {
 private:
-	std::uint16_t m_digital_value;	/**< The result of the analog to digital conversion will be stored here. */
-	float m_reference_voltage;		/**< Reference voltage value. Required for representing the digital reading as analog value. */
+	std::uint16_t m_digital_value = 0x0000;		/**< The result of the analog to digital conversion will be stored here. */
+	float m_reference_voltage = 0.0;			/**< Reference voltage value. Required for representing the digital reading as analog value. */
 
 public:
 	/**
 	 * @brief Class constructor.
 	 */
-	explicit MCP3204():
-		SPI_Slave_Device(),
-		m_digital_value(0),
-		m_reference_voltage(0.0)
-	{};
+	MCP3204() = default;
 
 	/**
 	 * @brief Class constructor.

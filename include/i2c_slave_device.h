@@ -34,10 +34,12 @@
 class I2C_Slave_Device: public Slave_Device
 {
 private:
-  unsigned int m_I2C_slave_address;				/**< The salve will be reachable via this master device. */
-  I2C_Bus_Master_Device *m_bus_master;			/**< Address of the slave device on the I2C bus. */
+  uint8_t m_I2C_slave_address = 0x10;					/**< The salve will be reachable via this master device. */
+  I2C_Bus_Master_Device *m_bus_master = nullptr;		/**< Address of the slave device on the I2C bus. */
 
 public:
+  I2C_Slave_Device(): Slave_Device(Slave_Device_Type::I2C_SLAVE_DEVICE) {};
+
   /**
    * @brief The class constructor.
    *
@@ -45,8 +47,7 @@ public:
    */
   explicit I2C_Slave_Device(uint8_t I2C_slave_address):
     Slave_Device(Slave_Device_Type::I2C_SLAVE_DEVICE),
-    m_I2C_slave_address(I2C_slave_address),
-	m_bus_master(nullptr)
+    m_I2C_slave_address(I2C_slave_address)
   {};
 
   /**
