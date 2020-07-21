@@ -1,3 +1,13 @@
+/**
+ * @file range_finder.cpp
+ *
+ * @brief Measuring distance with SRF02 ultra sonic range finder using libsetila2.
+ *
+ * @author Goce Boshkovski
+ *
+ * @copyright GNU General Public License v3
+ */
+
 #include <string>
 #include <iostream>
 

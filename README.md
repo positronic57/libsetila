@@ -4,6 +4,12 @@ Libsetila is a library written in C++ for communication with I2C/SPI slave devic
 
 The low level I2C and SPI communication is done by the appropriate Linux kernel drivers while the library use the standard read/write IO calls to send/receive data from/to the slave devices on the bus. The kernel drivers must be loaded before calling the library IO functions.
 
+Main resources providided with the library:
+- classes for SPI/I2C master;
+- classes for implementing SPI/I2C slaves;
+- templates for Basic Data Containers (BDC): stack, FIFO queue and circular buffer. Readings from different SPI/I2C devices can be stored in those data containers; 
+- support for some common/popular SPI/I2C devices (see supported hardware section).
+ 
 The library is not thread safe. 
 
 ### Software Requirements

@@ -19,7 +19,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Libsetila
-   &#160;<span id="projectnumber">v0.5</span>
+   &#160;<span id="projectnumber">v0.5.1</span>
    </div>
   </td>
  </tr>
@@ -62,9 +62,11 @@ Inheritance diagram for Bus_Master_Device:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a59aa7099a6c2d26ac0a66ec855cd6289"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBus__Master__Device.html#a59aa7099a6c2d26ac0a66ec855cd6289">Bus_Master_Device</a> (const std::string &amp;bus_master_device_file_name, <a class="el" href="bus__master__device_8h.html#a8cc15fa7525814943f6692983be4e19b">BUS_TYPE</a> <a class="el" href="classBus__Master__Device.html#aa12b55bb4d25e47e0486abebc182a40b">bus_type</a>=<a class="el" href="bus__master__device_8h.html#a8cc15fa7525814943f6692983be4e19babd2103035a8021942390a78a431ba0c4">BUS_TYPE::DUMMY</a>)</td></tr>
-<tr class="memdesc:a59aa7099a6c2d26ac0a66ec855cd6289"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a59aa7099a6c2d26ac0a66ec855cd6289">More...</a><br /></td></tr>
-<tr class="separator:a59aa7099a6c2d26ac0a66ec855cd6289"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebb49a4d81143f7edfe42f3f41040b92"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBus__Master__Device.html#aebb49a4d81143f7edfe42f3f41040b92">Bus_Master_Device</a> ()=default</td></tr>
+<tr class="separator:aebb49a4d81143f7edfe42f3f41040b92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a759ffa384a1a9ac2d2c9b585cfff4f82"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBus__Master__Device.html#a759ffa384a1a9ac2d2c9b585cfff4f82">Bus_Master_Device</a> (const std::string &amp;bus_master_device_file_name, <a class="el" href="bus__master__device_8h.html#a8cc15fa7525814943f6692983be4e19b">BUS_TYPE</a> <a class="el" href="classBus__Master__Device.html#aa12b55bb4d25e47e0486abebc182a40b">bus_type</a>)</td></tr>
+<tr class="memdesc:a759ffa384a1a9ac2d2c9b585cfff4f82"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a759ffa384a1a9ac2d2c9b585cfff4f82">More...</a><br /></td></tr>
+<tr class="separator:a759ffa384a1a9ac2d2c9b585cfff4f82"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1dbf96cb64efda5a73d823b646b3ce2b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBus__Master__Device.html#a1dbf96cb64efda5a73d823b646b3ce2b">~Bus_Master_Device</a> ()</td></tr>
 <tr class="memdesc:a1dbf96cb64efda5a73d823b646b3ce2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <a href="#a1dbf96cb64efda5a73d823b646b3ce2b">More...</a><br /></td></tr>
 <tr class="separator:a1dbf96cb64efda5a73d823b646b3ce2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -86,20 +88,46 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a5418b41c7d4e93450752154e6c1b1826"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bus__master__device_8h.html#a8cc15fa7525814943f6692983be4e19b">BUS_TYPE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBus__Master__Device.html#a5418b41c7d4e93450752154e6c1b1826">m_bus_type</a></td></tr>
+<tr class="memitem:a5418b41c7d4e93450752154e6c1b1826"><td class="memItemLeft" align="right" valign="top"><a class="el" href="bus__master__device_8h.html#a8cc15fa7525814943f6692983be4e19b">BUS_TYPE</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBus__Master__Device.html#a5418b41c7d4e93450752154e6c1b1826">m_bus_type</a> = <a class="el" href="bus__master__device_8h.html#a8cc15fa7525814943f6692983be4e19babd2103035a8021942390a78a431ba0c4">BUS_TYPE::DUMMY</a></td></tr>
 <tr class="separator:a5418b41c7d4e93450752154e6c1b1826"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ace69e72bdabe966f768b96a09377f944"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBus__Master__Device.html#ace69e72bdabe966f768b96a09377f944">m_bus_master_fd</a></td></tr>
+<tr class="memitem:ace69e72bdabe966f768b96a09377f944"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBus__Master__Device.html#ace69e72bdabe966f768b96a09377f944">m_bus_master_fd</a> = -1</td></tr>
 <tr class="separator:ace69e72bdabe966f768b96a09377f944"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a41ce881680e8d579238d066d3a401262"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBus__Master__Device.html#a41ce881680e8d579238d066d3a401262">m_bus_master_device_file_name</a></td></tr>
+<tr class="memitem:a41ce881680e8d579238d066d3a401262"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBus__Master__Device.html#a41ce881680e8d579238d066d3a401262">m_bus_master_device_file_name</a> = &quot;/dev/null&quot;</td></tr>
 <tr class="separator:a41ce881680e8d579238d066d3a401262"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaaa3db23372433b1326c35a5f2e2aeb6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBus__Master__Device.html#aaaa3db23372433b1326c35a5f2e2aeb6">m_number_of_salve_devices</a></td></tr>
+<tr class="memitem:aaaa3db23372433b1326c35a5f2e2aeb6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBus__Master__Device.html#aaaa3db23372433b1326c35a5f2e2aeb6">m_number_of_salve_devices</a> = 0</td></tr>
 <tr class="separator:aaaa3db23372433b1326c35a5f2e2aeb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class for accessing the device file of the bus master driver. Provides the file descriptor for the opened device file to the slave devices. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a59aa7099a6c2d26ac0a66ec855cd6289"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a59aa7099a6c2d26ac0a66ec855cd6289">&#9670;&nbsp;</a></span>Bus_Master_Device()</h2>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="bmp085_bmp180_8cpp-example.html#_a0">bmp085_bmp180.cpp</a>, <a class="el" href="pi_sense_hat_8cpp-example.html#_a0">pi_sense_hat.cpp</a>, and <a class="el" href="range_finder_8cpp-example.html#_a0">range_finder.cpp</a>.</dd>
+</dl></div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aebb49a4d81143f7edfe42f3f41040b92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebb49a4d81143f7edfe42f3f41040b92">&#9670;&nbsp;</a></span>Bus_Master_Device() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Bus_Master_Device::Bus_Master_Device </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a759ffa384a1a9ac2d2c9b585cfff4f82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a759ffa384a1a9ac2d2c9b585cfff4f82">&#9670;&nbsp;</a></span>Bus_Master_Device() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -117,7 +145,7 @@ Private Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="bus__master__device_8h.html#a8cc15fa7525814943f6692983be4e19b">BUS_TYPE</a>&#160;</td>
-          <td class="paramname"><em>bus_type</em> = <code><a class="el" href="bus__master__device_8h.html#a8cc15fa7525814943f6692983be4e19babd2103035a8021942390a78a431ba0c4">BUS_TYPE::DUMMY</a></code>&#160;</td>
+          <td class="paramname"><em>bus_type</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -237,7 +265,8 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Closes the device file of the bus driver. </p>
-
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="mcp3204_example_8cpp-example.html#a14">mcp3204_example.cpp</a>.</dd>
+</dl>
 </div>
 </div>
 <a id="ab50d389f3572a8fcb53aaea6f76f9914"></a>
@@ -286,7 +315,8 @@ Private Attributes</h2></td></tr>
 
 <p>Opens the device file of the bus driver. </p>
 <dl class="section return"><dt>Returns</dt><dd>int 0 in case of a successful file device open, ERROR_OPEN_BUS otherwise. </dd></dl>
-
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="bmp085_bmp180_8cpp-example.html#a4">bmp085_bmp180.cpp</a>, <a class="el" href="mcp3204_example_8cpp-example.html#a2">mcp3204_example.cpp</a>, <a class="el" href="pi_sense_hat_8cpp-example.html#a4">pi_sense_hat.cpp</a>, and <a class="el" href="range_finder_8cpp-example.html#a3">range_finder.cpp</a>.</dd>
+</dl>
 </div>
 </div>
 <h2 class="groupheader">Field Documentation</h2>
@@ -300,7 +330,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::string Bus_Master_Device::m_bus_master_device_file_name</td>
+          <td class="memname">std::string Bus_Master_Device::m_bus_master_device_file_name = &quot;/dev/null&quot;</td>
         </tr>
       </table>
   </td>
@@ -323,7 +353,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Bus_Master_Device::m_bus_master_fd</td>
+          <td class="memname">int Bus_Master_Device::m_bus_master_fd = -1</td>
         </tr>
       </table>
   </td>
@@ -346,7 +376,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="bus__master__device_8h.html#a8cc15fa7525814943f6692983be4e19b">BUS_TYPE</a> Bus_Master_Device::m_bus_type</td>
+          <td class="memname"><a class="el" href="bus__master__device_8h.html#a8cc15fa7525814943f6692983be4e19b">BUS_TYPE</a> Bus_Master_Device::m_bus_type = <a class="el" href="bus__master__device_8h.html#a8cc15fa7525814943f6692983be4e19babd2103035a8021942390a78a431ba0c4">BUS_TYPE::DUMMY</a></td>
         </tr>
       </table>
   </td>
@@ -369,7 +399,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int Bus_Master_Device::m_number_of_salve_devices</td>
+          <td class="memname">int Bus_Master_Device::m_number_of_salve_devices = 0</td>
         </tr>
       </table>
   </td>
@@ -388,7 +418,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 3 2019 23:56:49 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 21 2020 19:16:03 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

@@ -19,7 +19,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Libsetila
-   &#160;<span id="projectnumber">v0.5</span>
+   &#160;<span id="projectnumber">v0.5.1</span>
    </div>
   </td>
  </tr>
@@ -75,6 +75,8 @@ Collaboration diagram for I2C_Slave_Device:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ac6aee8e96b84de75c92e16a03aff7568"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2C__Slave__Device.html#ac6aee8e96b84de75c92e16a03aff7568">I2C_Slave_Device</a> ()</td></tr>
+<tr class="separator:ac6aee8e96b84de75c92e16a03aff7568"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4da8132a92e991ce7a9a8f0c5c6c495f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2C__Slave__Device.html#a4da8132a92e991ce7a9a8f0c5c6c495f">I2C_Slave_Device</a> (uint8_t I2C_slave_address)</td></tr>
 <tr class="memdesc:a4da8132a92e991ce7a9a8f0c5c6c495f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class constructor.  <a href="#a4da8132a92e991ce7a9a8f0c5c6c495f">More...</a><br /></td></tr>
 <tr class="separator:a4da8132a92e991ce7a9a8f0c5c6c495f"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -100,6 +102,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aa58fc18aab4737897631306334a5280f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Removes the <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> bus master defined with the <a class="el" href="classI2C__Slave__Device.html#ad7dc7e3d9b2100f96133fbaac6fcd810" title="Defines the I2C bus master device which will be use for communication with the slave device...">attach_to_bus()</a> function call.  <a href="#aa58fc18aab4737897631306334a5280f">More...</a><br /></td></tr>
 <tr class="separator:aa58fc18aab4737897631306334a5280f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classSlave__Device"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classSlave__Device')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classSlave__Device.html">Slave_Device</a></td></tr>
+<tr class="memitem:aafe67efbc38a162abcbdb4330c656acf inherit pub_methods_classSlave__Device"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlave__Device.html#aafe67efbc38a162abcbdb4330c656acf">Slave_Device</a> ()=default</td></tr>
+<tr class="separator:aafe67efbc38a162abcbdb4330c656acf inherit pub_methods_classSlave__Device"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a743ceb72b889131f836b0f12f362af97 inherit pub_methods_classSlave__Device"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlave__Device.html#a743ceb72b889131f836b0f12f362af97">~Slave_Device</a> ()</td></tr>
 <tr class="memdesc:a743ceb72b889131f836b0f12f362af97 inherit pub_methods_classSlave__Device"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class destructor.  <a href="classSlave__Device.html#a743ceb72b889131f836b0f12f362af97">More...</a><br /></td></tr>
 <tr class="separator:a743ceb72b889131f836b0f12f362af97 inherit pub_methods_classSlave__Device"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -115,16 +119,43 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:af74b6059f674d320ad3c78057fec0471"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2C__Slave__Device.html#af74b6059f674d320ad3c78057fec0471">m_I2C_slave_address</a></td></tr>
-<tr class="separator:af74b6059f674d320ad3c78057fec0471"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aff8e06e77bd20b335f18862dd2465c41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classI2C__Bus__Master__Device.html">I2C_Bus_Master_Device</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2C__Slave__Device.html#aff8e06e77bd20b335f18862dd2465c41">m_bus_master</a></td></tr>
+<tr class="memitem:ac60f3394432ce2122051292c3f18dabe"><td class="memItemLeft" align="right" valign="top">uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2C__Slave__Device.html#ac60f3394432ce2122051292c3f18dabe">m_I2C_slave_address</a> = 0x10</td></tr>
+<tr class="separator:ac60f3394432ce2122051292c3f18dabe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff8e06e77bd20b335f18862dd2465c41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classI2C__Bus__Master__Device.html">I2C_Bus_Master_Device</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classI2C__Slave__Device.html#aff8e06e77bd20b335f18862dd2465c41">m_bus_master</a> = nullptr</td></tr>
 <tr class="separator:aff8e06e77bd20b335f18862dd2465c41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Child of <a class="el" href="classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any...">Slave_Device</a> class. Implements the IO functions specific for <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> bus and <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> slave devices. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="BMP085_8h-example.html#_a13">BMP085.h</a>, <a class="el" href="HTS221_8h-example.html#_a1">HTS221.h</a>, <a class="el" href="LPS25H_8h-example.html#_a6">LPS25H.h</a>, and <a class="el" href="srf02_8h-example.html#_a25">srf02.h</a>.</dd>
+</dl></div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ac6aee8e96b84de75c92e16a03aff7568"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6aee8e96b84de75c92e16a03aff7568">&#9670;&nbsp;</a></span>I2C_Slave_Device() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">I2C_Slave_Device::I2C_Slave_Device </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="HTS221_8h-example.html#a9">HTS221.h</a>.</dd>
+</dl>
+</div>
+</div>
 <a id="a4da8132a92e991ce7a9a8f0c5c6c495f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4da8132a92e991ce7a9a8f0c5c6c495f">&#9670;&nbsp;</a></span>I2C_Slave_Device()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a4da8132a92e991ce7a9a8f0c5c6c495f">&#9670;&nbsp;</a></span>I2C_Slave_Device() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,7 +250,8 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>0 for success, ERROR_ATTACH_TO_BUS in case of a failure. </dd></dl>
 
 <p>Implements <a class="el" href="classSlave__Device.html#a4714f4e1359113a0e79892a8a56fe006">Slave_Device</a>.</p>
-<div class="dynheader">
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="bmp085_bmp180_8cpp-example.html#a5">bmp085_bmp180.cpp</a>, <a class="el" href="pi_sense_hat_8cpp-example.html#a5">pi_sense_hat.cpp</a>, and <a class="el" href="range_finder_8cpp-example.html#a4">range_finder.cpp</a>.</dd>
+</dl><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classI2C__Slave__Device_ad7dc7e3d9b2100f96133fbaac6fcd810_icgraph.png" border="0" usemap="#classI2C__Slave__Device_ad7dc7e3d9b2100f96133fbaac6fcd810_icgraph" alt=""/></div>
@@ -523,7 +555,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classI2C__Bus__Master__Device.html">I2C_Bus_Master_Device</a>* I2C_Slave_Device::m_bus_master</td>
+          <td class="memname"><a class="el" href="classI2C__Bus__Master__Device.html">I2C_Bus_Master_Device</a>* I2C_Slave_Device::m_bus_master = nullptr</td>
         </tr>
       </table>
   </td>
@@ -536,8 +568,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="af74b6059f674d320ad3c78057fec0471"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af74b6059f674d320ad3c78057fec0471">&#9670;&nbsp;</a></span>m_I2C_slave_address</h2>
+<a id="ac60f3394432ce2122051292c3f18dabe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac60f3394432ce2122051292c3f18dabe">&#9670;&nbsp;</a></span>m_I2C_slave_address</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -546,7 +578,7 @@ Here is the caller graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unsigned int I2C_Slave_Device::m_I2C_slave_address</td>
+          <td class="memname">uint8_t I2C_Slave_Device::m_I2C_slave_address = 0x10</td>
         </tr>
       </table>
   </td>
@@ -565,7 +597,7 @@ Here is the caller graph for this function:</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 3 2019 23:56:49 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 21 2020 19:16:03 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

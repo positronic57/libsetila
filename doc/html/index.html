@@ -19,7 +19,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Libsetila
-   &#160;<span id="projectnumber">v0.5</span>
+   &#160;<span id="projectnumber">v0.5.1</span>
    </div>
   </td>
  </tr>
@@ -44,13 +44,19 @@ $(function() {
 <div class="contents">
 <div class="textblock"><p>Libsetila is a library written in C++ for communication with I2C/SPI slave devices from Linux user space. It provides classes for representing <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> and <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> slave devices and implements data exchange methods that can be used for communication with target devices on I2C/SPI bus. The main purpose of the library is to simplify the process of writing software for communication with different I2C/SPI devices from user space on Linux.</p>
 <p>The low level <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> and <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> communication is done by the appropriate Linux kernel drivers while the library use the standard read/write IO calls to send/receive data from/to the slave devices on the bus. The kernel drivers must be loaded before calling the library IO functions.</p>
+<p>Main resources providided with the library:</p><ul>
+<li>classes for SPI/I2C master;</li>
+<li>classes for implementing SPI/I2C slaves;</li>
+<li>templates for <a class="el" href="bdc_module.html">Basic Data Containers</a> (BDC): stack, FIFO queue and circular buffer. Readings from different SPI/I2C devices can be stored in those data containers;</li>
+<li>support for some common/popular SPI/I2C devices (see supported hardware section).</li>
+</ul>
 <p>The library is not thread safe.</p>
 <h3>Software Requirements</h3>
 <p>The library requires C++ compiler that supports C++11 standard.</p>
 <h3>Supported Hardware</h3>
 <p>Besides being a general purpose tool for talking with target I2C/SPI devices, it integrates support for some popular devices like: pressure/humidity/temperature sensors, ADC etc.. Those devices were mainly used as test devices during the code development.</p>
 <h4>Hardware Platforms and Operating System</h4>
-<p>The library should work on any embedded system with I2C/SPI master controller capable of running Linux with appropriate kernel drivers for the master controllers and C++11 compiler.</p>
+<p>The library should work on any embedded system with I2C/SPI master controller(s) capable of running Linux with appropriate kernel drivers for the master controllers and C++11 compiler.</p>
 <p>Successful tests have been done on:</p><ul>
 <li>Raspbery Pi 2,3 model B and Pi Zero/W all running Rasbian GNU/Linux version 10 ("buster");</li>
 <li>Beagle Bone Black revision A with Debian GNU/Linux 9 ("stretch").</li>
@@ -69,8 +75,6 @@ $(function() {
 </ul>
 <h3>Installation</h3>
 <p>For installing instructions check INSTALL file.</p>
-<h3>Documentation</h3>
-<p>Check the doc folder for detailed library documentation.</p>
 <h3>Usage and Examples</h3>
 <p>The library is distributed with examples that demonstrate the library use. Check the code in the devices folder as an example for communication with different <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> and <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> devices. The library must be installed before building the examples.</p>
 <h3>Test Hardware</h3>
@@ -90,7 +94,7 @@ $(function() {
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 3 2019 23:56:49 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 21 2020 19:16:03 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

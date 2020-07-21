@@ -182,6 +182,9 @@ enum class LPS25H_NBR_AVERAGED_SAMPLES {
  *
  *  @brief A class derived from I2CSensor class
  *  that describes LPS25H sensor.
+ *
+ *  @example pi_sense_hat.cpp
+ *
  */
 class LPS25H: public I2C_Slave_Device
 {

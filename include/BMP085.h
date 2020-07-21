@@ -86,6 +86,8 @@ const unsigned int BMP085_Pressure_Conversion_Time[] = {
  *  @ingroup I2C_SLAVE_DEVICES
  *
  *  @brief A class derived from I2CSensor class. It represents BMP085/BMP180 pressure and temperature sensor.
+ *
+ *  @example bmp085_bmp180.cpp
  */
 class BMP085: public I2C_Slave_Device {
 private:

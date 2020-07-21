@@ -19,7 +19,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Libsetila
-   &#160;<span id="projectnumber">v0.5</span>
+   &#160;<span id="projectnumber">v0.5.1</span>
    </div>
   </td>
  </tr>
@@ -67,6 +67,8 @@ Inheritance diagram for Slave_Device:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aafe67efbc38a162abcbdb4330c656acf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlave__Device.html#aafe67efbc38a162abcbdb4330c656acf">Slave_Device</a> ()=default</td></tr>
+<tr class="separator:aafe67efbc38a162abcbdb4330c656acf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a743ceb72b889131f836b0f12f362af97"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlave__Device.html#a743ceb72b889131f836b0f12f362af97">~Slave_Device</a> ()</td></tr>
 <tr class="memdesc:a743ceb72b889131f836b0f12f362af97"><td class="mdescLeft">&#160;</td><td class="mdescRight">The class destructor.  <a href="#a743ceb72b889131f836b0f12f362af97">More...</a><br /></td></tr>
 <tr class="separator:a743ceb72b889131f836b0f12f362af97"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -100,12 +102,37 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a20dce3ff92d8aff47709869c771b172e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="slave__device_8h.html#a529f3ab6f4cea5088aa122a5329ab534">Slave_Device_Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlave__Device.html#a20dce3ff92d8aff47709869c771b172e">m_slave_device_type</a></td></tr>
+<tr class="memitem:a20dce3ff92d8aff47709869c771b172e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="slave__device_8h.html#a529f3ab6f4cea5088aa122a5329ab534">Slave_Device_Type</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSlave__Device.html#a20dce3ff92d8aff47709869c771b172e">m_slave_device_type</a> = <a class="el" href="slave__device_8h.html#a529f3ab6f4cea5088aa122a5329ab534a477371c111496f54bd521126c6b1aff9">Slave_Device_Type::GENERIC_SLAVE_DEVICE</a></td></tr>
 <tr class="separator:a20dce3ff92d8aff47709869c771b172e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class that represents a slave device. It defines the common properties and IO operations for any slave device independent of the bus type they are connected to. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="aafe67efbc38a162abcbdb4330c656acf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aafe67efbc38a162abcbdb4330c656acf">&#9670;&nbsp;</a></span>Slave_Device() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Slave_Device::Slave_Device </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a743ceb72b889131f836b0f12f362af97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a743ceb72b889131f836b0f12f362af97">&#9670;&nbsp;</a></span>~Slave_Device()</h2>
 
@@ -134,7 +161,7 @@ Private Attributes</h2></td></tr>
 </div>
 </div>
 <a id="ae22d1f751188140a68a5f24e57e58085"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae22d1f751188140a68a5f24e57e58085">&#9670;&nbsp;</a></span>Slave_Device()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ae22d1f751188140a68a5f24e57e58085">&#9670;&nbsp;</a></span>Slave_Device() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -512,7 +539,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="slave__device_8h.html#a529f3ab6f4cea5088aa122a5329ab534">Slave_Device_Type</a> Slave_Device::m_slave_device_type</td>
+          <td class="memname"><a class="el" href="slave__device_8h.html#a529f3ab6f4cea5088aa122a5329ab534">Slave_Device_Type</a> Slave_Device::m_slave_device_type = <a class="el" href="slave__device_8h.html#a529f3ab6f4cea5088aa122a5329ab534a477371c111496f54bd521126c6b1aff9">Slave_Device_Type::GENERIC_SLAVE_DEVICE</a></td>
         </tr>
       </table>
   </td>
@@ -531,7 +558,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu Oct 3 2019 23:56:49 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Jul 21 2020 19:16:03 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.13
 </small></address>

@@ -27,7 +27,8 @@
  *
  * @brief Child of Slave_Device class.
  * Implements the IO functions specific for SPI bus.
- *
+ * 
+ * @example mcp3204.h Use of SPU_Slave_Device class for implementing communication with Microchip MCP304 ADC.
  */
 class SPI_Slave_Device: public Slave_Device
 {

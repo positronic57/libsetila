@@ -161,6 +161,8 @@
  * @ingroup I2C_SLAVE_DEVICES
  *
  * @brief A class derived from I2CSensor class that describes HTS221 sensor.
+ *
+ * @example pi_sense_hat.cpp
  */
 class HTS221:public I2C_Slave_Device
 {

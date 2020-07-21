@@ -74,7 +74,7 @@ install: | setila
 	@echo Installing library files in /usr/local/lib
 	@cp libsetila.* /usr/local/lib
 	@echo Copy of header files in /usr/local/include/setila
-	@cp ./include/* /usr/local/include/setila
+	@cp -r ./include/* /usr/local/include/setila
 
 setila:
 	@echo Installing the library requires root privileges

@@ -30,6 +30,11 @@
  * @brief Child of Slave_Device class.
  * Implements the IO functions specific for I2C bus and
  * I2C slave devices.
+ *
+ * @example BMP085.h practical example of using I2C_Slave_Device class for communication with BOSCH BMP085/180 sensor
+ * @example LPS25H.h practical example of using I2C_Slave_Device class for communication with LPS25H sensor
+ * @example HTS221.h practical example of using I2C_Slave_Device class for communication with HTS221 sensor
+ * @example srf02.h practical example of using I2C_Slave_Device class for communication with SFT02 ultra sound range finder
  */
 class I2C_Slave_Device: public Slave_Device
 {
@@ -115,6 +120,5 @@ public:
    */
   void dettach_from_master_bus() override;
 };
-
 
 #endif /* I2C_SLAVE_DEVICE_H_ */

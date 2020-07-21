@@ -68,6 +68,8 @@ typedef enum {
  * \class SRF02
  * @ingroup I2C_SLAVE_DEVICES
  * @brief The class represents SRF02 ultra sonic range finder
+ *
+ * @example range_finder.cpp
  */
 class SRF02 : public I2C_Slave_Device
 {

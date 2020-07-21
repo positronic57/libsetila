@@ -59,7 +59,10 @@ enum class MCP3204_INPUT_CHANNEL: uint8_t
 /**
  * \class MCP3204
  * @ingroup SPI_SLAVE_DEVICES
+ *
  * @brief Class representing MCP3204 device.
+ *
+ * @example mcp3204_example.cpp
  */
 class MCP3204: public SPI_Slave_Device
 {

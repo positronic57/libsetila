@@ -1,3 +1,15 @@
+/**
+ * @file pi_sense_hat.cpp
+ *
+ * @brief Get temperature, pressure and humidity readings from Raspberry Pi Sense HAT LPS25H and HTS221 sensors
+ * using libsetila library.
+ *
+ * @author Goce Boshkovski
+ *
+ * @copyright GNU General Public License v3
+ *
+ */
+
 #include <iostream>
 
 #include "setila/setila_i2c.h"
