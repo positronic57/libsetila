@@ -13,6 +13,10 @@
 #ifndef SETILA_ERRORS_H_
 #define SETILA_ERRORS_H_
 
+#ifndef SENSOR_READING_WATCHDOG_COUNTER
+#define SENSOR_READING_WATCHDOG_COUNTER	50
+#endif
+
 /** \defgroup ERROR_DEF Error Codes */
 
 /** \defgroup BUS_ERR SPI/I2C Communication Error Codes
@@ -31,6 +35,7 @@
 #define ERROR_IO_MODE_NOT_SUPPORTED				-11
 #define ERROR_WRONG_DEVICE_MODEL				-12
 #define ERROR_UNSUPPORTED_DEVICE_OPTION_CONFIG	-13
+#define ERROR_SENSOR_READING_TIME_OUT           -14
 /* @} */
 
 

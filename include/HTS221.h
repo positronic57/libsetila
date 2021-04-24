@@ -17,6 +17,8 @@
 
 #include "i2c_slave_device.h"
 
+#define LTS221_ID	0xBC
+
 /** \defgroup HTS221_DESC HTS221
  * @ingroup DEV_REG_CMD
  */
@@ -216,7 +218,7 @@ public:
 	 *
 	 * @param[in] AV_CONF_value the new value of the AV_CONF register
 	 * @param[in] CTRL_REG1_value the new value of the CTRL_REG1 register
-	 * @return int return 0 for success, ERROR_INIT_HTS221_SENSOR error code in case of a failure
+	 * @return int return 0 for success, ERROR_READ/WRITE_FAILED error code in case of a failure, ERROR_WRONG_DEVICE_MODEL if the target device is not HTS221.
 	 */
 	int init_sensor(uint8_t AV_CONF_value, uint8_t CTRL_REG1_value);
 
@@ -227,7 +229,7 @@ public:
 	 * - set the output data rate to 12.5Hz;
 	 * - pressure and temperature internal average to: AVGT = 32 and AVGP = 64.
 	 *
-	 * @return int 0 in case of success, _INIT_HTS221_SENSOR error code in case of a failure.
+	 * @return int 0 in case of success, ERROR_READ/WRITE_FAILED error code in case of a failure, ERROR_WRONG_DEVICE_MODEL if the target device is not HTS221.
 	 */
 	int init_sensor(void);
 
@@ -247,11 +249,10 @@ public:
 	 * @brief Initiate the measurement process for humidity and temperature.
 	 *
 	 * The function starts a single acquisition of temperature and humidity by setting the ONE_SHOT bit of CTRL_REG2 register.
-	 * After the measuring is done, it reads of the temperature and humidity registers and calculates the
-	 * temperature and the humidity values using the private class functions: calculateRealtiveHumidity() and
-	 * calculateTemperature().
+	 * After that get_sensor_readings() function is called for reading the measurement outputs. 
 	 *
-	 * @return int returns an error code in case there is a failure in communication with the sensor, 0 for successful measurement cycle.
+	 * @return int returns an error code in case there is a failure in communication with the sensor; ERROR_SENSOR_READING_TIME_OUT when there is no measurement outputs
+     * available SENSOR_READING_WATCHDOG_COUNTER number of reading attempts; 0 for successful measurement cycle.
 	 */
 	int do_one_shot_measurement(void);
 
@@ -261,7 +262,8 @@ public:
 	 *
 	 * This function doesn't work when output data rate is set to ONE_SHOT.
 	 *
-	 * @return int returns an error code in case there is a failure in communication with the sensor, 0 for successful measurement cycle.
+	 * @return int returns an error code in case there is a failure in communication with the sensor; ERROR_SENSOR_READING_TIME_OUT when there is no measurement outputs
+     * available SENSOR_READING_WATCHDOG_COUNTER number of reading attempts; 0 for successful measurement cycle.
 	 */
 	int get_sensor_readings(void);
 
@@ -281,17 +283,19 @@ public:
 
 private:
 	/**
-	 * @brief Calculates the relative humidity bases on the sensor reading and place the result in the class member "humidityReading".
+	 * @brief Calculates the relative humidity bases on the sensor reading and place the result in the class member ""m_humidity_reading.
 	 *
 	 * @return int always returns 0.
 	 */
     int calculate_realtive_humidity();
+    
     /**
-     * @brief Calculates the temperature bases on the sensor reading and place the result in the class member "temperatureReading".
+     * @brief Calculates the temperature bases on the sensor reading and place the result in the class member "m_temperature_reading".
      *
      * @return int always returns 0.
      */
     int calculate_temperature();
+    
     /**
      * @brief Reads the content of the calibration table from HTS221 sensor.
      *

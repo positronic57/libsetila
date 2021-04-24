@@ -1,5 +1,6 @@
 <map id="Basic Data Containers" name="Basic Data Containers">
-<area shape="rect" id="node2" href="$group__circular__buffer__bdc__group.html" title="Circular Buffer" alt="" coords="208,5,315,32"/>
-<area shape="rect" id="node3" href="$group__stack__bdc__group.html" title="Stack" alt="" coords="233,56,289,83"/>
-<area shape="rect" id="node4" href="$group__FIFO__bdc__group.html" title="FIFO Queue" alt="" coords="214,107,309,133"/>
+<area shape="rect" id="node1" title=" " alt="" coords="5,55,172,80"/>
+<area shape="rect" id="node2" href="$group__circular__buffer__bdc__group.html" title=" " alt="" coords="220,5,335,31"/>
+<area shape="rect" id="node3" href="$group__stack__bdc__group.html" title=" " alt="" coords="248,55,307,80"/>
+<area shape="rect" id="node4" href="$group__FIFO__bdc__group.html" title=" " alt="" coords="228,104,327,129"/>
 </map>

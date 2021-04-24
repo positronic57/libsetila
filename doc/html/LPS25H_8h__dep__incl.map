@@ -1,3 +1,4 @@
 <map id="LPS25H.h" name="LPS25H.h">
-<area shape="rect" id="node2" href="$setila_8h.html" title="Includes all of header files from libsetila project. " alt="" coords="15,80,79,107"/>
+<area shape="rect" id="node1" title="A header file from libsetila library. It defines LPS25H class for communication with LPS25H sensor." alt="" coords="5,5,88,32"/>
+<area shape="rect" id="node2" href="$setila_8h.html" title="Includes all of header files from libsetila project." alt="" coords="11,80,82,107"/>
 </map>

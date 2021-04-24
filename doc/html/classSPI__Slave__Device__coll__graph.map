@@ -1,5 +1,6 @@
 <map id="SPI_Slave_Device" name="SPI_Slave_Device">
-<area shape="rect" id="node2" href="$classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any..." alt="" coords="5,81,108,108"/>
-<area shape="rect" id="node3" href="$classSPI__Bus__Master__Device.html" title="Child class of Bus_Master_Device class which implements function calls specific for SPI bus..." alt="" coords="132,81,301,108"/>
-<area shape="rect" id="node4" href="$classBus__Master__Device.html" title="Base class for accessing the device file of the bus master driver. Provides the file descriptor for t..." alt="" coords="147,5,287,32"/>
+<area shape="rect" id="node1" title="Child of Slave_Device class. Implements the IO functions specific for SPI bus." alt="" coords="44,171,181,197"/>
+<area shape="rect" id="node2" href="$classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any..." alt="" coords="5,81,116,108"/>
+<area shape="rect" id="node3" href="$classSPI__Bus__Master__Device.html" title="Child class of Bus_Master_Device class which implements function calls specific for SPI bus." alt="" coords="140,81,317,108"/>
+<area shape="rect" id="node4" href="$classBus__Master__Device.html" title="Base class for accessing the device file of the bus master driver. Provides the file descriptor for t..." alt="" coords="153,5,304,32"/>
 </map>

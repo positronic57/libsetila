@@ -1,4 +1,5 @@
 <map id="I2C Bus" name="I2C Bus">
-<area shape="rect" id="node1" href="$group__I2C__SLAVE__DEVICES.html" title="I2C Slave Devices" alt="" coords="124,5,256,32"/>
-<area shape="rect" id="node2" href="$group__I2C__BUS__MASTER.html" title="I2C Bus Master" alt="" coords="133,56,247,83"/>
+<area shape="rect" id="node1" href="$group__I2C__SLAVE__DEVICES.html" title=" " alt="" coords="124,5,263,31"/>
+<area shape="rect" id="node2" href="$group__I2C__BUS__MASTER.html" title=" " alt="" coords="133,55,253,80"/>
+<area shape="rect" id="node3" title=" " alt="" coords="5,31,76,56"/>
 </map>

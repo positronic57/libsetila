@@ -1,3 +1,4 @@
 <map id="setila_i2c.h" name="setila_i2c.h">
-<area shape="rect" id="node2" href="$setila_8h.html" title="Includes all of header files from libsetila project. " alt="" coords="17,80,81,107"/>
+<area shape="rect" id="node1" title="Contains all header files required for working with I2C slave devices." alt="" coords="5,5,101,32"/>
+<area shape="rect" id="node2" href="$setila_8h.html" title="Includes all of header files from libsetila project." alt="" coords="18,80,89,107"/>
 </map>

@@ -15,6 +15,9 @@
 
 #include "i2c_slave_device.h"
 
+/** @brief Value of the WHO_AM_I register. */
+#define LPS25H_ID 0xBD
+
 /** \defgroup LPS25H_DESC LPS25H
  * @ingroup DEV_REG_CMD
  */
@@ -224,7 +227,7 @@ public:
 	 * @param[in] CTRL_REG1_value the new value of the CTRL_REG1 register.
 	 * @param[in] CTRL_REG2_value the new value of the CTRL_REG2 register.
 	 * @param[in] RES_CONF_value the new value of the RES_CONF register.
-	 * @return int return 0 in case of successful init, ERROR_INIT_LPS25H_SENSOR code is case of failure.
+	 * @return int return 0 in case of successful init, ERROR_READ/WRITE_FAILED code is case of failure.
 	 */
 	int init_sensor(uint8_t CTRL_REG1_value, uint8_t CTRL_REG2_value, uint8_t RES_CONF_value);
 
@@ -246,30 +249,23 @@ public:
 	/**
 	 * @brief Starts one shot measurement of pressure and temperature.
 	 *
-	 * One shot measurement is started after setting the CTRL_REG2 to value 0x01.
-	 * After time delay of 5ms, the function reads the values stored in the pressure
-	 * and temperature output registers. The time delay is introduced because the
-	 * library doesn't support interrupts and the sensor is not configured for generating
-	 * interrupt signal. Checking the value of STATUS_REG for end of conversion is replaced
-	 * with a time delay to avoid endless loop in case of sensor malfunction.
+	 * One shot measurement is started after setting the ONE_SHOT bit in CTRL_REG2 to value 1.
+	 * After that get_sensor_readings() is called for getting the measurement outputs.
 	 *
-	 * After reading the pressure and temperature output registers,
-	 * the function calculates the current temperature and pressure values
-	 * and updates the pressureReading and temperatureReading members
-	 * accordingly.
-	 *
-	 * @return int error code. 0 for successful attempt, ERROR_LPS25H_MEASUREMENT_FAILED code for failure.
-	 */
+     * @return int returns an error code in case there is a failure in communication with the sensor; ERROR_SENSOR_READING_TIME_OUT when there is no measurement outputs
+     * available SENSOR_READING_WATCHDOG_COUNTER number of reading attempts; 0 for successful measurement cycle.
+     */
 	int do_one_shot_measurement();
 
 	/**
 	 * @brief Reads the latest humidity and temperature readings from the sensor and calculates the
 	 * temperature and humidity values.
 	 *
-	 * The measurement parameters are set by the initSensor() function before calling this function.
+	 * The measurement parameters are set by the init_sensor() function before calling this function.
 	 *
-	 * @return int 0 in case of successes, error code ERROR_LPS25H_MEASUREMENT_FAILED in case of a failure.
-	 */
+     * @return int returns an error code in case there is a failure in communication with the sensor; ERROR_SENSOR_READING_TIME_OUT when there is no measurement outputs
+     * available SENSOR_READING_WATCHDOG_COUNTER number of reading attempts; 0 for successful measurement cycle.
+     */
 	int get_sensor_readings(void);
 
 	/**
@@ -296,7 +292,7 @@ public:
 	 * functions.
 	 *
 	 * @param[in] NUM_AVERAGED_SAMPLES number of averaged samples (bits WTM_POINT4-0 of FIFO_CTRL register).
-	 * @return int 0 in case the new configuration is written on the sensor, error codes ERROR_LPS25H_ENABLE_FIFO_MEAN/ERROR_LPS25H_NBR_AVERAGED_SAMPLES
+	 * @return int 0 in case the new configuration is written on the sensor, error codes ERROR_READ/WRITE_FAILED
 	 * in case of a failure.
 	 */
 	int enable_FIFO_MEAN(LPS25H_NBR_AVERAGED_SAMPLES NUM_AVERAGED_SAMPLES);
@@ -304,14 +300,14 @@ public:
 	/**
 	 * @brief Disable FIFO mode of operation by reseting the FIFO_EN bit from CTRL_REG2.
 	 *
-	 * @return int 0 in case of success, error code ERROR_LPS25H_DISABLE_FIFO_MEAN in case of a failure.
+	 * @return int 0 in case of success, error code ERROR_READ/WRITE_FAILED in case of a failure.
 	 */
 	int disable_FIFO_MEAN(void);
 
 	/**
 	 * @brief Turn on the device. The device is in power-down mode when PD = ‘0’ (default value after boot).
 	 *
-	 * @return 0 in case the new CTRL_REG1 value is sent to the sensor successfully, error code ERROR_I2C_WRITE_FAILED in case of a failure.
+	 * @return 0 in case the new CTRL_REG1 value is sent to the sensor successfully, error code ERROR_WRITE_FAILED in case of a failure.
 	 */
 	int power_up(void);
 
@@ -319,7 +315,7 @@ public:
 	 * @brief Puts the device is in power-down mode by setting
 	 * bit PD of CTRL_REG1 to value 0.
 	 *
-	 * @return 0 in case the new CTRL_REG1 value is sent to the sensor successfully, error codes ERROR_I2C_READ_FAILED/ERROR_I2C_WRITE_FAILED
+	 * @return 0 in case the new CTRL_REG1 value is sent to the sensor successfully, error codes ERROR_READ_FAILED/ERROR_WRITE_FAILED
 	 * when there is an issue with reading/sending data to the sensor.
 	 */
 	int power_down(void);
@@ -330,7 +326,7 @@ public:
 	 * - block data update bit of CTRL_REG1 set to 1;
 	 * - power ON the device.
 	 *
-	 * @return int, 0 on success, ERROR_INIT_LPS25H_SENSOR in case of a failure.
+	 * @return int, 0 on success, ERROR_READ/WRITE_FAILED in case of a failure.
 	 */
 	int set_one_shot_mode(void);
 
@@ -338,11 +334,9 @@ public:
 	 * @brief The device is reset to the power on configuration by setting bits:
 	 * SWRESET and BOOT of CTRL_REG1 to ‘1’.
 	 *
-	 * @return int 0 on success, ERROR_LPS25H_SW_RESET in case there is an error in the communication with the sensor.
+	 * @return int 0 on success, ERROR_READ/WRITE_FAILED in case there is an error in the communication with the sensor.
 	 */
 	int SW_reset(void);
-
-
 };
 
 #endif /* LPS25H_H_ */

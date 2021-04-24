@@ -92,50 +92,11 @@ int HTS221::calculate_realtive_humidity()
 int HTS221::do_one_shot_measurement()
 {
 	/* Start a humidity and temperature measurement */
-	if (write_byte(HTS221_CTRL_REG2, 1))
+	if (write_byte(HTS221_CTRL_REG2, (1 << HTS221_CTRL_REG2_ONE_SHOT))) {
 		return ERROR_WRITE_FAILED;
+	}
 
-	unsigned char STATUS_REG;
-
-	/* Check to see whenever a new humidity sample is available. */
-	do
-	{
-		if (this->read(HTS221_STATUS_REG, &STATUS_REG, 1))
-			return ERROR_READ_FAILED;
-
-	} while (!(STATUS_REG & 2));
-
-#if 0
-	/* Wait around 5ms for finishing the measurement and start reading the sensor output */
-	tdelay(5000000L);
-#endif
-
-	/* Read humidity registers. MSB bit of HTS221_HUMIDITY_OUT_L address is set to 1 for
-	 * enabling address auto-increment.
-	 */
-	if (this->read((HTS221_HUMIDITY_OUT_L | 0x80), m_humidity_out, 2))
-		return ERROR_READ_FAILED;
-
-	/* Check to see whenever a new temperature sample is available. */
-	do
-	{
-		if (this->read(HTS221_STATUS_REG, &STATUS_REG, 1))
-			return ERROR_READ_FAILED;
-
-	} while (!(STATUS_REG & 1));
-
-	/* Read temperature registers. MSB bit of HTS221_TEMP_OUT_L address is set to 1 for
-	 * enabling address auto-increment.
-	 */
-	if (this->read((HTS221_TEMP_OUT_L | 0x80), m_temperature_out, 2))
-		return ERROR_READ_FAILED;
-
-	/* Calculate the relative humidity value based on the measurement data. */
-	calculate_realtive_humidity();
-	/* Calculate the temperature value based on the measurement data. */
-	calculate_temperature();
-
-	return 0;
+	return get_sensor_readings();
 }
 
 int HTS221::read_calibration_table()
@@ -152,23 +113,28 @@ int HTS221::init_sensor(unsigned char AV_CONF_value,unsigned char CTRL_REG1_valu
 	unsigned char registryValue;
 
 	/*Check the device ID by reading WHO_AM_I register*/
-	if (this->read(HTS221_WHO_AM_I, &registryValue, 1))
+	if (this->read(HTS221_WHO_AM_I, &registryValue, 1)) {
 		return ERROR_READ_FAILED;
+	}
 
-	if (registryValue != 0xBC)
+	if (registryValue != LTS221_ID) {
 		return ERROR_WRONG_DEVICE_MODEL;
+	}
 
 	/* Read HTS221 calibration table. */
-	if (read_calibration_table())
+	if (read_calibration_table()) {
 		return ERROR_READ_FAILED;
+	}
 
 	/* Set the values of AV_CONF registers. */
-	if (this->write_byte(HTS221_AV_CONF, AV_CONF_value))
+	if (this->write_byte(HTS221_AV_CONF, AV_CONF_value)) {
 		return ERROR_WRITE_FAILED;
+	}
 
 	/* Set the value of the HTS221_CTRL_REG1. */
-	if (this->write_byte(HTS221_CTRL_REG1, CTRL_REG1_value))
+	if (this->write_byte(HTS221_CTRL_REG1, CTRL_REG1_value)) {
 		return ERROR_WRITE_FAILED;
+	}
 
 	return 0;
 }
@@ -181,8 +147,9 @@ int HTS221::init_sensor(void)
 	if (this->read(HTS221_WHO_AM_I, &registryValue, 1))
 		return ERROR_READ_FAILED;
 
-	if (registryValue != 0xBC)
+	if (registryValue != LTS221_ID) {
 		return ERROR_WRONG_DEVICE_MODEL;
+	}
 
 	/* Set the pressure and temperature internal average to: AVGT = 32 and AVGP = 64. */
 	if (this->write_byte(HTS221_AV_CONF, 0x24))
@@ -198,47 +165,58 @@ int HTS221::init_sensor(void)
 int HTS221::set_one_shot_mode(void)
 {
 	/* Set one shot mode with the following parameters:
-	 * - pressure and temperature internal average values: AVGT = 256 and AVGP = 512;
+	 * - pressure and temperature internal average values are set to their defaults;
 	 * - block data update bit in CTRL_REG1 set to 1;
 	 * - power ON the sensor.
 	 */
-	return init_sensor(0x3F,0x84);
+	return init_sensor(0x1B, 0x84);
 }
 
 int HTS221::get_sensor_readings(void)
 {
 	unsigned char STATUS_REG;
+	int wd_counter = SENSOR_READING_WATCHDOG_COUNTER;
 
 	/* Check to see whenever a new humidity sample is available. */
 	do
 	{
 		if (this->read(HTS221_STATUS_REG, &STATUS_REG, 1))
 			return ERROR_READ_FAILED;
-
-	} while (!(STATUS_REG & 2));
+		wd_counter--;
+	} while (!(STATUS_REG & 2) && wd_counter);
+	if ((!(STATUS_REG & 2) && !wd_counter)) {
+		return ERROR_SENSOR_READING_TIME_OUT;
+	}
 
 	/* Read humidity registers. MSB bit of HTS221_HUMIDITY_OUT_L address is set to 1 forr
 	 * enabling address auto-increment.
 	 */
-	if (this->read((HTS221_HUMIDITY_OUT_L | 0x80), m_humidity_out, 2))
+	if (this->read((HTS221_HUMIDITY_OUT_L | 0x80), m_humidity_out, 2)) {
 		return ERROR_READ_FAILED;
+	}
 
 	/* Check to see whenever a new temperature sample is available. */
+	wd_counter = SENSOR_READING_WATCHDOG_COUNTER;
 	do
 	{
 		if (this->read(HTS221_STATUS_REG, &STATUS_REG, 1))
 			return ERROR_READ_FAILED;
-
-	} while (!(STATUS_REG & 1));
+		wd_counter--;
+	} while (!(STATUS_REG & 1) && wd_counter);
+	if (!(STATUS_REG & 1) && !wd_counter) {
+		return ERROR_SENSOR_READING_TIME_OUT;
+	}
 
 	/* Read temperature registers. MSB bit of HTS221_TEMP_OUT_L address is set to 1 for
 	 * enabling address auto-increment.
 	 */
-	if (this->read((HTS221_TEMP_OUT_L | 0x80), m_temperature_out, 2))
+	if (this->read((HTS221_TEMP_OUT_L | 0x80), m_temperature_out, 2)) {
 		return ERROR_READ_FAILED;
+	}
 
 	/* Calculate the relative humidity value based on the measurement data. */
 	calculate_realtive_humidity();
+
 	/* Calculate the temperature value based on the measurement data. */
 	calculate_temperature();
 

@@ -22,23 +22,28 @@ int LPS25H::init_sensor(uint8_t CTRL_REG1_value, uint8_t CTRL_REG2_value, uint8_
 {
 	uint8_t registryValue;
 
-	/*Check the device ID by reading WHO_AM_I register*/
-	if (this->read(LPS25H_WHO_AM_I, &registryValue, 1))
+	// Check the device ID by reading WHO_AM_I register
+	if (this->read(LPS25H_WHO_AM_I, &registryValue, 1)) {
 		return ERROR_READ_FAILED;
-	if (registryValue != 0xBD)
+	}
+	if (registryValue != LPS25H_ID) {
 		return ERROR_WRONG_DEVICE_MODEL;
+	}
 
-	/* Set the value of the LPS25H_RES_CONF. */
-	if (this->write_byte(LPS25H_RES_CONF, RES_CONF_value))
+	// Set the value of the LPS25H_RES_CONF
+	if (this->write_byte(LPS25H_RES_CONF, RES_CONF_value)) {
 	    	return ERROR_WRITE_FAILED;
+	}
 
-	/* Set the value of the LPS25H_CTRL_REG2. */
-	if (this->write_byte(LPS25H_CTRL_REG2, CTRL_REG2_value))
+	// Set the value of the LPS25H_CTRL_REG2.
+	if (this->write_byte(LPS25H_CTRL_REG2, CTRL_REG2_value)) {
 		return ERROR_WRITE_FAILED;
+	}
 
-	/* Set the value of the LPS25H_CTRL_REG1. */
-	if (this->write_byte(LPS25H_CTRL_REG1, CTRL_REG1_value))
+	// Set the value of the LPS25H_CTRL_REG1.
+	if (this->write_byte(LPS25H_CTRL_REG1, CTRL_REG1_value)) {
 		return ERROR_WRITE_FAILED;
+	}
 
 	return 0;
 }
@@ -46,21 +51,35 @@ int LPS25H::init_sensor(uint8_t CTRL_REG1_value, uint8_t CTRL_REG2_value, uint8_
 
 int LPS25H::init_sensor(void)
 {
-	/* Set the pressure and temperature internal average to: AVGT = 16 and AVGP = 32. */
-	if (this->write_byte(LPS25H_RES_CONF, 0x05))
-		return ERROR_WRITE_FAILED;
+	uint8_t registry_value = 0x0;
 
-	/* Enable FIFO. */
-	if (this->write_byte(LPS25H_CTRL_REG2, 0x40))
-		return ERROR_WRITE_FAILED;
+	// Check the device ID by reading WHO_AM_I register
+	if (this->read(LPS25H_WHO_AM_I, &registry_value, 1)) {
+		return ERROR_READ_FAILED;
+	}
+	if (registry_value != LPS25H_ID) {
+		return ERROR_WRONG_DEVICE_MODEL;
+	}
 
-	/* Activate the FIFO mean mode with average of 32 samples. */
-	if (this->write_byte(LPS25H_FIFO_CTRL, 0xDF))
+	// Set the pressure and temperature internal average to: AVGT = 16 and AVGP = 32.
+	if (this->write_byte(LPS25H_RES_CONF, 0x05)) {
 		return ERROR_WRITE_FAILED;
+	}
 
-	/* Set the ODR to 25Hz, enable block data update and power on the sensor. */
-	if (this->write_byte(LPS25H_CTRL_REG1, 0xC4))
+	// Enable FIFO.
+	if (this->write_byte(LPS25H_CTRL_REG2, 0x40)) {
 		return ERROR_WRITE_FAILED;
+	}
+
+	// Activate the FIFO mean mode with average of 32 samples.
+	if (this->write_byte(LPS25H_FIFO_CTRL, 0xDF)) {
+		return ERROR_WRITE_FAILED;
+	}
+
+	// Set the ODR to 25Hz, enable block data update and power on the sensor.
+	if (this->write_byte(LPS25H_CTRL_REG1, 0xC4)) {
+		return ERROR_WRITE_FAILED;
+	}
 
 	return 0;
 }
@@ -68,44 +87,12 @@ int LPS25H::init_sensor(void)
 
 int LPS25H::do_one_shot_measurement()
 {
-	uint8_t pBuffer[3];
-	uint8_t tBuffer[2];
-	int16_t temperature=0;
-
 	/* Start a pressure and temperature measurement by writing 0x01 in to a CTR_REG2*/
-	if (this->write_byte(LPS25H_CTRL_REG2, 0x01))
+	if (this->write_byte(LPS25H_CTRL_REG2, 0x01)) {
 		return ERROR_WRITE_FAILED;
+	}
 
-	/* Wait around 5ms for finishing the measurement and start reading the sensor output. */
-	time_delay_ms(5);
-
-	/* Read pressure registers. MSB bit of LPS25H_PRESS_POUT_XL address is set to 1 for
-	 * enabling address auto-increment.
-	 */
-	if (this->read((LPS25H_PRESS_POUT_XL | 0x80), pBuffer, 3))
-		return ERROR_READ_FAILED;
-
-	/* Read temperature registers. MSB bit of LPS25H_TEMP_OUT_L address is set to 1 for
-	 * enabling address auto-increment.
-	 */
-	if (this->read((LPS25H_TEMP_OUT_L | 0x80), tBuffer, 2))
-		return ERROR_READ_FAILED;
-
-	/*
-	 * Calculate the pressure value based on the measurement data.
-	 * The formula is taken from ST Application Note AN4450.
-	 */
-	m_pressure_reading = (float)((((uint32_t)pBuffer[2]) << 16) | (((uint32_t)pBuffer[1]) << 8) | (uint32_t)pBuffer[0]) / (float)4096;
-
-	/* Calculate the temperature value based on the measurement data. */
-	temperature = tBuffer[1];
-	temperature <<= 8;
-	temperature |= tBuffer[0];
-	/* Convert negative 2's complement values to native negative value */
-	if (temperature & 0x8000) temperature = -((~temperature)+1);
-	m_temperature_reading = 42.5 + float(temperature)/float(480.0);
-
-	return 0;
+	return get_sensor_readings();
 }
 
 
@@ -115,34 +102,45 @@ int LPS25H::get_sensor_readings(void)
 	uint8_t tBuffer[2];
 	int16_t temperature=0;
 	uint8_t STATUS_REG;
+	int wd_counter = SENSOR_READING_WATCHDOG_COUNTER;
 
 	/* Check to see whenever a new pressure sample is available. */
 	do
 	{
 		if (this->read(LPS25H_STATUS_REG, &STATUS_REG, 1))
 			return ERROR_READ_FAILED;
-
-	} while (!(STATUS_REG & 2));
+		wd_counter--;
+	} while (!(STATUS_REG & 2) && wd_counter);
+	if (!(STATUS_REG & 2) && !wd_counter) {
+		return ERROR_SENSOR_READING_TIME_OUT;
+	}
 
 	/* Read pressure registers. MSB bit of LPS25H_PRESS_POUT_XL address is set to 1 for
 	 * enabling address auto-increment.
 	 */
-	if (this->read((LPS25H_PRESS_POUT_XL | 0x80), pBuffer, 3))
+	if (this->read((LPS25H_PRESS_POUT_XL | 0x80), pBuffer, 3)) {
 		return ERROR_READ_FAILED;
+	}
 
 	/* Check to see whenever a new temperature sample is available. */
+	wd_counter = SENSOR_READING_WATCHDOG_COUNTER;
 	do
 	{
-		if (this->read(LPS25H_STATUS_REG, &STATUS_REG, 1))
+		if (this->read(LPS25H_STATUS_REG, &STATUS_REG, 1)) {
 			return ERROR_READ_FAILED;
-
-	} while (!(STATUS_REG & 1));
+		}
+		wd_counter--;
+	} while (!(STATUS_REG & 1) && wd_counter);
+	if (!(STATUS_REG & 1) && !wd_counter) {
+		return ERROR_SENSOR_READING_TIME_OUT;
+	}
 
 	/* Read temperature registers. MSB bit of LPS25H_TEMP_OUT_L address is set to 1 for
 	 * enabling address auto-increment.
 	 */
-	if (this->read((LPS25H_TEMP_OUT_L | 0x80), tBuffer, 2))
+	if (this->read((LPS25H_TEMP_OUT_L | 0x80), tBuffer, 2)) {
 		return ERROR_READ_FAILED;
+	}
 
 	/*
 	 * Calculate the pressure value based on the measurement data.
@@ -155,7 +153,10 @@ int LPS25H::get_sensor_readings(void)
 	temperature <<= 8;
 	temperature |= tBuffer[0];
 	/* Convert negative 2's complement values to native negative value */
-	if (temperature & 0x8000) temperature = -((~temperature)+1);
+	if (temperature & 0x8000) {
+		temperature = -((~temperature)+1);
+	}
+
 	m_temperature_reading = 42.5 + float(temperature)/float(480.0);
 
 	return 0;

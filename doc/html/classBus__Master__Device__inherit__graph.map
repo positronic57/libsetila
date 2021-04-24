@@ -1,4 +1,5 @@
 <map id="Bus_Master_Device" name="Bus_Master_Device">
-<area shape="rect" id="node2" href="$classI2C__Bus__Master__Device.html" title="Child class of Bus_Master_Device class which implements function calls specific for I2C bus..." alt="" coords="5,80,173,107"/>
-<area shape="rect" id="node3" href="$classSPI__Bus__Master__Device.html" title="Child class of Bus_Master_Device class which implements function calls specific for SPI bus..." alt="" coords="198,80,367,107"/>
+<area shape="rect" id="node1" title="Base class for accessing the device file of the bus master driver. Provides the file descriptor for t..." alt="" coords="121,5,271,32"/>
+<area shape="rect" id="node2" href="$classI2C__Bus__Master__Device.html" title="Child class of Bus_Master_Device class which implements function calls specific for I2C bus." alt="" coords="5,80,184,107"/>
+<area shape="rect" id="node3" href="$classSPI__Bus__Master__Device.html" title="Child class of Bus_Master_Device class which implements function calls specific for SPI bus." alt="" coords="209,80,386,107"/>
 </map>

@@ -3,6 +3,7 @@ HEADER_FILES = $(CURDIR)/include
 CPP_SRCS += \
 ../devices/BMP085.cpp \
 ../devices/HTS221.cpp \
+../devices/LPS22HB.cpp \
 ../devices/LPS25H.cpp \
 ../devices/mcp3204.cpp \
 ../devices/srf02.cpp 
@@ -10,6 +11,7 @@ CPP_SRCS += \
 OBJS += \
 ./devices/BMP085.o \
 ./devices/HTS221.o \
+./devices/LPS22HB.o \
 ./devices/LPS25H.o \
 ./devices/mcp3204.o \
 ./devices/srf02.o 
@@ -17,6 +19,7 @@ OBJS += \
 CPP_DEPS += \
 ./devices/BMP085.d \
 ./devices/HTS221.d \
+./devices/LPS22HB.d \
 ./devices/LPS25H.d \
 ./devices/mcp3204.d \
 ./devices/srf02.d 
@@ -24,6 +27,7 @@ CPP_DEPS += \
 SOBJS += \
 ./devices/stat/BMP085.o \
 ./devices/stat/HTS221.o \
+./devices/stat/LPS22HB.o \
 ./devices/stat/LPS25H.o \
 ./devices/stat/mcp3204.o \
 ./devices/stat/srf02.o

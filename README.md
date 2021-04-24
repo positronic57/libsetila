@@ -32,6 +32,7 @@ Successful tests have been done on:
 
 - ST HTS221 humidity and temperature sensor: single acquisition(ONE SHOT measurement), FIFO_MEAN mode, adjustable output data rate and resolution;
 - ST LPS25H pressure and temperature sensor: single acquisition(ONE SHOT measurement), adjustable output data rate and resolution;
+- ST LPS22HB pressure and temperature sensor: single acquisition(ONE SHOT measurement);
 - Bosh BMP085 pressure and temperature sensor. Fully supported;
 - Bosh BMP180 pressure and temperature sensor. Fully supported;
 - SRF02 ultra sonic range finder.
@@ -62,7 +63,9 @@ The library functionality has been tested using the following hardware:
 - Adafruit BMP180 module (Adafruit product ID 1603);
 - [MCP3204 test module](https://github.com/positronic57/libmcp3204/tree/master/example/hardware) 
 - SRF02 - I2C/Serial ultrasonic ranger sensor
+- Arduino MKR ENV Shield rev2
 - Pi Sense HAT;
+- Rapberry Pi model B rev1
 - Raspbery Pi 2 model B;
 - Raspbery Pi 3 model B;
 - Raspbery Pi Zero/W;
