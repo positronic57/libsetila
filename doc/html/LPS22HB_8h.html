@@ -19,7 +19,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Libsetila
-   &#160;<span id="projectnumber">v0.5.2</span>
+   &#160;<span id="projectnumber">v0.5.3</span>
    </div>
   </td>
  </tr>
@@ -53,19 +53,16 @@ $(function() {
 
 <p>A header file from libsetila library. It defines <a class="el" href="classLPS22HB.html" title="A class derived from I2CSensor class that describes LPS22HB sensor.">LPS22HB</a> class for communication with <a class="el" href="classLPS22HB.html" title="A class derived from I2CSensor class that describes LPS22HB sensor.">LPS22HB</a> sensor.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="i2c__slave__device_8h_source.html">i2c_slave_device.h</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="ST__sensor_8h_source.html">ST_sensor.h</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for LPS22HB.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="LPS22HB_8h__incl.png" border="0" usemap="#LPS22HB_8h" alt=""/></div>
 <map name="LPS22HB_8h" id="LPS22HB_8h">
-<area shape="rect" title="A header file from libsetila library. It defines LPS22HB class for communication with LPS22HB sensor." alt="" coords="43,5,135,32"/>
-<area shape="rect" href="i2c__slave__device_8h.html" title="Contains the definition of the I2C_Slave_Device class/." alt="" coords="16,80,161,107"/>
-<area shape="rect" title=" " alt="" coords="5,229,76,256"/>
-<area shape="rect" href="slave__device_8h.html" title="Contains the definition of Slave_Device class." alt="" coords="29,155,148,181"/>
-<area shape="rect" href="i2c__bus__master_8h.html" title="Contains the definition of I2C_Bus_Master_Device class." alt="" coords="172,155,307,181"/>
-<area shape="rect" href="bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class." alt="" coords="159,229,319,256"/>
-<area shape="rect" title=" " alt="" coords="210,304,269,331"/>
+<area shape="rect" title="A header file from libsetila library. It defines LPS22HB class for communication with LPS22HB sensor." alt="" coords="19,5,111,32"/>
+<area shape="rect" href="ST__sensor_8h.html" title="Definition of ST_Sensor class." alt="" coords="15,80,114,107"/>
+<area shape="rect" href="slave__device_8h.html" title="Contains the definition of Slave_Device class." alt="" coords="5,155,124,181"/>
+<area shape="rect" title=" " alt="" coords="29,229,100,256"/>
 </map>
 </div>
 </div>
@@ -269,19 +266,17 @@ Macros</h2></td></tr>
 <p>Supported <a class="el" href="classLPS22HB.html" title="A class derived from I2CSensor class that describes LPS22HB sensor.">LPS22HB</a> modes of operation:</p><ul>
 <li>ONE SHOT.</li>
 </ul>
+<p>Only a measurement of absolute temperature and pressure values is supported.</p>
 <p>Typical use case:</p>
 <ol type="1">
-<li><p class="startli">Call the constructor with <a class="el" href="classLPS22HB.html" title="A class derived from I2CSensor class that describes LPS22HB sensor.">LPS22HB</a> <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> address. For example 0x5C:</p>
-<p class="startli">LPS22HB::LPS22HB(0x5C);</p>
+<li><p class="startli">Call the constructor with <a class="el" href="classLPS22HB.html" title="A class derived from I2CSensor class that describes LPS22HB sensor.">LPS22HB</a> <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> address, communication interface type and pointer to the bus master object. For example 0x5C:</p>
+<p class="startli"><a class="el" href="classLPS22HB.html" title="A class derived from I2CSensor class that describes LPS22HB sensor.">LPS22HB(Slave_Device_Type::I2C_SLAVE_DEVICE, i2c_bus_master, 0x5C)</a>;</p>
 </li>
-<li><p class="startli">Assign the sensor to <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> master (see <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> sensor class and the examples)</p>
-<p class="startli">LPS22HB::attach_to_bus(i2c_bus_master)</p>
+<li><p class="startli">Assign ONE SHOT as mode of operation</p>
+<p class="startli">set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_ONE_SHOT);</p>
 </li>
-<li><p class="startli">Configure ONE SHOT mode of operation:</p>
-<p class="startli"><a class="el" href="classLPS22HB.html#a9f7cb5b482c0024e9600cacd9a55fc22" title="This function sets the following sensor configuration:">LPS22HB::init_sensor()</a>;</p>
-</li>
-<li><p class="startli">Perform ONE SHOT measurement and get the pressure and temperature readings</p>
-<p class="startli">LPS22HB::do_one_shot_measurement(pressure, temperature); </p>
+<li><p class="startli">Perform a measurement and get the pressure and temperature readings</p>
+<p class="startli">get_sensor_readings(); </p>
 </li>
 </ol>
 </div><h2 class="groupheader">Macro Definition Documentation</h2>
@@ -416,7 +411,7 @@ Macros</h2></td></tr>
 </div><div class="memdoc">
 
 <p>PLS22HB <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> address when SA0 pad is contected to ground. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="arduino_mkr_env_shield_rev2_8cpp-example.html#a3">arduino_mkr_env_shield_rev2.cpp</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="arduino_mkr_env_shield_rev2_8cpp-example.html#a4">arduino_mkr_env_shield_rev2.cpp</a>.</dd>
 </dl>
 
 </div>
@@ -1272,7 +1267,7 @@ Macros</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 00:44:50 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 8 2021 15:52:33 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

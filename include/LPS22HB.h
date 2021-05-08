@@ -11,23 +11,21 @@
   * Supported LPS22HB modes of operation:
   * - ONE SHOT.
   *
+  * Only a measurement of absolute temperature and pressure values is supported.
+  *
   * Typical use case:
   *
-  * 1. Call the constructor with LPS22HB I2C address. For example 0x5C:
+  * 1. Call the constructor with LPS22HB I2C address, communication interface type and pointer to the bus master object. For example 0x5C:
   *
-  *  LPS22HB::LPS22HB(0x5C);
+  *  LPS22HB(Slave_Device_Type::I2C_SLAVE_DEVICE, i2c_bus_master, 0x5C);
   *
-  * 2. Assign the sensor to I2C master (see I2C sensor class and the examples)
+  * 2. Assign ONE SHOT as mode of operation
   *
-  *  LPS22HB::attach_to_bus(i2c_bus_master)
+  *  set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_ONE_SHOT);
   *
-  * 3. Configure ONE SHOT mode of operation:
+  * 3. Perform a measurement and get the pressure and temperature readings
   *
-  *  LPS22HB::init_sensor();
-  *
-  * 4. Perform ONE SHOT measurement and get the pressure and temperature readings
-  *
-  *  LPS22HB::do_one_shot_measurement(pressure, temperature);
+  *  get_sensor_readings();
   *
   * @example arduino_mkr_env_shield_rev2.cpp
   *
@@ -36,7 +34,11 @@
 #ifndef LPS22HB_H_
 #define LPS22HB_H_
 
+#if 0
 #include "i2c_slave_device.h"
+#else
+#include "ST_sensor.h"
+#endif
 
 /** @brief Value of the WHO_AM_I register. */
 #define LPS22HB_ID 0xB1
@@ -264,33 +266,37 @@ serial interface (I2C or SPI), IF_ADD_INC bit of CTRL_REG2 register. */
 /* @} */
 
 
-/** \class LPS22HB
+/** 
+ * \class LPS22HB
  *  @ingroup I2C_SLAVE_DEVICES
  *
  *  @brief A class derived from I2CSensor class
  *  that describes LPS22HB sensor.
  *
  *  @example arduino_mkr_env_shield_rev2.cpp
- *
  */
-class LPS22HB: public I2C_Slave_Device
+class LPS22HB: public ST_Sensor
 {
 private:
 	float m_pressure_reading = 0.0;			/**<  The last pressure value measured by the sensor. */
 	float m_temperature_reading = 0.0;		/**<  The last temperature value measured by the sensor. */
-	uint8_t m_CTRL_REG1 = 0x00;				/**< Holds the last value of the CTRL_REG1 register. */
-	uint8_t m_CTRL_REG2 = 0x00;             /**< Holds the last value of the CTRL_REG2 register. */
-	uint8_t m_CTRL_REG3 = 0x00;             /**< Holds the last value of the CTRL_REG3 register. */
+	uint8_t m_CTRL_REG1 = 0x00;				/**< Holds the last value of the CTRL_REG1. */
+	uint8_t m_CTRL_REG2 = 0x10;				/**< Holds the last value of the CTRL_REG2. */
+	uint8_t m_CTRL_REG3 = 0x00;				/**< Holds the last value of the CTRL_REG3. */
 
-public:
 	LPS22HB() = default;
 
+public:
 	/**
 	* @brief A constructor.
 	*
-	* @param[in] I2C_slave_address an I2C address of the sensor.
+	* @param[in] interface_type enum for selecting the communication interface of the sensor (I2C or SPI)
+	* @param[in] bus_master_device pointer to the object that represents the master of the bus where the sensor is connected
+	* @param[in] I2C_slave_address an I2C address of the sensor
 	*/
-	explicit LPS22HB(uint8_t I2C_slave_address):	I2C_Slave_Device(I2C_slave_address)	{};
+	explicit LPS22HB(Slave_Device_Type interface_type, Bus_Master_Device *bus_master_device, uint8_t I2C_slave_address):
+			ST_Sensor(interface_type, bus_master_device, I2C_slave_address)
+	{};
 
 	/**
 	 * @brief A destructor of the class.
@@ -298,49 +304,19 @@ public:
 	~LPS22HB() {};
 
 	/**
-	 * @brief Sensor init functions.
+	 * @brief A low level function for custom sensor configuration using the control registers of the sensor.
 	 *
-	 * It configures the sensor behaving by setting the values of the
-	 * CTRL_REG1, CTRL_REG2 and CTRL_REG3 registers.
-	 * This function must be called before starting with measurements.
+	 * Can be used when the higher level function like set_mode_of_operation() is not enough for the
+	 * application. It will change the values of the CTRL_REG1, CTRL_REG2 and CTRL_REG3 registers.
 	 *
 	 * @param[in] CTRL_REG1_value the new value of the CTRL_REG1 register.
 	 * @param[in] CTRL_REG2_value the new value of the CTRL_REG2 register.
 	 * @param[in] CTRL_REG3_value the new value of the CTRL_REG3 register.
+	 *
 	 * @return int returns 0 in case of successful init, ERROR_READ/WRITE_FAILED code is case of failure, or
 	 * ERROR_WRONG_DEVICE_MODEL when the target device is not recognized as LPS22HB.s
 	 */
-	int init_sensor(uint8_t &CTRL_REG1_value, uint8_t &CTRL_REG2_value, uint8_t &CTRL_REG3_value);
-
-
-	/**
-	 *
-	 * @brief This function sets the following sensor configuration:
-	 * - power down mode with support for one shot measurement only;
-	 * - automatic address increment during a multiple byte access;
-	 * - block data register update while reading pressure/temperature registers.
-	 *
-	 * @return int, 0 for success, error code for READ/WRITE in case of a failure, or ERROR_WRONG_DEVICE_MODEL
-	 * when the target device is not recognized as LPS22HB based on the content of WHO_AM_I register.
-	 */
-	int init_sensor(void);
-
-	/**
-	 * @brief Starts one shot measurement of pressure and temperature. Call this function only after
-	 * the sensor has been configured for one shot measurement using init_sensor().
-	 *
-	 * One shot measurement is started after setting the bit ONE_SHOT in CTRL_REG2 to value 1.
-	 *
-	 * After reading the pressure and temperature output registers,
-	 * the function calculates the current temperature and pressure values.
-	 *
-	 * @param[out] pressure measured pressure
-	 * @param[out] temperature measured temperature
-	 * @return int error code. 0 for successful attempt, ERROR_READ/WRITE_FAILED code for problem with R?W operations
-	 * or ERROR_SENSOR_READING_TIME_OUT when the measurement takes longer then SENSOR_READING_WATCHDOG_COUNTER number of
-	 * read attempts.
-	 */
-	int do_one_shot_measurement(float &pressure, float &temperature);
+	int custom_config(uint8_t &CTRL_REG1_value, uint8_t &CTRL_REG2_value, uint8_t &CTRL_REG3_value);
 
 	/**
 	 * @brief Provides the last pressure reading in hPa.
@@ -349,7 +325,6 @@ public:
 	 */
 	float last_pressure_reading() const { return m_pressure_reading; };
 
-
 	/**
 	 * @brief Provides the last temperature reading in degrees C.
 	 *
@@ -357,6 +332,11 @@ public:
 	 */
 	float last_temperature_reading() const {  return m_temperature_reading; };
 
+	virtual int set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate = ST_Sensor::output_data_rate_t::ODR_ONE_SHOT) override;
+	virtual int set_resolution(uint8_t average_1, uint8_t average_2 = 0x00) override;
+	virtual int get_sensor_readings() override;
+
+private:
 	/**
 	 * @brief Puts the device is in power-down mode. Only one shot measurement is possible.
 	 *
@@ -364,21 +344,6 @@ public:
 	 * when there is an issue with reading/sending data from/to the sensor.
 	 */
 	int enable_one_shot_mode(void);
-
-	/**
-	 * @brief alias function for enable_one_shot_mode().
-	 * @return same return values as enable_one_shot_mode().
-	 */
-	int enable_power_down_mode(void) { return enable_one_shot_mode(); };
-
-
-	/**
-	 * @brief The device is reset to the power on configuration by setting bits:
-	 * SWRESET and BOOT of CTRL_REG1 to ‘1’.
-	 *
-	 * @return int 0 on success, ERROR_READ/WRITE_FAILED in case there is an error in the communication with the sensor.
-	 */
-	int SW_reset(void);
 
 	/**
 	 * @brief Reads the values of the output pressure and temperature registers.
@@ -389,8 +354,15 @@ public:
 	 * The function can be used in case of ONE_SHOT and continuous measurements.
 	 * @return 0 in case of success, error code in case of a R/W failure of reading time out.
 	 */
-	int get_sensor_readings();
+	int read_data_registers();
 
+	/**
+	 * @brief alias function for enable_one_shot_mode().
+	 * @return same return values as enable_one_shot_mode().
+	 */
+	int enable_power_down_mode(void) { return enable_one_shot_mode(); };
+
+	int config_continuous_mode(output_data_rate_t output_data_rate);
 };
 
 #endif /* LPS22HB_H_ */

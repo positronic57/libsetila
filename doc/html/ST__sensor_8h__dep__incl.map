@@ -1,0 +1,4 @@
+<map id="ST_sensor.h" name="ST_sensor.h">
+<area shape="rect" id="node1" title="Definition of ST_Sensor class." alt="" coords="5,5,104,32"/>
+<area shape="rect" id="node2" href="$LPS22HB_8h.html" title="A header file from libsetila library. It defines LPS22HB class for communication with LPS22HB sensor." alt="" coords="9,80,101,107"/>
+</map>

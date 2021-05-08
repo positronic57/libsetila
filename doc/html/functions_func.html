@@ -19,7 +19,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Libsetila
-   &#160;<span id="projectnumber">v0.5.2</span>
+   &#160;<span id="projectnumber">v0.5.3</span>
    </div>
   </td>
  </tr>
@@ -107,6 +107,9 @@ $(function() {
 <li>close_bus()
 : <a class="el" href="classBus__Master__Device.html#a696cb0f8c25e21bdabacc6fc5eb34d0f">Bus_Master_Device</a>
 </li>
+<li>config_continuous_mode()
+: <a class="el" href="classLPS22HB.html#adff04cbc55ce77d71aca354910bfb1a3">LPS22HB</a>
+</li>
 <li>configure()
 : <a class="el" href="classMCP3204.html#a65d6657df30fb2405299d77e34eaf6bc">MCP3204</a>
 , <a class="el" href="classSPI__Bus__Master__Device.html#a5a65d73950f486579b8b25db57bac03e">SPI_Bus_Master_Device</a>
@@ -117,6 +120,9 @@ $(function() {
 <li>current_number_of_elements()
 : <a class="el" href="classCircularBuffer.html#ae43b45853faf02779ec6026207d33a66">CircularBuffer&lt; tElement &gt;</a>
 , <a class="el" href="classFIFO__queue.html#ab5fbe6b1b8f645f276082088d381890f">FIFO_queue&lt; tElement &gt;</a>
+</li>
+<li>custom_config()
+: <a class="el" href="classLPS22HB.html#a14fd4cbdfa89fadbf188ad8165c21b68">LPS22HB</a>
 </li>
 </ul>
 
@@ -141,7 +147,6 @@ $(function() {
 </li>
 <li>do_one_shot_measurement()
 : <a class="el" href="classHTS221.html#ad928d69ac6510b55abfb823589ebc810">HTS221</a>
-, <a class="el" href="classLPS22HB.html#a793a078eedd8265eb97489bdcc5885a0">LPS22HB</a>
 , <a class="el" href="classLPS25H.html#a36def02e9af3f9b8f41ad008d56dfa1d">LPS25H</a>
 </li>
 </ul>
@@ -174,8 +179,9 @@ $(function() {
 <h3><a id="index_g"></a>- g -</h3><ul>
 <li>get_sensor_readings()
 : <a class="el" href="classHTS221.html#ac2eec32af34e4baead6e13120f94fc33">HTS221</a>
-, <a class="el" href="classLPS22HB.html#a0145a8e5aff02fc9cd9768dd072968af">LPS22HB</a>
+, <a class="el" href="classLPS22HB.html#a7adeb3f1652fe350e504b36e8798a207">LPS22HB</a>
 , <a class="el" href="classLPS25H.html#ac23e69c682efa1f26f52964b1a417590">LPS25H</a>
+, <a class="el" href="classST__Sensor.html#aeb38935b35022369acc3bb0b5b270d8a">ST_Sensor</a>
 </li>
 <li>getElement()
 : <a class="el" href="classCircularBuffer.html#a1ef1ffcfa228f4b40b43e71016d109e4">CircularBuffer&lt; tElement &gt;</a>
@@ -204,8 +210,13 @@ $(function() {
 <li>init_sensor()
 : <a class="el" href="classBMP085.html#ac92994a0b6d9c9e53f8866829ed2f563">BMP085</a>
 , <a class="el" href="classHTS221.html#a6c83e83016f6910bd852e03bfdd9dc93">HTS221</a>
-, <a class="el" href="classLPS22HB.html#a434d13e396948d237595fb8936922121">LPS22HB</a>
-, <a class="el" href="classLPS25H.html#aa56245cc2573f5320eb1684a16cd2bc5">LPS25H</a>
+, <a class="el" href="classLPS25H.html#a326e66cd5bd469df2eb0b6708247775f">LPS25H</a>
+</li>
+<li>interface()
+: <a class="el" href="classST__Sensor.html#af76ed434ae5138803cddc1176e823ad5">ST_Sensor</a>
+</li>
+<li>interface_type()
+: <a class="el" href="classST__Sensor.html#a6acfebbdda7c90fcb16e6eece132fc24">ST_Sensor</a>
 </li>
 <li>isEmpty()
 : <a class="el" href="classCircularBuffer.html#a2dec74fefffe72ab7287918974a67311">CircularBuffer&lt; tElement &gt;</a>
@@ -228,7 +239,7 @@ $(function() {
 : <a class="el" href="classLPS22HB.html#aea05ef97c6acaf269e24f9022541d2dd">LPS22HB</a>
 </li>
 <li>LPS22HB()
-: <a class="el" href="classLPS22HB.html#a79cffb6f1b2a80b2dbbcd53171717c7b">LPS22HB</a>
+: <a class="el" href="classLPS22HB.html#a121310e5bf50830163d460235cebb208">LPS22HB</a>
 </li>
 <li>LPS25H()
 : <a class="el" href="classLPS25H.html#af0470da43abc450e49a3e0f75cc0ece2">LPS25H</a>
@@ -242,6 +253,9 @@ $(function() {
 </li>
 <li>measure_temperature_pressure()
 : <a class="el" href="classBMP085.html#afeea07fef1c4515e771acb4d93f6e32a">BMP085</a>
+</li>
+<li>mode_of_operation()
+: <a class="el" href="classST__Sensor.html#aa83742471122da807f46f769109e1e0d">ST_Sensor</a>
 </li>
 </ul>
 
@@ -279,6 +293,9 @@ $(function() {
 </li>
 <li>operator==()
 : <a class="el" href="classbdc__iterator.html#ab41705ec0b9f022c72bf82b0f008764a">bdc_iterator&lt; tElement &gt;</a>
+</li>
+<li>output_data_rate()
+: <a class="el" href="classST__Sensor.html#ae54b1d25baf648c4c42351d6257337c4">ST_Sensor</a>
 </li>
 <li>over_sampling()
 : <a class="el" href="classBMP085.html#a43d32d0adeca2bda6d2d3457258c5e5c">BMP085</a>
@@ -318,6 +335,9 @@ $(function() {
 : <a class="el" href="classBMP085.html#ae88ef20d1cdac02b06b1efb0700b3892">BMP085</a>
 , <a class="el" href="classHTS221.html#acd95d6a1b2d592d1e864053e500a0778">HTS221</a>
 </li>
+<li>read_data_registers()
+: <a class="el" href="classLPS22HB.html#ad7697a4ff7d7a196a4759761c09a7f75">LPS22HB</a>
+</li>
 <li>read_write()
 : <a class="el" href="classI2C__Slave__Device.html#a0b12ca5239e2ed97dee42485929c4c3c">I2C_Slave_Device</a>
 , <a class="el" href="classSlave__Device.html#ad43d25571d4a0375e0796e93b42bc23f">Slave_Device</a>
@@ -327,9 +347,17 @@ $(function() {
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
+<li>set_mode_of_operation()
+: <a class="el" href="classLPS22HB.html#a59e00131bd0b64d98ad22e229200a220">LPS22HB</a>
+, <a class="el" href="classST__Sensor.html#a21dbaac08b81f4b69d2c35dfa82377e0">ST_Sensor</a>
+</li>
 <li>set_one_shot_mode()
 : <a class="el" href="classHTS221.html#afe02e12d2c90fd57e1da7181ac40e777">HTS221</a>
 , <a class="el" href="classLPS25H.html#a9c7b62baea4ec6b17dd82d7fb4e82a03">LPS25H</a>
+</li>
+<li>set_resolution()
+: <a class="el" href="classLPS22HB.html#a63e9f5ce8d9b3b6c35dd80b77d10dedb">LPS22HB</a>
+, <a class="el" href="classST__Sensor.html#a4f6750c8963d0925ec45f4776cd5c4ff">ST_Sensor</a>
 </li>
 <li>size()
 : <a class="el" href="classCircularBuffer.html#ae30b522a9933be6ed4b3443876ec7570">CircularBuffer&lt; tElement &gt;</a>
@@ -354,7 +382,7 @@ $(function() {
 : <a class="el" href="classSRF02.html#a389f808fe4874e598e852b1eb833c8bb">SRF02</a>
 </li>
 <li>srf02_find_object()
-: <a class="el" href="classSRF02.html#a96ae688f96c36d6c119f0268188e86c0">SRF02</a>
+: <a class="el" href="classSRF02.html#a31656d4151ec73a29dcf79dca113128d">SRF02</a>
 </li>
 <li>srf02_set_new_i2c_address()
 : <a class="el" href="classSRF02.html#a39143b082ceb26ec3de9fd54d7d7c71f">SRF02</a>
@@ -362,12 +390,14 @@ $(function() {
 <li>srf02_status_to_string()
 : <a class="el" href="classSRF02.html#a021249c0528352e1a41d0b880603b020">SRF02</a>
 </li>
+<li>ST_Sensor()
+: <a class="el" href="classST__Sensor.html#aa68a8693f697a9db111ad239e12d00ee">ST_Sensor</a>
+</li>
 <li>Stack()
-: <a class="el" href="classStack.html#af7d00ac28cc8027e81009870ccaf63cd">Stack&lt; tElement &gt;</a>
+: <a class="el" href="classStack.html#a7c3af550e40d6b79425b370c61a95189">Stack&lt; tElement &gt;</a>
 </li>
 <li>SW_reset()
-: <a class="el" href="classLPS22HB.html#aeec0f2583e9171cc20ae28098c49fd04">LPS22HB</a>
-, <a class="el" href="classLPS25H.html#ad913d5a2bad66be01d0b350a3970c2a7">LPS25H</a>
+: <a class="el" href="classLPS25H.html#ad913d5a2bad66be01d0b350a3970c2a7">LPS25H</a>
 </li>
 </ul>
 
@@ -441,6 +471,9 @@ $(function() {
 <li>~SRF02()
 : <a class="el" href="classSRF02.html#aa640243bc8aa12801bfe6ef96a43bb20">SRF02</a>
 </li>
+<li>~ST_Sensor()
+: <a class="el" href="classST__Sensor.html#a6f6f2b487943cac131fa33c5c0767e2d">ST_Sensor</a>
+</li>
 <li>~Stack()
 : <a class="el" href="classStack.html#a9c71b5735f104236e0a3872508742d45">Stack&lt; tElement &gt;</a>
 </li>
@@ -448,7 +481,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Apr 25 2021 00:44:50 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sat May 8 2021 15:52:33 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.17
 </small></address>

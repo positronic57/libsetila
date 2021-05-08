@@ -1,8 +1,8 @@
 /**
- * @file arduino_mkr_env_shield_rev2.cpp
+ * @file pi_sense_hat.cpp
  *
  * @brief Get temperature, pressure and humidity readings from Arduino MKR ENV Shield Rev2
- * LPS22HB and HTS221 sensors using libsetila library. 
+ * LPS22HB and HTS221 sensors using libsetila library.
  *
  * @author Goce Boshkovski
  *
@@ -13,18 +13,16 @@
 #include <iostream>
 
 #include "setila/setila_i2c.h"
+
 #include "setila/LPS22HB.h"
 #include "setila/HTS221.h"
 
 int main()
 {
-	float pressure = 0.0;
-	float temperature = 0.0;
-
 	Bus_Master_Device *i2c_bus_master = new Bus_Master_Device("/dev/i2c-0", BUS_TYPE::I2C_BUS);
 
-	// Pressure and temperature sensor
-	LPS22HB *lps22hb_sensor = new LPS22HB(LPS22HB_ADDR_SA0_0);  //I2C addess 0x5C
+	// ST LPS22HB Pressure and temperature sensor with I2C connection and I2C address 0x5C
+	LPS22HB *lps22hb_sensor = new LPS22HB(Slave_Device_Type::I2C_SLAVE_DEVICE, i2c_bus_master, LPS22HB_ADDR_SA0_0);
 
 	// Humidity and temperature sensor
 	HTS221 *hts221_sensor = new HTS221(0x5F);
@@ -37,11 +35,10 @@ int main()
 		return -1;
 	}
 
-	status = lps22hb_sensor->attach_to_bus(i2c_bus_master);
 	status = hts221_sensor->attach_to_bus(i2c_bus_master);
 
 	// Configure LPS22HB for ONE SHOT mode of operation
-	status = lps22hb_sensor->init_sensor();
+	status = lps22hb_sensor->set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_ONE_SHOT);
 	if(status)
 	{
 		std::cout << "LPS22HB sensor initialization failed." << std::endl;
@@ -55,12 +52,13 @@ int main()
 		return status;
 	}
 
-	// Measure pressure/temperature and get the readings using ONE SHOT command
-	if (lps22hb_sensor->do_one_shot_measurement(pressure, temperature))
+	// Measure pressure/temperature and get the readings
+	if (lps22hb_sensor->get_sensor_readings())
 	{
 		std::cout << "LPS22HB pressure/temperature measurement failed." << std::endl;
 		return status;
 	}
+
 	// Measure humidity/temperature and get the readings
 	if (hts221_sensor->get_sensor_readings())
 	{

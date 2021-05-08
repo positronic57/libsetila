@@ -1,0 +1,4 @@
+<map id="ST_Sensor" name="ST_Sensor">
+<area shape="rect" id="node1" title=" " alt="" coords="5,5,95,32"/>
+<area shape="rect" id="node2" href="$classLPS22HB.html" title="A class derived from I2CSensor class that describes LPS22HB sensor." alt="" coords="10,80,90,107"/>
+</map>
