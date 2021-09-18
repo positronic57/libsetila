@@ -1,11 +1,10 @@
 <map id="LPS22HB" name="LPS22HB">
-<area shape="rect" id="node1" href="$group__LPS22HB__FIFO__CTRL__REG__DESC.html" title=" " alt="" coords="393,5,601,45"/>
-<area shape="rect" id="node2" title=" " alt="" coords="256,205,336,230"/>
-<area shape="rect" id="node3" href="$group__LPS22HB__STATUS__REG__REG__DESC.html" title=" " alt="" coords="414,69,581,109"/>
-<area shape="rect" id="node4" href="$group__LPS22HB__CTRL__REG2__REG__DESC.html" title=" " alt="" coords="391,133,604,173"/>
-<area shape="rect" id="node5" href="$group__LPS22HB__RES__CONF__REG__DESC.html" title=" " alt="" coords="394,197,601,237"/>
-<area shape="rect" id="node6" href="$group__LPS22HB__CTRL__REG1__REG__DESC.html" title=" " alt="" coords="391,261,604,301"/>
-<area shape="rect" id="node7" href="$group__LPS22HB__CTRL__REG3__REG__DESC.html" title=" " alt="" coords="391,325,604,365"/>
-<area shape="rect" id="node8" href="$group__LPS22HB__REG__DEF.html" title=" " alt="" coords="384,390,611,415"/>
-<area shape="rect" id="node9" href="$group__DEV__REG__CMD.html" title=" " alt="" coords="5,197,208,237"/>
+<area shape="rect" id="node1" href="$group__LPS22HB__FIFO__CTRL__REG__DESC.html" title="LPS22HB FIFO_CTRL register\l description" alt="" coords="393,5,601,47"/>
+<area shape="rect" id="node3" href="$group__LPS22HB__STATUS__REG__REG__DESC.html" title="LPS22HB STATUS_REG\l register description" alt="" coords="413,71,581,112"/>
+<area shape="rect" id="node4" href="$group__LPS22HB__CTRL__REG2__REG__DESC.html" title="LPS22HB CTRL_REG2 register\l description" alt="" coords="391,136,604,177"/>
+<area shape="rect" id="node5" href="$group__LPS22HB__RES__CONF__REG__DESC.html" title="LPS22HB RES_CONF register\l description" alt="" coords="394,201,601,243"/>
+<area shape="rect" id="node6" href="$group__LPS22HB__CTRL__REG1__REG__DESC.html" title="LPS22HB CTRL_REG1 register\l description" alt="" coords="391,267,604,308"/>
+<area shape="rect" id="node7" href="$group__LPS22HB__CTRL__REG3__REG__DESC.html" title="LPS22HB CTRL_REG3 register\l description" alt="" coords="391,332,604,373"/>
+<area shape="rect" id="node8" href="$group__LPS22HB__REG__DEF.html" title="LPS22HB Register address map" alt="" coords="384,398,611,425"/>
+<area shape="rect" id="node9" href="$group__DEV__REG__CMD.html" title="Device Register Descriptors\l and Commands" alt="" coords="5,201,208,243"/>
 </map>

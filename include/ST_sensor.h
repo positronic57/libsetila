@@ -32,14 +32,15 @@ class ST_Sensor
 {
 private:
 	Slave_Device_Type m_interface_type = Slave_Device_Type::I2C_SLAVE_DEVICE; /**< Type of the communication interface (I2C/SPI). */
-	
+
 	/**
 	 * @brief One of the possible mode of operation found in ST sensors.
 	 */ 
 	enum modes_of_operation_enum {
 		OP_POWER_DOWN = 0,	/**< Power down mode. */
 		OP_ONE_SHOT,		/**< One shot (on demand) measurement. */
-		OP_CONTINUOUS		/**< Continuous measurement with defined output data rate. */
+		OP_CONTINUOUS,		/**< Continuous measurement with defined output data rate. */
+		OP_FIFO_MODE		/**< FIFO mode of operation. */
 	} m_mode_of_operation = OP_POWER_DOWN;
 
 	/**
@@ -83,7 +84,7 @@ public:
 	mode_of_operation_t mode_of_operation() { return m_mode_of_operation; };
 	output_data_rate_t output_data_rate() { return m_output_data_rate; };
 	Slave_Device *interface() { return m_interface; };
-	
+
 	/**
 	 * @brief High level function for configuring the sensor. It sets the mode of operation and the output data rate by writing
 	 * values in the sensors control registers based on the given arguments.
@@ -96,7 +97,7 @@ public:
 	 * @return int 0 in case of successful configuration write, appropriate error code otherwise
 	 */
 	virtual int set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate = ODR_ONE_SHOT) = 0;
-	
+
 	/**
 	 * @brief Set the resolution for the physical quantity(ies) measured by the sensor.
 	 * Different ST sensors support different measurement resolution(s). The registers used for that purpose
@@ -109,7 +110,7 @@ public:
 	 * @return int 0 for success, error code otherwise
 	 */
 	virtual int set_resolution(uint8_t average_1, uint8_t average_2 = 0x00) = 0;
-	
+
 	/**
 	 * @brief High level function for reading the values of the data registers for the
 	 * measured physical quantities. Based on the defined mode of operation, the actual data reading can be preceded
@@ -118,6 +119,15 @@ public:
 	 * @return int 0 for success, error code otherwise
 	 */
 	virtual int get_sensor_readings() = 0;
+
+	/**
+	 * @brief Tries to check the sensor type/model by comparing
+	 * the value of WHO_AM_I register from ST sensor and comparing it with
+	 * the known value for that sensor model.
+	 *
+	 * @return int 0 if the verification was successful, ERROR_WRONG_DEVICE_MODEL in case the value of the WHO_AM_I register does not match, ERROR_READ_FAILED for failed attempt to read the WHO_AM_I register
+	 */
+	virtual int verify_device_id() = 0;
 };
 
 

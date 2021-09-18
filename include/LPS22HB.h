@@ -1,35 +1,35 @@
- /**
-  * @file LPS22HB.h
-  *
-  * @brief A header file from libsetila library. It defines LPS22HB class for communication with LPS22HB sensor.
-  *
-  * @author Goce Boshkovski
-  * @date 17.04.2021
-  *
-  * @copyright GNU General Public License v3
-  *
-  * Supported LPS22HB modes of operation:
-  * - ONE SHOT.
-  *
-  * Only a measurement of absolute temperature and pressure values is supported.
-  *
-  * Typical use case:
-  *
-  * 1. Call the constructor with LPS22HB I2C address, communication interface type and pointer to the bus master object. For example 0x5C:
-  *
-  *  LPS22HB(Slave_Device_Type::I2C_SLAVE_DEVICE, i2c_bus_master, 0x5C);
-  *
-  * 2. Assign ONE SHOT as mode of operation
-  *
-  *  set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_ONE_SHOT);
-  *
-  * 3. Perform a measurement and get the pressure and temperature readings
-  *
-  *  get_sensor_readings();
-  *
-  * @example arduino_mkr_env_shield_rev2.cpp
-  *
-  */
+/**
+ * @file LPS22HB.h
+ *
+ * @brief A header file from libsetila library. It defines LPS22HB class for communication with LPS22HB sensor.
+ *
+ * @author Goce Boshkovski
+ * @date 17.04.2021
+ *
+ * @copyright GNU General Public License v3
+ *
+ * Supported LPS22HB modes of operation:
+ * - ONE SHOT.
+ *
+ * Only a measurement of absolute temperature and pressure values is supported.
+ *
+ * Typical use case:
+ *
+ * 1. Call the constructor with LPS22HB I2C address, communication interface type and pointer to the bus master object. For example 0x5C:
+ *
+ *  LPS22HB(Slave_Device_Type::I2C_SLAVE_DEVICE, i2c_bus_master, 0x5C);
+ *
+ * 2. Assign ONE SHOT as mode of operation
+ *
+ *  set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_ONE_SHOT);
+ *
+ * 3. Perform a measurement and get the pressure and temperature readings
+ *
+ *  get_sensor_readings();
+ *
+ * @example arduino_mkr_env_shield_rev2.cpp
+ *
+ */
 
 #ifndef LPS22HB_H_
 #define LPS22HB_H_
@@ -133,8 +133,8 @@
 /* @} */
 
 /** \defgroup LPS22HB_CTRL_REG1_REG_DESC LPS22HB CTRL_REG1 register description
-  * @ingroup LPS22HB_DESC
-  */
+ * @ingroup LPS22HB_DESC
+ */
 /* @{ */
 /** @brief Output data rate selection, ODR2 bit of CTRL_REG1 register. */
 #define LPS22HB_CTRL_REG1_ODR2 0x06
@@ -215,8 +215,8 @@ serial interface (I2C or SPI), IF_ADD_INC bit of CTRL_REG2 register. */
 /* @} */
 
 /** \defgroup LPS22HB_STATUS_REG_REG_DESC LPS22HB STATUS_REG register description
-  * @ingroup LPS22HB_DESC
-  */
+ * @ingroup LPS22HB_DESC
+ */
 /* @{ */
 /** @brief Temperature data overrun T_OR bit of STATUS_REG register. */
 #define LPS22HB_STATUS_REG_T_OR 0x05
@@ -278,6 +278,7 @@ serial interface (I2C or SPI), IF_ADD_INC bit of CTRL_REG2 register. */
 class LPS22HB: public ST_Sensor
 {
 private:
+	bool m_device_id_verified = false;		/**< A flag for verification of the sensor type with the help of WHO_AM_I register. */
 	float m_pressure_reading = 0.0;			/**<  The last pressure value measured by the sensor. */
 	float m_temperature_reading = 0.0;		/**<  The last temperature value measured by the sensor. */
 	uint8_t m_CTRL_REG1 = 0x00;				/**< Holds the last value of the CTRL_REG1. */
@@ -288,14 +289,14 @@ private:
 
 public:
 	/**
-	* @brief A constructor.
-	*
-	* @param[in] interface_type enum for selecting the communication interface of the sensor (I2C or SPI)
-	* @param[in] bus_master_device pointer to the object that represents the master of the bus where the sensor is connected
-	* @param[in] I2C_slave_address an I2C address of the sensor
-	*/
+	 * @brief A constructor.
+	 *
+	 * @param[in] interface_type enum for selecting the communication interface of the sensor (I2C or SPI)
+	 * @param[in] bus_master_device pointer to the object that represents the master of the bus where the sensor is connected
+	 * @param[in] I2C_slave_address an I2C address of the sensor
+	 */
 	explicit LPS22HB(Slave_Device_Type interface_type, Bus_Master_Device *bus_master_device, uint8_t I2C_slave_address):
-			ST_Sensor(interface_type, bus_master_device, I2C_slave_address)
+	ST_Sensor(interface_type, bus_master_device, I2C_slave_address)
 	{};
 
 	/**
@@ -335,15 +336,23 @@ public:
 	virtual int set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate = ST_Sensor::output_data_rate_t::ODR_ONE_SHOT) override;
 	virtual int set_resolution(uint8_t average_1, uint8_t average_2 = 0x00) override;
 	virtual int get_sensor_readings() override;
+	virtual int verify_device_id() override;
 
 private:
 	/**
 	 * @brief Puts the device is in power-down mode. Only one shot measurement is possible.
 	 *
-	 * @return 0 in case the new CTRL_REG1 value is sent to the sensor successfully, error codes ERROR_READ/WRITE_FAILED
-	 * when there is an issue with reading/sending data from/to the sensor.
+	 * @return 0 in case the new CTRL_REG1 value is sent to the sensor successfully, error code ERROR_WRITE_FAILED
+	 * when there is an issue with sending data to the sensor.
 	 */
 	int enable_one_shot_mode(void);
+
+	/**
+	 * @brief Starts a one shot measurement by setting bit in CTRL_REG2 register.
+	 *
+	 * @return 0 new register value successfully sent, ERROR_WRITE_FAILED in case of an error
+	 */
+	int do_one_shot_measurement(void);
 
 	/**
 	 * @brief Reads the values of the output pressure and temperature registers.
@@ -357,11 +366,13 @@ private:
 	int read_data_registers();
 
 	/**
-	 * @brief alias function for enable_one_shot_mode().
-	 * @return same return values as enable_one_shot_mode().
+	 * @brief Updates the values of the control register(s) for configuring the continuous mode and
+	 * defines the output data rate of the sensor.
+	 *
+	 * @param[in] output_data_rate the new output data rate supported by the sensor
+	 *
+	 * @return 0 in case of success, ERROR_WRITE_FAILED in case of an failure
 	 */
-	int enable_power_down_mode(void) { return enable_one_shot_mode(); };
-
 	int config_continuous_mode(output_data_rate_t output_data_rate);
 };
 

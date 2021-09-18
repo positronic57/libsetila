@@ -1,9 +1,8 @@
 <map id="i2c_slave_device.h" name="i2c_slave_device.h">
-<area shape="rect" id="node1" title="Contains the definition of the I2C_Slave_Device class/." alt="" coords="193,5,339,32"/>
 <area shape="rect" id="node2" href="$BMP085_8h.html" title="A Header file from libsetila library. It defines BMP085 class for communication with BOSCH BMP085 pre..." alt="" coords="5,80,92,107"/>
-<area shape="rect" id="node4" href="$HTS221_8h.html" title="A header file from libsetila library. It defines HTS221 class for communication with HT221 sensor." alt="" coords="116,80,200,107"/>
-<area shape="rect" id="node5" href="$LPS25H_8h.html" title="A header file from libsetila library. It defines LPS25H class for communication with LPS25H sensor." alt="" coords="225,80,307,107"/>
-<area shape="rect" id="node6" href="$setila__i2c_8h.html" title="Contains all header files required for working with I2C slave devices." alt="" coords="331,80,427,107"/>
-<area shape="rect" id="node7" href="$srf02_8h.html" title="Contains the definition of SRF02 class for communication with SRF02 sonar sensor." alt="" coords="451,80,518,107"/>
-<area shape="rect" id="node3" href="$setila_8h.html" title="Includes all of header files from libsetila project." alt="" coords="231,155,301,181"/>
+<area shape="rect" id="node4" href="$HTS221_8h.html" title="A header file from libsetila library. It defines HTS221 class for communication with HT221 sensor..." alt="" coords="116,80,200,107"/>
+<area shape="rect" id="node5" href="$LPS25H_8h.html" title="A header file from libsetila library. It defines LPS25H class for communication with LPS25H sensor..." alt="" coords="225,80,307,107"/>
+<area shape="rect" id="node6" href="$setila__i2c_8h.html" title="Contains all header files required for working with I2C slave devices. " alt="" coords="331,80,427,107"/>
+<area shape="rect" id="node7" href="$srf02_8h.html" title="Contains the definition of SRF02 class for communication with SRF02 sonar sensor. ..." alt="" coords="451,80,518,107"/>
+<area shape="rect" id="node3" href="$setila_8h.html" title="Includes all of header files from libsetila project. " alt="" coords="231,155,301,181"/>
 </map>

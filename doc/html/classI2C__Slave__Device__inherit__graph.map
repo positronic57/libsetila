@@ -1,8 +1,6 @@
 <map id="I2C_Slave_Device" name="I2C_Slave_Device">
-<area shape="rect" id="node1" title="Child of Slave_Device class. Implements the IO functions specific for I2C bus and I2C slave devices." alt="" coords="119,80,257,107"/>
-<area shape="rect" id="node3" href="$classBMP085.html" title="A class derived from I2CSensor class. It represents BMP085/BMP180 pressure and temperature sensor." alt="" coords="5,155,80,181"/>
-<area shape="rect" id="node4" href="$classHTS221.html" title="A class derived from I2CSensor class that describes HTS221 sensor." alt="" coords="104,155,176,181"/>
-<area shape="rect" id="node5" href="$classLPS25H.html" title="A class derived from I2CSensor class that describes LPS25H sensor." alt="" coords="201,155,271,181"/>
-<area shape="rect" id="node6" href="$classSRF02.html" title="The class represents SRF02 ultra sonic range finder." alt="" coords="295,155,358,181"/>
-<area shape="rect" id="node2" href="$classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any..." alt="" coords="133,5,243,32"/>
+<area shape="rect" id="node3" href="$classBMP085.html" title="A class derived from I2CSensor class. It represents BMP085/BMP180 pressure and temperature sensor..." alt="" coords="5,155,80,181"/>
+<area shape="rect" id="node4" href="$classLPS25H.html" title="A class derived from I2CSensor class that describes LPS25H sensor. " alt="" coords="105,155,175,181"/>
+<area shape="rect" id="node5" href="$classSRF02.html" title="The class represents SRF02 ultra sonic range finder. " alt="" coords="199,155,262,181"/>
+<area shape="rect" id="node2" href="$classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any..." alt="" coords="85,5,195,32"/>
 </map>

@@ -1,11 +1,10 @@
 <map id="LPS25H" name="LPS25H">
-<area shape="rect" id="node1" href="$group__LPS25H__FIFO__WATERMARKS.html" title=" " alt="" coords="384,5,583,45"/>
-<area shape="rect" id="node2" href="$group__LPS25H__RES__CONF__REG__DESC.html" title=" " alt="" coords="384,69,583,109"/>
-<area shape="rect" id="node3" href="$group__LPS25H__STATUS__REG__REG__DESC.html" title=" " alt="" coords="377,133,589,173"/>
-<area shape="rect" id="node4" href="$group__LPS25H__FIFO__CTRL__REG__DESC.html" title=" " alt="" coords="384,197,583,237"/>
-<area shape="rect" id="node5" href="$group__LPS25H__REG__DEF.html" title=" " alt="" coords="375,262,592,287"/>
-<area shape="rect" id="node6" href="$group__LPS25H__CTRL__REG1__REG__DESC.html" title=" " alt="" coords="381,312,585,352"/>
-<area shape="rect" id="node7" href="$group__DEV__REG__CMD.html" title=" " alt="" coords="5,197,208,237"/>
-<area shape="rect" id="node9" title=" " alt="" coords="256,205,327,230"/>
-<area shape="rect" id="node8" href="$group__LPS25H__CTRL__REG2__REG__DESC.html" title=" " alt="" coords="381,376,585,416"/>
+<area shape="rect" id="node1" href="$group__LPS25H__FIFO__WATERMARKS.html" title="LPS25H FIFO_MEAN_MODE\l Sample Size" alt="" coords="384,5,583,47"/>
+<area shape="rect" id="node2" href="$group__LPS25H__RES__CONF__REG__DESC.html" title="LPS25H RES_CONF register\l description" alt="" coords="384,71,583,112"/>
+<area shape="rect" id="node3" href="$group__LPS25H__STATUS__REG__REG__DESC.html" title="LPS25H STATUS_REG register\l description" alt="" coords="377,136,590,177"/>
+<area shape="rect" id="node4" href="$group__LPS25H__FIFO__CTRL__REG__DESC.html" title="LPS25H FIFO_CTRL register\l description" alt="" coords="384,201,583,243"/>
+<area shape="rect" id="node5" href="$group__LPS25H__REG__DEF.html" title="LPS25H Register address map" alt="" coords="375,267,592,294"/>
+<area shape="rect" id="node6" href="$group__LPS25H__CTRL__REG1__REG__DESC.html" title="LPS25H CTRL_REG1 register\l description" alt="" coords="381,319,585,360"/>
+<area shape="rect" id="node7" href="$group__DEV__REG__CMD.html" title="Device Register Descriptors\l and Commands" alt="" coords="5,201,208,243"/>
+<area shape="rect" id="node8" href="$group__LPS25H__CTRL__REG2__REG__DESC.html" title="LPS25H CTRL_REG2 register\l description" alt="" coords="381,384,585,425"/>
 </map>

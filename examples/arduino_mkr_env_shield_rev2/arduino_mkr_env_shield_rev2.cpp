@@ -19,13 +19,13 @@
 
 int main()
 {
-	Bus_Master_Device *i2c_bus_master = new Bus_Master_Device("/dev/i2c-0", BUS_TYPE::I2C_BUS);
+	Bus_Master_Device *i2c_bus_master = new Bus_Master_Device("/dev/i2c-1", BUS_TYPE::I2C_BUS);
 
 	// ST LPS22HB Pressure and temperature sensor with I2C connection and I2C address 0x5C
 	LPS22HB *lps22hb_sensor = new LPS22HB(Slave_Device_Type::I2C_SLAVE_DEVICE, i2c_bus_master, LPS22HB_ADDR_SA0_0);
 
 	// Humidity and temperature sensor
-	HTS221 *hts221_sensor = new HTS221(0x5F);
+	HTS221 *hts221_sensor = new HTS221(Slave_Device_Type::I2C_SLAVE_DEVICE, i2c_bus_master, 0x5F);
 
 	int status = 0;
 
@@ -35,8 +35,6 @@ int main()
 		return -1;
 	}
 
-	status = hts221_sensor->attach_to_bus(i2c_bus_master);
-
 	// Configure LPS22HB for ONE SHOT mode of operation
 	status = lps22hb_sensor->set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_ONE_SHOT);
 	if(status)
@@ -45,10 +43,19 @@ int main()
 		return status;
 	}
 
-	status = hts221_sensor->init_sensor(0x1B, 0x85);
+	// Configure HTS221 for ONE SHOT type of measurements
+	status = hts221_sensor->set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_ONE_SHOT);
 	if (status)
 	{
 		std::cout << "HTS221 sensor initialization failed." << std::endl;
+		return status;
+	}
+
+	//Set HTS221 internal temperature average to 32 and humidity to 64
+	status = hts221_sensor->set_resolution(0x04, 0x04);
+	if (status)
+	{
+		std::cout << "HTS221 sensor set resolution failed." << std::endl;
 		return status;
 	}
 
@@ -56,7 +63,7 @@ int main()
 	if (lps22hb_sensor->get_sensor_readings())
 	{
 		std::cout << "LPS22HB pressure/temperature measurement failed." << std::endl;
-		return status;
+		return -1;
 	}
 
 	// Measure humidity/temperature and get the readings

@@ -1,14 +1,14 @@
- /**
-  * @file LPS22HB.cpp
-  *
-  * @brief Implementation of the LPS25H class.
-  *
-  * @author Goce Boshkovski
-  * @date 30 Apr 2016
-  *
-  * @copyright GNU General Public License v3
-  *
-  */
+/**
+ * @file LPS22HB.cpp
+ *
+ * @brief Implementation of the LPS25H class.
+ *
+ * @author Goce Boshkovski
+ * @date 30 Apr 2016
+ *
+ * @copyright GNU General Public License v3
+ *
+ */
 
 #include <stdint.h>
 
@@ -18,11 +18,11 @@
 #include "slave_device.h"
 
 
-int LPS22HB::custom_config(uint8_t &CTRL_REG1_value, uint8_t &CTRL_REG2_value, uint8_t &CTRL_REG_3_value)
+int LPS22HB::verify_device_id()
 {
 	uint8_t registryValue;
 
-	/*Check the device ID by reading WHO_AM_I register*/
+	// Check the device ID by reading WHO_AM_I register
 	if (interface()->read(LPS22HB_WHO_AM_I, &registryValue, 1)) {
 		return ERROR_READ_FAILED;
 	}
@@ -31,17 +31,101 @@ int LPS22HB::custom_config(uint8_t &CTRL_REG1_value, uint8_t &CTRL_REG2_value, u
 		return ERROR_WRONG_DEVICE_MODEL;
 	}
 
+	m_device_id_verified = true;
+
+	return 0;
+}
+
+
+int LPS22HB::set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate)
+{
+	if (!m_device_id_verified) {
+		if (verify_device_id()) {
+			return ERROR_WRONG_DEVICE_MODEL;
+		}
+	}
+
+	switch(mode_of_operation) {
+	case mode_of_operation_t::OP_POWER_DOWN:
+	case mode_of_operation_t::OP_ONE_SHOT:
+		return enable_one_shot_mode();
+		break;
+	case mode_of_operation_t::OP_CONTINUOUS:
+		return config_continuous_mode(output_data_rate);
+		break;
+	case mode_of_operation_t::OP_FIFO_MODE:
+		//TODO Implement FIFO MODE configuration
+		break;
+	}
+
+	return 0;
+}
+
+
+int LPS22HB::set_resolution(uint8_t average_1, uint8_t average_2)
+{
+	// Not applicable for LPS22HB
+	return 0;
+}
+
+
+int LPS22HB::get_sensor_readings()
+{
+	if (!m_device_id_verified) {
+		if (verify_device_id()) {
+			return ERROR_WRONG_DEVICE_MODEL;
+		}
+	}
+
+	switch (mode_of_operation()) {
+	case mode_of_operation_t::OP_POWER_DOWN:
+	case mode_of_operation_t::OP_ONE_SHOT:
+		if (do_one_shot_measurement()) {
+			return ERROR_READ_FAILED;
+		}
+		break;
+	case mode_of_operation_t::OP_CONTINUOUS:
+	default:
+		return -1;
+		break;
+	}
+
+	return read_data_registers();
+}
+
+
+int LPS22HB::custom_config(uint8_t &CTRL_REG1_value, uint8_t &CTRL_REG2_value, uint8_t &CTRL_REG3_value)
+{
+	if (!m_device_id_verified) {
+		if (verify_device_id()) {
+			return ERROR_WRONG_DEVICE_MODEL;
+		}
+	}
+
+	uint8_t ctrl_reg1 = m_CTRL_REG1;
+	uint8_t ctrl_reg2 = m_CTRL_REG2;
+	uint8_t ctrl_reg3 = m_CTRL_REG3;
+
+	m_CTRL_REG3 = CTRL_REG3_value;
 	/* Set the value of the LPS22HB_RES_CONF. */
-	if (interface()->write_byte(LPS22HB_RES_CONF, CTRL_REG_3_value))
-	    	return ERROR_WRITE_FAILED;
+	if (interface()->write_byte(LPS22HB_RES_CONF, m_CTRL_REG3)) {
+		m_CTRL_REG3 = ctrl_reg3;
+		return ERROR_WRITE_FAILED;
+	}
 
+	m_CTRL_REG2 = CTRL_REG2_value;
 	/* Set the value of the LPS22HB_CTRL_REG2. */
-	if (interface()->write_byte(LPS22HB_CTRL_REG2, CTRL_REG2_value))
+	if (interface()->write_byte(LPS22HB_CTRL_REG2, m_CTRL_REG2)) {
+		m_CTRL_REG2 = ctrl_reg2;
 		return ERROR_WRITE_FAILED;
+	}
 
+	m_CTRL_REG1 = CTRL_REG1_value;
 	/* Set the value of the LPS22HB_CTRL_REG1. */
-	if (interface()->write_byte(LPS22HB_CTRL_REG1, CTRL_REG1_value))
+	if (interface()->write_byte(LPS22HB_CTRL_REG1, m_CTRL_REG1)) {
+		m_CTRL_REG1 = ctrl_reg1;
 		return ERROR_WRITE_FAILED;
+	}
 
 	return 0;
 }
@@ -49,20 +133,8 @@ int LPS22HB::custom_config(uint8_t &CTRL_REG1_value, uint8_t &CTRL_REG2_value, u
 
 int LPS22HB::enable_one_shot_mode(void)
 {
-	uint8_t registryValue;
-
-	// Check the device ID by reading WHO_AM_I register
-	if (interface()->read(LPS22HB_WHO_AM_I, &registryValue, 1)) {
-		return ERROR_READ_FAILED;
-	}
-	if (registryValue != LPS22HB_ID) {
-		return ERROR_WRONG_DEVICE_MODEL;	//Not LPS22HB device
-	}
-
-	// Read the value of the CTRL_REG1
-	if (interface()->read(LPS22HB_CTRL_REG1, &m_CTRL_REG1, 1)) {
-		return ERROR_READ_FAILED;
-	}
+	uint8_t ctrl_reg1 = m_CTRL_REG1;
+	uint8_t ctrl_reg2 = m_CTRL_REG2;
 
 	// Set all output data rate bits to 0
 	m_CTRL_REG1 &= LPS22HB_POWER_DOWN_MODE_DEF;
@@ -72,16 +144,15 @@ int LPS22HB::enable_one_shot_mode(void)
 
 	// Write the new CTRL_REG1 value
 	if (interface()->write_byte(LPS22HB_CTRL_REG1, m_CTRL_REG1)) {
+		m_CTRL_REG1 = ctrl_reg1;
 		return ERROR_WRITE_FAILED;
 	}
 
-	// Get the current value of CTRL_REG2 register
-	if (interface()->read(LPS22HB_CTRL_REG2, &m_CTRL_REG2, 1)) {
-		return ERROR_READ_FAILED;
-	}
 	// Disable internal address incremental for multiple registers reading in one read() call because FIFO stays disabled
 	m_CTRL_REG2 &= ~(1 << LPS22HB_CTRL_REG2_IF_ADD_INC);
+
 	if (interface()->write_byte(LPS22HB_CTRL_REG2, m_CTRL_REG2)) {
+		m_CTRL_REG2 = ctrl_reg2;
 		return ERROR_WRITE_FAILED;
 	}
 
@@ -89,25 +160,21 @@ int LPS22HB::enable_one_shot_mode(void)
 }
 
 
-int LPS22HB::get_sensor_readings()
+int LPS22HB::do_one_shot_measurement(void)
 {
-	switch (mode_of_operation()) {
-		case mode_of_operation_t::OP_POWER_DOWN:
-		case mode_of_operation_t::OP_ONE_SHOT:
-			// Start a pressure and temperature measurement by writing 0x01 in to a CTR_REG2
-			m_CTRL_REG2 |= (1 << LPS22HB_CTRL_REG2_ONE_SHOT);
-			if (interface()->write_byte(LPS22HB_CTRL_REG2, m_CTRL_REG2)) {
-				return ERROR_WRITE_FAILED;
-			}
-			break;
-		case mode_of_operation_t::OP_CONTINUOUS:
-		default:
-			return -1;
-			break;
+	uint8_t ctrl_reg2 = m_CTRL_REG2;
+
+	// Start a pressure and temperature measurement by writing 0x01 in to a CTR_REG2
+	m_CTRL_REG2 |= (1 << LPS22HB_CTRL_REG2_ONE_SHOT);
+
+	if (interface()->write_byte(LPS22HB_CTRL_REG2, m_CTRL_REG2)) {
+		m_CTRL_REG2 = ctrl_reg2;
+		return ERROR_WRITE_FAILED;
 	}
 
-	return read_data_registers();
+	return 0;
 }
+
 
 int LPS22HB::read_data_registers()
 {
@@ -206,27 +273,64 @@ int LPS22HB::read_data_registers()
 	return 0;
 }
 
-int LPS22HB::set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate)
-{
-	switch(mode_of_operation) {
-	case mode_of_operation_t::OP_POWER_DOWN:
-	case mode_of_operation_t::OP_ONE_SHOT:
-		return enable_one_shot_mode();
-		break;
-	case mode_of_operation_t::OP_CONTINUOUS:
-		return config_continuous_mode(output_data_rate);
-		break;
-	}
-
-	return 0;
-}
-
-int LPS22HB::set_resolution(uint8_t average_1, uint8_t average_2)
-{
-	return 0;
-}
 
 int LPS22HB::config_continuous_mode(output_data_rate_t output_data_rate)
 {
+	uint8_t ctrl_reg1 = m_CTRL_REG1;
+	uint8_t ctrl_reg2 = m_CTRL_REG2;
+
+	switch (output_data_rate) {
+	case output_data_rate_t::ODR_1_Hz:
+		m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR0);
+		m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR1);
+		m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR2);
+		break;
+	case output_data_rate_t::ODR_10_Hz:
+		m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR0);
+		m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR1);
+		m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR2);
+		break;
+	case output_data_rate_t::ODR_25_Hz:
+		m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR0);
+		m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR1);
+		m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR2);
+		break;
+	case output_data_rate_t::ODR_50_Hz:
+		m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR0);
+		m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR1);
+		m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR2);
+		break;
+	case output_data_rate_t::ODR_75_Hz:
+		m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR0);
+		m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR1);
+		m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR2);
+		break;
+	case output_data_rate_t::ODR_ONE_SHOT:
+		m_CTRL_REG1 &= ~((1 << LPS22HB_CTRL_REG1_ODR1) | (1 << LPS22HB_CTRL_REG1_ODR0));
+		m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR2);
+		break;
+	default:
+		return -1;
+		break;
+	}
+
+	// Set BDU to 1 (do not update the output register until the read is done)
+	m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_BDU);
+
+	// Disable automatic register address increment
+	m_CTRL_REG2 &= ~(1 << LPS22HB_CTRL_REG2_IF_ADD_INC);
+
+	// Write the output data rate to CTRL_REG1
+	if (interface()->write_byte(LPS22HB_CTRL_REG1, m_CTRL_REG1)) {
+		m_CTRL_REG1 = ctrl_reg1;
+		return ERROR_WRITE_FAILED;
+	}
+
+	// Write the new value of the CTRL_REG2
+	if (interface()->write_byte(LPS22HB_CTRL_REG2, m_CTRL_REG2)) {
+		m_CTRL_REG2 = ctrl_reg2;
+		return ERROR_WRITE_FAILED;
+	}
+
 	return 0;
 }
