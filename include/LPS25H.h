@@ -14,6 +14,7 @@
 #define LPS25H_H_
 
 #include "i2c_slave_device.h"
+#include "ST_sensor.h"
 
 /** @brief Value of the WHO_AM_I register. */
 #define LPS25H_ID 0xBD
@@ -189,84 +190,45 @@ enum class LPS25H_NBR_AVERAGED_SAMPLES {
  *  @example pi_sense_hat.cpp
  *
  */
-class LPS25H: public I2C_Slave_Device
+class LPS25H: public ST_Sensor
 {
 private:
+	bool m_device_id_verified = false;
 	float m_pressure_reading = 0.0;			/**<  The last pressure value measured by the sensor. */
 	float m_temperature_reading = 0.0;		/**<  The last temperature value measured by the sensor. */
-	uint8_t m_CTRL_REG1 = 0x00;				/**< Holds the value of the CTRL_REG1 between two power ON/Down commands. */
+	uint8_t m_CTRL_REG1 = 0x00;				/**< Holds the value of the CTRL_REG1 between configuration changes. */
+	uint8_t m_CTRL_REG2 = 0x00;				/**< Holds the value of the CTRL_REG2 between configuration changes. */
+	uint8_t m_FIFO_CTRL = 0x00;				/**< Holds the value of the FIFO_CTRL between configuration changes. */
 
-public:
 	LPS25H() = default;
 
-	/**
-	* @brief A constructor.
-	*
-	* Initiate the values of the class members:
-	* pressureReading is set to 0.0, temperatureReading to 0.0
-	* while LPS2H I2C address is set with the value pass to the
-	* constructor as an argument. If not given, the address will be
-	* set to the default value of 0x01.
-	*
-	* @param[in] I2C_slave_address an I2C address of the sensor.
-	*/
-	explicit LPS25H(uint8_t I2C_slave_address):	I2C_Slave_Device(I2C_slave_address)	{};
+public:
+	explicit LPS25H(Slave_Device_Type interface_type, Bus_Master_Device *bus_master_device, uint8_t I2C_slave_address):
+		ST_Sensor(interface_type, bus_master_device, I2C_slave_address)
+	{};
 
 	/**
 	 * @brief A destructor of the class.
 	 */
 	~LPS25H() {};
 
+	virtual int set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate = ST_Sensor::output_data_rate_t::ODR_ONE_SHOT) override;
+	virtual int set_resolution(uint8_t average_1, uint8_t average_2 = 0x00) override;
+	virtual int get_sensor_readings() override;
+	virtual int verify_device_id() override;
+
 	/**
-	 * @brief Sensor init functions.
+	 * @brief Same as set_mode_of_operation() from ST_Sensor class, with additional argument that defines
+	 * the number of averaged samples in case of FIFO_MEAN mode is selected. Calling set_mode_of_operation()
+	 * without the last argument for FIFO_MEAN mode will set the number of averaged samples to 2.
 	 *
-	 * It configures the sensor behaving by setting the values of the
-	 * CTRL_REG1, CTRL_REG2 and RES_CONF registers.
-	 * This function must be called before starting the first measurement.
+	 * @param[in] mode_of_operation defines the operation mode of the sensor
+	 * @param[in] output_data_rate defines the output data rate of the sensor
+	 * @param[in] fifo_mean_samples if FIFO_MEAN mode is given as an value for the argument one, will set the number of averaged samples
 	 *
-	 * @param[in] CTRL_REG1_value the new value of the CTRL_REG1 register.
-	 * @param[in] CTRL_REG2_value the new value of the CTRL_REG2 register.
-	 * @param[in] RES_CONF_value the new value of the RES_CONF register.
-	 * @return int return 0 in case of successful init, ERROR_READ/WRITE_FAILED code is case of failure.
+	 * @return int 0 in case of success, ERROR_WRONG_DEVICE_MODEL/ERROR_WRITE_FAILED in case of a failure
 	 */
-	int init_sensor(uint8_t CTRL_REG1_value, uint8_t CTRL_REG2_value, uint8_t RES_CONF_value);
-
-
-	/**
-	 *
-	 * @brief This function sets the following sensor configuration:
-	 * - output data rate ODR = 25Hz;
-	 * - block data update bit BDU = 1;
-	 * - pressure internal average AVGP = 32;
-	 * - temperature internal average AVRT = 16;
-	 * - FIFO enabled, decimation disabled;
-	 * - FIFO mean mode enabled with average on 32 samples.
-	 *
-	 * @return int, 0 for success, error code in case of a failure.
-	 */
-	int init_sensor(void);
-
-	/**
-	 * @brief Starts one shot measurement of pressure and temperature.
-	 *
-	 * One shot measurement is started after setting the ONE_SHOT bit in CTRL_REG2 to value 1.
-	 * After that get_sensor_readings() is called for getting the measurement outputs.
-	 *
-     * @return int returns an error code in case there is a failure in communication with the sensor; ERROR_SENSOR_READING_TIME_OUT when there is no measurement outputs
-     * available SENSOR_READING_WATCHDOG_COUNTER number of reading attempts; 0 for successful measurement cycle.
-     */
-	int do_one_shot_measurement();
-
-	/**
-	 * @brief Reads the latest humidity and temperature readings from the sensor and calculates the
-	 * temperature and humidity values.
-	 *
-	 * The measurement parameters are set by the init_sensor() function before calling this function.
-	 *
-     * @return int returns an error code in case there is a failure in communication with the sensor; ERROR_SENSOR_READING_TIME_OUT when there is no measurement outputs
-     * available SENSOR_READING_WATCHDOG_COUNTER number of reading attempts; 0 for successful measurement cycle.
-     */
-	int get_sensor_readings(void);
+	int set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate, LPS25H_NBR_AVERAGED_SAMPLES fifo_mean_samples);
 
 	/**
 	 * @brief Provides the last pressure reading in hPa.
@@ -284,32 +246,40 @@ public:
 	float temperature_reading() const {  return m_temperature_reading; };
 
 	/**
-	 * @brief Enable FIFO and select FIFO_MEAN mode.
+	 * @brief The device is reset to the power on configuration by setting bits:
+	 * SWRESET and BOOT of CTRL_REG1 to ‘1’.
 	 *
-	 * The number of averaged samples is provided as an argument.
-	 * Other settings (registry values) related to the measurement
-	 * parameters like output data rate are set by the initSensor()
-	 * functions.
-	 *
-	 * @param[in] NUM_AVERAGED_SAMPLES number of averaged samples (bits WTM_POINT4-0 of FIFO_CTRL register).
-	 * @return int 0 in case the new configuration is written on the sensor, error codes ERROR_READ/WRITE_FAILED
-	 * in case of a failure.
+	 * @return int 0 on success, ERROR_READ/WRITE_FAILED in case there is an error in the communication with the sensor.
 	 */
-	int enable_FIFO_MEAN(LPS25H_NBR_AVERAGED_SAMPLES NUM_AVERAGED_SAMPLES);
+	int SW_reset(void);
+
+private:
+	/**
+	 * @brief Updates the values of the control register(s) for configuring the continuous mode and
+	 * defines the output data rate of the sensor.
+	 *
+	 * @param[in] output_data_rate the new output data rate supported by the sensor
+	 *
+	 * @return 0 in case of success, ERROR_WRITE_FAILED in case of an failure
+	 */
+	int config_continuous_mode(output_data_rate_t output_data_rate);
 
 	/**
-	 * @brief Disable FIFO mode of operation by reseting the FIFO_EN bit from CTRL_REG2.
+	 * @brief Enables the FIFO mean mode with FIFO_MEAN decimation disabled and defines the number of averaged samples
 	 *
-	 * @return int 0 in case of success, error code ERROR_READ/WRITE_FAILED in case of a failure.
+	 * @param[in] NUM_AVERAGED_SAMPLES number of averaged samples from the FIFO (moving average)
+	 *
+	 * @return int 0 in case of success, ERROR_WRITE_FAILED/ERROR_UNSUPPORTED_DEVICE_OPTION_CONFIG in case of a failure
 	 */
-	int disable_FIFO_MEAN(void);
+	int config_fifo_mean_mode(LPS25H_NBR_AVERAGED_SAMPLES NUM_AVERAGED_SAMPLES);
 
 	/**
-	 * @brief Turn on the device. The device is in power-down mode when PD = ‘0’ (default value after boot).
+	 * @brief Reads the values of the temperature and pressure output registers.
+	 * It is called by the get_sensor_readings().
 	 *
-	 * @return 0 in case the new CTRL_REG1 value is sent to the sensor successfully, error code ERROR_WRITE_FAILED in case of a failure.
+	 * @return int 0 in case of successful read calls, ERROR_READ_FAILED/ERROR_SENSOR_READING_TIME_OUT otherwise
 	 */
-	int power_up(void);
+	int read_data_registers();
 
 	/**
 	 * @brief Puts the device is in power-down mode by setting
@@ -321,22 +291,20 @@ public:
 	int power_down(void);
 
 	/**
-	 * @brief Configure the sensor for ONE SHOT measurement mode with the following settings:
-	 * - pressure and temperature internal average to: AVGT = 16 and AVGP = 32;
-	 * - block data update bit of CTRL_REG1 set to 1;
-	 * - power ON the device.
+	 * @brief Prepares the sensor for one shot measurements.
+	 * FIFO will be disabled, output data rate will be set to 0.
 	 *
-	 * @return int, 0 on success, ERROR_READ/WRITE_FAILED in case of a failure.
+	 * @return int 0 in case of successful write of the new configuration, ERROR_WRITE_FAILED in case of a failure
 	 */
-	int set_one_shot_mode(void);
+	int enable_one_shot_mode();
 
 	/**
-	 * @brief The device is reset to the power on configuration by setting bits:
-	 * SWRESET and BOOT of CTRL_REG1 to ‘1’.
+	 * @brief Starts one shot measurement of pressure and temperature.
 	 *
-	 * @return int 0 on success, ERROR_READ/WRITE_FAILED in case there is an error in the communication with the sensor.
-	 */
-	int SW_reset(void);
+     * @return int 0 for success, ERROR_WRITE_FAILED in case update of the control register failed
+     */
+	int do_one_shot_measurement();
+
 };
 
 #endif /* LPS25H_H_ */

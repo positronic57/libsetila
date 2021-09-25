@@ -40,7 +40,8 @@ private:
 		OP_POWER_DOWN = 0,	/**< Power down mode. */
 		OP_ONE_SHOT,		/**< One shot (on demand) measurement. */
 		OP_CONTINUOUS,		/**< Continuous measurement with defined output data rate. */
-		OP_FIFO_MODE		/**< FIFO mode of operation. */
+		OP_FIFO_MODE,		/**< FIFO mode of operation. */
+		OP_FIFO_MEAN_MODE	/**< FIFO MEAN mode of operation. */
 	} m_mode_of_operation = OP_POWER_DOWN;
 
 	/**

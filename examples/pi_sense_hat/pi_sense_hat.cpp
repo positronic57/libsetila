@@ -21,7 +21,7 @@ int main()
 	
 	Bus_Master_Device *i2c_bus_master = new Bus_Master_Device("/dev/i2c-1", BUS_TYPE::I2C_BUS);
 
-	LPS25H *lps25h_sensor = new LPS25H(0x5C);
+	LPS25H *lps25h_sensor = new LPS25H(Slave_Device_Type::I2C_SLAVE_DEVICE, i2c_bus_master, 0x5C);
 	HTS221 *hts221_sensor = new HTS221(Slave_Device_Type::I2C_SLAVE_DEVICE, i2c_bus_master, 0x5F);
 
 	int status;
@@ -32,20 +32,18 @@ int main()
 		return -1;
 	}
 
-	lps25h_sensor->attach_to_bus(i2c_bus_master);
-
-	status = lps25h_sensor->init_sensor();
-	if(status)
+	// Set LPS25H internal temperature average to 16 and pressure to 32
+	status = lps25h_sensor->set_resolution(0x01, 0x01);
+	if (status)
 	{
-		std::cout << "LPS25H sensor initialization failed." << std::endl;
+		std::cout << "HTS221 sensor set resolution failed." << std::endl;
 		return status;
 	}
 
-	// Configure HTS221 for ONE SHOT type of measurements
-	status = hts221_sensor->set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_ONE_SHOT);
-	if (status)
+	status = lps25h_sensor->set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_FIFO_MEAN_MODE, ST_Sensor::output_data_rate_t::ODR_1_Hz, LPS25H_NBR_AVERAGED_SAMPLES::AVER_SAMPLES_4);
+	if(status)
 	{
-		std::cout << "HTS221 sensor initialization failed." << std::endl;
+		std::cout << "LPS25H sensor initialization failed." << std::endl;
 		return status;
 	}
 
@@ -54,6 +52,14 @@ int main()
 	if (status)
 	{
 		std::cout << "HTS221 sensor set resolution failed." << std::endl;
+		return status;
+	}
+
+	// Configure HTS221 for ONE SHOT type of measurements
+	status = hts221_sensor->set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_ONE_SHOT);
+	if (status)
+	{
+		std::cout << "HTS221 sensor initialization failed." << std::endl;
 		return status;
 	}
 

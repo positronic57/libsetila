@@ -1,3 +1,4 @@
 <map id="SPI Bus Master" name="SPI Bus Master">
-<area shape="rect" id="node2" href="$group__SPI__BUS.html" title="SPI Bus" alt="" coords="5,5,76,32"/>
+<area shape="rect" id="node1" title=" " alt="" coords="124,5,243,31"/>
+<area shape="rect" id="node2" href="$group__SPI__BUS.html" title=" " alt="" coords="5,5,76,31"/>
 </map>

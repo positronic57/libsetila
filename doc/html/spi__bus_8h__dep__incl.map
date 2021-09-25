@@ -1,4 +1,5 @@
 <map id="spi_bus.h" name="spi_bus.h">
-<area shape="rect" id="node2" href="$setila__spi_8h.html" title="Contains all header files required for working with SPI slave devices. " alt="" coords="5,80,101,107"/>
-<area shape="rect" id="node3" href="$setila_8h.html" title="Includes all of header files from libsetila project. " alt="" coords="18,155,89,181"/>
+<area shape="rect" id="node1" title="Contains the definition of the SPI namespace." alt="" coords="12,5,95,32"/>
+<area shape="rect" id="node2" href="$setila__spi_8h.html" title="Contains all header files required for working with SPI slave devices." alt="" coords="5,80,101,107"/>
+<area shape="rect" id="node3" href="$setila_8h.html" title="Includes all of header files from libsetila project." alt="" coords="18,155,89,181"/>
 </map>

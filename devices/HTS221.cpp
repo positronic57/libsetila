@@ -64,6 +64,8 @@ int HTS221::set_mode_of_operation(mode_of_operation_t mode_of_operation, output_
 			return ERROR_UNSUPPORTED_DEVICE_OPTION_CONFIG;
 		}
 		break;
+    case mode_of_operation_t::OP_FIFO_MEAN_MODE:
+        return ERROR_UNSUPPORTED_DEVICE_OPTION_CONFIG;
 	case mode_of_operation_t::OP_FIFO_MODE:
 	default:
 		break;

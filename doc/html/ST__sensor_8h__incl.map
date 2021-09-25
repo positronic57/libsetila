@@ -1,3 +1,5 @@
 <map id="ST_sensor.h" name="ST_sensor.h">
-<area shape="rect" id="node2" href="$slave__device_8h.html" title="Contains the definition of Slave_Device class. " alt="" coords="5,80,124,107"/>
+<area shape="rect" id="node1" title="Definition of ST_Sensor class." alt="" coords="15,5,114,32"/>
+<area shape="rect" id="node2" href="$slave__device_8h.html" title="Contains the definition of Slave_Device class." alt="" coords="5,80,124,107"/>
+<area shape="rect" id="node3" title=" " alt="" coords="29,155,100,181"/>
 </map>

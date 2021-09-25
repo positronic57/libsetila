@@ -1,3 +1,4 @@
 <map id="BMP085.h" name="BMP085.h">
-<area shape="rect" id="node2" href="$setila_8h.html" title="Includes all of header files from libsetila project. " alt="" coords="13,80,84,107"/>
+<area shape="rect" id="node1" title="A Header file from libsetila library. It defines BMP085 class for communication with BOSCH BMP085 pre..." alt="" coords="5,5,92,32"/>
+<area shape="rect" id="node2" href="$setila_8h.html" title="Includes all of header files from libsetila project." alt="" coords="13,80,84,107"/>
 </map>

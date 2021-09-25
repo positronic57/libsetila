@@ -6,7 +6,8 @@ CPP_SRCS += \
 ../devices/LPS22HB.cpp \
 ../devices/LPS25H.cpp \
 ../devices/mcp3204.cpp \
-../devices/srf02.cpp 
+../devices/srf02.cpp \
+../devices/ST_Sensor.cpp
 
 OBJS += \
 ./devices/BMP085.o \
@@ -14,7 +15,8 @@ OBJS += \
 ./devices/LPS22HB.o \
 ./devices/LPS25H.o \
 ./devices/mcp3204.o \
-./devices/srf02.o 
+./devices/srf02.o \
+./devices/ST_Sensor.o
 
 CPP_DEPS += \
 ./devices/BMP085.d \
@@ -22,7 +24,8 @@ CPP_DEPS += \
 ./devices/LPS22HB.d \
 ./devices/LPS25H.d \
 ./devices/mcp3204.d \
-./devices/srf02.d 
+./devices/srf02.d \
+./devices/ST_Sensor.d
 
 SOBJS += \
 ./devices/stat/BMP085.o \
@@ -30,7 +33,9 @@ SOBJS += \
 ./devices/stat/LPS22HB.o \
 ./devices/stat/LPS25H.o \
 ./devices/stat/mcp3204.o \
-./devices/stat/srf02.o
+./devices/stat/srf02.o \
+./devices/stat/ST_Sensor.o
+
 
 
 # Each subdirectory must supply rules for building sources it contributes

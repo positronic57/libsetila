@@ -1,4 +1,5 @@
 <map id="MCP3204" name="MCP3204">
-<area shape="rect" id="node2" href="$classSPI__Slave__Device.html" title="Child of Slave_Device class. Implements the IO functions specific for SPI bus. " alt="" coords="5,80,143,107"/>
+<area shape="rect" id="node1" title="Class representing MCP3204 device." alt="" coords="33,155,115,181"/>
+<area shape="rect" id="node2" href="$classSPI__Slave__Device.html" title="Child of Slave_Device class. Implements the IO functions specific for SPI bus." alt="" coords="5,80,143,107"/>
 <area shape="rect" id="node3" href="$classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any..." alt="" coords="19,5,129,32"/>
 </map>

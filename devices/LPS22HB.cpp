@@ -55,6 +55,10 @@ int LPS22HB::set_mode_of_operation(mode_of_operation_t mode_of_operation, output
 		break;
 	case mode_of_operation_t::OP_FIFO_MODE:
 		//TODO Implement FIFO MODE configuration
+        return ERROR_UNSUPPORTED_DEVICE_OPTION_CONFIG;
+		break;
+	case mode_of_operation_t::OP_FIFO_MEAN_MODE:
+        return ERROR_UNSUPPORTED_DEVICE_OPTION_CONFIG;
 		break;
 	}
 

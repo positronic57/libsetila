@@ -1,3 +1,4 @@
 <map id="ST_Sensor" name="ST_Sensor">
+<area shape="rect" id="node1" title=" " alt="" coords="16,95,105,121"/>
 <area shape="rect" id="node2" href="$classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any..." alt="" coords="5,5,116,32"/>
 </map>
