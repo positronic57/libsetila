@@ -1,0 +1,6 @@
+<map id="MCP9808" name="MCP9808">
+<area shape="rect" id="node2" href="$classI2C__Slave__Device.html" title="Child of Slave_Device class. Implements the IO functions specific for I2C bus and I2C slave devices..." alt="" coords="13,171,151,197"/>
+<area shape="rect" id="node3" href="$classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any..." alt="" coords="5,81,116,108"/>
+<area shape="rect" id="node4" href="$classI2C__Bus__Master__Device.html" title="Child class of Bus_Master_Device class which implements function calls specific for I2C bus..." alt="" coords="141,81,319,108"/>
+<area shape="rect" id="node5" href="$classBus__Master__Device.html" title="Base class for accessing the device file of the bus master driver. Provides the file descriptor for t..." alt="" coords="155,5,305,32"/>
+</map>

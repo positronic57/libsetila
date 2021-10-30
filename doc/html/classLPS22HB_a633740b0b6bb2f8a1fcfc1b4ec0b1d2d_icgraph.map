@@ -1,4 +1,0 @@
-<map id="LPS22HB::enable_one_shot_mode" name="LPS22HB::enable_one_shot_mode">
-<area shape="rect" id="node1" title="Puts the device is in power&#45;down mode. Only one shot measurement is possible." alt="" coords="232,5,395,47"/>
-<area shape="rect" id="node2" href="$classLPS22HB.html#a1b472f7c646c0ffee10cce9d6e92f921" title="alias function for enable_one_shot_mode()." alt="" coords="5,5,184,47"/>
-</map>

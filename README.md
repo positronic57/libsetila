@@ -25,7 +25,7 @@ Besides being a general purpose tool for talking with target I2C/SPI devices, it
 The library should work on any embedded system with I2C/SPI master controller capable of running Linux with appropriate kernel drivers for the master controllers and C++11 compiler.
 
 Successful tests have been done on:
-- Raspbery Pi 2,3 model B and Pi Zero/W all running Rasbian GNU/Linux version 10 ("buster");
+- Raspbery Pi 2, 3 model B and Pi Zero/W all running Rasbian GNU/Linux version 10 ("buster");
 - Beagle Bone Black revision A with Debian GNU/Linux 9 ("stretch").
 
 #### I2C Devices
@@ -33,6 +33,7 @@ Successful tests have been done on:
 - ST HTS221 humidity and temperature sensor: single acquisition(ONE SHOT measurement), FIFO_MEAN mode, adjustable output data rate and resolution;
 - ST LPS25H pressure and temperature sensor: single acquisition(ONE SHOT measurement), adjustable output data rate and resolution;
 - ST LPS22HB pressure and temperature sensor: single acquisition(ONE SHOT measurement);
+- Microchip MCP9808 temperature sensor: temperature reading, no support for alarms/interrupts;
 - Bosh BMP085 pressure and temperature sensor. Fully supported;
 - Bosh BMP180 pressure and temperature sensor. Fully supported;
 - SRF02 ultra sonic range finder.
@@ -61,11 +62,12 @@ The library functionality has been tested using the following hardware:
 
 - Adafruit BMP085 module (Adafruit product ID 391);
 - Adafruit BMP180 module (Adafruit product ID 1603);
+- Adafruit MCP9808 High Accuracy I2C Temperature Sensor Breakout Board (Adafruit product ID 1782); 
 - [MCP3204 test module](https://github.com/positronic57/libmcp3204/tree/master/example/hardware) 
 - SRF02 - I2C/Serial ultrasonic ranger sensor
 - Arduino MKR ENV Shield rev2
 - Pi Sense HAT;
-- Rapberry Pi model B rev1
+- Raspbery Pi model B rev1;
 - Raspbery Pi 2 model B;
 - Raspbery Pi 3 model B;
 - Raspbery Pi Zero/W;

@@ -1,22 +1,18 @@
 <map id="setila.h" name="setila.h">
-<area shape="rect" id="node1" title="Includes all of header files from libsetila project." alt="" coords="345,5,416,32"/>
-<area shape="rect" id="node2" href="$setila__i2c_8h.html" title="Contains all header files required for working with I2C slave devices." alt="" coords="438,80,534,107"/>
-<area shape="rect" id="node10" href="$setila__errors_8h.html" title="Contains definitions of the error codes used in the library." alt="" coords="518,155,633,181"/>
-<area shape="rect" id="node11" href="$setila__spi_8h.html" title="Contains all header files required for working with SPI slave devices." alt="" coords="682,80,778,107"/>
-<area shape="rect" id="node16" href="$HTS221_8h.html" title="A header file from libsetila library. It defines HTS221 class for communication with HT221 sensor." alt="" coords="20,80,104,107"/>
-<area shape="rect" id="node18" href="$LPS25H_8h.html" title="A header file from libsetila library. It defines LPS25H class for communication with LPS25H sensor." alt="" coords="129,80,211,107"/>
-<area shape="rect" id="node19" href="$srf02_8h.html" title="Contains the definition of SRF02 class for communication with SRF02 sonar sensor." alt="" coords="347,80,414,107"/>
-<area shape="rect" id="node20" href="$BMP085_8h.html" title="A Header file from libsetila library. It defines BMP085 class for communication with BOSCH BMP085 pre..." alt="" coords="236,80,323,107"/>
-<area shape="rect" id="node3" href="$i2c__bus__master_8h.html" title="Contains the definition of I2C_Bus_Master_Device class." alt="" coords="524,229,659,256"/>
-<area shape="rect" id="node6" href="$i2c__slave__device_8h.html" title="Contains the definition of the I2C_Slave_Device class/." alt="" coords="145,155,291,181"/>
-<area shape="rect" id="node9" href="$i2c__bus_8h.html" title="Definition of I2C name space." alt="" coords="417,229,499,256"/>
-<area shape="rect" id="node4" href="$bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class." alt="" coords="555,304,715,331"/>
-<area shape="rect" id="node5" title=" " alt="" coords="606,379,665,405"/>
-<area shape="rect" id="node7" title=" " alt="" coords="293,304,364,331"/>
-<area shape="rect" id="node8" href="$slave__device_8h.html" title="Contains the definition of Slave_Device class." alt="" coords="172,229,291,256"/>
-<area shape="rect" id="node12" href="$spi__bus__master_8h.html" title="Defines the SPI_Bus_Master_Device class." alt="" coords="784,229,919,256"/>
-<area shape="rect" id="node14" href="$spi__slave__device_8h.html" title="Contains the definition of the SPI_Slave_Device class." alt="" coords="657,155,803,181"/>
-<area shape="rect" id="node15" href="$spi__bus_8h.html" title="Contains the definition of the SPI namespace." alt="" coords="827,155,910,181"/>
-<area shape="rect" id="node13" title=" " alt="" coords="784,304,919,331"/>
-<area shape="rect" id="node17" href="$ST__sensor_8h.html" title="Definition of ST_Sensor class." alt="" coords="22,155,121,181"/>
+<area shape="rect" id="node2" href="$setila__i2c_8h.html" title="Contains all header files required for working with I2C slave devices. " alt="" coords="439,80,535,107"/>
+<area shape="rect" id="node10" href="$setila__errors_8h.html" title="Contains definitions of the error codes used in the library. " alt="" coords="519,155,634,181"/>
+<area shape="rect" id="node11" href="$setila__spi_8h.html" title="Contains all header files required for working with SPI slave devices. " alt="" coords="683,80,779,107"/>
+<area shape="rect" id="node16" href="$HTS221_8h.html" title="A header file from libsetila library. It defines HTS221 class for communication with HT221 sensor..." alt="" coords="21,80,105,107"/>
+<area shape="rect" id="node18" href="$LPS25H_8h.html" title="A header file from libsetila library. It defines LPS25H class for communication with LPS25H sensor..." alt="" coords="130,80,213,107"/>
+<area shape="rect" id="node19" href="$srf02_8h.html" title="Contains the definition of SRF02 class for communication with SRF02 sonar sensor. ..." alt="" coords="349,80,415,107"/>
+<area shape="rect" id="node20" href="$BMP085_8h.html" title="A Header file from libsetila library. It defines BMP085 class for communication with BOSCH BMP085 pre..." alt="" coords="237,80,324,107"/>
+<area shape="rect" id="node3" href="$i2c__bus__master_8h.html" title="Contains the definition of I2C_Bus_Master_Device class. " alt="" coords="525,229,661,256"/>
+<area shape="rect" id="node6" href="$i2c__slave__device_8h.html" title="Contains the definition of the I2C_Slave_Device class/. " alt="" coords="147,155,292,181"/>
+<area shape="rect" id="node9" href="$i2c__bus_8h.html" title="Definition of I2C name space. " alt="" coords="418,229,501,256"/>
+<area shape="rect" id="node4" href="$bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class. " alt="" coords="557,304,717,331"/>
+<area shape="rect" id="node8" href="$slave__device_8h.html" title="Contains the definition of Slave_Device class. " alt="" coords="173,229,292,256"/>
+<area shape="rect" id="node12" href="$spi__bus__master_8h.html" title="Defines the SPI_Bus_Master_Device class. " alt="" coords="785,229,921,256"/>
+<area shape="rect" id="node14" href="$spi__slave__device_8h.html" title="Contains the definition of the SPI_Slave_Device class. " alt="" coords="659,155,804,181"/>
+<area shape="rect" id="node15" href="$spi__bus_8h.html" title="Contains the definition of the SPI namespace. " alt="" coords="829,155,911,181"/>
+<area shape="rect" id="node17" href="$ST__sensor_8h.html" title="Definition of ST_Sensor class. " alt="" coords="23,155,123,181"/>
 </map>

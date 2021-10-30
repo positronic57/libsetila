@@ -1,5 +1,5 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
 <area shape="rect" id="node1" href="$classBus__Master__Device.html" title="Base class for accessing the device file of the bus master driver. Provides the file descriptor for t..." alt="" coords="5,31,156,57"/>
-<area shape="rect" id="node2" href="$classI2C__Bus__Master__Device.html" title="Child class of Bus_Master_Device class which implements function calls specific for I2C bus." alt="" coords="204,5,383,32"/>
-<area shape="rect" id="node3" href="$classSPI__Bus__Master__Device.html" title="Child class of Bus_Master_Device class which implements function calls specific for SPI bus." alt="" coords="205,56,382,83"/>
+<area shape="rect" id="node2" href="$classI2C__Bus__Master__Device.html" title="Child class of Bus_Master_Device class which implements function calls specific for I2C bus..." alt="" coords="204,5,383,32"/>
+<area shape="rect" id="node3" href="$classSPI__Bus__Master__Device.html" title="Child class of Bus_Master_Device class which implements function calls specific for SPI bus..." alt="" coords="205,56,382,83"/>
 </map>

@@ -2,7 +2,7 @@
   * @file BMP085.h
   *
   * @brief A Header file from libsetila library.
-  * It defines BMP085 class for communication with BOSCH BMP085 pressure and temperatue sensor.
+  * It defines BMP085 class for communication with BOSCH BMP085 pressure and temperature sensor.
   *
   * @author Goce Boshkovski
   * @date 01 May 2016

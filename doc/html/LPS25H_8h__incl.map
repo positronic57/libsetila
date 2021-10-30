@@ -1,10 +1,7 @@
 <map id="LPS25H.h" name="LPS25H.h">
-<area shape="rect" id="node1" title="A header file from libsetila library. It defines LPS25H class for communication with LPS25H sensor." alt="" coords="87,5,169,32"/>
-<area shape="rect" id="node2" href="$i2c__slave__device_8h.html" title="Contains the definition of the I2C_Slave_Device class/." alt="" coords="129,80,274,107"/>
-<area shape="rect" id="node8" href="$ST__sensor_8h.html" title="Definition of ST_Sensor class." alt="" coords="5,80,104,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="75,229,146,256"/>
-<area shape="rect" id="node4" href="$slave__device_8h.html" title="Contains the definition of Slave_Device class." alt="" coords="19,155,138,181"/>
-<area shape="rect" id="node5" href="$i2c__bus__master_8h.html" title="Contains the definition of I2C_Bus_Master_Device class." alt="" coords="214,155,349,181"/>
-<area shape="rect" id="node6" href="$bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class." alt="" coords="201,229,361,256"/>
-<area shape="rect" id="node7" title=" " alt="" coords="252,304,311,331"/>
+<area shape="rect" id="node2" href="$i2c__slave__device_8h.html" title="Contains the definition of the I2C_Slave_Device class/. " alt="" coords="129,80,275,107"/>
+<area shape="rect" id="node8" href="$ST__sensor_8h.html" title="Definition of ST_Sensor class. " alt="" coords="5,80,105,107"/>
+<area shape="rect" id="node4" href="$slave__device_8h.html" title="Contains the definition of Slave_Device class. " alt="" coords="20,155,139,181"/>
+<area shape="rect" id="node5" href="$i2c__bus__master_8h.html" title="Contains the definition of I2C_Bus_Master_Device class. " alt="" coords="214,155,350,181"/>
+<area shape="rect" id="node6" href="$bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class. " alt="" coords="202,229,362,256"/>
 </map>

@@ -1,0 +1,6 @@
+<map id="MCP9808" name="MCP9808">
+<area shape="rect" id="node1" href="$group__MCP9808__I2C__ADDRESSES.html" title="List of MCP9808 I2C\l addresses" alt="" coords="425,5,577,47"/>
+<area shape="rect" id="node3" href="$group__MCP9808__REG__DEF.html" title="MCP9808 Register address map" alt="" coords="387,71,616,98"/>
+<area shape="rect" id="node4" href="$group__MCP9808__DEFS.html" title="MCP9808 common definitions" alt="" coords="393,122,610,149"/>
+<area shape="rect" id="node5" href="$group__DEV__REG__CMD.html" title="Device Register Descriptors\l and Commands" alt="" coords="5,64,208,105"/>
+</map>

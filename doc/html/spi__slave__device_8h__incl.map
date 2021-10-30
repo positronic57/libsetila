@@ -1,9 +1,5 @@
 <map id="spi_slave_device.h" name="spi_slave_device.h">
-<area shape="rect" id="node1" title="Contains the definition of the SPI_Slave_Device class." alt="" coords="67,5,212,32"/>
-<area shape="rect" id="node2" href="$slave__device_8h.html" title="Contains the definition of Slave_Device class." alt="" coords="5,80,124,107"/>
-<area shape="rect" id="node4" href="$spi__bus__master_8h.html" title="Defines the SPI_Bus_Master_Device class." alt="" coords="148,80,283,107"/>
-<area shape="rect" id="node3" title=" " alt="" coords="29,155,100,181"/>
-<area shape="rect" id="node5" title=" " alt="" coords="136,155,271,181"/>
-<area shape="rect" id="node6" href="$bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class." alt="" coords="295,155,455,181"/>
-<area shape="rect" id="node7" title=" " alt="" coords="346,229,405,256"/>
+<area shape="rect" id="node2" href="$slave__device_8h.html" title="Contains the definition of Slave_Device class. " alt="" coords="5,80,124,107"/>
+<area shape="rect" id="node4" href="$spi__bus__master_8h.html" title="Defines the SPI_Bus_Master_Device class. " alt="" coords="147,80,283,107"/>
+<area shape="rect" id="node6" href="$bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class. " alt="" coords="295,155,455,181"/>
 </map>
