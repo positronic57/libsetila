@@ -19,7 +19,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Libsetila
-   &#160;<span id="projectnumber">v0.5.4</span>
+   &#160;<span id="projectnumber">v0.5.5</span>
    </div>
   </td>
  </tr>
@@ -45,6 +45,9 @@ $(function() {
 <li>addElement()
 : <a class="el" href="classCircularBuffer.html#a2f8a175377add3e8aff19c11aada8512">CircularBuffer&lt; tElement &gt;</a>
 , <a class="el" href="classFIFO__queue.html#a5d003a9a9a0b88ea0af0d9b7d05f8012">FIFO_queue&lt; tElement &gt;</a>
+</li>
+<li>ADT7410()
+: <a class="el" href="classADT7410.html#aa1662b585258d0497a21932e2dc3a002">ADT7410</a>
 </li>
 <li>ambient_temperature()
 : <a class="el" href="classMCP9808.html#aa7fab1a87296dd9a68a29a1de0c2aac6">MCP9808</a>
@@ -182,7 +185,8 @@ $(function() {
 
 <h3><a id="index_g"></a>- g -</h3><ul>
 <li>get_sensor_readings()
-: <a class="el" href="classHTS221.html#ad6c25191a82d3c905604e826bb05345c">HTS221</a>
+: <a class="el" href="classADT7410.html#a7af24b6760eec3bc5e9663aae9393482">ADT7410</a>
+, <a class="el" href="classHTS221.html#ad6c25191a82d3c905604e826bb05345c">HTS221</a>
 , <a class="el" href="classLPS22HB.html#a7adeb3f1652fe350e504b36e8798a207">LPS22HB</a>
 , <a class="el" href="classLPS25H.html#adb2a8fd9f235ec257798273075f7d00e">LPS25H</a>
 , <a class="el" href="classMCP9808.html#a934dbf2b30199e43548f1b307e78afb3">MCP9808</a>
@@ -317,6 +321,9 @@ $(function() {
 : <a class="el" href="classHTS221.html#a244d2c6f5ceaf8d227fdc1c504dd1a0c">HTS221</a>
 , <a class="el" href="classLPS25H.html#a11df8efa235579e5429f8129bba065d5">LPS25H</a>
 </li>
+<li>power_up()
+: <a class="el" href="classADT7410.html#a9e91075a4191c1f5d651261cc9158001">ADT7410</a>
+</li>
 <li>pressure_reading()
 : <a class="el" href="classBMP085.html#abe5253940e1377e459b7dffed2b14b2c">BMP085</a>
 , <a class="el" href="classLPS25H.html#ace808d233b1a076280b1fe0582cd0b1e">LPS25H</a>
@@ -354,20 +361,23 @@ $(function() {
 : <a class="el" href="classMCP9808.html#ae28a71b782b3f10e3167fbac511e9ffc">MCP9808</a>
 </li>
 <li>set_mode_of_operation()
-: <a class="el" href="classHTS221.html#a3556b2ded7642514cc58cb7cd9e4ead8">HTS221</a>
+: <a class="el" href="classADT7410.html#a354ad8c68d80273217a225881a3e6a17">ADT7410</a>
+, <a class="el" href="classHTS221.html#a3556b2ded7642514cc58cb7cd9e4ead8">HTS221</a>
 , <a class="el" href="classLPS22HB.html#a59e00131bd0b64d98ad22e229200a220">LPS22HB</a>
 , <a class="el" href="classLPS25H.html#ac6c44020f5be299340afa1e1f09dd892">LPS25H</a>
 , <a class="el" href="classST__Sensor.html#a21dbaac08b81f4b69d2c35dfa82377e0">ST_Sensor</a>
 </li>
 <li>set_resolution()
-: <a class="el" href="classHTS221.html#aa33a137d7c2593b7b2839916cbcfcd18">HTS221</a>
+: <a class="el" href="classADT7410.html#a918cf3addd00608f7c03a958f4a08f9b">ADT7410</a>
+, <a class="el" href="classHTS221.html#aa33a137d7c2593b7b2839916cbcfcd18">HTS221</a>
 , <a class="el" href="classLPS22HB.html#a63e9f5ce8d9b3b6c35dd80b77d10dedb">LPS22HB</a>
 , <a class="el" href="classLPS25H.html#a59f9784facc0304ed96c34393fc569e2">LPS25H</a>
 , <a class="el" href="classMCP9808.html#aed351ba0505ab8338ec5f857dd262edc">MCP9808</a>
 , <a class="el" href="classST__Sensor.html#a4f6750c8963d0925ec45f4776cd5c4ff">ST_Sensor</a>
 </li>
 <li>shutdown()
-: <a class="el" href="classMCP9808.html#a70e41af8f763a73d113b06da76818094">MCP9808</a>
+: <a class="el" href="classADT7410.html#a6e599bf53fc140310ac1f0d9af982b4f">ADT7410</a>
+, <a class="el" href="classMCP9808.html#a70e41af8f763a73d113b06da76818094">MCP9808</a>
 </li>
 <li>size()
 : <a class="el" href="classCircularBuffer.html#ae30b522a9933be6ed4b3443876ec7570">CircularBuffer&lt; tElement &gt;</a>
@@ -404,7 +414,7 @@ $(function() {
 : <a class="el" href="classST__Sensor.html#a62d9b2a9256ee2e055f976efea3e6999">ST_Sensor</a>
 </li>
 <li>Stack()
-: <a class="el" href="classStack.html#a7c3af550e40d6b79425b370c61a95189">Stack&lt; tElement &gt;</a>
+: <a class="el" href="classStack.html#af7d00ac28cc8027e81009870ccaf63cd">Stack&lt; tElement &gt;</a>
 </li>
 <li>SW_reset()
 : <a class="el" href="classLPS25H.html#ad913d5a2bad66be01d0b350a3970c2a7">LPS25H</a>
@@ -413,6 +423,9 @@ $(function() {
 
 
 <h3><a id="index_t"></a>- t -</h3><ul>
+<li>temperature()
+: <a class="el" href="classADT7410.html#a8e636a247b12adae477c3a7b3ce56d86">ADT7410</a>
+</li>
 <li>temperature_reading()
 : <a class="el" href="classBMP085.html#aa8d04866c69689953d979a3f35049ad7">BMP085</a>
 , <a class="el" href="classHTS221.html#a5c2c85232c99911d10b0f7e4e732e388">HTS221</a>
@@ -450,6 +463,9 @@ $(function() {
 
 
 <h3><a id="index_0x7e"></a>- ~ -</h3><ul>
+<li>~ADT7410()
+: <a class="el" href="classADT7410.html#a96ecd9316bd186c76b54ebd4f09cc230">ADT7410</a>
+</li>
 <li>~BMP085()
 : <a class="el" href="classBMP085.html#a5c8e7d3da882afe2e0c9ac106c592499">BMP085</a>
 </li>
@@ -505,7 +521,7 @@ $(function() {
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Oct 30 2021 22:57:08 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Nov 7 2021 14:36:02 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

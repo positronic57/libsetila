@@ -19,7 +19,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Libsetila
-   &#160;<span id="projectnumber">v0.5.4</span>
+   &#160;<span id="projectnumber">v0.5.5</span>
    </div>
   </td>
  </tr>
@@ -43,7 +43,7 @@ $(function() {
 <div class="title">Libsetila </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Libsetila is a library written in C++ for communication with I2C/SPI slave devices from Linux user space. It provides classes for representing <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> and <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> slave devices and implements data exchange methods that can be used for communication with target devices on I2C/SPI bus. The main purpose of the library is to simplify the process of writing software for communication with different I2C/SPI devices from user space on Linux.</p>
+<div class="textblock"><p>Libsetila is a library written in C++ for communication with I2C/SPI slave devices from user space on SOC/SBC running Linux. It provides classes for representing <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> and <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> slave devices and implements data exchange methods that can be used for communication with target devices on I2C/SPI bus. The main purpose of the library is to simplify the process of writing software for communication with different I2C/SPI devices from user space on Linux.</p>
 <p>The low level <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> and <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> communication is done by the appropriate Linux kernel drivers while the library use the standard read/write IO calls to send/receive data from/to the slave devices on the bus. The kernel drivers must be loaded before calling the library IO functions.</p>
 <p>Main resources providided with the library:</p><ul>
 <li>classes for SPI/I2C master;</li>
@@ -57,7 +57,7 @@ $(function() {
 <h3>Supported Hardware</h3>
 <p>Besides being a general purpose tool for talking with target I2C/SPI devices, it integrates support for some popular devices like: pressure/humidity/temperature sensors, ADC etc.. Those devices were mainly used as test devices during the code development.</p>
 <h4>Hardware Platforms and Operating System</h4>
-<p>The library should work on any embedded system with I2C/SPI master controller(s) capable of running Linux with appropriate kernel drivers for the master controllers and C++11 compiler.</p>
+<p>The library should work on any SOC/SBC with I2C/SPI interface(s), capable of running Linux with appropriate kernel drivers for the master controllers and C++11 compiler.</p>
 <p>Successful tests have been done on:</p><ul>
 <li>Raspbery Pi 2,3 model B and Pi Zero/W all running Rasbian GNU/Linux version 10 ("buster");</li>
 <li>Beagle Bone Black revision A with Debian GNU/Linux 9 ("stretch").</li>
@@ -68,6 +68,7 @@ $(function() {
 <li>ST <a class="el" href="classLPS25H.html" title="A class derived from I2CSensor class that describes LPS25H sensor. ">LPS25H</a> pressure and temperature sensor: single acquisition(ONE SHOT measurement), adjustable output data rate and resolution;</li>
 <li>ST <a class="el" href="classLPS22HB.html" title="A class derived from I2CSensor class that describes LPS22HB sensor. ">LPS22HB</a> pressure and temperature sensor: single acquisition(ONE SHOT measurement);</li>
 <li>Microchip <a class="el" href="classMCP9808.html" title="Class which represents MCP9808 sensor with I2C interface. ">MCP9808</a> temperature sensor: temperature reading, no support for alarms/interrupts;</li>
+<li>Analog Devices <a class="el" href="classADT7410.html" title="Class which represents ADT7410 sensor with I2C interface. ">ADT7410</a> temperature sensor: temperature readign, no support for alarms/interrupts;</li>
 <li>Bosh <a class="el" href="classBMP085.html" title="A class derived from I2CSensor class. It represents BMP085/BMP180 pressure and temperature sensor...">BMP085</a> pressure and temperature sensor. Fully supported;</li>
 <li>Bosh BMP180 pressure and temperature sensor. Fully supported;</li>
 <li><a class="el" href="classSRF02.html" title="The class represents SRF02 ultra sonic range finder. ">SRF02</a> ultra sonic range finder.</li>
@@ -86,6 +87,7 @@ $(function() {
 <li>Adafruit <a class="el" href="classBMP085.html" title="A class derived from I2CSensor class. It represents BMP085/BMP180 pressure and temperature sensor...">BMP085</a> module (Adafruit product ID 391);</li>
 <li>Adafruit BMP180 module (Adafruit product ID 1603);</li>
 <li>Adafruit <a class="el" href="classMCP9808.html" title="Class which represents MCP9808 sensor with I2C interface. ">MCP9808</a> High Accuracy <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> Temperature Sensor Breakout Board (Adafruit product ID 1782);</li>
+<li>Adafruit <a class="el" href="classADT7410.html" title="Class which represents ADT7410 sensor with I2C interface. ">ADT7410</a> High Accuracy <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> Temperature Sensor Breakout Board (Adafruit product ID 4089);</li>
 <li><a href="https://github.com/positronic57/libmcp3204/tree/master/example/hardware">MCP3204 test module</a></li>
 <li><a class="el" href="classSRF02.html" title="The class represents SRF02 ultra sonic range finder. ">SRF02</a> - I2C/Serial ultrasonic ranger sensor</li>
 <li>Arduino MKR ENV Shield rev2</li>
@@ -96,11 +98,12 @@ $(function() {
 <li>Raspbery Pi Zero/W;</li>
 <li>Beagle Bone Black revision A.</li>
 </ul>
-<p><b>WARNING:</b> The source is provided as it is without any warranty. Use it on your own risk! The author does not take any responsibility for the damage caused while using this software. </p>
+<p><b>WARNING:</b> The source is provided as it is without any warranty. Use it on your own risk! The author does not take any responsibility for the damage caused while using this software.</p>
+<p><b>DISCLAIMER:</b> The code is a result of a hobby work and the author is not affiliated with any of the hardware/components/boards manufacturers mentioned in the code, documentation or the description of this project. All trademarks are the property of the respective owners. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Oct 30 2021 22:57:08 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Sun Nov 7 2021 14:36:02 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

@@ -1,0 +1,4 @@
+<map id="ADT7410::set_mode_of_operation" name="ADT7410::set_mode_of_operation">
+<area shape="rect" id="node2" href="$classADT7410.html#a6e599bf53fc140310ac1f0d9af982b4f" title="Auxiliary function for switching the device in the shut down mode. I2C interface stays active..." alt="" coords="227,5,379,32"/>
+<area shape="rect" id="node3" href="$classADT7410.html#a9e91075a4191c1f5d651261cc9158001" title="Auxiliary function for bringing the device back from the shut down mode by enabling the continuous co..." alt="" coords="227,56,379,83"/>
+</map>

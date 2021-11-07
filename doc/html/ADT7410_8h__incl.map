@@ -1,0 +1,6 @@
+<map id="ADT7410.h" name="ADT7410.h">
+<area shape="rect" id="node2" href="$i2c__slave__device_8h.html" title="Contains the definition of the I2C_Slave_Device class/. " alt="" coords="16,80,161,107"/>
+<area shape="rect" id="node4" href="$slave__device_8h.html" title="Contains the definition of Slave_Device class. " alt="" coords="29,155,148,181"/>
+<area shape="rect" id="node5" href="$i2c__bus__master_8h.html" title="Contains the definition of I2C_Bus_Master_Device class. " alt="" coords="171,155,307,181"/>
+<area shape="rect" id="node6" href="$bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class. " alt="" coords="159,229,319,256"/>
+</map>

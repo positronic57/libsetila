@@ -1,6 +1,6 @@
 ## Libsetila
 
-Libsetila is a library written in C++ for communication with I2C/SPI slave devices from Linux user space. It provides classes for representing SPI and I2C slave devices and implements data exchange methods that can be used for communication with target devices on I2C/SPI bus. The main purpose of the library is to simplify the process of writing software for communication with different I2C/SPI devices from user space on Linux.
+Libsetila is a library written in C++ for communication with I2C/SPI slave devices from user space on SOC/SBC running Linux. It provides classes for representing SPI and I2C slave devices and implements data exchange methods that can be used for communication with target devices on I2C/SPI bus. The main purpose of the library is to simplify the process of writing software for communication with different I2C/SPI devices from user space on Linux.
 
 The low level I2C and SPI communication is done by the appropriate Linux kernel drivers while the library use the standard read/write IO calls to send/receive data from/to the slave devices on the bus. The kernel drivers must be loaded before calling the library IO functions.
 
@@ -22,7 +22,7 @@ Besides being a general purpose tool for talking with target I2C/SPI devices, it
 
 #### Hardware Platforms and Operating System
 
-The library should work on any embedded system with I2C/SPI master controller capable of running Linux with appropriate kernel drivers for the master controllers and C++11 compiler.
+The library should work on any SOC/SBC with I2C/SPI interface(s), capable of running Linux with appropriate kernel drivers for the master controllers and C++11 compiler.
 
 Successful tests have been done on:
 - Raspbery Pi 2, 3 model B and Pi Zero/W all running Rasbian GNU/Linux version 10 ("buster");
@@ -34,6 +34,7 @@ Successful tests have been done on:
 - ST LPS25H pressure and temperature sensor: single acquisition(ONE SHOT measurement), adjustable output data rate and resolution;
 - ST LPS22HB pressure and temperature sensor: single acquisition(ONE SHOT measurement);
 - Microchip MCP9808 temperature sensor: temperature reading, no support for alarms/interrupts;
+- Analog Devices ADT7410 temperature sensor: temperature readign, no support for alarms/interrupts;
 - Bosh BMP085 pressure and temperature sensor. Fully supported;
 - Bosh BMP180 pressure and temperature sensor. Fully supported;
 - SRF02 ultra sonic range finder.
@@ -63,6 +64,7 @@ The library functionality has been tested using the following hardware:
 - Adafruit BMP085 module (Adafruit product ID 391);
 - Adafruit BMP180 module (Adafruit product ID 1603);
 - Adafruit MCP9808 High Accuracy I2C Temperature Sensor Breakout Board (Adafruit product ID 1782); 
+- Adafruit ADT7410 High Accuracy I2C Temperature Sensor Breakout Board (Adafruit product ID 4089);
 - [MCP3204 test module](https://github.com/positronic57/libmcp3204/tree/master/example/hardware) 
 - SRF02 - I2C/Serial ultrasonic ranger sensor
 - Arduino MKR ENV Shield rev2
@@ -78,3 +80,5 @@ The library functionality has been tested using the following hardware:
 The source is provided as it is without any warranty. Use it on your own risk!
 The author does not take any responsibility for the damage caused while using this software.
 
+**DISCLAIMER:**
+The code is a result of a hobby work and the author is not affiliated with any of the hardware/components/boards manufacturers mentioned in the code, documentation or the description of this project. All trademarks are the property of the respective owners.

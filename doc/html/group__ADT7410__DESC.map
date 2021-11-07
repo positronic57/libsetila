@@ -1,0 +1,5 @@
+<map id="ADT7410" name="ADT7410">
+<area shape="rect" id="node1" href="$group__ADT7410__REG__DEF.html" title="ADT7410 Register address map" alt="" coords="385,5,612,32"/>
+<area shape="rect" id="node3" href="$group__ADT7410__REG__DESC.html" title="ADT7410 registers description" alt="" coords="389,56,608,83"/>
+<area shape="rect" id="node4" href="$group__DEV__REG__CMD.html" title="Device Register Descriptors\l and Commands" alt="" coords="5,23,208,65"/>
+</map>

@@ -1,9 +1,10 @@
 <map id="i2c_slave_device.h" name="i2c_slave_device.h">
-<area shape="rect" id="node2" href="$BMP085_8h.html" title="A Header file from libsetila library. It defines BMP085 class for communication with BOSCH BMP085 pre..." alt="" coords="5,80,92,107"/>
-<area shape="rect" id="node4" href="$HTS221_8h.html" title="A header file from libsetila library. It defines HTS221 class for communication with HT221 sensor..." alt="" coords="116,80,200,107"/>
-<area shape="rect" id="node5" href="$LPS25H_8h.html" title="A header file from libsetila library. It defines LPS25H class for communication with LPS25H sensor..." alt="" coords="225,80,307,107"/>
-<area shape="rect" id="node6" href="$mcp9808_8h.html" title="A Header file from libsetila library. It defines MCP9808 class for communication with Microchip MCP98..." alt="" coords="332,80,427,107"/>
-<area shape="rect" id="node7" href="$setila__i2c_8h.html" title="Contains all header files required for working with I2C slave devices. " alt="" coords="451,80,547,107"/>
-<area shape="rect" id="node8" href="$srf02_8h.html" title="Contains the definition of SRF02 class for communication with SRF02 sonar sensor. ..." alt="" coords="571,80,638,107"/>
-<area shape="rect" id="node3" href="$setila_8h.html" title="Includes all of header files from libsetila project. " alt="" coords="231,155,301,181"/>
+<area shape="rect" id="node2" href="$ADT7410_8h.html" title="A Header file from libsetila library. It defines ADT7410 class for communication with Analog Devices ..." alt="" coords="5,80,99,107"/>
+<area shape="rect" id="node3" href="$BMP085_8h.html" title="A Header file from libsetila library. It defines BMP085 class for communication with BOSCH BMP085 pre..." alt="" coords="123,80,210,107"/>
+<area shape="rect" id="node5" href="$HTS221_8h.html" title="A header file from libsetila library. It defines HTS221 class for communication with HT221 sensor..." alt="" coords="234,80,318,107"/>
+<area shape="rect" id="node6" href="$LPS25H_8h.html" title="A header file from libsetila library. It defines LPS25H class for communication with LPS25H sensor..." alt="" coords="343,80,425,107"/>
+<area shape="rect" id="node7" href="$mcp9808_8h.html" title="A Header file from libsetila library. It defines MCP9808 class for communication with Microchip MCP98..." alt="" coords="450,80,545,107"/>
+<area shape="rect" id="node8" href="$setila__i2c_8h.html" title="Contains all header files required for working with I2C slave devices. " alt="" coords="569,80,665,107"/>
+<area shape="rect" id="node9" href="$srf02_8h.html" title="Contains the definition of SRF02 class for communication with SRF02 sonar sensor. ..." alt="" coords="689,80,756,107"/>
+<area shape="rect" id="node4" href="$setila_8h.html" title="Includes all of header files from libsetila project. " alt="" coords="349,155,419,181"/>
 </map>

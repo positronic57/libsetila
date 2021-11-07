@@ -8,7 +8,8 @@ CPP_SRCS += \
 ../devices/mcp3204.cpp \
 ../devices/srf02.cpp \
 ../devices/ST_Sensor.cpp \
-../devices/mcp9808.cpp
+../devices/mcp9808.cpp \
+../devices/ADT7410.cpp
 
 OBJS += \
 ./devices/BMP085.o \
@@ -18,7 +19,8 @@ OBJS += \
 ./devices/mcp3204.o \
 ./devices/srf02.o \
 ./devices/ST_Sensor.o \
-./devices/mcp9808.o
+./devices/mcp9808.o \
+./devices/ADT7410.o
 
 CPP_DEPS += \
 ./devices/BMP085.d \
@@ -28,7 +30,8 @@ CPP_DEPS += \
 ./devices/mcp3204.d \
 ./devices/srf02.d \
 ./devices/ST_Sensor.d \
-./devices/mcp9808.d
+./devices/mcp9808.d \
+./devices/ADT7410.d
 
 SOBJS += \
 ./devices/stat/BMP085.o \
@@ -38,7 +41,8 @@ SOBJS += \
 ./devices/stat/mcp3204.o \
 ./devices/stat/srf02.o \
 ./devices/stat/ST_Sensor.o \
-./devices/stat/mcp9808.o
+./devices/stat/mcp9808.o \
+./devices/stat/ADT7410.o
 
 
 
