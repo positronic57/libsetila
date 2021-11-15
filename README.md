@@ -8,6 +8,7 @@ Main resources providided with the library:
 - classes for SPI/I2C master;
 - classes for implementing SPI/I2C slaves;
 - templates for Basic Data Containers (BDC): stack, FIFO queue and circular buffer. Readings from different SPI/I2C devices can be stored in those data containers; 
+- filters module for digital filtering of the sensor readings;
 - support for some common/popular SPI/I2C devices (see supported hardware section).
  
 The library is not thread safe. 

@@ -45,7 +45,7 @@ int SPI::spi_slave_write_byte(SPI_Bus_Master_Device *spi_master, uint8_t registr
 	return 0;
 }
 
-int SPI::spi_slave_write_data(SPI_Bus_Master_Device *spi_master, uint8_t registry, void *buffer, int buffer_size)
+int SPI::spi_slave_write_data(SPI_Bus_Master_Device *spi_master, uint8_t registry, const void *buffer, int buffer_size)
 {
 	if (spi_master == nullptr)
 	{
@@ -55,7 +55,7 @@ int SPI::spi_slave_write_data(SPI_Bus_Master_Device *spi_master, uint8_t registr
 	return 0;
 }
 
-int SPI::spi_read_write_data(SPI_Bus_Master_Device *spi_master, void *transmit_buffer, void *receive_buffer, int buffer_size)
+int SPI::spi_read_write_data(const SPI_Bus_Master_Device *spi_master, void *transmit_buffer, void *receive_buffer, int buffer_size)
 {
 	if (spi_master == nullptr)
 	{

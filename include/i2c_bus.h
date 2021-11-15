@@ -56,7 +56,7 @@ namespace I2C {
 	 *
 	 * @return int 0 in case there are no errors on the bus, error code in case of communication failure
 	 */
-	extern int i2c_slave_write_data(int i2c_master, uint8_t i2c_slave_address, uint8_t registry, void *buffer, int buffer_size);
+	extern int i2c_slave_write_data(int i2c_master, uint8_t i2c_slave_address, uint8_t registry, const void *buffer, int buffer_size);
 }
 
 #endif /* I2C_BUS_H_ */

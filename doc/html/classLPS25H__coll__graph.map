@@ -1,4 +1,4 @@
 <map id="LPS25H" name="LPS25H">
-<area shape="rect" id="node2" href="$classST__Sensor.html" title="ST_Sensor" alt="" coords="16,95,105,121"/>
+<area shape="rect" id="node2" href="$classST__Sensor.html" title="Base class for ST sensors with I2C and/or SPI interface. " alt="" coords="16,95,105,121"/>
 <area shape="rect" id="node3" href="$classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any..." alt="" coords="5,5,116,32"/>
 </map>

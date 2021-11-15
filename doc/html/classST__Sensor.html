@@ -19,7 +19,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Libsetila
-   &#160;<span id="projectnumber">v0.5.5</span>
+   &#160;<span id="projectnumber">v0.5.6</span>
    </div>
   </td>
  </tr>
@@ -49,6 +49,9 @@ $(function() {
 <div class="title">ST_Sensor Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Base class for ST sensors with <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> and/or <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> interface.  
+ <a href="classST__Sensor.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ST__sensor_8h_source.html">ST_sensor.h</a>&gt;</code></p>
 <div class="dynheader">
@@ -150,7 +153,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a0cc366998f4e9dd28b875d91af5ac1b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl><dt><b>Examples: </b></dt><dd><a class="el" href="HTS221_8h-example.html#_a1">HTS221.h</a>, <a class="el" href="LPS22HB_8h-example.html#_a1">LPS22HB.h</a>, and <a class="el" href="LPS25H_8h-example.html#_a6">LPS25H.h</a>.</dd>
+<div class="textblock"><p>Base class for ST sensors with <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> and/or <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> interface. </p>
+<p>The class defines few virtual function for high level abstraction of the configuration process, measurement commands and reading of the sensor data. Lower level configuration functions and registers R/W operation, specific for the targeted sensor must be defined and implemented additionally in the child classes derived from this base class.</p>
+<p>The data communication interface is defined as an instance of the <a class="el" href="classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any...">Slave_Device</a> class and can cover both <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> and <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a>. </p>
+<dl><dt><b>Examples: </b></dt><dd><a class="el" href="HTS221_8h-example.html#_a1">HTS221.h</a>, <a class="el" href="LPS22HB_8h-example.html#_a1">LPS22HB.h</a>, and <a class="el" href="LPS25H_8h-example.html#_a6">LPS25H.h</a>.</dd>
 </dl></div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ac67559ea1dcbfdb9a96eb31112a7df69"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac67559ea1dcbfdb9a96eb31112a7df69">&#9670;&nbsp;</a></span>mode_of_operation_t</h2>
@@ -721,7 +727,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 7 2021 14:36:01 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 15 2021 18:41:15 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

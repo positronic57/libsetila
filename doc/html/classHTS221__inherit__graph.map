@@ -1,3 +1,3 @@
 <map id="HTS221" name="HTS221">
-<area shape="rect" id="node2" href="$classST__Sensor.html" title="ST_Sensor" alt="" coords="5,5,95,32"/>
+<area shape="rect" id="node2" href="$classST__Sensor.html" title="Base class for ST sensors with I2C and/or SPI interface. " alt="" coords="5,5,95,32"/>
 </map>

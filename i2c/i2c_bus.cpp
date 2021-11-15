@@ -66,7 +66,7 @@ int I2C::i2c_slave_write_byte(int i2c_master, uint8_t i2c_slave_address, uint8_t
 	return 0;
 }
 
-int I2C::i2c_slave_write_data(int i2c_master, uint8_t i2c_slave_address, uint8_t registry, void *buffer, int buffer_size)
+int I2C::i2c_slave_write_data(int i2c_master, uint8_t i2c_slave_address, uint8_t registry, const void *buffer, int buffer_size)
 {
 	uint8_t *write_buffer = (uint8_t *) calloc(buffer_size + 1, sizeof(uint8_t));
 	uint8_t return_code = 0;

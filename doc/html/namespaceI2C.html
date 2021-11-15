@@ -19,7 +19,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Libsetila
-   &#160;<span id="projectnumber">v0.5.5</span>
+   &#160;<span id="projectnumber">v0.5.6</span>
    </div>
   </td>
  </tr>
@@ -57,9 +57,9 @@ Functions</h2></td></tr>
 <tr class="memitem:a4ddd84aa3b69fef446ab44f490e470ea"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceI2C.html#a4ddd84aa3b69fef446ab44f490e470ea">i2c_slave_write_byte</a> (int i2c_master, uint8_t i2c_slave_address, uint8_t registry, uint8_t value)</td></tr>
 <tr class="memdesc:a4ddd84aa3b69fef446ab44f490e470ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes one byte into an internal registry of the slave device.  <a href="#a4ddd84aa3b69fef446ab44f490e470ea">More...</a><br /></td></tr>
 <tr class="separator:a4ddd84aa3b69fef446ab44f490e470ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa14a29506868d2aeffd383e81268f192"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceI2C.html#aa14a29506868d2aeffd383e81268f192">i2c_slave_write_data</a> (int i2c_master, uint8_t i2c_slave_address, uint8_t registry, void *buffer, int buffer_size)</td></tr>
-<tr class="memdesc:aa14a29506868d2aeffd383e81268f192"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the content of the buffer into the target <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> slave starting from a given internal registry.  <a href="#aa14a29506868d2aeffd383e81268f192">More...</a><br /></td></tr>
-<tr class="separator:aa14a29506868d2aeffd383e81268f192"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a192c7703c8a95be838778510c162aa46"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceI2C.html#a192c7703c8a95be838778510c162aa46">i2c_slave_write_data</a> (int i2c_master, uint8_t i2c_slave_address, uint8_t registry, const void *buffer, int buffer_size)</td></tr>
+<tr class="memdesc:a192c7703c8a95be838778510c162aa46"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes the content of the buffer into the target <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> slave starting from a given internal registry.  <a href="#a192c7703c8a95be838778510c162aa46">More...</a><br /></td></tr>
+<tr class="separator:a192c7703c8a95be838778510c162aa46"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Namespace with functions that implement IO requests for <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> bus. Requests are made by the <a class="el" href="namespaceI2C.html" title="Namespace with functions that implement IO requests for I2C bus. Requests are made by the I2C slave d...">I2C</a> slave device object using its read/write functions. </p>
@@ -175,8 +175,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa14a29506868d2aeffd383e81268f192"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa14a29506868d2aeffd383e81268f192">&#9670;&nbsp;</a></span>i2c_slave_write_data()</h2>
+<a id="a192c7703c8a95be838778510c162aa46"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a192c7703c8a95be838778510c162aa46">&#9670;&nbsp;</a></span>i2c_slave_write_data()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -202,7 +202,7 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">void *&#160;</td>
+          <td class="paramtype">const void *&#160;</td>
           <td class="paramname"><em>buffer</em>, </td>
         </tr>
         <tr>
@@ -237,7 +237,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 7 2021 14:36:01 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 15 2021 18:41:15 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

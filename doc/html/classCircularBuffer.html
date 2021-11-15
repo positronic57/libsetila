@@ -19,7 +19,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Libsetila
-   &#160;<span id="projectnumber">v0.5.5</span>
+   &#160;<span id="projectnumber">v0.5.6</span>
    </div>
   </td>
  </tr>
@@ -41,6 +41,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="#pri-attribs">Private Attributes</a>  </div>
   <div class="headertitle">
 <div class="title">CircularBuffer&lt; tElement &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__bdc__group.html">Basic Data Containers</a> &raquo; <a class="el" href="group__circular__buffer__bdc__group.html">Circular Buffer</a></div></div>  </div>
@@ -54,9 +55,6 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a79a64f8ceb10e1fe9788d90e4f8fd9de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularBuffer.html#a79a64f8ceb10e1fe9788d90e4f8fd9de">CircularBuffer</a> ()=default</td></tr>
-<tr class="memdesc:a79a64f8ceb10e1fe9788d90e4f8fd9de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="#a79a64f8ceb10e1fe9788d90e4f8fd9de">More...</a><br /></td></tr>
-<tr class="separator:a79a64f8ceb10e1fe9788d90e4f8fd9de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4790094807d6b7cb9690ff84b387f52c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularBuffer.html#a4790094807d6b7cb9690ff84b387f52c">CircularBuffer</a> (unsigned int len)</td></tr>
 <tr class="memdesc:a4790094807d6b7cb9690ff84b387f52c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A constructor.  <a href="#a4790094807d6b7cb9690ff84b387f52c">More...</a><br /></td></tr>
 <tr class="separator:a4790094807d6b7cb9690ff84b387f52c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -90,6 +88,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae30b522a9933be6ed4b3443876ec7570"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularBuffer.html#ae30b522a9933be6ed4b3443876ec7570">size</a> ()</td></tr>
 <tr class="memdesc:ae30b522a9933be6ed4b3443876ec7570"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides the amount of elements that can be written into the circular buffer.  <a href="#ae30b522a9933be6ed4b3443876ec7570">More...</a><br /></td></tr>
 <tr class="separator:ae30b522a9933be6ed4b3443876ec7570"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b013c83045e0c5a16d75e19e017d363"><td class="memItemLeft" align="right" valign="top">const tElement &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularBuffer.html#a8b013c83045e0c5a16d75e19e017d363">get_head</a> () const</td></tr>
+<tr class="separator:a8b013c83045e0c5a16d75e19e017d363"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0d476494bfd7036418cde1084126103"><td class="memItemLeft" align="right" valign="top">const tElement &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularBuffer.html#ac0d476494bfd7036418cde1084126103">get_tail</a> () const</td></tr>
+<tr class="separator:ac0d476494bfd7036418cde1084126103"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a79a64f8ceb10e1fe9788d90e4f8fd9de"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCircularBuffer.html#a79a64f8ceb10e1fe9788d90e4f8fd9de">CircularBuffer</a> ()=default</td></tr>
+<tr class="memdesc:a79a64f8ceb10e1fe9788d90e4f8fd9de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="#a79a64f8ceb10e1fe9788d90e4f8fd9de">More...</a><br /></td></tr>
+<tr class="separator:a79a64f8ceb10e1fe9788d90e4f8fd9de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -136,7 +144,7 @@ template&lt;class tElement&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel">private</span><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -342,6 +350,60 @@ template&lt;class tElement&gt; </div>
 
 <p>Function for getting the actual number of elements currently present in the buffer. </p>
 <dl class="section return"><dt>Returns</dt><dd>int number of elements in the buffer </dd></dl>
+
+</div>
+</div>
+<a id="a8b013c83045e0c5a16d75e19e017d363"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b013c83045e0c5a16d75e19e017d363">&#9670;&nbsp;</a></span>get_head()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class tElement&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const tElement&amp; <a class="el" href="classCircularBuffer.html">CircularBuffer</a>&lt; tElement &gt;::get_head </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac0d476494bfd7036418cde1084126103"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0d476494bfd7036418cde1084126103">&#9670;&nbsp;</a></span>get_tail()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class tElement&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const tElement&amp; <a class="el" href="classCircularBuffer.html">CircularBuffer</a>&lt; tElement &gt;::get_tail </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -644,7 +706,7 @@ template&lt;class tElement&gt; </div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 7 2021 14:36:01 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 15 2021 18:41:15 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>

@@ -15,7 +15,10 @@
 #include "slave_device.h"
 
 /**
- * @brief Class for representing ST sensors with I2C and/or SPI interface.
+ * \class ST_Sensor
+ *
+ * @brief Base class for ST sensors with I2C and/or SPI interface.
+ *
  * The class defines few virtual function for high level abstraction of the
  * configuration process, measurement commands and reading of the sensor data.
  * Lower level configuration functions and registers R/W operation, specific

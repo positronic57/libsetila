@@ -37,11 +37,12 @@ private:
 	unsigned int number_of_entries = 0;		/**< Number of entries currently stored in the circular buffer. */
 	tElement *queue = new tElement[32];		/**< The actual buffer.*/
 
-public:
     /**
      * @brief Default constructor.
      */
     CircularBuffer() = default;
+
+public:
 
     /**
 	 * @brief A constructor.
@@ -197,6 +198,17 @@ public:
      * @return int the size of the internal buffer in nubmer of elements.
      */
 	unsigned int size() { return length; }
+
+	const tElement &get_head() const
+	{
+		return queue[head];
+	}
+
+	const tElement &get_tail() const
+	{
+		return queue[tail];
+	}
+
 };
 
 /** @} */

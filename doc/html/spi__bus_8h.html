@@ -19,7 +19,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">Libsetila
-   &#160;<span id="projectnumber">v0.5.5</span>
+   &#160;<span id="projectnumber">v0.5.6</span>
    </div>
   </td>
  </tr>
@@ -90,12 +90,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a1ddfee1d1327ffaef449e85d9e4a2a44"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSPI.html#a1ddfee1d1327ffaef449e85d9e4a2a44">SPI::spi_slave_write_byte</a> (<a class="el" href="classSPI__Bus__Master__Device.html">SPI_Bus_Master_Device</a> *spi_master, uint8_t registry, uint8_t value)</td></tr>
 <tr class="memdesc:a1ddfee1d1327ffaef449e85d9e4a2a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sends two bites to the slave device: address of an internal registry of the slave and the new value of this registry. Due to the full-duplex of the <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> bus, the slave will answer to the master with two bits but they will be ignored by this function.  <a href="namespaceSPI.html#a1ddfee1d1327ffaef449e85d9e4a2a44">More...</a><br /></td></tr>
 <tr class="separator:a1ddfee1d1327ffaef449e85d9e4a2a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6c62532fc7a28fea05dfb5fe23167a87"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSPI.html#a6c62532fc7a28fea05dfb5fe23167a87">SPI::spi_slave_write_data</a> (<a class="el" href="classSPI__Bus__Master__Device.html">SPI_Bus_Master_Device</a> *spi_master, uint8_t registry, void *buffer, int buffer_size)</td></tr>
-<tr class="memdesc:a6c62532fc7a28fea05dfb5fe23167a87"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes data to the slave device starting from internal location in the slave device defined with the "registry" argument. Due to the full-duplex of the <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> bus, the slave will answer to the master with the same number of bytes but they will be ignored by this function.  <a href="namespaceSPI.html#a6c62532fc7a28fea05dfb5fe23167a87">More...</a><br /></td></tr>
-<tr class="separator:a6c62532fc7a28fea05dfb5fe23167a87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96d6a7baecb6fb5efbc19b3d56ca91fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSPI.html#a96d6a7baecb6fb5efbc19b3d56ca91fe">SPI::spi_read_write_data</a> (<a class="el" href="classSPI__Bus__Master__Device.html">SPI_Bus_Master_Device</a> *spi_master, void *transmit_buffer, void *receive_buffer, int buffer_size)</td></tr>
-<tr class="memdesc:a96d6a7baecb6fb5efbc19b3d56ca91fe"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> is full-duplex synchronous bus. While writing data to the slave (content of the transmit buffer), in parallel slave answers with data back to the master (content of the receive buffer). The size of the transmit and receive buffer are the same.  <a href="namespaceSPI.html#a96d6a7baecb6fb5efbc19b3d56ca91fe">More...</a><br /></td></tr>
-<tr class="separator:a96d6a7baecb6fb5efbc19b3d56ca91fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d28e913ed12a434252538c13c545c12"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSPI.html#a9d28e913ed12a434252538c13c545c12">SPI::spi_slave_write_data</a> (<a class="el" href="classSPI__Bus__Master__Device.html">SPI_Bus_Master_Device</a> *spi_master, uint8_t registry, const void *buffer, int buffer_size)</td></tr>
+<tr class="memdesc:a9d28e913ed12a434252538c13c545c12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Writes data to the slave device starting from internal location in the slave device defined with the "registry" argument. Due to the full-duplex of the <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> bus, the slave will answer to the master with the same number of bytes but they will be ignored by this function.  <a href="namespaceSPI.html#a9d28e913ed12a434252538c13c545c12">More...</a><br /></td></tr>
+<tr class="separator:a9d28e913ed12a434252538c13c545c12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0ea993670a3ca20449d561b83c90c13a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceSPI.html#a0ea993670a3ca20449d561b83c90c13a">SPI::spi_read_write_data</a> (const <a class="el" href="classSPI__Bus__Master__Device.html">SPI_Bus_Master_Device</a> *spi_master, void *transmit_buffer, void *receive_buffer, int buffer_size)</td></tr>
+<tr class="memdesc:a0ea993670a3ca20449d561b83c90c13a"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> is full-duplex synchronous bus. While writing data to the slave (content of the transmit buffer), in parallel slave answers with data back to the master (content of the receive buffer). The size of the transmit and receive buffer are the same.  <a href="namespaceSPI.html#a0ea993670a3ca20449d561b83c90c13a">More...</a><br /></td></tr>
+<tr class="separator:a0ea993670a3ca20449d561b83c90c13a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains the definition of the <a class="el" href="namespaceSPI.html" title="Namespace with functions that implement IO requests for SPI bus. Requests are triggered by the SPI sl...">SPI</a> namespace. </p>
@@ -105,7 +105,7 @@ Functions</h2></td></tr>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Nov 7 2021 14:36:01 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Nov 15 2021 18:41:15 for Libsetila by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.14
 </small></address>
