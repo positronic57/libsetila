@@ -123,7 +123,7 @@ public:
      * @param[in] SensorAddress one of the possible MCP9808 I2C addresses
      *
      */
-    explicit MCP9808(const uint8_t SensorAddress): I2C_Slave_Device(SensorAddress) {};
+    explicit MCP9808(uint8_t SensorAddress): I2C_Slave_Device(SensorAddress) {};
 
     ~MCP9808() {};
 
@@ -135,7 +135,7 @@ public:
      *
      * @return 0 in case of success, error code in case of a failure in the communication with the sensor
      */
-    int set_mod_of_operation(const MCP9808::MODE_OF_OPERATION op_mode, const MCP9808::RESOLUTION resolution = MCP9808::RESOLUTION::RES_0_0625_DEG);
+    int set_mod_of_operation(MCP9808::MODE_OF_OPERATION op_mode, MCP9808::RESOLUTION resolution = MCP9808::RESOLUTION::RES_0_0625_DEG);
 
     /**
      * @brief Sets the resolution of the sensor by writing a new value into the resolution register
@@ -144,7 +144,7 @@ public:
      *
      * @return 0 in case of success, error code in case of a failure in the communication with the sensor
      */
-    int set_resolution(const MCP9808::RESOLUTION resolution);
+    int set_resolution(MCP9808::RESOLUTION resolution);
 
     /**
      * @brief Reads the content of the ambient temperature register and stores it in the m_temperature class member

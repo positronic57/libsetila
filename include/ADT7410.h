@@ -138,7 +138,7 @@ public:
 	 *
 	 * @return 0 in case of success, ERROR_WRITE_FAILED in case there is an issue in communication with the sensor
 	 */
-	int set_mode_of_operation(const ADT7410::MODE_OF_OPERATION mode, const ADT7410::RESOLUTION resolution = ADT7410::RESOLUTION::RES_0_0625);
+	int set_mode_of_operation(ADT7410::MODE_OF_OPERATION mode, ADT7410::RESOLUTION resolution = ADT7410::RESOLUTION::RES_0_0625);
 
 	/**
 	 * @brief Sets the resolution of the internal ADC.
@@ -149,7 +149,7 @@ public:
 	 *
 	 * @return 0 in case of success, ERROR_WRITE_FAILED in case there is an issue in communication with the sensor
 	 */
-	int set_resolution(const ADT7410::RESOLUTION resolution);
+	int set_resolution(ADT7410::RESOLUTION resolution);
 
 	/**
 	 * @brief Reads the temperature value from the sensor.

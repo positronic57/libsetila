@@ -14,7 +14,7 @@
 
 #include "setila_errors.h"
 
-int ADT7410::set_mode_of_operation(const ADT7410::MODE_OF_OPERATION mode, const ADT7410::RESOLUTION resolution)
+int ADT7410::set_mode_of_operation(ADT7410::MODE_OF_OPERATION mode, ADT7410::RESOLUTION resolution)
 {
 	uint8_t temp_control_reg = m_config_register;
 
@@ -48,7 +48,7 @@ int ADT7410::set_mode_of_operation(const ADT7410::MODE_OF_OPERATION mode, const 
 }
 
 
-int ADT7410::set_resolution(const ADT7410::RESOLUTION resolution)
+int ADT7410::set_resolution(ADT7410::RESOLUTION resolution)
 {
 	uint8_t temp_control_register = m_config_register;
 

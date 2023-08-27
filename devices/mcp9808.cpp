@@ -34,7 +34,7 @@ int MCP9808::verify_device_id()
 }
 
 
-int MCP9808::set_mod_of_operation(const MCP9808::MODE_OF_OPERATION op_mode, const MCP9808::RESOLUTION resolution)
+int MCP9808::set_mod_of_operation(MCP9808::MODE_OF_OPERATION op_mode, MCP9808::RESOLUTION resolution)
 {
     int status = 0;
 
@@ -134,7 +134,7 @@ int MCP9808::continuous_conversion()
 }
 
 
-int MCP9808::set_resolution(const MCP9808::RESOLUTION resolution)
+int MCP9808::set_resolution(MCP9808::RESOLUTION resolution)
 {
     uint8_t res = static_cast<uint8_t>(resolution);
 
