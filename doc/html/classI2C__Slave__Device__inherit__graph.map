@@ -1,7 +1,8 @@
 <map id="I2C_Slave_Device" name="I2C_Slave_Device">
-<area shape="rect" id="node3" href="$classADT7410.html" title="Class which represents ADT7410 sensor with I2C interface. " alt="" coords="5,155,87,181"/>
-<area shape="rect" id="node4" href="$classBMP085.html" title="A class derived from I2CSensor class. It represents BMP085/BMP180 pressure and temperature sensor..." alt="" coords="111,155,186,181"/>
-<area shape="rect" id="node5" href="$classMCP9808.html" title="Class which represents MCP9808 sensor with I2C interface. " alt="" coords="210,155,293,181"/>
-<area shape="rect" id="node6" href="$classSRF02.html" title="The class represents SRF02 ultra sonic range finder. " alt="" coords="317,155,380,181"/>
-<area shape="rect" id="node2" href="$classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any..." alt="" coords="144,5,255,32"/>
+<area shape="rect" id="node1" title="Child of Slave_Device class. Implements the IO functions specific for I2C bus and I2C slave devices." alt="" coords="127,80,257,107"/>
+<area shape="rect" id="node3" href="$classADT7410.html" title="Class which represents ADT7410 sensor with I2C interface." alt="" coords="5,155,83,181"/>
+<area shape="rect" id="node4" href="$classBMP085.html" title="A class derived from I2CSensor class. It represents BMP085/BMP180 pressure and temperature sensor." alt="" coords="107,155,179,181"/>
+<area shape="rect" id="node5" href="$classMCP9808.html" title="Class which represents MCP9808 sensor with I2C interface." alt="" coords="203,155,283,181"/>
+<area shape="rect" id="node6" href="$classSRF02.html" title="The class represents SRF02 ultra sonic range finder." alt="" coords="307,155,370,181"/>
+<area shape="rect" id="node2" href="$classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any..." alt="" coords="141,5,243,32"/>
 </map>

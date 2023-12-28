@@ -1,10 +1,11 @@
 <map id="HTS221" name="HTS221">
-<area shape="rect" id="node1" href="$group__HTS221__REG__DEF.html" title="HTS221 Register Address Map" alt="" coords="376,5,595,32"/>
-<area shape="rect" id="node2" href="$group__HTS221__CTRL__REG3__REG__DESC.html" title="HTS221 CTRL_REG3 register\l description" alt="" coords="383,57,588,98"/>
-<area shape="rect" id="node3" href="$group__DEV__REG__CMD.html" title="Device Register Descriptors\l and Commands" alt="" coords="5,187,208,229"/>
-<area shape="rect" id="node4" href="$group__HTS221__DEFAULT__REG__VALUE.html" title="HTS221 Default values\l of the registers" alt="" coords="400,122,571,163"/>
-<area shape="rect" id="node5" href="$group__HTS221__STATUS__REG__REG__DESC.html" title="HTS221 STATUS_REG register\l description" alt="" coords="378,187,593,229"/>
-<area shape="rect" id="node6" href="$group__HTS221__CTRL__REG1__REG__DESC.html" title="HTS221 CTRL_REG1 register\l description" alt="" coords="383,253,588,294"/>
-<area shape="rect" id="node7" href="$group__HTS221__AV__CONF__REG__DESC.html" title="HTS221 AV_CONF register\l description" alt="" coords="389,318,581,359"/>
-<area shape="rect" id="node9" href="$group__HTS221__CTRL__REG2__REG__DESC.html" title="HTS221 CTRL_REG2 register\l description" alt="" coords="383,383,588,425"/>
+<area shape="rect" id="node1" href="$group__HTS221__REG__DEF.html" title=" " alt="" coords="362,5,565,31"/>
+<area shape="rect" id="node2" href="$group__HTS221__CTRL__REG3__REG__DESC.html" title=" " alt="" coords="364,55,563,95"/>
+<area shape="rect" id="node3" href="$group__DEV__REG__CMD.html" title=" " alt="" coords="5,183,192,223"/>
+<area shape="rect" id="node8" title=" " alt="" coords="240,191,311,216"/>
+<area shape="rect" id="node4" href="$group__HTS221__DEFAULT__REG__VALUE.html" title=" " alt="" coords="384,119,543,159"/>
+<area shape="rect" id="node5" href="$group__HTS221__STATUS__REG__REG__DESC.html" title=" " alt="" coords="359,183,568,223"/>
+<area shape="rect" id="node6" href="$group__HTS221__CTRL__REG1__REG__DESC.html" title=" " alt="" coords="364,247,563,287"/>
+<area shape="rect" id="node7" href="$group__HTS221__AV__CONF__REG__DESC.html" title=" " alt="" coords="373,311,554,351"/>
+<area shape="rect" id="node9" href="$group__HTS221__CTRL__REG2__REG__DESC.html" title=" " alt="" coords="364,375,563,415"/>
 </map>

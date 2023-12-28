@@ -1,3 +1,6 @@
 <map id="spi_bus_master.h" name="spi_bus_master.h">
-<area shape="rect" id="node3" href="$bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class. " alt="" coords="165,80,325,107"/>
+<area shape="rect" id="node1" title="Defines the SPI_Bus_Master_Device class." alt="" coords="83,5,207,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,80,127,107"/>
+<area shape="rect" id="node3" href="$bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class." alt="" coords="151,80,298,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="197,155,252,181"/>
 </map>

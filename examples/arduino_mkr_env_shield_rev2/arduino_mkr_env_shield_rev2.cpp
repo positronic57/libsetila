@@ -1,5 +1,5 @@
 /**
- * @file pi_sense_hat.cpp
+ * @file ardiuno_mkr_env_schield_rev2.cpp
  *
  * @brief Get temperature, pressure and humidity readings from Arduino MKR ENV Shield Rev2
  * LPS22HB and HTS221 sensors using libsetila library.
@@ -36,7 +36,7 @@ int main()
 	}
 
 	// Configure LPS22HB for ONE SHOT mode of operation
-	status = lps22hb_sensor->set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_ONE_SHOT);
+	status = lps22hb_sensor->set_mode_of_operation(ST_Sensor::MODE_OF_OPERATION::OP_ONE_SHOT);
 	if(status)
 	{
 		std::cout << "LPS22HB sensor initialization failed." << std::endl;
@@ -44,7 +44,7 @@ int main()
 	}
 
 	// Configure HTS221 for ONE SHOT type of measurements
-	status = hts221_sensor->set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_ONE_SHOT);
+	status = hts221_sensor->set_mode_of_operation(ST_Sensor::MODE_OF_OPERATION::OP_ONE_SHOT);
 	if (status)
 	{
 		std::cout << "HTS221 sensor initialization failed." << std::endl;

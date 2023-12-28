@@ -1,0 +1,22 @@
+Libsetila library is distributed with two examples for ST L3GD20 sensor:
+  - l3gd20_single_meas_example.cpp: demonstrates a reading of angular rates in X, Y and Z axis every second in endless loop;
+  - l3gd20_FIFO_example: demonstrates a reading of angular rates from the sensor configured in FIFO mode.
+
+The library must be installed before compiling the examples. 
+
+Build the examples from the command line by executing:
+  #make 
+or 
+  #make all 
+for compiling the two examples in one go.
+
+Execute:
+  #make l3gd20_single_meas_example 
+for builing l3gd_single_meas_example.cpp code 
+
+Execute:
+  #make l3gd20_FIFO_example 
+for building l3gd_FIFO_example.cpp
+
+Cleaning the output files from the build:
+  #make clean

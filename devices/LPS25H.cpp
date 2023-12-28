@@ -18,24 +18,6 @@
 #include "slave_device.h"
 
 
-int LPS25H::verify_device_id()
-{
-	uint8_t registryValue;
-
-	// Check the device ID by reading WHO_AM_I register
-	if (interface()->read(LPS25H_WHO_AM_I, &registryValue, 1)) {
-		return ERROR_READ_FAILED;
-	}
-
-	if (registryValue != LPS25H_ID) {
-		return ERROR_WRONG_DEVICE_MODEL;
-	}
-
-	m_device_id_verified = true;
-
-	return 0;
-}
-
 
 int LPS25H::set_resolution(uint8_t average_1, uint8_t average_2)
 {
@@ -44,13 +26,16 @@ int LPS25H::set_resolution(uint8_t average_1, uint8_t average_2)
 	uint8_t temp = average_1  | (average_2 << 2);
 
 	if (!m_device_id_verified) {
-		if (verify_device_id()) {
+		if (verify_device_id(LPS25H_WHO_AM_I, LPS25H_ID)) {
 			return ERROR_WRONG_DEVICE_MODEL;
+		}
+		else {
+			m_device_id_verified = true;
 		}
 	}
 
 	// Write the pressure and humidity resolution in AV_CONF register
-	if (interface()->write_byte(LPS25H_RES_CONF, temp)) {
+	if (m_interface->write_byte(LPS25H_RES_CONF, temp)) {
 		return ERROR_WRITE_FAILED;
 	}
 
@@ -58,35 +43,45 @@ int LPS25H::set_resolution(uint8_t average_1, uint8_t average_2)
 }
 
 
-int LPS25H::set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate)
+int LPS25H::set_mode_of_operation(ST_Sensor::MODE_OF_OPERATION mode_of_operation, ST_Sensor::OUTPUT_DATA_RATE output_data_rate)
 {
 	return set_mode_of_operation(mode_of_operation, output_data_rate, LPS25H_NBR_AVERAGED_SAMPLES::AVER_SAMPLES_2);
 }
 
 
-int LPS25H::set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate, LPS25H_NBR_AVERAGED_SAMPLES fifo_mean_samples)
+int LPS25H::set_mode_of_operation(
+	ST_Sensor::MODE_OF_OPERATION mode_of_operation,
+	ST_Sensor::OUTPUT_DATA_RATE output_data_rate,
+	LPS25H_NBR_AVERAGED_SAMPLES fifo_mean_samples
+)
 {
 	if (!m_device_id_verified) {
-		if (verify_device_id()) {
+		if (verify_device_id(LPS25H_WHO_AM_I, LPS25H_ID)) {
 			return ERROR_WRONG_DEVICE_MODEL;
+		}
+		else {
+			m_device_id_verified = true;
 		}
 	}
 
+	m_mode_of_operation = mode_of_operation;
+	m_output_data_rate = output_data_rate;
+
 	switch(mode_of_operation) {
-	case mode_of_operation_t::OP_POWER_DOWN:
+	case ST_Sensor::MODE_OF_OPERATION::OP_POWER_DOWN:
 		return power_down();
 		break;
-	case mode_of_operation_t::OP_ONE_SHOT:
+	case ST_Sensor::MODE_OF_OPERATION::OP_ONE_SHOT:
 		return enable_one_shot_mode();
 		break;
-	case mode_of_operation_t::OP_CONTINUOUS:
+	case ST_Sensor::MODE_OF_OPERATION::OP_CONTINUOUS:
 		return config_continuous_mode(output_data_rate);
 		break;
-	case mode_of_operation_t::OP_FIFO_MEAN_MODE:
+	case ST_Sensor::MODE_OF_OPERATION::OP_FIFO_MEAN_MODE:
 		config_continuous_mode(output_data_rate);
 		return config_fifo_mean_mode(fifo_mean_samples);
 		break;
-	case mode_of_operation_t::OP_FIFO_MODE:
+	case ST_Sensor::MODE_OF_OPERATION::OP_FIFO_MODE:
 	default:
 		//TODO Implement FIFO MODE configuration
         return ERROR_UNSUPPORTED_DEVICE_OPTION_CONFIG; 
@@ -108,14 +103,14 @@ int LPS25H::enable_one_shot_mode()
 	// Set output data rate to 0
 	m_CTRL_REG1 &= ~((1 << LPS25H_CTRL_REG1_ODR2) | (1 << LPS25H_CTRL_REG1_ODR1) | (1 << LPS25H_CTRL_REG1_ODR0));
 
-	if (interface()->write_byte(LPS25H_CTRL_REG1, m_CTRL_REG1)) {
+	if (m_interface->write_byte(LPS25H_CTRL_REG1, m_CTRL_REG1)) {
 		m_CTRL_REG1 = ctrl_reg1;
 		return ERROR_WRITE_FAILED;
 	}
 
 	// Disable FIFO
 	m_CTRL_REG2 &= ~(1 << LPS25H_CTRL_REG2_FIFO_EN);
-	if (interface()->write_byte(LPS25H_CTRL_REG2, m_CTRL_REG2)) {
+	if (m_interface->write_byte(LPS25H_CTRL_REG2, m_CTRL_REG2)) {
 		m_CTRL_REG2 = ctrl_reg2;
 		return ERROR_WRITE_FAILED;
 	}
@@ -130,7 +125,7 @@ int LPS25H::do_one_shot_measurement()
 
 	m_CTRL_REG2 |= (1 << LPS25H_CTRL_REG2_ONE_SHOT);
 
-	if (interface()->write_byte(LPS25H_CTRL_REG2, ctrl_reg2)) {
+	if (m_interface->write_byte(LPS25H_CTRL_REG2, ctrl_reg2)) {
 		m_CTRL_REG2 = ctrl_reg2;
 		return ERROR_WRITE_FAILED;
 	}
@@ -141,12 +136,15 @@ int LPS25H::do_one_shot_measurement()
 int LPS25H::get_sensor_readings()
 {
 	if (!m_device_id_verified) {
-		if (verify_device_id()) {
+		if (verify_device_id(LPS25H_WHO_AM_I, LPS25H_ID)) {
 			return ERROR_WRONG_DEVICE_MODEL;
+		}
+		else {
+			m_device_id_verified = true;
 		}
 	}
 
-	if (mode_of_operation() == mode_of_operation_t::OP_ONE_SHOT) {
+	if (m_mode_of_operation == ST_Sensor::MODE_OF_OPERATION::OP_ONE_SHOT) {
 		if (do_one_shot_measurement()) {
 			return ERROR_READ_FAILED;
 		}
@@ -167,7 +165,7 @@ int LPS25H::read_data_registers()
 	/* Check to see whenever a new pressure sample is available. */
 	do
 	{
-		if (interface()->read(LPS25H_STATUS_REG, &STATUS_REG, 1))
+		if (m_interface->read(LPS25H_STATUS_REG, &STATUS_REG, 1))
 			return ERROR_READ_FAILED;
 		wd_counter--;
 	} while (!(STATUS_REG & 2) && wd_counter);
@@ -178,7 +176,7 @@ int LPS25H::read_data_registers()
 	/* Read pressure registers. MSB bit of LPS25H_PRESS_POUT_XL address is set to 1 for
 	 * enabling address auto-increment.
 	 */
-	if (interface()->read((LPS25H_PRESS_POUT_XL | 0x80), pBuffer, 3)) {
+	if (m_interface->read((LPS25H_PRESS_POUT_XL | 0x80), pBuffer, 3)) {
 		return ERROR_READ_FAILED;
 	}
 
@@ -186,7 +184,7 @@ int LPS25H::read_data_registers()
 	wd_counter = SENSOR_READING_WATCHDOG_COUNTER;
 	do
 	{
-		if (interface()->read(LPS25H_STATUS_REG, &STATUS_REG, 1)) {
+		if (m_interface->read(LPS25H_STATUS_REG, &STATUS_REG, 1)) {
 			return ERROR_READ_FAILED;
 		}
 		wd_counter--;
@@ -198,7 +196,7 @@ int LPS25H::read_data_registers()
 	/* Read temperature registers. MSB bit of LPS25H_TEMP_OUT_L address is set to 1 for
 	 * enabling address auto-increment.
 	 */
-	if (interface()->read((LPS25H_TEMP_OUT_L | 0x80), tBuffer, 2)) {
+	if (m_interface->read((LPS25H_TEMP_OUT_L | 0x80), tBuffer, 2)) {
 		return ERROR_READ_FAILED;
 	}
 
@@ -255,7 +253,7 @@ int LPS25H::config_fifo_mean_mode(LPS25H_NBR_AVERAGED_SAMPLES NUM_AVERAGED_SAMPL
 	}
 
 	// Send the new value of FIFO_CTRL register to the sensor
-	if (interface()->write_byte(LPS25H_FIFO_CTRL, m_FIFO_CTRL)) {
+	if (m_interface->write_byte(LPS25H_FIFO_CTRL, m_FIFO_CTRL)) {
 		m_FIFO_CTRL = fifo_ctrl;
 		return ERROR_WRITE_FAILED;
 	}
@@ -265,7 +263,7 @@ int LPS25H::config_fifo_mean_mode(LPS25H_NBR_AVERAGED_SAMPLES NUM_AVERAGED_SAMPL
 	m_CTRL_REG2 &= ~(1 << LPS25H_CTRL_REG2_FIFO_MEAN_DEC);
 
 	// Send the new value of CTRL_REG2 register to the sensor
-	if (interface()->write_byte(LPS25H_CTRL_REG2, m_CTRL_REG2)) {
+	if (m_interface->write_byte(LPS25H_CTRL_REG2, m_CTRL_REG2)) {
 		m_CTRL_REG2 = ctrl_reg2;
 		return ERROR_WRITE_FAILED;
 	}
@@ -281,7 +279,7 @@ int LPS25H::power_down(void)
 	// Set PD bit to 0
 	m_CTRL_REG1 &= ~(1 << LPS25H_CTRL_REG1_PD);
 
-	if (interface()->write_byte(LPS25H_CTRL_REG1, m_CTRL_REG1)) {
+	if (m_interface->write_byte(LPS25H_CTRL_REG1, m_CTRL_REG1)) {
 		m_CTRL_REG1 = ctrl_reg1;
 		return ERROR_WRITE_FAILED;
 	}
@@ -298,7 +296,7 @@ int LPS25H::SW_reset(void)
 	m_CTRL_REG2 |= (1 << LPS25H_CTRL_REG2_BOOT) | (1 << LPS25H_CTRL_REG2_SWRESET);
 
 	/* Write the new value of the CTRL_REG1 on the sensor. */
-	if (interface()->write_byte(LPS25H_CTRL_REG2, ctrl_reg2)) {
+	if (m_interface->write_byte(LPS25H_CTRL_REG2, ctrl_reg2)) {
 		m_CTRL_REG2 = ctrl_reg2;
 		return ERROR_WRITE_FAILED;
 	}
@@ -308,28 +306,28 @@ int LPS25H::SW_reset(void)
 }
 
 
-int LPS25H::config_continuous_mode(output_data_rate_t output_data_rate)
+int LPS25H::config_continuous_mode(ST_Sensor::OUTPUT_DATA_RATE output_data_rate)
 {
 	uint8_t ctrl_reg1 = m_CTRL_REG1;
 	uint8_t ctrl_reg2 = m_CTRL_REG2;
 
 	switch (output_data_rate) {
-	case output_data_rate_t::ODR_1_Hz:
+	case ST_Sensor::OUTPUT_DATA_RATE::ODR_1_Hz:
 		m_CTRL_REG1 |= (1 << LPS25H_CTRL_REG1_ODR0);
 		m_CTRL_REG1 &= ~(1 << LPS25H_CTRL_REG1_ODR1);
 		m_CTRL_REG1 &= ~(1 << LPS25H_CTRL_REG1_ODR2);
 		break;
-	case output_data_rate_t::ODR_7_Hz:
+	case ST_Sensor::OUTPUT_DATA_RATE::ODR_7_Hz:
 		m_CTRL_REG1 &= ~(1 << LPS25H_CTRL_REG1_ODR0);
 		m_CTRL_REG1 |= (1 << LPS25H_CTRL_REG1_ODR1);
 		m_CTRL_REG1 &= ~(1 << LPS25H_CTRL_REG1_ODR2);
 		break;
-	case output_data_rate_t::ODR_12_5_Hz:
+	case ST_Sensor::OUTPUT_DATA_RATE::ODR_12_5_Hz:
 		m_CTRL_REG1 |= (1 << LPS25H_CTRL_REG1_ODR0);
 		m_CTRL_REG1 |= (1 << LPS25H_CTRL_REG1_ODR1);
 		m_CTRL_REG1 &= ~(1 << LPS25H_CTRL_REG1_ODR2);
 		break;
-	case output_data_rate_t::ODR_25_Hz:
+	case ST_Sensor::OUTPUT_DATA_RATE::ODR_25_Hz:
 		m_CTRL_REG1 &= ~(1 << LPS25H_CTRL_REG1_ODR0);
 		m_CTRL_REG1 &= ~(1 << LPS25H_CTRL_REG1_ODR1);
 		m_CTRL_REG1 |= (1 << LPS25H_CTRL_REG1_ODR2);
@@ -343,14 +341,14 @@ int LPS25H::config_continuous_mode(output_data_rate_t output_data_rate)
 	m_CTRL_REG1 |= ((1 << LPS25H_CTRL_REG1_BDU) | (1 << LPS25H_CTRL_REG1_PD));
 
 	// Write the output data rate to CTRL_REG1
-	if (interface()->write_byte(LPS25H_CTRL_REG1, m_CTRL_REG1)) {
+	if (m_interface->write_byte(LPS25H_CTRL_REG1, m_CTRL_REG1)) {
 		m_CTRL_REG1 = ctrl_reg1;
 		return ERROR_WRITE_FAILED;
 	}
 
 	// Disable FIFO
 	m_CTRL_REG2 &= ~(1 << LPS25H_CTRL_REG2_FIFO_EN);
-	if (interface()->write_byte(LPS25H_CTRL_REG2, m_CTRL_REG2)) {
+	if (m_interface->write_byte(LPS25H_CTRL_REG2, m_CTRL_REG2)) {
 		m_CTRL_REG2 = ctrl_reg2;
 		return ERROR_WRITE_FAILED;
 	}
@@ -359,3 +357,12 @@ int LPS25H::config_continuous_mode(output_data_rate_t output_data_rate)
 
 }
 
+int LPS25H::set_mode_of_operation(
+		ST_Sensor::OUTPUT_DATA_RATE output_data_rate,
+		ST_Sensor::FULL_SCALE full_scale,
+		ST_Sensor::MODE_OF_OPERATION mode_of_operation,
+		ST_Sensor::FIFO_TYPE  fifo_type
+)
+{
+	return 0;
+}

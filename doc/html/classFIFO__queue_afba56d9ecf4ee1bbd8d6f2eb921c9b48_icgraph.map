@@ -1,4 +1,5 @@
 <map id="FIFO_queue::isEmpty" name="FIFO_queue::isEmpty">
-<area shape="rect" id="node2" href="$classFIFO__queue.html#a3a43a4d042e9fc7f8f5f35886c6ac964" title="A copy constructor of the class. " alt="" coords="213,5,397,32"/>
-<area shape="rect" id="node3" href="$classFIFO__queue.html#a56a154b22f8b44b077608667777c4405" title="Overloading of the assignment operator. " alt="" coords="219,56,392,83"/>
+<area shape="rect" id="node1" title="Checks if the queue is empty." alt="" coords="228,31,379,57"/>
+<area shape="rect" id="node2" href="$classFIFO__queue.html#a3a43a4d042e9fc7f8f5f35886c6ac964" title="A copy constructor of the class." alt="" coords="5,5,180,32"/>
+<area shape="rect" id="node3" href="$classFIFO__queue.html#a56a154b22f8b44b077608667777c4405" title="Overloading of the assignment operator." alt="" coords="14,56,171,83"/>
 </map>

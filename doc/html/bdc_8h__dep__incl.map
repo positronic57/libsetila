@@ -1,5 +1,6 @@
 <map id="bdc.h" name="bdc.h">
-<area shape="rect" id="node2" href="$CircularBuffer_8h.html" title="Template class for implementing circular buffer. " alt="" coords="5,80,129,107"/>
-<area shape="rect" id="node3" href="$FIFO__queue_8h.html" title="Template class for first in first out type of queue. " alt="" coords="153,80,264,107"/>
-<area shape="rect" id="node4" href="$stack_8h.html" title="Template for the stack data container. " alt="" coords="289,80,358,107"/>
+<area shape="rect" id="node1" title="Header file containing the definition of BDC_STATE enum class." alt="" coords="166,5,221,32"/>
+<area shape="rect" id="node2" href="$CircularBuffer_8h.html" title="Template class for implementing circular buffer." alt="" coords="5,80,117,107"/>
+<area shape="rect" id="node3" href="$FIFO__queue_8h.html" title="Template class for first in first out type of queue." alt="" coords="141,80,246,107"/>
+<area shape="rect" id="node4" href="$stack_8h.html" title="Template for the stack data container." alt="" coords="270,80,335,107"/>
 </map>

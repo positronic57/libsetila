@@ -4,11 +4,11 @@ Libsetila is a library written in C++ for communication with I2C/SPI slave devic
 
 The low level I2C and SPI communication is done by the appropriate Linux kernel drivers while the library use the standard read/write IO calls to send/receive data from/to the slave devices on the bus. The kernel drivers must be loaded before calling the library IO functions.
 
-Main resources providided with the library:
+Main resources provided with the library:
 - classes for SPI/I2C master;
 - classes for implementing SPI/I2C slaves;
 - templates for Basic Data Containers (BDC): stack, FIFO queue and circular buffer. Readings from different SPI/I2C devices can be stored in those data containers; 
-- filters module for digital filtering of the sensor readings;
+- filters module for digital filtering of the sensor readings: moving average filter;
 - support for some common/popular SPI/I2C devices (see supported hardware section).
  
 The library is not thread safe. 
@@ -26,11 +26,12 @@ Besides being a general purpose tool for talking with target I2C/SPI devices, it
 The library should work on any SOC/SBC with I2C/SPI interface(s), capable of running Linux with appropriate kernel drivers for the master controllers and C++11 compiler.
 
 Successful tests have been done on:
-- Raspbery Pi 2, 3 model B and Pi Zero/W all running Rasbian GNU/Linux version 10 ("buster");
+- Raspberry Pi Compute Module 4 Revision 1.1. running Debian 12 ("bookworm");
+- Raspberry Pi 2, 3 model B and Pi Zero/W all running Rasbian GNU/Linux version 10 ("buster");
 - Beagle Bone Black revision A with Debian GNU/Linux 9 ("stretch").
 
 #### I2C Devices
-
+- ST L3GD20 three axes digital output gyroscope (FIFO mode and single measurement);
 - ST HTS221 humidity and temperature sensor: single acquisition(ONE SHOT measurement), FIFO_MEAN mode, adjustable output data rate and resolution;
 - ST LPS25H pressure and temperature sensor: single acquisition(ONE SHOT measurement), adjustable output data rate and resolution;
 - ST LPS22HB pressure and temperature sensor: single acquisition(ONE SHOT measurement);
@@ -63,6 +64,7 @@ The library must be installed before building the examples.
 The library functionality has been tested using the following hardware:
 
 - Adafruit BMP085 module (Adafruit product ID 391);
+- Adafruit 10-DOF IMU Breakout (Adafruit product ID 1604);
 - Adafruit BMP180 module (Adafruit product ID 1603);
 - Adafruit MCP9808 High Accuracy I2C Temperature Sensor Breakout Board (Adafruit product ID 1782); 
 - Adafruit ADT7410 High Accuracy I2C Temperature Sensor Breakout Board (Adafruit product ID 4089);
@@ -70,12 +72,15 @@ The library functionality has been tested using the following hardware:
 - SRF02 - I2C/Serial ultrasonic ranger sensor
 - Arduino MKR ENV Shield rev2
 - Pi Sense HAT;
-- Raspbery Pi model B rev1;
-- Raspbery Pi 2 model B;
-- Raspbery Pi 3 model B;
-- Raspbery Pi Zero/W;
+- Raspberry Pi model B rev1;
+- Raspberry Pi 2 model B;
+- Raspberry Pi 3 model B;
+- Raspberry Pi Zero/W;
+- Raspberry Pi Compute Module 4 Revision 1.1;
 - Beagle Bone Black revision A.
 
+## Translations
+- [Macedonian version of this text](translations/README_mk.md)
 
 **WARNING:** 
 The source is provided as it is without any warranty. Use it on your own risk!

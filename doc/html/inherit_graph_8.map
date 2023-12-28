@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classST__Sensor.html" title="Base class for ST sensors with I2C and/or SPI interface." alt="" coords="5,81,92,108"/>
+<area shape="rect" id="node2" href="$classHTS221.html" title="A class derived from I2CSensor class that describes HTS221 sensor." alt="" coords="145,5,215,32"/>
+<area shape="rect" id="node3" href="$classL3GD20.html" title="A class derived from ST_Sensor class that describes L3GD20 sensor." alt="" coords="145,56,215,83"/>
+<area shape="rect" id="node4" href="$classLPS22HB.html" title="A class derived from I2CSensor class that describes LPS22HB sensor." alt="" coords="140,107,220,133"/>
+<area shape="rect" id="node5" href="$classLPS25H.html" title="A class derived from I2CSensor class that describes LPS25H sensor." alt="" coords="145,157,215,184"/>
+</map>

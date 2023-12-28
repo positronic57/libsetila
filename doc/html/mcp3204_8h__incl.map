@@ -1,6 +1,10 @@
 <map id="mcp3204.h" name="mcp3204.h">
-<area shape="rect" id="node2" href="$spi__slave__device_8h.html" title="Contains the definition of the SPI_Slave_Device class. " alt="" coords="67,80,212,107"/>
-<area shape="rect" id="node3" href="$slave__device_8h.html" title="Contains the definition of Slave_Device class. " alt="" coords="5,155,124,181"/>
-<area shape="rect" id="node5" href="$spi__bus__master_8h.html" title="Defines the SPI_Bus_Master_Device class. " alt="" coords="147,155,283,181"/>
-<area shape="rect" id="node7" href="$bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class. " alt="" coords="295,229,455,256"/>
+<area shape="rect" id="node1" title="A header file from libsetila library. It defines MCP3204 class for communication with Microchip MCP32..." alt="" coords="87,5,174,32"/>
+<area shape="rect" id="node2" href="$spi__slave__device_8h.html" title="Contains the definition of the SPI_Slave_Device class." alt="" coords="64,80,197,107"/>
+<area shape="rect" id="node3" href="$slave__device_8h.html" title="Contains the definition of Slave_Device class." alt="" coords="5,155,115,181"/>
+<area shape="rect" id="node5" href="$spi__bus__master_8h.html" title="Defines the SPI_Bus_Master_Device class." alt="" coords="139,155,263,181"/>
+<area shape="rect" id="node4" title=" " alt="" coords="27,229,93,256"/>
+<area shape="rect" id="node6" title=" " alt="" coords="129,229,250,256"/>
+<area shape="rect" id="node7" href="$bus__master__device_8h.html" title="Contains the definition of the Bus_Master_Device class." alt="" coords="275,229,421,256"/>
+<area shape="rect" id="node8" title=" " alt="" coords="321,304,375,331"/>
 </map>

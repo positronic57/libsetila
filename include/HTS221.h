@@ -18,7 +18,7 @@
 #include "i2c_slave_device.h"
 #include "ST_sensor.h"
 
-#define LTS221_ID	0xBC
+#define HTS221_ID	0xBC
 
 /** \defgroup HTS221_DESC HTS221
  * @ingroup DEV_REG_CMD
@@ -209,10 +209,18 @@ public:
 	 */
 	~HTS221() { }
 
-	virtual int set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate = ST_Sensor::output_data_rate_t::ODR_ONE_SHOT) override;
+	virtual int set_mode_of_operation(
+        ST_Sensor::MODE_OF_OPERATION mode_of_operation,
+        ST_Sensor::OUTPUT_DATA_RATE output_data_rate = ST_Sensor::OUTPUT_DATA_RATE::ODR_ONE_SHOT
+    ) override;
+	virtual int set_mode_of_operation(
+		ST_Sensor::OUTPUT_DATA_RATE output_data_rate = ST_Sensor::OUTPUT_DATA_RATE::ODR_95_Hz,
+		ST_Sensor::FULL_SCALE full_scale = ST_Sensor::FULL_SCALE::FS_250_DPS,
+		ST_Sensor::MODE_OF_OPERATION mode_of_operation = ST_Sensor::MODE_OF_OPERATION::OP_NORMAL_MODE,
+		ST_Sensor::FIFO_TYPE  fifo_type = ST_Sensor::FIFO_TYPE::FIFO_DISABLED
+	)  override;
 	virtual int set_resolution(uint8_t average_1, uint8_t average_2 = 0x00) override;
 	virtual int get_sensor_readings() override;
-	virtual int verify_device_id() override;
 
 	/**
 	 * @brief Provides the value of the sensor temperature reading.
@@ -258,7 +266,7 @@ private:
 	 * @param output_data_rate
 	 * @return
 	 */
-	int config_continuous_mode(output_data_rate_t output_data_rate);
+	int config_continuous_mode(ST_Sensor::OUTPUT_DATA_RATE output_data_rate);
 
 	/**
 	 * @brief Switch the sensor into a power-down mode by setting PD bit of CTRL_REG1 to 0.

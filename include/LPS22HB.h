@@ -34,11 +34,7 @@
 #ifndef LPS22HB_H_
 #define LPS22HB_H_
 
-#if 0
-#include "i2c_slave_device.h"
-#else
 #include "ST_sensor.h"
-#endif
 
 /** @brief Value of the WHO_AM_I register. */
 #define LPS22HB_ID 0xB1
@@ -333,10 +329,18 @@ public:
 	 */
 	float last_temperature_reading() const {  return m_temperature_reading; };
 
-	virtual int set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate = ST_Sensor::output_data_rate_t::ODR_ONE_SHOT) override;
+	virtual int set_mode_of_operation(
+		ST_Sensor::MODE_OF_OPERATION,
+		ST_Sensor::OUTPUT_DATA_RATE output_data_rate = ST_Sensor::OUTPUT_DATA_RATE::ODR_ONE_SHOT
+	) override;
+	virtual int set_mode_of_operation(
+		ST_Sensor::OUTPUT_DATA_RATE output_data_rate = ST_Sensor::OUTPUT_DATA_RATE::ODR_95_Hz,
+		ST_Sensor::FULL_SCALE full_scale = ST_Sensor::FULL_SCALE::FS_250_DPS,
+		ST_Sensor::MODE_OF_OPERATION mode_of_operation = ST_Sensor::MODE_OF_OPERATION::OP_NORMAL_MODE,
+		ST_Sensor::FIFO_TYPE fifo_type = ST_Sensor::FIFO_TYPE::FIFO_DISABLED
+	)  override;
 	virtual int set_resolution(uint8_t average_1, uint8_t average_2 = 0x00) override;
 	virtual int get_sensor_readings() override;
-	virtual int verify_device_id() override;
 
 private:
 	/**
@@ -373,7 +377,7 @@ private:
 	 *
 	 * @return 0 in case of success, ERROR_WRITE_FAILED in case of an failure
 	 */
-	int config_continuous_mode(output_data_rate_t output_data_rate);
+	int config_continuous_mode(ST_Sensor::OUTPUT_DATA_RATE output_data_rate);
 };
 
 #endif /* LPS22HB_H_ */

@@ -1,5 +1,6 @@
 /**
- * @file mcp9808.cpp
+ * @file mcp9808_example.cpp
+ *
  * @brief Reads temperature from MCP9808 sensor using libsetila library.
  *
  * @author Goce Boshkovski

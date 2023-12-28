@@ -1,6 +1,8 @@
 <map id="ST_sensor.h" name="ST_sensor.h">
-<area shape="rect" id="node2" href="$HTS221_8h.html" title="A header file from libsetila library. It defines HTS221 class for communication with HT221 sensor..." alt="" coords="5,80,89,107"/>
-<area shape="rect" id="node4" href="$LPS22HB_8h.html" title="A header file from libsetila library. It defines LPS22HB class for communication with LPS22HB sensor..." alt="" coords="113,80,205,107"/>
-<area shape="rect" id="node5" href="$LPS25H_8h.html" title="A header file from libsetila library. It defines LPS25H class for communication with LPS25H sensor..." alt="" coords="230,80,313,107"/>
-<area shape="rect" id="node3" href="$setila_8h.html" title="Includes all of header files from libsetila project. " alt="" coords="124,155,195,181"/>
+<area shape="rect" id="node1" title="Definition of ST_Sensor class." alt="" coords="159,5,253,32"/>
+<area shape="rect" id="node2" href="$HTS221_8h.html" title="A header file from libsetila library. It defines HTS221 class for communication with HT221 sensor." alt="" coords="5,80,87,107"/>
+<area shape="rect" id="node4" href="$L3GD20_8h.html" title="A header file from libsetila library. It defines L3GD20 class for communication with ST L3GD20 3&#45;axis..." alt="" coords="111,80,192,107"/>
+<area shape="rect" id="node5" href="$LPS22HB_8h.html" title="A header file from libsetila library. It defines LPS22HB class for communication with LPS22HB sensor." alt="" coords="217,80,307,107"/>
+<area shape="rect" id="node6" href="$LPS25H_8h.html" title="A header file from libsetila library. It defines LPS25H class for communication with LPS25H sensor." alt="" coords="331,80,414,107"/>
+<area shape="rect" id="node3" href="$setila_8h.html" title="Includes all of header files from libsetila project." alt="" coords="177,155,241,181"/>
 </map>

@@ -1,4 +1,6 @@
 <map id="FIFO_queue.h" name="FIFO_queue.h">
-<area shape="rect" id="node2" href="$bdc_8h.html" title="Header file containing the definition of BDC_STATE enum class. " alt="" coords="5,80,63,107"/>
-<area shape="rect" id="node3" href="$bdc__iterator_8h.html" title="Template class for implementing iterator for bdc. " alt="" coords="87,80,199,107"/>
+<area shape="rect" id="node1" title="Template class for first in first out type of queue." alt="" coords="31,5,136,32"/>
+<area shape="rect" id="node2" href="$bdc_8h.html" title="Header file containing the definition of BDC_STATE enum class." alt="" coords="5,80,60,107"/>
+<area shape="rect" id="node3" href="$bdc__iterator_8h.html" title="Template class for implementing iterator for bdc." alt="" coords="84,80,184,107"/>
+<area shape="rect" id="node4" title=" " alt="" coords="99,155,169,181"/>
 </map>

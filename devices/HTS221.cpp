@@ -16,30 +16,18 @@
 #include "setila_errors.h"
 
 
-int HTS221::verify_device_id()
-{
-	uint8_t registryValue;
-
-	// Get the valued of the WHO_AM_I register
-	if (interface()->read(HTS221_WHO_AM_I, &registryValue, 1)) {
-		return ERROR_READ_FAILED;
-	}
-
-	if (registryValue != LTS221_ID) {
-		return ERROR_WRONG_DEVICE_MODEL;
-	}
-
-	m_device_id_verified = true;
-
-	return 0;
-}
-
-int HTS221::set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate)
+int HTS221::set_mode_of_operation(
+	ST_Sensor::MODE_OF_OPERATION mode_of_operation,
+	ST_Sensor::OUTPUT_DATA_RATE output_data_rate
+)
 {
 
 	if (!m_device_id_verified) {
-		if (verify_device_id()) {
+		if (verify_device_id(HTS221_WHO_AM_I, HTS221_ID)) {
 			return ERROR_WRONG_DEVICE_MODEL;
+		}
+		else {
+			m_device_id_verified = true;
 		}
 	}
 
@@ -49,24 +37,26 @@ int HTS221::set_mode_of_operation(mode_of_operation_t mode_of_operation, output_
 		}
 	}
 
+	m_output_data_rate = output_data_rate;
+	m_mode_of_operation = mode_of_operation;
+
 	switch(mode_of_operation) {
-	case mode_of_operation_t::OP_POWER_DOWN:
+	case ST_Sensor::MODE_OF_OPERATION::OP_POWER_DOWN:
 		return power_down();
-	case mode_of_operation_t::OP_ONE_SHOT:
-		return config_continuous_mode(output_data_rate_t::ODR_ONE_SHOT);
+	case ST_Sensor::MODE_OF_OPERATION::OP_ONE_SHOT:
+		return config_continuous_mode(ST_Sensor::OUTPUT_DATA_RATE::ODR_ONE_SHOT);
 		break;
-	case mode_of_operation_t::OP_CONTINUOUS:
-		if (output_data_rate != output_data_rate_t::ODR_ONE_SHOT) {
+	case ST_Sensor::MODE_OF_OPERATION::OP_CONTINUOUS:
+		if (output_data_rate != ST_Sensor::OUTPUT_DATA_RATE::ODR_ONE_SHOT) {
 			return config_continuous_mode(output_data_rate);
 		}
-		else
-		{
+		else 	{
 			return ERROR_UNSUPPORTED_DEVICE_OPTION_CONFIG;
 		}
 		break;
-    case mode_of_operation_t::OP_FIFO_MEAN_MODE:
+    case ST_Sensor::MODE_OF_OPERATION::OP_FIFO_MEAN_MODE:
         return ERROR_UNSUPPORTED_DEVICE_OPTION_CONFIG;
-	case mode_of_operation_t::OP_FIFO_MODE:
+	case ST_Sensor::MODE_OF_OPERATION::OP_FIFO_MODE:
 	default:
 		break;
 	}
@@ -74,26 +64,27 @@ int HTS221::set_mode_of_operation(mode_of_operation_t mode_of_operation, output_
 	return 0;
 }
 
-int HTS221::config_continuous_mode(output_data_rate_t output_data_rate)
+int HTS221::config_continuous_mode(ST_Sensor::OUTPUT_DATA_RATE output_data_rate)
 {
 	uint8_t temp = m_CTRL_REG1;
 
 	m_CTRL_REG1 |= (1 << HTS221_CTRL_REG1_PD);
 
-	switch (output_data_rate) {
-	case output_data_rate_t::ODR_1_Hz:
+	m_output_data_rate = output_data_rate;
+	switch (m_output_data_rate) {
+	case ST_Sensor::OUTPUT_DATA_RATE::ODR_1_Hz:
 		m_CTRL_REG1 |= (1 << HTS221_CTRL_REG1_ODR0);
 		m_CTRL_REG1 &= ~(1 << HTS221_CTRL_REG1_ODR1);
 		break;
-	case output_data_rate_t::ODR_7_Hz:
+	case ST_Sensor::OUTPUT_DATA_RATE::ODR_7_Hz:
 		m_CTRL_REG1 &= ~(1 << HTS221_CTRL_REG1_ODR0);
 		m_CTRL_REG1 |= (1 << HTS221_CTRL_REG1_ODR1);
 		break;
-	case output_data_rate_t::ODR_12_5_Hz:
+	case ST_Sensor::OUTPUT_DATA_RATE::ODR_12_5_Hz:
 		m_CTRL_REG1 |= (1 << HTS221_CTRL_REG1_ODR0);
 		m_CTRL_REG1 |= (1 << HTS221_CTRL_REG1_ODR1);
 		break;
-	case output_data_rate_t::ODR_ONE_SHOT:
+	case ST_Sensor::OUTPUT_DATA_RATE::ODR_ONE_SHOT:
 		m_CTRL_REG1 &= ~((1 << HTS221_CTRL_REG1_ODR1) | (1 << HTS221_CTRL_REG1_ODR0));
 		break;
 	default:
@@ -105,7 +96,7 @@ int HTS221::config_continuous_mode(output_data_rate_t output_data_rate)
 	m_CTRL_REG1 |= (1 << HTS221_CTRL_REG1_BDU);
 
 	// Write the output data rate to CTR_REG1
-	if (interface()->write_byte(HTS221_CTRL_REG1, m_CTRL_REG1)) {
+	if (m_interface->write_byte(HTS221_CTRL_REG1, m_CTRL_REG1)) {
 		m_CTRL_REG1 = temp;
 		return ERROR_WRITE_FAILED;
 	}
@@ -120,13 +111,16 @@ int HTS221::set_resolution(uint8_t average_1, uint8_t average_2)
 	uint8_t temp = average_1  | (average_2 << 3);
 
 	if (!m_device_id_verified) {
-		if (verify_device_id()) {
+		if (verify_device_id(HTS221_WHO_AM_I, HTS221_ID)) {
 			return ERROR_WRONG_DEVICE_MODEL;
+		}
+		else {
+			m_device_id_verified = true;
 		}
 	}
 
 	// Write the temperature and humidity resolution in AV_CONF register
-	if (interface()->write_byte(HTS221_AV_CONF, temp)) {
+	if (m_interface->write_byte(HTS221_AV_CONF, temp)) {
 		return ERROR_WRITE_FAILED;
 	}
 
@@ -215,7 +209,7 @@ void HTS221::calculate_realtive_humidity()
 
 int HTS221::do_one_shot_measurement()
 {
-	if (interface()->write_byte(HTS221_CTRL_REG2, (1 << HTS221_CTRL_REG2_ONE_SHOT))) {
+	if (m_interface->write_byte(HTS221_CTRL_REG2, (1 << HTS221_CTRL_REG2_ONE_SHOT))) {
 		return ERROR_WRITE_FAILED;
 	}
 
@@ -225,7 +219,7 @@ int HTS221::do_one_shot_measurement()
 int HTS221::read_calibration_table()
 {
 
-	if(interface()->read((HTS221_CALIB_0 | 0x80), m_calibration_table, 16)) {
+	if(m_interface->read((HTS221_CALIB_0 | 0x80), m_calibration_table, 16)) {
 		return ERROR_READ_FAILED;
 	}
 
@@ -238,19 +232,22 @@ int HTS221::get_sensor_readings(void)
 	int wd_counter = SENSOR_READING_WATCHDOG_COUNTER;
 
 	if (!m_device_id_verified) {
-		if (verify_device_id()) {
+		if (verify_device_id(HTS221_WHO_AM_I, HTS221_ID)) {
 			return ERROR_WRONG_DEVICE_MODEL;
+		}
+		else {
+			m_device_id_verified = true;
 		}
 	}
 
-	switch (mode_of_operation()) {
-	case mode_of_operation_t::OP_POWER_DOWN:
-	case mode_of_operation_t::OP_ONE_SHOT:
+	switch (m_mode_of_operation) {
+	case ST_Sensor::MODE_OF_OPERATION::OP_POWER_DOWN:
+	case ST_Sensor::MODE_OF_OPERATION::OP_ONE_SHOT:
 		if (do_one_shot_measurement()) {
 			return ERROR_READ_FAILED;
 		}
 		break;
-	case mode_of_operation_t::OP_CONTINUOUS:
+	case ST_Sensor::MODE_OF_OPERATION::OP_CONTINUOUS:
 	default:
 		break;
 	}
@@ -258,7 +255,7 @@ int HTS221::get_sensor_readings(void)
 	// Check if a new humidity sample is available for reading
 	do
 	{
-		if (interface()->read(HTS221_STATUS_REG, &STATUS_REG, 1))
+		if (m_interface->read(HTS221_STATUS_REG, &STATUS_REG, 1))
 			return ERROR_READ_FAILED;
 		wd_counter--;
 	} while (!(STATUS_REG & 2) && wd_counter);
@@ -267,7 +264,7 @@ int HTS221::get_sensor_readings(void)
 	}
 
 	// Read humidity registers. MSB bit of HTS221_HUMIDITY_OUT_L address is set to 1 for enabling address auto-increment
-	if (interface()->read((HTS221_HUMIDITY_OUT_L | 0x80), m_humidity_out, 2)) {
+	if (m_interface->read((HTS221_HUMIDITY_OUT_L | 0x80), m_humidity_out, 2)) {
 		return ERROR_READ_FAILED;
 	}
 
@@ -275,7 +272,7 @@ int HTS221::get_sensor_readings(void)
 	wd_counter = SENSOR_READING_WATCHDOG_COUNTER;
 	do
 	{
-		if (interface()->read(HTS221_STATUS_REG, &STATUS_REG, 1))
+		if (m_interface->read(HTS221_STATUS_REG, &STATUS_REG, 1))
 			return ERROR_READ_FAILED;
 		wd_counter--;
 	} while (!(STATUS_REG & 1) && wd_counter);
@@ -284,7 +281,7 @@ int HTS221::get_sensor_readings(void)
 	}
 
 	// Read temperature registers. MSB bit of HTS221_TEMP_OUT_L address is set to 1 for enabling address auto-increment
-	if (interface()->read((HTS221_TEMP_OUT_L | 0x80), m_temperature_out, 2)) {
+	if (m_interface->read((HTS221_TEMP_OUT_L | 0x80), m_temperature_out, 2)) {
 		return ERROR_READ_FAILED;
 	}
 
@@ -305,10 +302,20 @@ int HTS221::power_down(void)
 	m_CTRL_REG1 &= ~(1 << HTS221_CTRL_REG1_PD);
 
 	// Write the new CTRL_REG1 value
-	if (interface()->write_byte(HTS221_CTRL_REG1, m_CTRL_REG1)) {
+	if (m_interface->write_byte(HTS221_CTRL_REG1, m_CTRL_REG1)) {
 		m_CTRL_REG1 = temp;
 		return ERROR_WRITE_FAILED;
 	}
 
+	return 0;
+}
+
+int HTS221::set_mode_of_operation(
+		ST_Sensor::OUTPUT_DATA_RATE output_data_rate,
+		ST_Sensor::FULL_SCALE full_scale,
+		ST_Sensor::MODE_OF_OPERATION mode_of_operation,
+		ST_Sensor::FIFO_TYPE  fifo_type
+)
+{
 	return 0;
 }

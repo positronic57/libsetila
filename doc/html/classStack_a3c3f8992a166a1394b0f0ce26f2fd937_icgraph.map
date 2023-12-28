@@ -1,4 +1,5 @@
 <map id="Stack::isEmpty" name="Stack::isEmpty">
-<area shape="rect" id="node2" href="$classStack.html#ab5226d851609b649a43e79012b8d42ff" title="A copy constructor of the class. " alt="" coords="187,5,289,32"/>
-<area shape="rect" id="node3" href="$classStack.html#a8eed8e56b35979dcf25d1b8eeba14668" title="Overloading of the assignment operator. " alt="" coords="172,56,304,83"/>
+<area shape="rect" id="node1" title="Checks if the stack is empty." alt="" coords="172,31,284,57"/>
+<area shape="rect" id="node2" href="$classStack.html#a8eed8e56b35979dcf25d1b8eeba14668" title="Overloading of the assignment operator." alt="" coords="5,5,124,32"/>
+<area shape="rect" id="node3" href="$classStack.html#ab5226d851609b649a43e79012b8d42ff" title="A copy constructor of the class." alt="" coords="15,56,114,83"/>
 </map>

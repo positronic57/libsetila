@@ -41,6 +41,7 @@
 /** \defgroup ADT7410_REG_DESC ADT7410 registers description
  * @ingroup ADT7410_DESC
  */
+/* @{ */
 
 /** \defgroup ADT7410_STATUS_REG_DESC ADT7410 status register description
  * @ingroup ADT7410_REG_DESC
@@ -62,6 +63,8 @@
 
 /** @brief First operational mode bit */
 #define ADT7410_CONFIG_REG_OP_BIT2			6
+/* @} */
+
 /* @} */
 
 

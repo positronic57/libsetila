@@ -8,11 +8,8 @@
 #include "ST_sensor.h"
 #include "i2c_slave_device.h"
 #include "spi_slave_device.h"
+#include "setila_errors.h"
 
-ST_Sensor::ST_Sensor()
-{
-
-}
 
 ST_Sensor::ST_Sensor(Slave_Device_Type interface_type, Bus_Master_Device *bus_master_device, const uint8_t i2c_address)
 {
@@ -38,4 +35,20 @@ ST_Sensor::~ST_Sensor()
 	if (m_interface) {
 		delete m_interface;
 	}
+}
+
+int ST_Sensor::verify_device_id(uint8_t who_am_I_reg_addr, uint8_t id_value)
+{
+	uint8_t registryValue = 0;
+
+	// Check the device ID by reading WHO_AM_I register
+	if (m_interface->read(who_am_I_reg_addr, &registryValue, 1)) {
+		return ERROR_READ_FAILED;
+	}
+
+	if (registryValue != id_value) {
+		return ERROR_WRONG_DEVICE_MODEL;
+	}
+
+	return 0;
 }

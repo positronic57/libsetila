@@ -212,10 +212,19 @@ public:
 	 */
 	~LPS25H() {};
 
-	virtual int set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate = ST_Sensor::output_data_rate_t::ODR_ONE_SHOT) override;
+	virtual int set_mode_of_operation(
+		ST_Sensor::MODE_OF_OPERATION mode_of_operation,
+		ST_Sensor::OUTPUT_DATA_RATE output_data_rate = ST_Sensor::OUTPUT_DATA_RATE::ODR_ONE_SHOT
+	) override;
+
+	virtual int set_mode_of_operation(
+		ST_Sensor::OUTPUT_DATA_RATE output_data_rate = ST_Sensor::OUTPUT_DATA_RATE::ODR_95_Hz,
+		ST_Sensor::FULL_SCALE full_scale = ST_Sensor::FULL_SCALE::FS_250_DPS,
+		ST_Sensor::MODE_OF_OPERATION mode_of_operation = ST_Sensor::MODE_OF_OPERATION::OP_NORMAL_MODE,
+		ST_Sensor::FIFO_TYPE  fifo_type = ST_Sensor::FIFO_TYPE::FIFO_DISABLED
+	)  override;
 	virtual int set_resolution(uint8_t average_1, uint8_t average_2 = 0x00) override;
 	virtual int get_sensor_readings() override;
-	virtual int verify_device_id() override;
 
 	/**
 	 * @brief Same as set_mode_of_operation() from ST_Sensor class, with additional argument that defines
@@ -228,7 +237,11 @@ public:
 	 *
 	 * @return int 0 in case of success, ERROR_WRONG_DEVICE_MODEL/ERROR_WRITE_FAILED in case of a failure
 	 */
-	int set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate, LPS25H_NBR_AVERAGED_SAMPLES fifo_mean_samples);
+	int set_mode_of_operation	(
+		ST_Sensor::MODE_OF_OPERATION mode_of_operation,
+		ST_Sensor::OUTPUT_DATA_RATE  output_data_rate,
+		LPS25H_NBR_AVERAGED_SAMPLES fifo_mean_samples
+	);
 
 	/**
 	 * @brief Provides the last pressure reading in hPa.
@@ -262,7 +275,7 @@ private:
 	 *
 	 * @return 0 in case of success, ERROR_WRITE_FAILED in case of an failure
 	 */
-	int config_continuous_mode(output_data_rate_t output_data_rate);
+	int config_continuous_mode(ST_Sensor::OUTPUT_DATA_RATE output_data_rate);
 
 	/**
 	 * @brief Enables the FIFO mean mode with FIFO_MEAN decimation disabled and defines the number of averaged samples

@@ -36,38 +36,62 @@ class ST_Sensor
 private:
 	Slave_Device_Type m_interface_type = Slave_Device_Type::I2C_SLAVE_DEVICE; /**< Type of the communication interface (I2C/SPI). */
 
+	ST_Sensor() {};
+
+public:
+
 	/**
 	 * @brief One of the possible mode of operation found in ST sensors.
-	 */ 
-	enum modes_of_operation_enum {
+	 */
+	enum MODE_OF_OPERATION {
 		OP_POWER_DOWN = 0,	/**< Power down mode. */
-		OP_ONE_SHOT,		/**< One shot (on demand) measurement. */
-		OP_CONTINUOUS,		/**< Continuous measurement with defined output data rate. */
-		OP_FIFO_MODE,		/**< FIFO mode of operation. */
+		OP_ONE_SHOT,					/**< One shot (on demand) measurement. */
+		OP_CONTINUOUS,				/**< Continuous measurement with defined output data rate. */
+		OP_NORMAL_MODE,			/**< Same as continuous mode. */
+		OP_SLEEP_MODE,
+		OP_FIFO_MODE,					/**< FIFO mode of operation. */
 		OP_FIFO_MEAN_MODE	/**< FIFO MEAN mode of operation. */
 	} m_mode_of_operation = OP_POWER_DOWN;
+
+	enum FIFO_TYPE {
+		FIFO_DISABLED = 0,
+		BYPASS_MODE,
+		FIFO,
+		STREAM,
+		STREAM_TO_FIFO,
+		BYPASS_TO_FIFO
+	} m_fifo_type;
 
 	/**
 	 * @brief List of possible output data rates found in different ST sensors.
 	 */
-	enum output_data_rate_enum {
+	enum OUTPUT_DATA_RATE {
 		ODR_ONE_SHOT = 0,	/**< Measurement only on demand */
-		ODR_1_Hz,        	/** Output data rate with frequency of 1Hz */
-		ODR_7_Hz,        	/**< Output data rate with frequency of 7Hz */
-		ODR_10_Hz,       	/**< Output data rate with frequency of 10Hz */
-		ODR_12_5_Hz,     	/**< Output data rate with frequency of 12.5Hz */
-		ODR_25_Hz,       	/**< Output data rate with frequency of 25Hz */
-		ODR_50_Hz,       	/**< Output data rate with frequency of 50Hz */
-		ODR_75_Hz        	/**< Output data rate with frequency of 75Hz */
+		ODR_1_Hz,        	/**< Output data rate of 1Hz */
+		ODR_7_Hz,        	/**< Output data rate of 7Hz */
+		ODR_10_Hz,       	/**< Output data rate of 10Hz */
+		ODR_12_5_Hz,     	/**< Output data rate of 12.5Hz */
+		ODR_25_Hz,       	/**< Output data rate of 25Hz */
+		ODR_50_Hz,       	/**< Output data rate of 50Hz */
+		ODR_75_Hz,        	/**< Output data rate of 75Hz */
+		ODR_95_Hz,			/**< Output data rate of 95Hz */
+		ODR_190_Hz,			/**< Output data rate of 190Hz */
+		ODR_380_Hz,			/**< Output data rate of 380Hz */
+		ODR_760_Hz			/**< Output data rate of 760Hz */
 	} m_output_data_rate = ODR_1_Hz;
 
-	Slave_Device *m_interface = nullptr;	/**< Represents the sensor communication interface. It can be an instance of I2C_Slave_Device or SPI_Slave_Deice class depening of the m_interface_type value. */
-
-	ST_Sensor();
-
-public:
+	enum FULL_SCALE {
+		FS_250_DPS = 0,
+		FS_500_DPS,
+		FS_2000_DPS
+	};
+#if 0
 	using mode_of_operation_t = modes_of_operation_enum;
 	using output_data_rate_t = output_data_rate_enum;
+	using fifo_type_t = fifo_type_enum;
+	using full_scale_t = full_scale_enum;
+#endif
+	Slave_Device *m_interface = nullptr;	/**< Represents the sensor communication interface. It can be an instance of I2C_Slave_Device or SPI_Slave_Deice class depening of the m_interface_type value. */
 
 	/**
 	 * @brief Constructor
@@ -85,9 +109,21 @@ public:
 	virtual ~ST_Sensor();
 
 	Slave_Device_Type interface_type() { return m_interface_type; };
+#if 0
 	mode_of_operation_t mode_of_operation() { return m_mode_of_operation; };
 	output_data_rate_t output_data_rate() { return m_output_data_rate; };
-	Slave_Device *interface() { return m_interface; };
+#endif
+	/**
+	 * @brief Check the type/model of the sensor by reading
+	 * the value of WHO_AM_I register from ST sensor and comparing it with
+	 * the known value for that sensor model.
+	 *
+	 * @param[in] who_am_I_reg_addr address of the WHO_AM_I register of the ST Sensor
+	 * @param[in] id_value expected value of the WHO_AM_I register for the sensor
+	 * @return int 0 if the verification was successful, ERROR_WRONG_DEVICE_MODEL in case the value of the WHO_AM_I register does not match, ERROR_READ_FAILED for failed
+	 * attempt to read the WHO_AM_I register
+	 */
+	int verify_device_id(uint8_t who_am_I_reg_addr, uint8_t id_value);
 
 	/**
 	 * @brief High level function for configuring the sensor. It sets the mode of operation and the output data rate by writing
@@ -100,7 +136,14 @@ public:
 	 *
 	 * @return int 0 in case of successful configuration write, appropriate error code otherwise
 	 */
-	virtual int set_mode_of_operation(mode_of_operation_t mode_of_operation, output_data_rate_t output_data_rate = ODR_ONE_SHOT) = 0;
+	virtual int set_mode_of_operation(MODE_OF_OPERATION mode_of_operation, OUTPUT_DATA_RATE output_data_rate = ODR_ONE_SHOT) = 0;
+
+	virtual int set_mode_of_operation(
+		OUTPUT_DATA_RATE output_data_rate = ST_Sensor::OUTPUT_DATA_RATE::ODR_95_Hz,
+		FULL_SCALE full_scale = ST_Sensor::FULL_SCALE::FS_250_DPS,
+		MODE_OF_OPERATION mode_of_operation =ST_Sensor:: MODE_OF_OPERATION::OP_NORMAL_MODE,
+		FIFO_TYPE  fifo_type = ST_Sensor::FIFO_TYPE::FIFO_DISABLED
+	)  = 0;
 
 	/**
 	 * @brief Set the resolution for the physical quantity(ies) measured by the sensor.
@@ -124,14 +167,6 @@ public:
 	 */
 	virtual int get_sensor_readings() = 0;
 
-	/**
-	 * @brief Tries to check the sensor type/model by comparing
-	 * the value of WHO_AM_I register from ST sensor and comparing it with
-	 * the known value for that sensor model.
-	 *
-	 * @return int 0 if the verification was successful, ERROR_WRONG_DEVICE_MODEL in case the value of the WHO_AM_I register does not match, ERROR_READ_FAILED for failed attempt to read the WHO_AM_I register
-	 */
-	virtual int verify_device_id() = 0;
 };
 
 

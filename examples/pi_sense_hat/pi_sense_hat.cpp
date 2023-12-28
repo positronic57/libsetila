@@ -40,7 +40,7 @@ int main()
 		return status;
 	}
 
-	status = lps25h_sensor->set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_FIFO_MEAN_MODE, ST_Sensor::output_data_rate_t::ODR_1_Hz, LPS25H_NBR_AVERAGED_SAMPLES::AVER_SAMPLES_4);
+	status = lps25h_sensor->set_mode_of_operation(ST_Sensor::MODE_OF_OPERATION::OP_FIFO_MEAN_MODE, ST_Sensor::OUTPUT_DATA_RATE::ODR_1_Hz, LPS25H_NBR_AVERAGED_SAMPLES::AVER_SAMPLES_4);
 	if(status)
 	{
 		std::cout << "LPS25H sensor initialization failed." << std::endl;
@@ -56,7 +56,7 @@ int main()
 	}
 
 	// Configure HTS221 for ONE SHOT type of measurements
-	status = hts221_sensor->set_mode_of_operation(ST_Sensor::mode_of_operation_t::OP_ONE_SHOT);
+	status = hts221_sensor->set_mode_of_operation(ST_Sensor::MODE_OF_OPERATION::OP_ONE_SHOT);
 	if (status)
 	{
 		std::cout << "HTS221 sensor initialization failed." << std::endl;
