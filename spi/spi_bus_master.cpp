@@ -16,6 +16,8 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+#include <cstdint>
+
 #include "spi_bus_master.h"
 
 #include "setila_errors.h"

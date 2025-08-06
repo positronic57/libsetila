@@ -16,19 +16,22 @@
 
 int MCP9808::verify_device_id()
 {
-   uint16_t registryValue = 0;
+   uint16_t dev_ID = 0;
+   uint16_t manu_ID = 0;
 
-   // Check the device ID by reading DEVICE ID register
-   if (read(MCP9808_DEV_ID_REG, &registryValue, 2)) {
+   // Get the value for the device ID
+   if (read(MCP9808_DEV_ID_REG, &dev_ID, 2)) {
      return ERROR_READ_FAILED;
    }
 
-    // Device ID is the MSB of the DEVICE ID register
-   if ((registryValue & 0x00FF) != MCP9808_DEV_ID) {
-	 return ERROR_WRONG_DEVICE_MODEL;
+   // Get the value of the manufacturer ID by reading DEVICE ID register
+   if (read(MCP9808_MANU_ID_REG, &manu_ID, 2)) {
+     return ERROR_READ_FAILED;
    }
 
-   m_device_id_verified = true;
+   if ((dev_ID | manu_ID) == MCP9808_MANU_DEV_ID) {
+     m_device_id_verified = true;
+   }
 
    return 0;
 }
@@ -36,30 +39,115 @@ int MCP9808::verify_device_id()
 
 int MCP9808::set_mod_of_operation(MCP9808::MODE_OF_OPERATION op_mode, MCP9808::RESOLUTION resolution)
 {
-    int status = 0;
+  int status = 0;
 
-    if (!m_device_id_verified) {
-      if (verify_device_id()) {
-        return ERROR_WRONG_DEVICE_MODEL;
-      }
+  if (!m_device_id_verified) {
+    if (verify_device_id()) {
+      return ERROR_WRONG_DEVICE_MODEL;
     }
+  }
 
-    switch(op_mode) {
-        case MODE_OF_OPERATION::CONTINUOUS_CONVERSION:
-        status = continuous_conversion();
-        break;
+  switch(op_mode) {
+    case MODE_OF_OPERATION::CONTINUOUS_CONVERSION:
+      status = continuous_conversion();
+      break;
     case MODE_OF_OPERATION::SHUTDOWN:
-		status = shutdown();
-        break;
-	default:
-		break;
-	}
+      status = shutdown();
+      break;
+    default:
+      break;
+  }
 
-	if (status) {
-      return status;
+  if (status) {
+    return status;
+  }
+
+  return set_resolution(resolution);
+}
+
+
+int MCP9808::set_mod_of_operation(MCP9808::MODE_OF_OPERATION op_mode)
+{
+  int status = 0;
+
+  if (!m_device_id_verified) {
+    if (verify_device_id()) {
+      return ERROR_WRONG_DEVICE_MODEL;
     }
+  }
 
-    return set_resolution(resolution);
+  uint16_t temp = m_config_register;
+
+  switch(op_mode) {
+    case MODE_OF_OPERATION::CONTINUOUS_CONVERSION:
+      // Set shutdown bit to 0
+      m_config_register &= ~(1 << MCP9808_CONGIF_REG_SHDN);
+      break;
+    case MODE_OF_OPERATION::SHUTDOWN:
+      // Set shutdown bit to value 1
+      m_config_register |= (1 << MCP9808_CONGIF_REG_SHDN);
+      break;
+    default:
+      break;
+  }
+
+  // Write the new Control register value
+  if (this->write(MCP9808_CONFIG_REG, &m_config_register, sizeof(m_config_register))) {
+    m_config_register = temp;
+    status = ERROR_WRITE_FAILED;
+  }
+
+  return status;
+}
+
+
+int MCP9808::set_resolution(MCP9808::RESOLUTION resolution)
+{
+  uint8_t res = static_cast<uint8_t>(resolution);
+
+  if (this->write(MCP9808_RESOLUTION_REG, &res, sizeof(res))) {
+    return ERROR_WRITE_FAILED;
+  }
+
+  return 0;
+}
+
+
+int MCP9808::get_sensor_readings(float &ambient_temperature)
+{
+  if (!m_device_id_verified) {
+    if (verify_device_id()) {
+      return ERROR_WRONG_DEVICE_MODEL;
+    }
+  }
+
+  uint16_t temperature = 0;
+  uint16_t temp = 0;
+
+  if (this->read(MCP9808_TEMPERATURE_REG, &temp, sizeof(temp))) {
+    return ERROR_READ_FAILED;
+  }
+
+  temperature = temp << 8 | temp >> 8;
+
+  // Clear flag bits
+  temperature &= 0x1FFF;
+
+  // Check if a temperature < 0°C
+  bool negative_value = (temperature & 0x1000) == 0x1000;
+
+  // Clear the sign bit
+  temperature &= 0x0FFF;
+
+  m_temperature = temperature / 16.0;
+
+  if (negative_value) {
+    m_temperature -= 256;
+  }
+
+  ambient_temperature = m_temperature;
+
+  return 0;
 }
 
 
@@ -131,16 +219,4 @@ int MCP9808::continuous_conversion()
    }
 
    return 0;
-}
-
-
-int MCP9808::set_resolution(MCP9808::RESOLUTION resolution)
-{
-    uint8_t res = static_cast<uint8_t>(resolution);
-
-    if (this->write(MCP9808_RESOLUTION_REG, &res, sizeof(res))) {
-	return ERROR_WRITE_FAILED;
-    }
-
-    return 0;
 }

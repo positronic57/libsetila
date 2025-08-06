@@ -13,6 +13,11 @@
 #ifndef SETILA_H_
 #define SETILA_H_
 
+#define SETILA_MAJOR_VERSION    (0)
+#define SETILA_MINOR_VERSION    (5)
+#define SETILA_PATCH_VERSION    (8)
+
+
 /* Include all the header files providing I2C support. */
 #include "setila_i2c.h"
 

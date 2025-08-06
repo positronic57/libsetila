@@ -62,6 +62,8 @@
 
 /** @brief The MSB of the Device ID register */
 #define MCP9808_DEV_ID			0x04
+
+#define MCP9808_MANU_DEV_ID 0x0454
 /* @} */
 
 
@@ -87,7 +89,7 @@
 class MCP9808: public I2C_Slave_Device
 {
 private:
-    float m_temperature = 0.0;					/**< Ambient temperature reading from the sensor */
+    float m_temperature = -273.15;					/**< Ambient temperature reading from the sensor */
     bool m_device_id_verified = false;			/**< Flag for device recognition */
     uint16_t m_config_register = 0x0000;		/**< The last value of the Control register which was successfully sent to the sensor */
 
@@ -135,7 +137,16 @@ public:
      *
      * @return 0 in case of success, error code in case of a failure in the communication with the sensor
      */
-    int set_mod_of_operation(MCP9808::MODE_OF_OPERATION op_mode, MCP9808::RESOLUTION resolution = MCP9808::RESOLUTION::RES_0_0625_DEG);
+    int set_mod_of_operation(MCP9808::MODE_OF_OPERATION op_mode, MCP9808::RESOLUTION resolution) __attribute__ ((deprecated));
+
+    /**
+     * @brief Sets the mode of operation and the resolution by adjusting the values of the control register
+     *
+     * @param[in] op_mode the new mode of operation given as enumerator
+     *
+     * @return 0 in case of success, error code in case of a failure in the communication with the sensor
+     */
+    int set_mod_of_operation(MCP9808::MODE_OF_OPERATION op_mode);
 
     /**
      * @brief Sets the resolution of the sensor by writing a new value into the resolution register
@@ -151,14 +162,23 @@ public:
      *
      * @return 0 in case there is no error in the I2C communication with the sensor, error code for opposite
      */
-    int get_sensor_readings();
+    int get_sensor_readings() __attribute__ ((deprecated));
+
+    /**
+     * @brief Reads the content of the ambient temperature register and stores it in the m_temperature class member
+     *
+     * @param[in,out] ambient_temperature holds the value of the temperature reading
+     *
+     * @return 0 in case there is no error in the I2C communication with the sensor, error code for opposite
+     */
+    int get_sensor_readings(float &ambient_temperature);
 
     /**
      * @brief Returns the temperature value stored in the m_temperature class member
      *
      * @return the value of the class member m_temperature
      */
-    float ambient_temperature() const { return m_temperature; };
+    float ambient_temperature() const  __attribute__ ((deprecated)) { return m_temperature; };
 
 private:
     /**
@@ -176,7 +196,7 @@ private:
      *
      * @return 0 for successful update of the control register, error code for communication issue
      */
-    int shutdown();
+    int shutdown()  __attribute__ ((deprecated));
 
     /**
      * @brief Auxiliary function for clearing the shut down bit in control register.
@@ -184,7 +204,7 @@ private:
      *
      * @return 0 for successful update of the control register, error code for communication issue
      */
-    int continuous_conversion();
+    int continuous_conversion()  __attribute__ ((deprecated));
 };
 
 #endif // MCP9808_H
