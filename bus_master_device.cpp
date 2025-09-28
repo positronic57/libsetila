@@ -22,11 +22,11 @@
 #include "setila_errors.h"
 
 Bus_Master_Device::Bus_Master_Device(const std::string &bus_master_device_file_name, BUS_TYPE bus_type):
-	m_bus_type(bus_type),
-	m_bus_master_device_file_name(bus_master_device_file_name)
-	//m_number_of_salve_devices(0)
+  m_bus_type(bus_type),
+  m_bus_master_device_file_name(bus_master_device_file_name)
+  //m_number_of_salve_devices(0)
 {
-	//m_bus_master_fd = -1;
+  //m_bus_master_fd = -1;
 }
 
 Bus_Master_Device::~Bus_Master_Device()
@@ -39,9 +39,9 @@ Bus_Master_Device::~Bus_Master_Device()
 
 int Bus_Master_Device::open_bus(void)
 {
-	m_bus_master_fd = open(m_bus_master_device_file_name.c_str(), O_RDWR);
-
-	return (m_bus_master_fd != -1) ? 0 : ERROR_OPEN_BUS;
+  m_bus_master_fd = open(m_bus_master_device_file_name.c_str(), O_RDWR);
+  
+  return (m_bus_master_fd != -1) ? 0 : ERROR_OPEN_BUS;
 }
 
 void Bus_Master_Device::close_bus(void)

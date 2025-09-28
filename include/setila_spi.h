@@ -13,10 +13,9 @@
 #ifndef SETILA_SPI_H_
 #define SETILA_SPI_H_
 
-#include "setila_errors.h"
+// #include "setila_errors.h"
+#include "spi_bus.h"
 #include "spi_bus_master.h"
 #include "spi_slave_device.h"
-#include "spi_bus.h"
-
 
 #endif /* SETILA_SPI_H_ */

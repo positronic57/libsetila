@@ -1,9 +1,12 @@
-cmake_minimum_required(VERSION 2.8 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # Define the project name
 project(libsetila)
 
 include(GNUInstallDirs)
+
+# Generate a file for clangd LSP
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # To see the compiler commands change the value to ON
 set(CMAKE_VERBOSE_MAKEFILE ON)
@@ -30,6 +33,7 @@ ${SPI_SOURCES}
 ${DEVICES_SOURCES}
 bus_master_device.cpp
 slave_device.cpp
+setila_version.cpp
 )
 
 # Build static and shared versions of the library.

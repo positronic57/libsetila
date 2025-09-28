@@ -13,10 +13,8 @@
 #ifndef SETILA_H_
 #define SETILA_H_
 
-#define SETILA_MAJOR_VERSION    (0)
-#define SETILA_MINOR_VERSION    (5)
-#define SETILA_PATCH_VERSION    (8)
-
+#include "setila_version.h"
+#include "setila_errors.h"
 
 /* Include all the header files providing I2C support. */
 #include "setila_i2c.h"
@@ -24,13 +22,16 @@
 /* Include all the header files providing SPI support. */
 #include "setila_spi.h"
 
-
 /* Slave device specific definitions. */
 #include "HTS221.h"
 #include "LPS25H.h"
+#include "LPS22HB.h"
 #include "srf02.h"
 #include "BMP085.h"
-#include "setila_errors.h"
+#include "ADT7410.h"
+#include "L3GD20.h"
+#include "mcp3204.h"
+#include "mcp9808.h"
 
 /**
  * \defgroup SPI_BUS SPI Bus

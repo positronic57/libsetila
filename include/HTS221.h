@@ -1,7 +1,8 @@
 /**
  * @file HTS221.h
  *
- * @brief A header file from libsetila library. It defines HTS221 class for communication with HT221 sensor.
+ * @brief A header file from libsetila library. It defines HTS221 class for
+ * communication with HT221 sensor.
  *
  * @author Goce Boshkovski
  * @date 01 May 2016
@@ -13,12 +14,11 @@
 #ifndef HTS221_H_
 #define HTS221_H_
 
-#include <stdint.h>
+#include <cstdint>
 
-#include "i2c_slave_device.h"
 #include "ST_sensor.h"
 
-#define HTS221_ID	0xBC
+#define HTS221_ID 0xBC
 
 /** \defgroup HTS221_DESC HTS221
  * @ingroup DEV_REG_CMD
@@ -180,111 +180,133 @@
  *
  * @example pi_sense_hat.cpp
  */
-class HTS221: public ST_Sensor//I2C_Slave_Device
+class HTS221 : public ST_Sensor // I2C_Slave_Device
 {
 private:
-	bool m_calibration_table_read = false;				/**< A flag for reading the calibration table. */
-	bool m_device_id_verified = false;					/**< A flag for verification of the sensor type with the help of WHO_AM_I register. */
-	float m_temperature_reading = 0.0;					/**< A sensor temperature reading.*/
-	float m_humidity_reading = 0.0;						/**< A sensor humidity reading. */
-	uint8_t m_calibration_table[16] = { 0x00 };			/**< HTS221 calibration table. */
-	uint8_t m_humidity_out[2] = { 0x00 };				/**< A humidity buffer. */
-	uint8_t m_temperature_out[2] = { 0x00 };			/**< A temperature buffer. */
-	uint8_t m_CTRL_REG1 = { 0x00 };						/**< Holds CTRL_REG1 value between power ON and OFF requests. */
-	uint8_t m_CTRL_REG2 = { 0x00 };						/**< Holds CTRL_REG2 value between power ON and OFF requests. */
+  bool m_calibration_table_read =
+      false; /**< A flag for reading the calibration table. */
+  bool m_device_id_verified =
+      false; /**< A flag for verification of the sensor type with the help of
+                WHO_AM_I register. */
+  float m_temperature_reading = 0.0;        /**< A sensor temperature reading.*/
+  float m_humidity_reading = 0.0;           /**< A sensor humidity reading. */
+  uint8_t m_calibration_table[16] = {0x00}; /**< HTS221 calibration table. */
+  uint8_t m_humidity_out[2] = {0x00};       /**< A humidity buffer. */
+  uint8_t m_temperature_out[2] = {0x00};    /**< A temperature buffer. */
+  uint8_t m_CTRL_REG1 = {
+      0x00}; /**< Holds CTRL_REG1 value between power ON and OFF requests. */
+  uint8_t m_CTRL_REG2 = {
+      0x00}; /**< Holds CTRL_REG2 value between power ON and OFF requests. */
 
 public:
-	/**
-	 *
-	 * @param[in] interface_type defines the sensor data communication interface (SPI or I2C)
-	 * @param[in] bus_master_device pointer to the object that represents the master of the SPI/I2C bus where the sensor is connected to
-	 * @param[in] I2C_slave_address I2C address of the sensor in case the I2C communication
-	 */
-	explicit HTS221(Slave_Device_Type interface_type, Bus_Master_Device *bus_master_device, uint8_t I2C_slave_address):
-	ST_Sensor(interface_type, bus_master_device, I2C_slave_address)
-	{};
+  /**
+   *
+   * @param[in] interface_type defines the sensor data communication interface
+   * (SPI or I2C)
+   * @param[in] bus_master_device pointer to the object that represents the
+   * master of the SPI/I2C bus where the sensor is connected to
+   * @param[in] I2C_slave_address I2C address of the sensor in case the I2C
+   * communication
+   */
+  explicit HTS221(Slave_Device_Type interface_type,
+                  Bus_Master_Device *bus_master_device,
+                  uint8_t I2C_slave_address)
+      : ST_Sensor(interface_type, bus_master_device, I2C_slave_address) {};
 
-	/**
-	 * @brief A destructor of the class.
-	 */
-	~HTS221() { }
+  /**
+   * @brief A destructor of the class.
+   */
+  ~HTS221() {}
 
-	virtual int set_mode_of_operation(
-        ST_Sensor::MODE_OF_OPERATION mode_of_operation,
-        ST_Sensor::OUTPUT_DATA_RATE output_data_rate = ST_Sensor::OUTPUT_DATA_RATE::ODR_ONE_SHOT
-    ) override;
-	virtual int set_mode_of_operation(
-		ST_Sensor::OUTPUT_DATA_RATE output_data_rate = ST_Sensor::OUTPUT_DATA_RATE::ODR_95_Hz,
-		ST_Sensor::FULL_SCALE full_scale = ST_Sensor::FULL_SCALE::FS_250_DPS,
-		ST_Sensor::MODE_OF_OPERATION mode_of_operation = ST_Sensor::MODE_OF_OPERATION::OP_NORMAL_MODE,
-		ST_Sensor::FIFO_TYPE  fifo_type = ST_Sensor::FIFO_TYPE::FIFO_DISABLED
-	)  override;
-	virtual int set_resolution(uint8_t average_1, uint8_t average_2 = 0x00) override;
-	virtual int get_sensor_readings() override;
+  virtual int
+  set_mode_of_operation(ST_Sensor::MODE_OF_OPERATION mode_of_operation,
+                        ST_Sensor::OUTPUT_DATA_RATE output_data_rate =
+                            ST_Sensor::OUTPUT_DATA_RATE::ODR_ONE_SHOT) override;
+  virtual int set_mode_of_operation(
+      ST_Sensor::OUTPUT_DATA_RATE output_data_rate =
+          ST_Sensor::OUTPUT_DATA_RATE::ODR_95_Hz,
+      ST_Sensor::FULL_SCALE full_scale = ST_Sensor::FULL_SCALE::FS_250_DPS,
+      ST_Sensor::MODE_OF_OPERATION mode_of_operation =
+          ST_Sensor::MODE_OF_OPERATION::OP_NORMAL_MODE,
+      ST_Sensor::FIFO_TYPE fifo_type =
+          ST_Sensor::FIFO_TYPE::FIFO_DISABLED) override;
+  virtual int set_resolution(uint8_t average_1,
+                             uint8_t average_2 = 0x00) override;
+  virtual int get_sensor_readings() override;
 
-	/**
-	 * @brief Provides the value of the sensor temperature reading.
-	 *
-	 * @return float returns the value of the class member temperatureReading.
-	 */
-	float temperature_reading() const { return m_temperature_reading; };
+  /**
+   * @brief Provides the value of the sensor temperature reading.
+   *
+   * @return float returns the value of the class member temperatureReading.
+   */
+  float temperature_reading() const { return m_temperature_reading; };
 
-	/**
-	 * @brief Provides the value of the sensor humidity reading.
-	 *
-	 * @return float returns the value of the class member humidityReading.
-	 */
-	float humidity_reading() const { return m_humidity_reading; };
+  /**
+   * @brief Provides the value of the sensor humidity reading.
+   *
+   * @return float returns the value of the class member humidityReading.
+   */
+  float humidity_reading() const { return m_humidity_reading; };
 
 private:
-	/**
-	 * @brief Calculates the relative humidity bases on the sensor reading and place the result in the class member ""m_humidity_reading.
-	 *
-	 * @return int always returns 0.
-	 */
-	void calculate_realtive_humidity();
+  /**
+   * @brief Calculates the relative humidity bases on the sensor reading and
+   * place the result in the class member ""m_humidity_reading.
+   *
+   * @return int always returns 0.
+   */
+  void calculate_realtive_humidity();
 
-	/**
-	 * @brief Calculates the temperature bases on the sensor reading and place the result in the class member "m_temperature_reading".
-	 *
-	 * @return int always returns 0.
-	 */
-	int calculate_temperature();
+  /**
+   * @brief Calculates the temperature bases on the sensor reading and place the
+   * result in the class member "m_temperature_reading".
+   *
+   * @return int always returns 0.
+   */
+  int calculate_temperature();
 
-	/**
-	 * @brief Reads the content of the calibration table from HTS221 sensor.
-	 *
-	 * The start address of the calibration table is HTS221_CALB_0.
-	 * The MSB bit of the register address is set to 1 for enabling address auto-increment.
-	 *
-	 * @return int returns an error code in case there is a failure in communication with the sensor, 0 for successful read.
-	 */
-	int read_calibration_table();
+  /**
+   * @brief Reads the content of the calibration table from HTS221 sensor.
+   *
+   * The start address of the calibration table is HTS221_CALB_0.
+   * The MSB bit of the register address is set to 1 for enabling address
+   * auto-increment.
+   *
+   * @return int returns an error code in case there is a failure in
+   * communication with the sensor, 0 for successful read.
+   */
+  int read_calibration_table();
 
-	/**
-	 *
-	 * @param output_data_rate
-	 * @return
-	 */
-	int config_continuous_mode(ST_Sensor::OUTPUT_DATA_RATE output_data_rate);
+  /**
+   *
+   * @param output_data_rate
+   * @return
+   */
+  int config_continuous_mode(ST_Sensor::OUTPUT_DATA_RATE output_data_rate);
 
-	/**
-	 * @brief Switch the sensor into a power-down mode by setting PD bit of CTRL_REG1 to 0.
-	 *
-	 * @return int an error code in case there is a failure in the communication with the sensor, 0 for success.
-	 */
-	int power_down(void);
+  /**
+   * @brief Switch the sensor into a power-down mode by setting PD bit of
+   * CTRL_REG1 to 0.
+   *
+   * @return int an error code in case there is a failure in the communication
+   * with the sensor, 0 for success.
+   */
+  int power_down(void);
 
-	/**
-	 * @brief Initiate the measurement process for humidity and temperature.
-	 *
-	 * The function starts a single acquisition of temperature and humidity by setting the ONE_SHOT bit of CTRL_REG2 register.
-	 * After that get_sensor_readings() function is called for reading the measurement outputs.
-	 *
-	 * @return int returns an error code in case there is a failure in communication with the sensor; ERROR_SENSOR_READING_TIME_OUT when there is no measurement outputs
-	 * available SENSOR_READING_WATCHDOG_COUNTER number of reading attempts; 0 for successful measurement cycle.
-	 */
-	int do_one_shot_measurement(void);
+  /**
+   * @brief Initiate the measurement process for humidity and temperature.
+   *
+   * The function starts a single acquisition of temperature and humidity by
+   * setting the ONE_SHOT bit of CTRL_REG2 register. After that
+   * get_sensor_readings() function is called for reading the measurement
+   * outputs.
+   *
+   * @return int returns an error code in case there is a failure in
+   * communication with the sensor; ERROR_SENSOR_READING_TIME_OUT when there is
+   * no measurement outputs available SENSOR_READING_WATCHDOG_COUNTER number of
+   * reading attempts; 0 for successful measurement cycle.
+   */
+  int do_one_shot_measurement(void);
 };
 
 #endif /* HTS221_H_ */
