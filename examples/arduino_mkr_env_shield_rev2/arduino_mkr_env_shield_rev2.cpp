@@ -10,6 +10,7 @@
  *
  */
 
+#include <cstdint>
 #include <iostream>
 
 #include "setila/HTS221.h"
@@ -25,72 +26,73 @@ int main() {
                                         i2c_bus_master, LPS22HB_ADDR_SA0_0);
 
   // Humidity and temperature sensor
-  HTS221 *hts221_sensor =
-      new HTS221(Slave_Device_Type::I2C_SLAVE_DEVICE, i2c_bus_master, 0x5F);
+  constexpr uint8_t HTS221_I2C_ADDRESS{0x5F};
+  HTS221 *hts221_sensor = new HTS221(Slave_Device_Type::I2C_SLAVE_DEVICE,
+                                     i2c_bus_master, HTS221_I2C_ADDRESS);
 
-  int status = 0;
+  int status{0};
 
-  if (i2c_bus_master->open_bus() < 0) {
-    std::cout << "Failed to open master bus" << std::endl;
-    return -1;
-  }
+  do {
+    if (i2c_bus_master->open_bus() < 0) {
+      std::cout << "Failed to open master bus\n";
+      status = -1;
+      break;
+    }
 
-  // Configure LPS22HB for ONE SHOT mode of operation
-  status = lps22hb_sensor->set_mode_of_operation(
-      ST_Sensor::MODE_OF_OPERATION::OP_ONE_SHOT);
-  if (status) {
-    std::cout << "LPS22HB sensor initialization failed." << std::endl;
-    return status;
-  }
+    // Configure LPS22HB for ONE SHOT mode of operation
+    status = lps22hb_sensor->set_mode_of_operation(
+        ST_Sensor::MODE_OF_OPERATION::OP_ONE_SHOT);
+    if (status) {
+      std::cout << "LPS22HB sensor initialization failed.\n";
+      break;
+    }
 
-  // Configure HTS221 for ONE SHOT type of measurements
-  status = hts221_sensor->set_mode_of_operation(
-      ST_Sensor::MODE_OF_OPERATION::OP_ONE_SHOT);
-  if (status) {
-    std::cout << "HTS221 sensor initialization failed." << std::endl;
-    return status;
-  }
+    // Configure HTS221 for ONE SHOT type of measurements
+    status = hts221_sensor->set_mode_of_operation(
+        ST_Sensor::MODE_OF_OPERATION::OP_ONE_SHOT);
+    if (status) {
+      std::cout << "HTS221 sensor initialization failed.\n";
+      break;
+    }
 
-  // Set HTS221 internal temperature average to 32 and humidity to 64
-  status = hts221_sensor->set_resolution(0x04, 0x04);
-  if (status) {
-    std::cout << "HTS221 sensor set resolution failed." << std::endl;
-    return status;
-  }
+    // Set HTS221 internal temperature average to 32 and humidity to 64
+    status = hts221_sensor->set_resolution(0x04, 0x04);
+    if (status) {
+      std::cout << "HTS221 sensor set resolution failed.\n";
+      break;
+    }
 
-  // Measure pressure/temperature and get the readings
-  if (lps22hb_sensor->get_sensor_readings()) {
-    std::cout << "LPS22HB pressure/temperature measurement failed."
-              << std::endl;
-    return -1;
-  }
+    // Measure pressure/temperature and get the readings
+    if (lps22hb_sensor->get_sensor_readings()) {
+      std::cout << "LPS22HB pressure/temperature measurement failed.\n";
+      status = -1;
+      break;
+    }
 
-  // Measure humidity/temperature and get the readings
-  if (hts221_sensor->get_sensor_readings()) {
-    std::cout << "HTS221 humidity/temperature measurement failed." << std::endl;
-    return -1;
-  }
+    // Measure humidity/temperature and get the readings
+    if (hts221_sensor->get_sensor_readings()) {
+      std::cout << "HTS221 humidity/temperature measurement failed.\n";
+      status = -1;
+      break;
+    }
 
-  std::cout << std::endl
-            << "Readings from Arduino MKR ENV Shield Rev2:" << std::endl
-            << std::endl;
-  std::cout << "LPS22HB sensor:" << std::endl;
-  std::cout << "Pressure P=" << lps22hb_sensor->last_pressure_reading()
-            << "[hPa]" << std::endl;
-  std::cout << "Temperature T=" << lps22hb_sensor->last_temperature_reading()
-            << "[°C]" << std::endl;
-  std::cout << std::endl;
+    std::cout << "\nReadings from Arduino MKR ENV Shield Rev2:\n\n";
+    std::cout << "LPS22HB sensor:\n";
+    std::cout << "Pressure P=" << lps22hb_sensor->last_pressure_reading()
+              << "[hPa]\n";
+    std::cout << "Temperature T=" << lps22hb_sensor->last_temperature_reading()
+              << "[°C]\n\n";
 
-  std::cout << "HTS221 sensor:" << std::endl;
-  std::cout << "Relative Humidity R=" << hts221_sensor->humidity_reading()
-            << "[%rH]" << std::endl;
-  std::cout << "Temperature T=" << hts221_sensor->temperature_reading()
-            << "[°C]" << std::endl;
-  std::cout << std::endl;
+    std::cout << "HTS221 sensor:\n";
+    std::cout << "Relative Humidity R=" << hts221_sensor->humidity_reading()
+              << "[%rH]\n";
+    std::cout << "Temperature T=" << hts221_sensor->temperature_reading()
+              << "[°C]\n\n";
+  } while (0);
 
   delete lps22hb_sensor;
   delete hts221_sensor;
   delete i2c_bus_master;
 
-  return 0;
+  return status;
 }

@@ -1,4 +1,0 @@
-<map id="L3GD20" name="L3GD20">
-<area shape="rect" id="node1" title="A class derived from ST_Sensor class that describes L3GD20 sensor." alt="" coords="13,80,84,107"/>
-<area shape="rect" id="node2" href="$classST__Sensor.html" title="Base class for ST sensors with I2C and/or SPI interface." alt="" coords="5,5,92,32"/>
-</map>

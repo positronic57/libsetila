@@ -1,7 +1,0 @@
-<map id="ST_Sensor" name="ST_Sensor">
-<area shape="rect" id="node1" title="Base class for ST sensors with I2C and/or SPI interface." alt="" coords="141,5,228,32"/>
-<area shape="rect" id="node2" href="$classHTS221.html" title="A class derived from I2CSensor class that describes HTS221 sensor." alt="" coords="5,80,76,107"/>
-<area shape="rect" id="node3" href="$classL3GD20.html" title="A class derived from ST_Sensor class that describes L3GD20 sensor." alt="" coords="100,80,171,107"/>
-<area shape="rect" id="node4" href="$classLPS22HB.html" title="A class derived from I2CSensor class that describes LPS22HB sensor." alt="" coords="195,80,275,107"/>
-<area shape="rect" id="node5" href="$classLPS25H.html" title="A class derived from I2CSensor class that describes LPS25H sensor." alt="" coords="300,80,371,107"/>
-</map>

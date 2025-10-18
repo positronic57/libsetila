@@ -1,7 +1,0 @@
-<map id="L3GD20" name="L3GD20">
-<area shape="rect" id="node1" title="A class derived from ST_Sensor class that describes L3GD20 sensor." alt="" coords="147,184,217,211"/>
-<area shape="rect" id="node2" href="$classST__Sensor.html" title="Base class for ST sensors with I2C and/or SPI interface." alt="" coords="13,95,100,121"/>
-<area shape="rect" id="node3" href="$classSlave__Device.html" title="Base class that represents a slave device. It defines the common properties and IO operations for any..." alt="" coords="5,5,108,32"/>
-<area shape="rect" id="node4" href="$structL3GD20_1_1Config.html" title="A container for the parameters of the sensor which defines his behavior and measurement process." alt="" coords="124,95,240,121"/>
-<area shape="rect" id="node5" href="$structL3GD20_1_1Data.html" title="Holds the raw output values from the sensor for all 3&#45;axes. The array represents the FIFO of the sens..." alt="" coords="265,95,371,121"/>
-</map>

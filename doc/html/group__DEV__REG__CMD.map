@@ -1,9 +1,0 @@
-<map id="Device Register Descriptors and Commands" name="Device Register Descriptors and Commands">
-<area shape="rect" id="node1" href="$group__LPS22HB__DESC.html" title=" " alt="" coords="240,5,320,31"/>
-<area shape="rect" id="node2" href="$group__MCP9808__DESC.html" title=" " alt="" coords="240,55,320,80"/>
-<area shape="rect" id="node3" href="$group__ADT7410__DESC.html" title=" " alt="" coords="241,104,319,129"/>
-<area shape="rect" id="node4" title=" " alt="" coords="5,122,192,162"/>
-<area shape="rect" id="node5" href="$group__L3GD20__DESC.html" title=" " alt="" coords="245,153,315,179"/>
-<area shape="rect" id="node6" href="$group__LPS25H__DESC.html" title=" " alt="" coords="245,203,315,228"/>
-<area shape="rect" id="node7" href="$group__HTS221__DESC.html" title=" " alt="" coords="245,252,315,277"/>
-</map>

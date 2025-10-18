@@ -1,4 +1,0 @@
-<map id="HTS221" name="HTS221">
-<area shape="rect" id="node1" title="A class derived from I2CSensor class that describes HTS221 sensor." alt="" coords="13,80,84,107"/>
-<area shape="rect" id="node2" href="$classST__Sensor.html" title="Base class for ST sensors with I2C and/or SPI interface." alt="" coords="5,5,92,32"/>
-</map>

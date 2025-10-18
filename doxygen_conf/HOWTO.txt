@@ -1,0 +1,20 @@
+To generate the project documentation based on "doxygen" comments in the code,
+use the "doxygen" tool (available in the repositories of almost any Linux distribution)
+from the command line. 
+
+First navigate to "doxygen_config" folder within "libsetila" project folder:
+
+  >cd doxygen_config
+
+and execute the command:
+
+  >doxygen ./doxyfile_libsetila
+
+The documentation will be generated in "doc" folder in HTML format.
+Open "index.html" in your favorite browser.
+
+
+
+
+
+

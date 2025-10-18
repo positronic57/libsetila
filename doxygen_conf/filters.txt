@@ -1,0 +1,10 @@
+/**
+* \page filters_module Digital filters module
+*
+* This module provides digital filters for removing the noise from the sensor readings.
+
+* Curently only \ref Moving_Average_Filter "Simple Moving Average Window" is part of this module.
+* This filter is commonly used to smooth out the sensor output the sensor output in the time-domain.
+*
+*
+*/

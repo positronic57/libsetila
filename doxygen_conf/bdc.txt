@@ -1,0 +1,42 @@
+/**
+* \page bdc_module Basic Data Containers
+*
+* Basic Data Containers module is a set of few templates for data structures that can be use for 
+* storing data read from SPI/I2C devices: 
+*
+*  - \ref Stack "stack"  
+*  - \ref CircularBuffer "circular buffer" 
+*  - \ref FIFO_queue "first in first out (FIFO) queue".
+*
+*
+* The implementations are not thread safe. 
+* 
+* Basic Operations 
+* 
+* Functions: addElement() and getElement() are defined for adding/removing data to/from  
+* the data structures. Exception is the stack implementation where those two basic data 
+* operations are implemented as push() for adding elements, and pop() for removing elements  
+* from the stack. 
+*
+* 
+* FIFO queue class has const \ref bdc_iterator "interator" defined. Although it is not a standard way of 
+* accessing elements from queue data structures, it can be used for iterating over all of the elements 
+* in the internal buffer for troubleshooting purposes. 
+*
+*
+* The \ref BDC_STATE "status codes" for all of those operations are standardised accross the  
+* templates.  
+*
+* 
+* Buffer Size 
+* 
+*
+* By default, the data containers allocate memory for 32 elements. 
+* This value can be changed using the size argument of the corresponding  
+* constructors. 
+* 
+* Practical example that demonstrates the use of FIFO_queue for storing data readings from BMP085 sensor 
+* can be found in bmp085_bmp180.cpp. 
+* 
+*
+*/

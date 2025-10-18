@@ -18,56 +18,60 @@
 float TMP36_temperature(float);
 
 int main() {
-  int rc;
 
   SPI_Bus_Master_Device *spi_bus_master =
       new SPI_Bus_Master_Device("/dev/spidev0.1");
 
-  MCP3204 *ad_MCP3204 = new MCP3204(2.491);
+  constexpr float reference_voltage{2.491};
+  MCP3204 *ad_MCP3204 = new MCP3204(reference_voltage);
 
-  if (spi_bus_master->open_bus()) {
-    std::cout << "Failed to open bus master device." << std::endl;
-    return -1;
-  }
+  int status{0};
 
-  if (spi_bus_master->configure(SPI_BUS_MODE::MODE_0, MCP3204_SPI_BUS_SPEED,
-                                MCP3204_SPI_BITS_PER_WORD, 0)) {
-    std::cout << "Setting SPI bus master parameters failed." << std::endl;
-    return -1;
-  }
+  do {
+    if (spi_bus_master->open_bus()) {
+      std::cout << "Failed to open bus master device.\n";
+      status = -1;
+      break;
+    }
 
-  if (ad_MCP3204->attach_to_bus(spi_bus_master)) {
-    std::cout << "Attach to SPI bus master failed." << std::endl;
-    return -1;
-  }
+    if (spi_bus_master->configure(SPI_BUS_MODE::MODE_0, MCP3204_SPI_BUS_SPEED,
+                                  MCP3204_SPI_BITS_PER_WORD, 0)) {
+      std::cout << "Setting SPI bus master parameters failed.\n";
+      status = -1;
+      break;
+    }
 
-  rc = ad_MCP3204->convert(MCP3204_INPUT_CHANNEL::CH0,
-                           MCP3204_INPUT_CHANNEL_MODE::SINGLE_ENDED);
+    if (ad_MCP3204->attach_to_bus(spi_bus_master)) {
+      std::cout << "Attach to SPI bus master failed.\n";
+      status = -1;
+      break;
+    }
 
-  if (rc) {
-    std::cout << "MCP3204 Error: communication error while asking for AD "
-                 "conversion. Error code: "
-              << rc << std::endl;
-    return -1;
-  }
+    status = ad_MCP3204->convert(MCP3204_INPUT_CHANNEL::CH0,
+                                 MCP3204_INPUT_CHANNEL_MODE::SINGLE_ENDED);
 
-  std::cout << "Digital value of the sensor reading: "
-            << ad_MCP3204->digital_value() << std::endl;
-  std::cout << "Analog value: " << ad_MCP3204->analog_value() << "V"
-            << std::endl;
-  std::cout << "Temperature t = "
-            << TMP36_temperature(ad_MCP3204->analog_value()) << "[°C]"
-            << std::endl;
+    if (status) {
+      std::cout << "MCP3204 Error: communication error while asking for AD "
+                   "conversion. Error code: "
+                << status << '\n';
+      break;
+    }
+
+    std::cout << "Digital value of the sensor reading: "
+              << ad_MCP3204->digital_value() << '\n';
+    std::cout << "Analog value: " << ad_MCP3204->analog_value() << "V\n";
+    std::cout << "Temperature t = "
+              << TMP36_temperature(ad_MCP3204->analog_value()) << "[°C]\n";
+
+  } while (0);
 
   ad_MCP3204->dettach_from_master_bus();
-
   delete ad_MCP3204;
 
   spi_bus_master->close_bus();
-
   delete spi_bus_master;
 
-  return 0;
+  return status;
 }
 
 float TMP36_temperature(float voltage_level) {

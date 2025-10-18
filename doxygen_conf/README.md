@@ -7,8 +7,8 @@ The low level I2C and SPI communication is done by the appropriate Linux kernel 
 Main resources provided with the library:
 - classes for SPI/I2C master;
 - classes for implementing SPI/I2C slaves;
-- templates for Basic Data Containers (BDC): stack, FIFO queue and circular buffer. Readings from different SPI/I2C devices can be stored in those data containers; 
-- filters module for digital filtering of the sensor readings: moving average filter;
+- templates for \ref bdc_module (BDC): stack, FIFO queue and circular buffer. Readings from different SPI/I2C devices can be stored in those data containers; 
+- \ref filters_module (filters module) for digital filtering of the sensor readings
 - support for some common/popular SPI/I2C devices (see supported hardware section).
  
 The library is not thread safe. 
@@ -31,6 +31,7 @@ Successful tests have been done on:
 - Beagle Bone Black revision A with Debian GNU/Linux 9 ("stretch").
 
 #### I2C Devices
+
 - ST L3GD20 three axes digital output gyroscope (FIFO mode and single measurement);
 - ST HTS221 humidity and temperature sensor: single acquisition(ONE SHOT measurement), FIFO_MEAN mode, adjustable output data rate and resolution;
 - ST LPS25H pressure and temperature sensor: single acquisition(ONE SHOT measurement), adjustable output data rate and resolution;
@@ -48,11 +49,6 @@ Successful tests have been done on:
 ### Installation
 
 For installing instructions check INSTALL file.
-
-### Documentation
-
-The code is documented using "doxygen" formated comments. All the configuration files required to generate the documentation using 
-"doxygen" tool are located in the "doc" folder.
 
 ### Usage and Examples
 
@@ -80,8 +76,6 @@ The library functionality has been tested using the following hardware:
 - Raspberry Pi Compute Module 4 Revision 1.1;
 - Beagle Bone Black revision A.
 
-## Translations
-- [Macedonian version of this text](translations/README_mk.md)
 
 **WARNING:** 
 The source is provided as it is without any warranty. Use it on your own risk!

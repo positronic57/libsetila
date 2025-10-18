@@ -26,20 +26,21 @@ int main() {
 
   int status = 0;
 
-  if (i2c_bus_master->open_bus() < 0) {
-    std::cout << "Failed to open master bus" << std::endl;
-    return -1;
-  }
-
-  mcp9808_sensor->attach_to_bus(i2c_bus_master);
-
   do {
+    if (i2c_bus_master->open_bus() < 0) {
+      std::cout << "Failed to open master bus\n";
+      status = -1;
+      break;
+    }
+
+    mcp9808_sensor->attach_to_bus(i2c_bus_master);
+
     // Configure MCP9808 for continuous conversion mode of operation
     status = mcp9808_sensor->set_mod_of_operation(
         MCP9808::MODE_OF_OPERATION::CONTINUOUS_CONVERSION);
     if (status) {
       std::cout << "Setting mod of operation failed with error " << status
-                << std::endl;
+                << '\n';
       break;
     }
 
@@ -47,7 +48,7 @@ int main() {
     if (status) {
       std::cout << "Setting the resolution for the tenperature measurement "
                    "with error "
-                << status << std::endl;
+                << status << '\n';
       break;
     }
 
@@ -57,15 +58,12 @@ int main() {
     status = mcp9808_sensor->get_sensor_readings(ambient_temperature);
     if (status) {
       std::cout << "Reading the temperature from the sensor failed with error "
-                << status << std::endl;
+                << status << '\n';
       break;
     }
 
-    std::cout << std::endl
-              << "Ambient temperature reading:" << std::endl
-              << std::endl;
-    std::cout << "Temperature T=" << ambient_temperature << "[°C]" << std::endl;
-    std::cout << std::endl;
+    std::cout << "\nAmbient temperature reading:\n\n";
+    std::cout << "Temperature T=" << ambient_temperature << "[°C]\n\n";
   } while (0);
 
   delete mcp9808_sensor;

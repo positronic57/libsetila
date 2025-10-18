@@ -1,7 +1,0 @@
-<map id="setila_errors.h" name="setila_errors.h">
-<area shape="rect" id="node1" title="Contains definitions of the error codes used in the library." alt="" coords="70,5,174,32"/>
-<area shape="rect" id="node2" href="$setila_8h.html" title="Includes all of header files from libsetila project." alt="" coords="90,155,154,181"/>
-<area shape="rect" id="node3" href="$setila__i2c_8h.html" title="Contains all header files required for working with I2C slave devices." alt="" coords="22,80,110,107"/>
-<area shape="rect" id="node4" href="$setila__spi_8h.html" title="Contains all header files required for working with SPI slave devices." alt="" coords="134,80,222,107"/>
-<area shape="rect" id="node5" href="$srf02_8h.html" title="Contains the definition of SRF02 class for communication with SRF02 sonar sensor." alt="" coords="247,80,310,107"/>
-</map>
