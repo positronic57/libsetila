@@ -20,16 +20,16 @@ int MCP9808::verify_device_id()
    uint16_t manu_ID = 0;
 
    // Get the value for the device ID
-   if (read(MCP9808_DEV_ID_REG, &dev_ID, 2)) {
+   if (read(MCP9808::DEV_ID_REG, &dev_ID, 2)) {
      return ERROR_READ_FAILED;
    }
 
    // Get the value of the manufacturer ID by reading DEVICE ID register
-   if (read(MCP9808_MANU_ID_REG, &manu_ID, 2)) {
+   if (read(MCP9808::MANU_ID_REG, &manu_ID, 2)) {
      return ERROR_READ_FAILED;
    }
 
-   if ((dev_ID | manu_ID) == MCP9808_MANU_DEV_ID) {
+   if ((dev_ID | manu_ID) == MCP9808::MANU_DEV_ID) {
      m_device_id_verified = true;
    }
 
@@ -81,18 +81,18 @@ int MCP9808::set_mod_of_operation(MCP9808::MODE_OF_OPERATION op_mode)
   switch(op_mode) {
     case MODE_OF_OPERATION::CONTINUOUS_CONVERSION:
       // Set shutdown bit to 0
-      m_config_register &= ~(1 << MCP9808_CONGIF_REG_SHDN);
+      m_config_register &= ~(1 << MCP9808::CONGIF_REG_SHDN_BIT);
       break;
     case MODE_OF_OPERATION::SHUTDOWN:
       // Set shutdown bit to value 1
-      m_config_register |= (1 << MCP9808_CONGIF_REG_SHDN);
+      m_config_register |= (1 << MCP9808::CONGIF_REG_SHDN_BIT);
       break;
     default:
       break;
   }
 
   // Write the new Control register value
-  if (this->write(MCP9808_CONFIG_REG, &m_config_register, sizeof(m_config_register))) {
+  if (this->write(MCP9808::CONFIG_REG, &m_config_register, sizeof(m_config_register))) {
     m_config_register = temp;
     status = ERROR_WRITE_FAILED;
   }
@@ -105,7 +105,7 @@ int MCP9808::set_resolution(MCP9808::RESOLUTION resolution)
 {
   uint8_t res = static_cast<uint8_t>(resolution);
 
-  if (this->write(MCP9808_RESOLUTION_REG, &res, sizeof(res))) {
+  if (this->write(MCP9808::RESOLUTION_REG, &res, sizeof(res))) {
     return ERROR_WRITE_FAILED;
   }
 
@@ -124,7 +124,7 @@ int MCP9808::get_sensor_readings(float &ambient_temperature)
   uint16_t temperature = 0;
   uint16_t temp = 0;
 
-  if (this->read(MCP9808_TEMPERATURE_REG, &temp, sizeof(temp))) {
+  if (this->read(MCP9808::TEMPERATURE_REG, &temp, sizeof(temp))) {
     return ERROR_READ_FAILED;
   }
 
@@ -163,7 +163,7 @@ int MCP9808::get_sensor_readings()
 	  }
     }
 
-    if (this->read(MCP9808_TEMPERATURE_REG, &ambient_temperature, sizeof(ambient_temperature))) {
+    if (this->read(MCP9808::TEMPERATURE_REG, &ambient_temperature, sizeof(ambient_temperature))) {
        return ERROR_READ_FAILED;
     }
 
@@ -193,10 +193,10 @@ int MCP9808::shutdown()
   uint16_t temp = m_config_register;
 
   // Set shutdown bit to value 1
-  m_config_register |= (1 << MCP9808_CONGIF_REG_SHDN);
+  m_config_register |= (1 << MCP9808::CONGIF_REG_SHDN_BIT);
 
   // Write the new Control register value
-  if (this->write(MCP9808_CONFIG_REG, &m_config_register, sizeof(m_config_register))) {
+  if (this->write(MCP9808::CONFIG_REG, &m_config_register, sizeof(m_config_register))) {
      m_config_register = temp;
      return ERROR_WRITE_FAILED;
    }
@@ -210,10 +210,10 @@ int MCP9808::continuous_conversion()
    uint16_t temp = m_config_register;
 
    // Set shutdown bit to 0
-   m_config_register &= ~(1 << MCP9808_CONGIF_REG_SHDN);
+   m_config_register &= ~(1 << MCP9808::CONGIF_REG_SHDN_BIT);
 
    // Write the new Control register value
-   if (this->write(MCP9808_CONFIG_REG, &m_config_register, sizeof(m_config_register))) {
+   if (this->write(MCP9808::CONFIG_REG, &m_config_register, sizeof(m_config_register))) {
 	 m_config_register = temp;
 	 return ERROR_WRITE_FAILED;
    }

@@ -5,14 +5,18 @@ project(libsetila)
 
 include(GNUInstallDirs)
 
-# Generate a file for clangd LSP
+# Generate a file for clangd LSP.
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-# To see the compiler commands change the value to ON
+# To see the compiler commands change the value to ON.
 set(CMAKE_VERBOSE_MAKEFILE ON)
 
-# Set the C++ compiler flags. Enable C++11 standard.
-set(CMAKE_CXX_FLAGS "-std=c++0x -O0 -Wall -fmessage-length=0")
+# Use C++17 standard.
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+# Set the C++ compiler flags.
+set(CMAKE_CXX_FLAGS "-O0 -Wall -fmessage-length=0")
 
 # Define the include directory
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -32,8 +36,8 @@ ${I2C_SOURCES}
 ${SPI_SOURCES}
 ${DEVICES_SOURCES}
 bus_master_device.cpp
-slave_device.cpp
 setila_version.cpp
+setila_aux.cpp
 )
 
 # Build static and shared versions of the library.

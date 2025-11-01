@@ -51,7 +51,7 @@ public:
   /**
    * @brief The class destructor.
    */
-  virtual ~Slave_Device();
+  virtual ~Slave_Device() {};
 
   /**
    * @brief The class constructor.
@@ -149,15 +149,6 @@ public:
    */
   virtual int read_write(void *transmit_buffer, void *receive_buffer,
                          int buffer_size) = 0;
-
-  /**
-   * @brief Auxiliary function that introduces a delay in ms.
-   * Useful in cases when the salve device requires delay between two successive
-   * IO operations on the bus.
-   *
-   * @param[in] ms_delay time delay size in number of ms.
-   */
-  void time_delay_ms(unsigned int ms_delay);
 };
 
 #endif /* SLAVE_DEVICE_H_ */

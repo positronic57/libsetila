@@ -12,7 +12,6 @@
 #include <cstdint>
 
 #include "ADT7410.h"
-
 #include "setila_errors.h"
 
 int ADT7410::set_mode_of_operation(ADT7410::MODE_OF_OPERATION mode,
@@ -21,20 +20,20 @@ int ADT7410::set_mode_of_operation(ADT7410::MODE_OF_OPERATION mode,
 
   switch (mode) {
   case MODE_OF_OPERATION::CONTINUOUS_CONVERSION:
-    m_config_register &= ~(1 << ADT7410_CONFIG_REG_OP_BIT1);
-    m_config_register &= ~(1 << ADT7410_CONFIG_REG_OP_BIT2);
+    m_config_register &= ~(1 << ADT7410::CONFIG_REG_OP_BIT1);
+    m_config_register &= ~(1 << ADT7410::CONFIG_REG_OP_BIT2);
     break;
   case MODE_OF_OPERATION::ONE_SHOT:
-    m_config_register |= (1 << ADT7410_CONFIG_REG_OP_BIT1);
-    m_config_register &= ~(1 << ADT7410_CONFIG_REG_OP_BIT2);
+    m_config_register |= (1 << ADT7410::CONFIG_REG_OP_BIT1);
+    m_config_register &= ~(1 << ADT7410::CONFIG_REG_OP_BIT2);
     break;
   case MODE_OF_OPERATION::ONE_SAMPLE_PER_SECOND:
-    m_config_register &= ~(1 << ADT7410_CONFIG_REG_OP_BIT1);
-    m_config_register |= (1 << ADT7410_CONFIG_REG_OP_BIT1);
+    m_config_register &= ~(1 << ADT7410::CONFIG_REG_OP_BIT1);
+    m_config_register |= (1 << ADT7410::CONFIG_REG_OP_BIT1);
     break;
   case MODE_OF_OPERATION::SHUTDOWN:
-    m_config_register |= (1 << ADT7410_CONFIG_REG_OP_BIT1);
-    m_config_register |= (1 << ADT7410_CONFIG_REG_OP_BIT1);
+    m_config_register |= (1 << ADT7410::CONFIG_REG_OP_BIT1);
+    m_config_register |= (1 << ADT7410::CONFIG_REG_OP_BIT1);
     break;
   default:
     break;
@@ -52,12 +51,12 @@ int ADT7410::set_resolution(ADT7410::RESOLUTION resolution) {
   uint8_t temp_control_register = m_config_register;
 
   if (resolution == ADT7410::RESOLUTION::RES_0_0625) {
-    m_config_register &= ~(1 << ADT7410_CONFIG_REG_RESOLUTION_BIT);
+    m_config_register &= ~(1 << ADT7410::CONFIG_REG_RESOLUTION_BIT);
   } else if (resolution == ADT7410::RESOLUTION::RES_0_0078) {
-    m_config_register |= (1 << ADT7410_CONFIG_REG_RESOLUTION_BIT);
+    m_config_register |= (1 << ADT7410::CONFIG_REG_RESOLUTION_BIT);
   }
 
-  if (this->write_byte(ADT7410_CONFIG_REG, m_config_register)) {
+  if (this->write_byte(ADT7410::CONFIG_REG, m_config_register)) {
     m_config_register = temp_control_register;
     return ERROR_WRITE_FAILED;
   }
@@ -75,20 +74,20 @@ int ADT7410::get_sensor_readings() {
 
   // Check to see whenever a new temperature sample is available
   do {
-    if (this->read(ADT7410_STATUS_REG, &status_reg, 1)) {
+    if (this->read(ADT7410::STATUS_REG, &status_reg, 1)) {
       return ERROR_READ_FAILED;
     }
 
     wd_counter--;
 
-  } while ((status_reg & (1 << ADT7410_STATUS_REG_RDY_BIT)) && wd_counter);
+  } while ((status_reg & (1 << ADT7410::STATUS_REG_RDY_BIT)) && wd_counter);
 
-  if ((status_reg & (1 << ADT7410_STATUS_REG_RDY_BIT)) && !wd_counter) {
+  if ((status_reg & (1 << ADT7410::STATUS_REG_RDY_BIT)) && !wd_counter) {
     return ERROR_SENSOR_READING_TIME_OUT;
   }
 
   // Read the 2 temperature registers
-  if (this->read(ADT7410_STATUS_REG, temperature_regs, 2))
+  if (this->read(ADT7410::STATUS_REG, temperature_regs, 2))
     return ERROR_READ_FAILED;
 
   // Swap the MSB and LSB from the temperature reading

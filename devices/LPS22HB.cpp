@@ -15,13 +15,13 @@
 #include "LPS22HB.h"
 
 #include "setila_errors.h"
-#include "slave_device.h"
+// #include "slave_device.h"
 
 int LPS22HB::set_mode_of_operation(
     ST_Sensor::MODE_OF_OPERATION mode_of_operation,
     ST_Sensor::OUTPUT_DATA_RATE output_data_rate) {
   if (!m_device_id_verified) {
-    if (verify_device_id(LPS22HB_WHO_AM_I, LPS22HB_ID)) {
+    if (verify_device_id(LPS22HB::REG_WHO_AM_I, LPS22HB::ID)) {
       return ERROR_WRONG_DEVICE_MODEL;
     } else {
       m_device_id_verified = true;
@@ -59,7 +59,7 @@ int LPS22HB::set_resolution(uint8_t average_1, uint8_t average_2) {
 
 int LPS22HB::get_sensor_readings() {
   if (!m_device_id_verified) {
-    if (verify_device_id(LPS22HB_WHO_AM_I, LPS22HB_ID)) {
+    if (verify_device_id(LPS22HB::REG_WHO_AM_I, LPS22HB::ID)) {
       return ERROR_WRONG_DEVICE_MODEL;
     } else {
       m_device_id_verified = true;
@@ -85,7 +85,7 @@ int LPS22HB::get_sensor_readings() {
 int LPS22HB::custom_config(uint8_t &CTRL_REG1_value, uint8_t &CTRL_REG2_value,
                            uint8_t &CTRL_REG3_value) {
   if (!m_device_id_verified) {
-    if (verify_device_id(LPS22HB_WHO_AM_I, LPS22HB_ID)) {
+    if (verify_device_id(LPS22HB::REG_WHO_AM_I, LPS22HB::ID)) {
       return ERROR_WRONG_DEVICE_MODEL;
     } else {
       m_device_id_verified = true;
@@ -98,21 +98,21 @@ int LPS22HB::custom_config(uint8_t &CTRL_REG1_value, uint8_t &CTRL_REG2_value,
 
   m_CTRL_REG3 = CTRL_REG3_value;
   /* Set the value of the LPS22HB_RES_CONF. */
-  if (m_interface->write_byte(LPS22HB_RES_CONF, m_CTRL_REG3)) {
+  if (m_interface->write_byte(LPS22HB::REG_RES_CONF, m_CTRL_REG3)) {
     m_CTRL_REG3 = ctrl_reg3;
     return ERROR_WRITE_FAILED;
   }
 
   m_CTRL_REG2 = CTRL_REG2_value;
   /* Set the value of the LPS22HB_CTRL_REG2. */
-  if (m_interface->write_byte(LPS22HB_CTRL_REG2, m_CTRL_REG2)) {
+  if (m_interface->write_byte(LPS22HB::REG_CTRL_REG2, m_CTRL_REG2)) {
     m_CTRL_REG2 = ctrl_reg2;
     return ERROR_WRITE_FAILED;
   }
 
   m_CTRL_REG1 = CTRL_REG1_value;
   /* Set the value of the LPS22HB_CTRL_REG1. */
-  if (m_interface->write_byte(LPS22HB_CTRL_REG1, m_CTRL_REG1)) {
+  if (m_interface->write_byte(LPS22HB::REG_CTRL_REG1, m_CTRL_REG1)) {
     m_CTRL_REG1 = ctrl_reg1;
     return ERROR_WRITE_FAILED;
   }
@@ -125,22 +125,22 @@ int LPS22HB::enable_one_shot_mode(void) {
   uint8_t ctrl_reg2 = m_CTRL_REG2;
 
   // Set all output data rate bits to 0
-  m_CTRL_REG1 &= LPS22HB_POWER_DOWN_MODE_DEF;
+  m_CTRL_REG1 &= LPS22HB::POWER_DOWN_MODE_DEF;
 
   // Block the data register updates while reading
-  m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_BDU);
+  m_CTRL_REG1 |= (1 << LPS22HB::CTRL_REG1_BDU_BIT);
 
   // Write the new CTRL_REG1 value
-  if (m_interface->write_byte(LPS22HB_CTRL_REG1, m_CTRL_REG1)) {
+  if (m_interface->write_byte(LPS22HB::REG_CTRL_REG1, m_CTRL_REG1)) {
     m_CTRL_REG1 = ctrl_reg1;
     return ERROR_WRITE_FAILED;
   }
 
   // Disable internal address incremental for multiple registers reading in one
   // read() call because FIFO stays disabled
-  m_CTRL_REG2 &= ~(1 << LPS22HB_CTRL_REG2_IF_ADD_INC);
+  m_CTRL_REG2 &= ~(1 << LPS22HB::CTRL_REG2_IF_ADD_INC_BIT);
 
-  if (m_interface->write_byte(LPS22HB_CTRL_REG2, m_CTRL_REG2)) {
+  if (m_interface->write_byte(LPS22HB::REG_CTRL_REG2, m_CTRL_REG2)) {
     m_CTRL_REG2 = ctrl_reg2;
     return ERROR_WRITE_FAILED;
   }
@@ -153,9 +153,9 @@ int LPS22HB::do_one_shot_measurement(void) {
 
   // Start a pressure and temperature measurement by writing 0x01 in to a
   // CTR_REG2
-  m_CTRL_REG2 |= (1 << LPS22HB_CTRL_REG2_ONE_SHOT);
+  m_CTRL_REG2 |= (1 << LPS22HB::CTRL_REG2_ONE_SHOT_BIT);
 
-  if (m_interface->write_byte(LPS22HB_CTRL_REG2, m_CTRL_REG2)) {
+  if (m_interface->write_byte(LPS22HB::REG_CTRL_REG2, m_CTRL_REG2)) {
     m_CTRL_REG2 = ctrl_reg2;
     return ERROR_WRITE_FAILED;
   }
@@ -168,38 +168,40 @@ int LPS22HB::read_data_registers() {
   uint8_t tBuffer[2];
   int16_t temperature_raw = 0x0;
   bool addr_auto_increment =
-      (m_CTRL_REG2 & (1 << LPS22HB_CTRL_REG2_IF_ADD_INC)) ? true : false;
+      (m_CTRL_REG2 & (1 << LPS22HB::CTRL_REG2_IF_ADD_INC_BIT)) ? true : false;
 
   int wd_counter = SENSOR_READING_WATCHDOG_COUNTER;
   uint8_t STATUS_REG = 0x00;
 
   // Check to see whenever a new pressure sample is available
   do {
-    if (m_interface->read(LPS22HB_STATUS_REG, &STATUS_REG, 1)) {
+    if (m_interface->read(LPS22HB::REG_STATUS_REG, &STATUS_REG, 1)) {
       return ERROR_READ_FAILED;
     }
     wd_counter--;
-  } while (!(STATUS_REG & (1 << LPS22HB_STATUS_REG_P_DA)) && wd_counter);
+  } while (!(STATUS_REG & (1 << LPS22HB::PS22HB_STATUS_REG_P_DA_BIT)) &&
+           wd_counter);
 
-  if (!wd_counter && !(STATUS_REG & (1 << LPS22HB_STATUS_REG_P_DA))) {
+  if (!wd_counter &&
+      !(STATUS_REG & (1 << LPS22HB::PS22HB_STATUS_REG_P_DA_BIT))) {
     return ERROR_SENSOR_READING_TIME_OUT;
   }
 
   if (addr_auto_increment) {
     // Register address auto increment is active. Read the 3 pressure registers
-    // starting from LPS22HB_PRESS_OUT_XL
-    if (m_interface->read(LPS22HB_PRESS_OUT_XL, pBuffer, 3)) {
+    // starting from LPS22HB::PRESS_OUT_XL
+    if (m_interface->read(LPS22HB::REG_PRESS_OUT_XL, pBuffer, 3)) {
       return ERROR_READ_FAILED;
     }
   } else {
     // Read the 3 pressure registers separately
-    if (m_interface->read(LPS22HB_PRESS_OUT_XL, pBuffer, 1)) {
+    if (m_interface->read(LPS22HB::REG_PRESS_OUT_XL, pBuffer, 1)) {
       return ERROR_READ_FAILED;
     }
-    if (m_interface->read(LPS22HB_PRESS_OUT_L, pBuffer + 1, 1)) {
+    if (m_interface->read(LPS22HB::REG_PRESS_OUT_L, pBuffer + 1, 1)) {
       return ERROR_READ_FAILED;
     }
-    if (m_interface->read(LPS22HB_PRESS_OUT_H, pBuffer + 2, 1)) {
+    if (m_interface->read(LPS22HB::REG_PRESS_OUT_H, pBuffer + 2, 1)) {
       return ERROR_READ_FAILED;
     }
   }
@@ -207,28 +209,28 @@ int LPS22HB::read_data_registers() {
   wd_counter = SENSOR_READING_WATCHDOG_COUNTER;
   // Check to see whenever a new temperature sample is available
   do {
-    if (m_interface->read(LPS22HB_STATUS_REG, &STATUS_REG, 1)) {
+    if (m_interface->read(LPS22HB::REG_STATUS_REG, &STATUS_REG, 1)) {
       return ERROR_READ_FAILED;
     }
     wd_counter--;
-  } while (!(STATUS_REG & (1 << LPS22HB_STATUS_REG_T_DA)) && wd_counter);
-  if (!wd_counter && !(STATUS_REG & (1 << LPS22HB_STATUS_REG_T_DA))) {
+  } while (!(STATUS_REG & (1 << LPS22HB::STATUS_REG_T_DA_BIT)) && wd_counter);
+  if (!wd_counter && !(STATUS_REG & (1 << LPS22HB::STATUS_REG_T_DA_BIT))) {
     return ERROR_SENSOR_READING_TIME_OUT;
   }
 
   if (addr_auto_increment) {
     // Read the 2 temperature registers in one go. The register address
     // increment is active
-    if (m_interface->read(LPS22HB_TEMP_OUT_L, tBuffer, 2)) {
+    if (m_interface->read(LPS22HB::REG_TEMP_OUT_L, tBuffer, 2)) {
       return ERROR_READ_FAILED;
     }
   } else {
     // Read the 2 temperature registers separately. The register address
     // increment is inactive
-    if (m_interface->read(LPS22HB_TEMP_OUT_L, tBuffer, 1)) {
+    if (m_interface->read(LPS22HB::REG_TEMP_OUT_L, tBuffer, 1)) {
       return ERROR_READ_FAILED;
     }
-    if (m_interface->read(LPS22HB_TEMP_OUT_H, tBuffer + 1, 1)) {
+    if (m_interface->read(LPS22HB::REG_TEMP_OUT_H, tBuffer + 1, 1)) {
       return ERROR_READ_FAILED;
     }
   }
@@ -264,34 +266,34 @@ int LPS22HB::config_continuous_mode(
 
   switch (output_data_rate) {
   case ST_Sensor::OUTPUT_DATA_RATE::ODR_1_Hz:
-    m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR0);
-    m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR1);
-    m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR2);
+    m_CTRL_REG1 |= (1 << LPS22HB::CTRL_REG1_ODR0_BIT);
+    m_CTRL_REG1 &= ~(1 << LPS22HB::CTRL_REG1_ODR1_BIT);
+    m_CTRL_REG1 &= ~(1 << LPS22HB::CTRL_REG1_ODR2_BIT);
     break;
   case ST_Sensor::OUTPUT_DATA_RATE::ODR_10_Hz:
-    m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR0);
-    m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR1);
-    m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR2);
+    m_CTRL_REG1 &= ~(1 << LPS22HB::CTRL_REG1_ODR0_BIT);
+    m_CTRL_REG1 |= (1 << LPS22HB::CTRL_REG1_ODR1_BIT);
+    m_CTRL_REG1 &= ~(1 << LPS22HB::CTRL_REG1_ODR2_BIT);
     break;
   case ST_Sensor::OUTPUT_DATA_RATE::ODR_25_Hz:
-    m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR0);
-    m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR1);
-    m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR2);
+    m_CTRL_REG1 |= (1 << LPS22HB::CTRL_REG1_ODR0_BIT);
+    m_CTRL_REG1 |= (1 << LPS22HB::CTRL_REG1_ODR1_BIT);
+    m_CTRL_REG1 &= ~(1 << LPS22HB::CTRL_REG1_ODR2_BIT);
     break;
   case ST_Sensor::OUTPUT_DATA_RATE::ODR_50_Hz:
-    m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR0);
-    m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR1);
-    m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR2);
+    m_CTRL_REG1 &= ~(1 << LPS22HB::CTRL_REG1_ODR0_BIT);
+    m_CTRL_REG1 &= ~(1 << LPS22HB::CTRL_REG1_ODR1_BIT);
+    m_CTRL_REG1 |= (1 << LPS22HB::CTRL_REG1_ODR2_BIT);
     break;
   case ST_Sensor::OUTPUT_DATA_RATE::ODR_75_Hz:
-    m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR0);
-    m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR1);
-    m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_ODR2);
+    m_CTRL_REG1 |= (1 << LPS22HB::CTRL_REG1_ODR0_BIT);
+    m_CTRL_REG1 &= ~(1 << LPS22HB::CTRL_REG1_ODR1_BIT);
+    m_CTRL_REG1 |= (1 << LPS22HB::CTRL_REG1_ODR2_BIT);
     break;
   case ST_Sensor::OUTPUT_DATA_RATE::ODR_ONE_SHOT:
-    m_CTRL_REG1 &=
-        ~((1 << LPS22HB_CTRL_REG1_ODR1) | (1 << LPS22HB_CTRL_REG1_ODR0));
-    m_CTRL_REG1 &= ~(1 << LPS22HB_CTRL_REG1_ODR2);
+    m_CTRL_REG1 &= ~((1 << LPS22HB::CTRL_REG1_ODR1_BIT) |
+                     (1 << LPS22HB::CTRL_REG1_ODR0_BIT));
+    m_CTRL_REG1 &= ~(1 << LPS22HB::CTRL_REG1_ODR2_BIT);
     break;
   default:
     return -1;
@@ -299,19 +301,19 @@ int LPS22HB::config_continuous_mode(
   }
 
   // Set BDU to 1 (do not update the output register until the read is done)
-  m_CTRL_REG1 |= (1 << LPS22HB_CTRL_REG1_BDU);
+  m_CTRL_REG1 |= (1 << LPS22HB::CTRL_REG1_BDU_BIT);
 
   // Disable automatic register address increment
-  m_CTRL_REG2 &= ~(1 << LPS22HB_CTRL_REG2_IF_ADD_INC);
+  m_CTRL_REG2 &= ~(1 << LPS22HB::CTRL_REG2_IF_ADD_INC_BIT);
 
   // Write the output data rate to CTRL_REG1
-  if (m_interface->write_byte(LPS22HB_CTRL_REG1, m_CTRL_REG1)) {
+  if (m_interface->write_byte(LPS22HB::REG_CTRL_REG1, m_CTRL_REG1)) {
     m_CTRL_REG1 = ctrl_reg1;
     return ERROR_WRITE_FAILED;
   }
 
   // Write the new value of the CTRL_REG2
-  if (m_interface->write_byte(LPS22HB_CTRL_REG2, m_CTRL_REG2)) {
+  if (m_interface->write_byte(LPS22HB::REG_CTRL_REG2, m_CTRL_REG2)) {
     m_CTRL_REG2 = ctrl_reg2;
     return ERROR_WRITE_FAILED;
   }

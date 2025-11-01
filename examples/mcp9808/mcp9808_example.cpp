@@ -10,6 +10,7 @@
  */
 
 #include <iostream>
+#include <memory>
 
 // #include "setila/setila_i2c.h"
 
@@ -18,56 +19,50 @@
 int main() {
   // Example tested on Pi Zero W rev 1.1 were I2C interface is /dev/i2c-1.
   // Put the correct device name for your platform
-  Bus_Master_Device *i2c_bus_master =
-      new Bus_Master_Device("/dev/i2c-1", BUS_TYPE::I2C_BUS);
+  std::unique_ptr<Bus_Master_Device> i2c_bus_master{
+      new Bus_Master_Device("/dev/i2c-1", BUS_TYPE::I2C_BUS)};
 
   // MCP9808 temperature sensor with the defaule I2C address of 0x18
-  MCP9808 *mcp9808_sensor = new MCP9808(MCP9808_I2C_ADDR);
+  std::unique_ptr<MCP9808> mcp9808_sensor{new MCP9808(MCP9808::I2C_ADDR)};
 
-  int status = 0;
+  int status{0};
 
-  do {
-    if (i2c_bus_master->open_bus() < 0) {
-      std::cout << "Failed to open master bus\n";
-      status = -1;
-      break;
-    }
+  if (i2c_bus_master->open_bus() < 0) {
+    std::cout << "Failed to open master bus\n";
+    return -1;
+  }
 
-    mcp9808_sensor->attach_to_bus(i2c_bus_master);
+  mcp9808_sensor->attach_to_bus(i2c_bus_master.get());
 
-    // Configure MCP9808 for continuous conversion mode of operation
-    status = mcp9808_sensor->set_mod_of_operation(
-        MCP9808::MODE_OF_OPERATION::CONTINUOUS_CONVERSION);
-    if (status) {
-      std::cout << "Setting mod of operation failed with error " << status
-                << '\n';
-      break;
-    }
+  // Configure MCP9808 for continuous conversion mode of operation
+  status = mcp9808_sensor->set_mod_of_operation(
+      MCP9808::MODE_OF_OPERATION::CONTINUOUS_CONVERSION);
+  if (status) {
+    std::cout << "Setting mod of operation failed with error " << status
+              << '\n';
+    return status;
+  }
 
-    status = mcp9808_sensor->set_resolution(MCP9808::RESOLUTION::RES_0_25_DEG);
-    if (status) {
-      std::cout << "Setting the resolution for the tenperature measurement "
-                   "with error "
-                << status << '\n';
-      break;
-    }
+  status = mcp9808_sensor->set_resolution(MCP9808::RESOLUTION::RES_0_25_DEG);
+  if (status) {
+    std::cout << "Setting the resolution for the tenperature measurement "
+                 "with error "
+              << status << '\n';
+    return status;
+  }
 
-    // Get the temperature readings
-    float ambient_temperature = -273.15;
+  // Get the temperature readings
+  float ambient_temperature = -273.15;
 
-    status = mcp9808_sensor->get_sensor_readings(ambient_temperature);
-    if (status) {
-      std::cout << "Reading the temperature from the sensor failed with error "
-                << status << '\n';
-      break;
-    }
+  status = mcp9808_sensor->get_sensor_readings(ambient_temperature);
+  if (status) {
+    std::cout << "Reading the temperature from the sensor failed with error "
+              << status << '\n';
+    return status;
+  }
 
-    std::cout << "\nAmbient temperature reading:\n\n";
-    std::cout << "Temperature T=" << ambient_temperature << "[°C]\n\n";
-  } while (0);
-
-  delete mcp9808_sensor;
-  delete i2c_bus_master;
+  std::cout << "\nAmbient temperature reading:\n\n";
+  std::cout << "Temperature T=" << ambient_temperature << "[°C]\n\n";
 
   return status;
 }

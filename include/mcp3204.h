@@ -15,46 +15,9 @@
 #define MCP3204_H_
 
 #include <cstdint>
+#include <sys/types.h>
 
 #include "spi_slave_device.h"
-
-#define START_BIT 0x04
-
-/* Masks for selecting the input channels. */
-#define MCP3204_CH_0 0x00
-#define MCP3204_CH_1 0x40
-#define MCP3204_CH_2 0x80
-#define MCP3204_CH_3 0xC0
-
-/** @brief SPI bus speed supported by MCP3204. */
-#define MCP3204_SPI_BUS_SPEED 100000
-
-/** @brief Size of data word of MCP3204(SPI bus parameter). */
-#define MCP3204_SPI_BITS_PER_WORD 8
-
-/**
- * \enum MCP3204_INPUT_CHANNEL_MODE
- * @brief Mode of operation for the MCP3204 input channels.
- */
-enum class MCP3204_INPUT_CHANNEL_MODE : uint8_t {
-  SINGLE_ENDED = 0x02, //!< SINGLE_ENDED
-  DIFFERENTIAL = 0xFB  //!< DIFFERENTIAL
-};
-
-/**
- * \enum MCP3204_INPUT_CHANNEL
- * @brief Definition of MCP3204 input channels
- */
-enum class MCP3204_INPUT_CHANNEL : uint8_t {
-  CH0,  /**< Single ended channel 0 */
-  CH1,  /**< Single ended channel 1 */
-  CH2,  /**< Single ended channel 2 */
-  CH3,  /**< Single ended channel 3 */
-  CH01, /* CH0 = IN+, CH1 = IN- Differential channel */
-  CH10, /* CH0 = IN-, CH1 = IN+ Differential channel */
-  CH23, /* CH2 = IN+, CH3 = IN- Differential channel */
-  CH32  /* CH2 = IN-, CH3 = IN+ Differential channel */
-};
 
 /**
  * \class MCP3204
@@ -65,6 +28,45 @@ enum class MCP3204_INPUT_CHANNEL : uint8_t {
  * @example mcp3204_example.cpp
  */
 class MCP3204 : public SPI_Slave_Device {
+public:
+  static constexpr uint8_t START_BIT{0x04};
+
+  /* Masks for selecting the input channels. */
+  static constexpr uint8_t CH_0{0x00};
+  static constexpr uint8_t CH_1{0x40};
+  static constexpr uint8_t CH_2{0x80};
+  static constexpr uint8_t CH_3{0xC0};
+
+  /** @brief SPI bus speed supported by MCP3204. */
+  static constexpr uint32_t SPI_BUS_SPEED{100000};
+
+  /** @brief Size of data word of MCP3204(SPI bus parameter). */
+  static constexpr uint8_t SPI_BITS_PER_WORD{8};
+
+  /**
+   * \enum MCP3204_INPUT_CHANNEL_MODE
+   * @brief Mode of operation for the MCP3204 input channels.
+   */
+  enum class INPUT_CHANNEL_MODE : uint8_t {
+    SINGLE_ENDED = 0x02, //!< SINGLE_ENDED
+    DIFFERENTIAL = 0xFB  //!< DIFFERENTIAL
+  };
+
+  /**
+   * \enum MCP3204_INPUT_CHANNEL
+   * @brief Definition of MCP3204 input channels
+   */
+  enum class INPUT_CHANNEL : uint8_t {
+    CH0,  /**< Single ended channel 0 */
+    CH1,  /**< Single ended channel 1 */
+    CH2,  /**< Single ended channel 2 */
+    CH3,  /**< Single ended channel 3 */
+    CH01, /* CH0 = IN+, CH1 = IN- Differential channel */
+    CH10, /* CH0 = IN-, CH1 = IN+ Differential channel */
+    CH23, /* CH2 = IN+, CH3 = IN- Differential channel */
+    CH32  /* CH2 = IN-, CH3 = IN+ Differential channel */
+  };
+
 private:
   uint16_t m_digital_value = 0x0000; /**< The result of the analog to digital
                                         conversion will be stored here. */
@@ -112,8 +114,8 @@ public:
    * @return 0 in case there is no error in communication with MCP3204, error
    * code if opposite
    */
-  int convert(MCP3204_INPUT_CHANNEL input_channel,
-              MCP3204_INPUT_CHANNEL_MODE input_channel_mode);
+  int convert(MCP3204::INPUT_CHANNEL input_channel,
+              MCP3204::INPUT_CHANNEL_MODE input_channel_mode);
 
   /**
    * @brief Get the digital representation of the analog input.

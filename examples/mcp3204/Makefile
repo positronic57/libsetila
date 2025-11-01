@@ -15,7 +15,7 @@ all: $(PROJECT)
 #Compile all of the source files
 %.o: %.cpp
 	@echo Compiling file: $<
-	g++ -std=c++0x -O0 -Wall -c -fmessage-length=0 "$^" -o "$@"
+	g++ -std=c++17 -O0 -Wall -c -fmessage-length=0 "$^" -o "$@"
 	@echo
 
 #Building the binary

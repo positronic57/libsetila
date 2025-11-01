@@ -10,12 +10,13 @@
  */
 
 #include <cstdint>
+#include <cstring>
+#include <memory>
 
 extern "C" {
 #include <fcntl.h>
 #include <linux/i2c-dev.h>
 #include <stdlib.h>
-#include <string.h>
 #include <sys/ioctl.h>
 #include <unistd.h>
 }
@@ -74,27 +75,23 @@ int I2C::i2c_slave_write_data(int i2c_master, uint8_t i2c_slave_address,
     return ERROR_NOT_ATTACHED_TO_A_BUS;
   }
 
-  uint8_t *write_buffer = (uint8_t *)calloc(buffer_size + 1, sizeof(uint8_t));
   uint8_t return_code = 0;
 
+  auto write_buffer{std::make_unique<uint8_t[]>(buffer_size + 1)};
   write_buffer[0] = registry;
-  memcpy(write_buffer + 1, buffer, buffer_size);
+  std::memcpy(&write_buffer[0] + 1, buffer, buffer_size);
 
-  do {
-    /*Select the sensor on the I2C bus with an address as a slave device.*/
-    if (ioctl(i2c_master, I2C_SLAVE, i2c_slave_address) < 0) {
-      return_code = ERROR_I2C_SELECT_SLAVE;
-      break;
-    }
+  /*Select the sensor on the I2C bus with an address as a slave device.*/
+  if (ioctl(i2c_master, I2C_SLAVE, i2c_slave_address) < 0) {
+    return_code = ERROR_I2C_SELECT_SLAVE;
+    return return_code;
+  }
 
-    /* Place the register address and its value on I2C bus */
-    if (write(i2c_master, write_buffer, buffer_size + 1) != (buffer_size + 1)) {
-      return_code = ERROR_WRITE_FAILED;
-    }
-
-  } while (0);
-
-  free(write_buffer);
+  /* Place the register address and its value on I2C bus */
+  if (write(i2c_master, &write_buffer[0], buffer_size + 1) !=
+      (buffer_size + 1)) {
+    return_code = ERROR_WRITE_FAILED;
+  }
 
   return return_code;
 }

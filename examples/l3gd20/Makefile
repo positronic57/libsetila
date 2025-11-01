@@ -16,7 +16,7 @@ OBJECTS += $(SOURCES:.cpp=.o)
 #Compile all of the source files
 %.o: %.cpp
 	@echo Compiling file: $<
-	g++ -std=c++0x -O0 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
+	g++ -std=c++17 -O0 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@)" -o "$@" "$<"
 	@echo
 
 #Building the binary

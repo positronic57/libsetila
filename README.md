@@ -15,7 +15,7 @@ The library is not thread safe.
 
 ### Software Requirements
 
-The library requires C++ compiler that supports C++11 standard.
+The library requires C++ compiler that supports C++17 standard.
 
 ### Supported Hardware
 
@@ -23,7 +23,7 @@ Besides being a general purpose tool for talking with target I2C/SPI devices, it
 
 #### Hardware Platforms and Operating System
 
-The library should work on any SOC/SBC with I2C/SPI interface(s), capable of running Linux with appropriate kernel drivers for the master controllers and C++11 compiler.
+The library should work on any SOC/SBC with I2C/SPI interface(s), capable of running Linux with appropriate kernel drivers for the master controllers and C++17 compiler.
 
 Successful tests have been done on:
 - Raspberry Pi Compute Module 4 Revision 1.1. running Debian 12 ("bookworm");

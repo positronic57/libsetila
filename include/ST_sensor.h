@@ -12,9 +12,8 @@
 #ifndef INCLUDE_ST_SENSOR_H_
 #define INCLUDE_ST_SENSOR_H_
 
-#include "i2c_slave_device.h"
+#include "bus_master_device.h"
 #include "slave_device.h"
-#include "spi_slave_device.h"
 
 /**
  * \class ST_Sensor
@@ -39,7 +38,7 @@ private:
       Slave_Device_Type::I2C_SLAVE_DEVICE; /**< Type of the communication
                                               interface (I2C/SPI). */
 
-  ST_Sensor() {};
+  ST_Sensor() = delete;
 
 public:
   /**
@@ -83,17 +82,16 @@ public:
   } m_output_data_rate = ODR_1_Hz;
 
   enum FULL_SCALE { FS_250_DPS = 0, FS_500_DPS, FS_2000_DPS };
-#if 0
-	using mode_of_operation_t = modes_of_operation_enum;
-	using output_data_rate_t = output_data_rate_enum;
-	using fifo_type_t = fifo_type_enum;
-	using full_scale_t = full_scale_enum;
-#endif
+
   Slave_Device *m_interface =
       nullptr; /**< Represents the sensor communication interface. It can be an
                   instance of I2C_Slave_Device or SPI_Slave_Deice class depening
                   of the m_interface_type value. */
 
+  ST_Sensor(const ST_Sensor &) = default;
+  ST_Sensor(ST_Sensor &&) = delete;
+  ST_Sensor &operator=(const ST_Sensor &) = default;
+  ST_Sensor &operator=(ST_Sensor &&) = delete;
   /**
    * @brief Constructor
    * Some ST sensors have hardware support for I2C or SPI only interface or they
@@ -115,10 +113,7 @@ public:
   virtual ~ST_Sensor();
 
   Slave_Device_Type interface_type() { return m_interface_type; };
-#if 0
-	mode_of_operation_t mode_of_operation() { return m_mode_of_operation; };
-	output_data_rate_t output_data_rate() { return m_output_data_rate; };
-#endif
+
   /**
    * @brief Check the type/model of the sensor by reading
    * the value of WHO_AM_I register from ST sensor and comparing it with

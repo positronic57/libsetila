@@ -15,13 +15,13 @@
 #define SETILA_VERSION_H
 
 #define SETILA_MAJOR_VERSION (0)
-#define SETILA_MINOR_VERSION (5)
-#define SETILA_PATCH_VERSION (10)
+#define SETILA_MINOR_VERSION (6)
+#define SETILA_PATCH_VERSION (0)
 
 /**
  * @brief Libsetila version as a string.
  */
-#define SETILA_VERSION_STRING "0.5.10"
+#define SETILA_VERSION_STRING "0.6.0"
 
 /**
  *  @brief Libsetila version encoded as a hexadecimal number.

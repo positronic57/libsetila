@@ -9,83 +9,79 @@
  * @copyright GNU General Public License v3
  *
  */
+#include <cstdint>
 #include <iostream>
+#include <memory>
 
 #include "setila/L3GD20.h"
 
 int main() {
-  int status = 0;
+  int status{0};
 
-  Bus_Master_Device *i2c_bus_master =
-      new Bus_Master_Device("/dev/i2c-1", BUS_TYPE::I2C_BUS);
+  std::unique_ptr<Bus_Master_Device> i2c_bus_master{
+      new Bus_Master_Device("/dev/i2c-1", BUS_TYPE::I2C_BUS)};
 
-  L3GD20 *L3GD20_sensor =
-      new L3GD20(Slave_Device_Type::I2C_SLAVE_DEVICE, i2c_bus_master, 0x6B);
+  constexpr uint8_t L3GD20_I2C_Address{0x6B};
+  std::unique_ptr<L3GD20> L3GD20_sensor{
+      new L3GD20(Slave_Device_Type::I2C_SLAVE_DEVICE, i2c_bus_master.get(),
+                 L3GD20_I2C_Address)};
 
-  do {
-    if (i2c_bus_master->open_bus() < 0) {
-      std::cout << "Failed to open master bus\n";
-      status = -1;
-      break;
-    }
+  if (i2c_bus_master->open_bus() < 0) {
+    std::cout << "Failed to open master bus\n";
+    return -1;
+  }
 
-    // Same as setting fields in L3GD20::Config structure and calling
-    // L3GD20::configure()
-    status = L3GD20_sensor->set_mode_of_operation(
-        ST_Sensor::OUTPUT_DATA_RATE::ODR_95_Hz,
-        ST_Sensor::FULL_SCALE::FS_250_DPS,
-        ST_Sensor::MODE_OF_OPERATION::OP_NORMAL_MODE,
-        ST_Sensor::FIFO_TYPE::FIFO);
-    if (status) {
-      std::cout << "Error: configure sensor failed with error " << status
-                << '\n';
-      break;
-    }
+  // Same as setting fields in L3GD20::Config structure and calling
+  // L3GD20::configure()
+  status = L3GD20_sensor->set_mode_of_operation(
+      ST_Sensor::OUTPUT_DATA_RATE::ODR_95_Hz, ST_Sensor::FULL_SCALE::FS_250_DPS,
+      ST_Sensor::MODE_OF_OPERATION::OP_NORMAL_MODE, ST_Sensor::FIFO_TYPE::FIFO);
+  if (status) {
+    std::cout << "Error: configure sensor failed with error " << status << '\n';
+    return status;
+  }
 
-    // Read the content of the FIFO buffer of the sensor
-    status = L3GD20_sensor->get_sensor_readings();
-    if (status) {
-      std::cout << "Error: get sensor data failed with error " << status
-                << '\n';
-      break;
-    }
+  // Read the content of the FIFO buffer of the sensor
+  status = L3GD20_sensor->get_sensor_readings();
+  if (status) {
+    std::cout << "Error: get sensor data failed with error " << status << '\n';
+    return status;
+  }
 
-    std::cout << "Content of the FIFO, starting from the latest to the oldest "
-              << "measurement: \n";
-    // Newest reading at the top of the FIFO
-    std::cout << " raw X = " << L3GD20_sensor->data.angular_rate_X
-              << " Y = " << L3GD20_sensor->data.angular_rate_Y
-              << " Z = " << L3GD20_sensor->data.angular_rate_Z
+  std::cout << "Content of the FIFO, starting from the latest to the oldest "
+            << "measurement: \n";
+  // Newest reading at the top of the FIFO
+  std::cout << " raw X = " << L3GD20_sensor->data.angular_rate_X
+            << " Y = " << L3GD20_sensor->data.angular_rate_Y
+            << " Z = " << L3GD20_sensor->data.angular_rate_Z
+            << " in [mdps] X = "
+            << L3GD20::angular_rate_in_mdps(L3GD20_sensor->config,
+                                            L3GD20_sensor->data.angular_rate_X)
+            << " Y = "
+            << L3GD20::angular_rate_in_mdps(L3GD20_sensor->config,
+                                            L3GD20_sensor->data.angular_rate_Y)
+            << " Z = "
+            << L3GD20::angular_rate_in_mdps(L3GD20_sensor->config,
+                                            L3GD20_sensor->data.angular_rate_Z)
+            << '\n';
+
+  // The rest of the readings till the oldest sample
+  for (int item = L3GD20::FIFO_SIZE_IN_RAW_VALUES - 4; item >= 2;
+       item = item - 3) {
+    std::cout << " raw X = " << L3GD20_sensor->data.FIFO[item]
+              << " Y = " << L3GD20_sensor->data.FIFO[item - 1]
+              << " Z = " << L3GD20_sensor->data.FIFO[item - 2]
               << " in [mdps] X = "
-              << L3GD20::angular_rate_in_mdps(
-                     L3GD20_sensor->config, L3GD20_sensor->data.angular_rate_X)
+              << L3GD20::angular_rate_in_mdps(L3GD20_sensor->config,
+                                              L3GD20_sensor->data.FIFO[item])
               << " Y = "
               << L3GD20::angular_rate_in_mdps(
-                     L3GD20_sensor->config, L3GD20_sensor->data.angular_rate_Y)
+                     L3GD20_sensor->config, L3GD20_sensor->data.FIFO[item - 1])
               << " Z = "
               << L3GD20::angular_rate_in_mdps(
-                     L3GD20_sensor->config, L3GD20_sensor->data.angular_rate_Z)
+                     L3GD20_sensor->config, L3GD20_sensor->data.FIFO[item - 2])
               << '\n';
-
-    // The rest of the readings till the oldest sample
-    for (int item = L3GD20_FIFO_SIZE_IN_RAW_VALUES - 4; item >= 2;
-         item = item - 3) {
-      std::cout
-          << " raw X = " << L3GD20_sensor->data.FIFO[item]
-          << " Y = " << L3GD20_sensor->data.FIFO[item - 1]
-          << " Z = " << L3GD20_sensor->data.FIFO[item - 2] << " in [mdps] X = "
-          << L3GD20::angular_rate_in_mdps(L3GD20_sensor->config,
-                                          L3GD20_sensor->data.FIFO[item])
-          << " Y = "
-          << L3GD20::angular_rate_in_mdps(L3GD20_sensor->config,
-                                          L3GD20_sensor->data.FIFO[item - 1])
-          << " Z = "
-          << L3GD20::angular_rate_in_mdps(L3GD20_sensor->config,
-                                          L3GD20_sensor->data.FIFO[item - 2])
-          << '\n';
-    }
-
-  } while (0);
+  }
 
   return status;
 }

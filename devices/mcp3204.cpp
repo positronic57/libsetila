@@ -18,7 +18,6 @@ extern "C" {
 
 #include "mcp3204.h"
 #include "setila_errors.h"
-#include "spi_bus.h"
 
 int MCP3204::configure(SPI_BUS_MODE mcp3204_SPI_mode, float ref_voltage) {
   if ((mcp3204_SPI_mode == SPI_BUS_MODE::MODE_1) ||
@@ -29,8 +28,8 @@ int MCP3204::configure(SPI_BUS_MODE mcp3204_SPI_mode, float ref_voltage) {
   /* Set the SPI bus parameters for MCP3204. */
   if (spi_bus_master()) {
     if (spi_bus_master()->bus_master_fd() != -1) {
-      if (spi_bus_master()->configure(mcp3204_SPI_mode, MCP3204_SPI_BUS_SPEED,
-                                      MCP3204_SPI_BITS_PER_WORD, 0) < 0) {
+      if (spi_bus_master()->configure(mcp3204_SPI_mode, MCP3204::SPI_BUS_SPEED,
+                                      MCP3204::SPI_BITS_PER_WORD, 0) < 0) {
         return ERROR_CONF_BUS_MASTER_FAILED;
       }
     } else {
@@ -49,8 +48,8 @@ int MCP3204::configure(SPI_BUS_MODE mcp3204_SPI_mode, float ref_voltage) {
  * Start the AD conversion process and read the digital value
  * of the analog signal from MCP3204.
  */
-int MCP3204::convert(MCP3204_INPUT_CHANNEL input_channel,
-                     MCP3204_INPUT_CHANNEL_MODE input_channel_mode) {
+int MCP3204::convert(MCP3204::INPUT_CHANNEL input_channel,
+                     MCP3204::INPUT_CHANNEL_MODE input_channel_mode) {
   int ret = 0;
 
   unsigned char tx[] = {0x00, 0x00, 0x00};
@@ -69,34 +68,34 @@ int MCP3204::convert(MCP3204_INPUT_CHANNEL input_channel,
 
   /* Define the channel input mode */
   switch (input_channel_mode) {
-  case MCP3204_INPUT_CHANNEL_MODE::SINGLE_ENDED:
+  case MCP3204::INPUT_CHANNEL_MODE::SINGLE_ENDED:
     tx[0] |= static_cast<uint8_t>(input_channel_mode);
     break;
-  case MCP3204_INPUT_CHANNEL_MODE::DIFFERENTIAL:
+  case MCP3204::INPUT_CHANNEL_MODE::DIFFERENTIAL:
     tx[0] &= static_cast<uint8_t>(input_channel_mode);
     break;
   default:
-    tx[0] |= static_cast<uint8_t>(MCP3204_INPUT_CHANNEL_MODE::SINGLE_ENDED);
+    tx[0] |= static_cast<uint8_t>(MCP3204::INPUT_CHANNEL_MODE::SINGLE_ENDED);
     break;
   }
 
   /* set the input channel/pair */
   switch (input_channel) {
-  case MCP3204_INPUT_CHANNEL::CH0:
-  case MCP3204_INPUT_CHANNEL::CH01:
-    tx[1] |= MCP3204_CH_0;
+  case MCP3204::INPUT_CHANNEL::CH0:
+  case MCP3204::INPUT_CHANNEL::CH01:
+    tx[1] |= MCP3204::CH_0;
     break;
-  case MCP3204_INPUT_CHANNEL::CH1:
-  case MCP3204_INPUT_CHANNEL::CH10:
-    tx[1] |= MCP3204_CH_1;
+  case MCP3204::INPUT_CHANNEL::CH1:
+  case MCP3204::INPUT_CHANNEL::CH10:
+    tx[1] |= MCP3204::CH_1;
     break;
-  case MCP3204_INPUT_CHANNEL::CH2:
-  case MCP3204_INPUT_CHANNEL::CH23:
-    tx[1] |= MCP3204_CH_2;
+  case MCP3204::INPUT_CHANNEL::CH2:
+  case MCP3204::INPUT_CHANNEL::CH23:
+    tx[1] |= MCP3204::CH_2;
     break;
-  case MCP3204_INPUT_CHANNEL::CH3:
-  case MCP3204_INPUT_CHANNEL::CH32:
-    tx[1] |= MCP3204_CH_3;
+  case MCP3204::INPUT_CHANNEL::CH3:
+  case MCP3204::INPUT_CHANNEL::CH32:
+    tx[1] |= MCP3204::CH_3;
     break;
   }
 

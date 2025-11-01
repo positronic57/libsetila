@@ -15,75 +15,10 @@
 #ifndef BMP085_H_
 #define BMP085_H_
 
+#include <array>
 #include <cstdint>
 
 #include "i2c_slave_device.h"
-
-/**
- * @def createUword(MSB,LSB)
- * Creates a new unsigned word from two unsigned byte values:
- * \a MSB as most significant byte of the word and \a LSB as least significant
- * byte of the word.
- */
-#define createUword(MSB, LSB) (uint16_t)((MSB << 8) | LSB)
-
-/**
- * @def createSword(MSB,LSB)
- * Creates a new signed word from two unsigned byte values:
- * \a MSB as most significant byte of the word and \a LSB as least significant
- * byte of the word.
- */
-#define createSword(MSB, LSB) (int16_t)((MSB << 8) | LSB)
-
-/**
- * \enum BMP085_Register
- *
- * @brief List of BMP085/BMP180 registers.
- */
-enum class BMP085_Register : uint8_t {
-  CALIBRATION_TABLE =
-      0xAA, /**< Address of the first register from the calibration table. */
-  DATA_REG_MSB = 0xF6, /**< Address of the MSB from the data register. */
-  DATA_REG_LSB = 0xF7, /**< Address of the LSB from the data register. */
-  DATA_REG_XLASB =
-      0xF8,          /**< Address of the XLASB part from the data register. */
-  CONTROL_REG = 0xF4 /**< Address of the control register. */
-};
-
-/**
- * \enum BMP085_Command
- * @brief List of BMP085/BMP180 commands. This values are written into
- * CONTROL_REG.
- */
-enum class BMP085_Command : uint8_t {
-  START_TEMPERATURE_MEASUREMENT = 0x2E, /**< Start a temperature measurement. */
-  START_PRESSURE_MEASUREMENT = 0x34     /**< Start a pressure measurement. */
-};
-
-/* @} */
-
-/**
- * \enum BMP085_Over_Sampling
- *
- * @brief Definition of BMP085/BMP180 modes.
- */
-enum class BMP085_Over_Sampling : uint8_t {
-  ULTRA_LOW_POWER = 0,  /**< Ultra low power mode (oversampling setting = 0). */
-  STANDARD,             /**< Standard mode (oversampling setting = 1). */
-  HIGH_RESOLUTION,      /**< High resolution mode (oversampling setting = 2). */
-  ULTRA_HIGH_RESOLUTION /**< Ultra high resolution mode (oversampling setting =
-                           3). */
-};
-
-/**
- * BMP085/BMP180 conversion time[ms] for each mode of operation.
- */
-const unsigned int BMP085_Pressure_Conversion_Time[] = {
-    5,  // Conversion time in ms for ultra low power mode.
-    8,  // Conversion time in ms for standard mode.
-    14, // Conversion time in ms for high resolution.
-    26  // Conversion time in ms for ultra high resolution.
-};
 
 /** \class BMP085
  *  @ingroup I2C_SLAVE_DEVICES
@@ -94,6 +29,47 @@ const unsigned int BMP085_Pressure_Conversion_Time[] = {
  *  @example bmp085_bmp180.cpp
  */
 class BMP085 : public I2C_Slave_Device {
+public:
+  // I2C address of the sensor
+  static constexpr uint8_t I2C_ADDRESS{0x77};
+
+  // Addresses of the registers
+  static constexpr uint8_t CALIBRATION_TABLE{
+      0xAA}; /**< Address of the first register from the calibration table. */
+  static constexpr uint8_t DATA_REG_MSB{
+      0xF6}; /**< Address of the MSB from the data register. */
+  static constexpr uint8_t DATA_REG_LSB{
+      0xF7}; /**< Address of the LSB from the data register. */
+  static constexpr uint8_t DATA_REG_XLASB{
+      0xF8}; /**< Address of the XLASB part from the data register. */
+  static constexpr uint8_t CONTROL_REG{
+      0xF4}; /**< Address of the control register. */
+
+  // Commands
+  static constexpr uint8_t CMD_START_TEMPERATURE_MEASUREMENT{
+      0x2E}; /**< Start a temperature measurement. */
+  static constexpr uint8_t CMD_START_PRESSURE_MEASUREMENT{
+      0x34}; /**< Start a pressure measurement. */
+
+  static constexpr std::array<uint8_t, 4> pressureConversionTimes{
+      5,  // Conversion time in ms for ultra low power mode.
+      8,  // Conversion time in ms for standard mode.
+      14, // Conversion time in ms for high resolution.
+      26  // Conversion time in ms for ultra high resolution.
+  };
+
+  /**
+   * \enum BMP085_Over_Sampling
+   *
+   * @brief Definition of BMP085/BMP180 modes.
+   */
+  enum class OverSampling : uint8_t {
+    ULTRA_LOW_POWER = 0,  /**< Ultra low power mode. */
+    STANDARD,             /**< Standard mode. */
+    HIGH_RESOLUTION,      /**< High resolution mode. */
+    ULTRA_HIGH_RESOLUTION /**< Ultra high resolution mode. */
+  };
+
 private:
   uint8_t m_calibration_table[22] = {0x00}; /**< Calibration table */
   float m_pressure_reading =
@@ -104,11 +80,10 @@ private:
       0x00}; /**<  Buffer for raw pressure data. */
   uint8_t m_raw_temperature_data[2] = {
       0x00}; /**<  Buffer for raw temperature data. */
-  BMP085_Over_Sampling m_oss =
-      BMP085_Over_Sampling::STANDARD; /**< Over sampling mode */
+  OverSampling m_oss{BMP085::OverSampling::STANDARD}; /**< Over sampling mode */
 
 public:
-  BMP085() : I2C_Slave_Device(0x77) {};
+  BMP085() : I2C_Slave_Device(BMP085::I2C_ADDRESS) {};
 
   /**
    * @brief A constructor.
@@ -129,7 +104,7 @@ public:
    * @param[in] SensorAddress defines the I2C address of the sensor.
    * @param[in] oss defines the sensor mode of operation.
    */
-  explicit BMP085(uint8_t SensorAddress, BMP085_Over_Sampling oss);
+  explicit BMP085(uint8_t SensorAddress, BMP085::OverSampling oss);
 
   /**
    * @brief A class destructor.
@@ -167,7 +142,7 @@ public:
    *
    * @param[in] oss the new value for the over sampling mode of the sensor
    */
-  void over_sampling(BMP085_Over_Sampling oss);
+  void over_sampling(BMP085::OverSampling oss);
 
 private:
   /**

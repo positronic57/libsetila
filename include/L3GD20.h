@@ -22,209 +22,6 @@
 
 #include "ST_sensor.h"
 
-/** \defgroup L3GD20_DESC L3GD20
- * @ingroup DEV_REG_CMD
- */
-
-/** \defgroup L3GD20_FIFO_SRC_REG_DESC L3GD20 FIFO_SRC register description
- * @ingroup L3GD20_DESC
- */
-/* @{ */
-// L3GD20 FIFO status register bits
-#define L3GD20_FIFO_SRC_WT 7
-#define L3GD20_FIFO_SRC_OVRN 6
-#define L3GD20_FIFO_SRC_EMPTY 5
-#define L3GD20_FIFO_SRC_FSS4 4
-#define L3GD20_FIFO_SRC_FSS3 3
-#define L3GD20_FIFO_SRC_FSS2 2
-#define L3GD20_FIFO_SRC_FSS1 1
-#define L3GD20_FIFO_SRC_FSS0 0
-/* @} */
-
-/** \defgroup L3GD20_FIFO_CTRL_REG_DESC L3GD20 FIFO_CTRL register description
- * @ingroup L3GD20_DESC
- */
-/* @{ */
-// L3GD20 FIFO control register
-#define L3GD20_FIFO_CTRL_REG_FM2 7
-#define L3GD20_FIFO_CTRL_REG_FM1 6
-#define L3GD20_FIFO_CTRL_REG_FM0 5
-#define L3GD20_FIFO_CTRL_REG_WTM4 4
-#define L3GD20_FIFO_CTRL_REG_WTM3 3
-#define L3GD20_FIFO_CTRL_REG_WTM2 2
-#define L3GD20_FIFO_CTRL_REG_WTM1 1
-#define L3GD20_FIFO_CTRL_REG_WTM0 0
-/* @} */
-
-/** \defgroup L3GD20_CTRL_REG1_REG_DESC L3GD20 CTRL_REG1 register description
- * @ingroup L3GD20_DESC
- */
-/* @{ */
-// L3GD20 control register 1 bits
-#define L3GD20_CTRL_REG1_DR1 7
-#define L3GD20_CTRL_REG1_DR0 6
-#define L3GD20_CTRL_REG1_BW1 5
-#define L3GD20_CTRL_REG1_BW0 4
-#define L3GD20_CTRL_REG1_PD 3
-#define L3GD20_CTRL_REG1_Zen 2
-#define L3GD20_CTRL_REG1_Xen 1
-#define L3GD20_CTRL_REG1_Yen 0
-/* @} */
-
-/** \defgroup L3GD20_CTRL_REG2_REG_DESC L3GD20 CTRL_REG2 register description
- * @ingroup L3GD20_DESC
- */
-/* @{ */
-// L3GD20 control register 2 bits
-#define L3GD20_CTRL_REG2_HPM1 5
-#define L3GD20_CTRL_REG2_HPM0 4
-#define L3GD20_CTRL_REG2_HPCF3 3
-#define L3GD20_CTRL_REG2_HPCF2 2
-#define L3GD20_CTRL_REG2_HPCF1 1
-#define L3GD20_CTRL_REG2_HPCF0 0
-/* @} */
-
-/** \defgroup L3GD20_CTRL_REG3_REG_DESC L3GD20 CTRL_REG3 register description
- * @ingroup L3GD20_DESC
- */
-/* @{ */
-// L3GD20 control register 3 bits
-#define L3GD20_CTRL_REG3_I1_Int1 7
-#define L3GD20_CTRL_REG3_I1_Boot 6
-#define L3GD20_CTRL_REG3_H_Lactive 5
-#define L3GD20_CTRL_REG3_PP_OD 4
-#define L3GD20_CTRL_REG3_I2_DRDY 3
-#define L3GD20_CTRL_REG3_I2_WTM 2
-#define L3GD20_CTRL_REG3_I2_ORun 1
-#define L3GD20_CTRL_REG3_I2_Empty 0
-/* @} */
-
-/** \defgroup L3GD20_CTRL_REG4_REG_DESC L3GD20 CTRL_REG4 register description
- * @ingroup L3GD20_DESC
- */
-/* @{ */
-// L3GD20 control register 4 bits
-#define L3GD20_CTRL_REG4_BDU 7
-#define L3GD20_CTRL_REG4_BLE 6
-#define L3GD20_CTRL_REG4_FS1 5
-#define L3GD20_CTRL_REG4_FS0 4
-#define L3GD20_CTRL_REG4_SIM 0
-/* @} */
-
-/** \defgroup L3GD20_CTRL_REG5_REG_DESC L3GD20 CTRL_REG5 register description
- * @ingroup L3GD20_DESC
- */
-/* @{ */
-// L3GD20 control register 5 bits
-#define L3GD20_CTRL_REG5_BOOT 7
-#define L3GD20_CTRL_REG5_FIFO_EN 6
-#define L3GD20_CTRL_REG5_HPen 4
-#define L3GD20_CTRL_REG5_INT1_Sel1 3
-#define L3GD20_CTRL_REG5_INT1_Sel0 2
-#define L3GD20_CTRL_REG5_Out_Sel1 1
-#define L3GD20_CTRL_REG5_Out_Sel0 0
-/* @} */
-
-/** \defgroup L3GD20_CTRL_STATUS_REG_DESC L3GD20 STATUS register description
- * @ingroup L3GD20_DESC
- */
-/* @{ */
-// L3GD20 status register bits
-#define L3GD20_STATUS_REG_ZYXOR
-#define L3GD20_STATUS_REG_ZOR 6
-#define L3GD20_STATUS_REG_YOR 5
-#define L3GD20_STATUS_REG_XOR 4
-#define L3GD20_STATUS_REG_ZYXDA 3
-#define L3GD20_STATUS_REG_ZDA 2
-#define L3GD20_STATUS_REG_YDA 1
-#define L3GD20_STATUS_REG_XDA 0
-/* @} */
-
-/** \defgroup L3GD20_INT1_CFG_REG_DESC L3GD20 INT1_CGF register description
- * @ingroup L3GD20_DESC
- */
-/* @{ */
-// L3GD20 INT1_CFG register bits
-#define L3GD20_INT1_CFG_AND_OR 7
-#define L3GD20_INT1_CFG_LIR 6
-#define L3GD20_INT1_CFG_ZHIE 5
-#define L3GD20_INT1_CFG_ZLIE 4
-#define L3GD20_INT1_CFG_YHIE 3
-#define L3GD20_INT1_CFG_YLIE 2
-#define L3GD20_INT1_CFG_XHIE 1
-#define L3GD20_INT1_CFG_XLIE 0
-/* @} */
-
-/** \defgroup L3GD20_REG_DEF L3GD20 Register address map
- * @ingroup L3GD20_DESC
- */
-/* @{ */
-/** @brief Address of WHO_AM_I register. */
-#define L3GD20_WHO_AM_I 0x0F
-/** @brief Address of CTRL_REG1 register. */
-#define L3GD20_CTRL_REG1 0x20
-/** @brief Address of CTRL_REG2 register. */
-#define L3GD20_CTRL_REG2 0x21
-/** @brief Address of CTRL_REG3 register. */
-#define L3GD20_CTRL_REG3 0x22
-/** @brief Address of CTRL_REG4 register. */
-#define L3GD20_CTRL_REG4 0x23
-/** @brief Address of CTRL_REG5 register. */
-#define L3GD20_CTRL_REG5 0x24
-/** @brief Address of Reference register */
-#define L3GD20_REFERENCE 0x25
-/** @brief Address of OUT_TEMP register */
-#define L3GD20_OUT_TEMP 0x26
-/** @brief Address of STATUS register */
-#define L3GD20_STATUS_REG 0x27
-/** @brief Address of OUT_X_L register. */
-#define L3GD20_OUT_X_L 0x28
-/** @brief Address of OUT_X_H register. */
-#define L3GD20_OUT_X_H 0x29
-/** @brief Address of OUT_Y_L register. */
-#define L3GD20_OUT_Y_L 0x2A
-/** @brief Address of OUT_Y_H register. */
-#define L3GD20_OUT_Y_H 0x2B
-/** @brief Address of OUT_Z_L register. */
-#define L3GD20_OUT_Z_L 0x2C
-/** @brief Address of OUT_Z_H register. */
-#define L3GD20_OUT_Z_H 0x2D
-/** @brief Address of FIFO_CTRL register. */
-#define L3GD20_FIFO_CTRL_REG 0x2E
-/** @brief Address of FIFO_SRC register. */
-#define L3GD20_FIFO_SRC_REG 0x2F
-/** @brief Address of INT1_CFG register. */
-#define L3GD20_INT1_CFG 0x30
-/** @brief Address of INT1_SRC register. */
-#define L3GD20_INT1_SRC 0x31
-/** @brief Address of INT1_THS_XH register. */
-#define L3GD20_INT1_THS_XH 0x32
-/** @brief Address of INT1_THS_XL register. */
-#define L3GD20_INT1_THS_XL 0x33
-/** @brief Address of INT1_THS_YH register. */
-#define L3GD20_INT1_THS_YH 0x34
-/** @brief Address of INT1_THS_YL register. */
-#define L3GD20_INT1_THS_YL 0x35
-/** @brief Address of INT1_THS_ZH register. */
-#define L3GD20_INT1_THS_ZH 0x36
-/** @brief Address of INT1_THS_ZL register. */
-#define L3GD20_INT1_THS_ZL 0x37
-/** @brief Address of INT1_DURATION register. */
-#define L3GD20_INT1_DURATION 0x38
-/* @} */
-
-/** \defgroup L3GD20_HARDWARE_PARAMS L3GD20 hardware parameters
- * @ingroup L3GD20_DESC
- */
-/* @{ */
-/** ID of the device, stored in WHO_AM_I register */
-#define L3GD20_DEVICE_ID 0xD4
-/** Size of the FIFO buffer in bytes. */
-#define L3GD20_FIFO_SIZE_IN_BYTES 192
-/** Size of the FIFO in 16-bit values */
-#define L3GD20_FIFO_SIZE_IN_RAW_VALUES 96
-/* @} */
-
 /**
  * \class L3GD20
  *  @ingroup I2C_SLAVE_DEVICES
@@ -236,6 +33,184 @@
  *  @example l3dg20_FIFO_example.cpp
  */
 class L3GD20 : public ST_Sensor {
+public:
+  /** \defgroup L3GD20_DESC L3GD20
+   * @ingroup DEV_REG_CMD
+   */
+
+  /** \defgroup L3GD20_FIFO_SRC_REG_DESC L3GD20 FIFO_SRC register description
+   * @ingroup L3GD20_DESC
+   */
+  /* @{ */
+  // L3GD20 FIFO status register bits
+  static constexpr uint8_t FIFO_SRC_WT_BIT{7};
+  static constexpr uint8_t FIFO_SRC_OVRN_BIT{6};
+  static constexpr uint8_t FIFO_SRC_EMPTY_BIT{5};
+  static constexpr uint8_t FIFO_SRC_FSS4_BIT{4};
+  static constexpr uint8_t FIFO_SRC_FSS3_BIT{3};
+  static constexpr uint8_t FIFO_SRC_FSS2_BIT{2};
+  static constexpr uint8_t FIFO_SRC_FSS1_BIT{1};
+  static constexpr uint8_t FIFO_SRC_FSS0_BIT{0};
+  /* @} */
+
+  /** \defgroup L3GD20_FIFO_CTRL_REG_DESC L3GD20 FIFO_CTRL register description
+   * @ingroup L3GD20_DESC
+   */
+  /* @{ */
+  // L3GD20 FIFO control register
+  static constexpr uint8_t FIFO_CTRL_REG_FM2_BIT{7};
+  static constexpr uint8_t FIFO_CTRL_REG_FM1_BIT{6};
+  static constexpr uint8_t FIFO_CTRL_REG_FM0_BIT{5};
+  static constexpr uint8_t FIFO_CTRL_REG_WTM4_BIT{4};
+  static constexpr uint8_t FIFO_CTRL_REG_WTM3_BIT{3};
+  static constexpr uint8_t FIFO_CTRL_REG_WTM2_BIT{2};
+  static constexpr uint8_t FIFO_CTRL_REG_WTM1_BIT{1};
+  static constexpr uint8_t FIFO_CTRL_REG_WTM0_BIT{0};
+  /* @} */
+
+  /** \defgroup L3GD20_CTRL_REG1_REG_DESC L3GD20 CTRL_REG1 register description
+   * @ingroup L3GD20_DESC
+   */
+  /* @{ */
+  // L3GD20 control register 1 bits
+  static constexpr uint8_t CTRL_REG1_DR1_BIT{7};
+  static constexpr uint8_t CTRL_REG1_DR0_BIT{6};
+  static constexpr uint8_t CTRL_REG1_BW1_BIT{5};
+  static constexpr uint8_t CTRL_REG1_BW0_BIT{4};
+  static constexpr uint8_t CTRL_REG1_PD_BIT{3};
+  static constexpr uint8_t CTRL_REG1_Zen_BIT{2};
+  static constexpr uint8_t CTRL_REG1_Xen_BIT{1};
+  static constexpr uint8_t CTRL_REG1_Yen_BIT{0};
+  /* @} */
+
+  /** \defgroup L3GD20_CTRL_REG2_REG_DESC L3GD20 CTRL_REG2 register description
+   * @ingroup L3GD20_DESC
+   */
+  /* @{ */
+  // L3GD20 control register bits
+  static constexpr uint8_t CTRL_REG2_HPM1_BIT{5};
+  static constexpr uint8_t CTRL_REG2_HPM0_BIT{4};
+  static constexpr uint8_t CTRL_REG2_HPCF3_BIT{3};
+  static constexpr uint8_t CTRL_REG2_HPCF2_BIT{2};
+  static constexpr uint8_t CTRL_REG2_HPCF1_BIT{1};
+  static constexpr uint8_t CTRL_REG2_HPCF0_BIT{0};
+  /* @} */
+
+  /** \defgroup L3GD20_CTRL_REG3_REG_DESC L3GD20 CTRL_REG3 register description
+   * @ingroup L3GD20_DESC
+   */
+  /* @{ */
+  // L3GD20 control register bits
+  static constexpr uint8_t CTRL_REG3_I1_Int1_BIT{7};
+  static constexpr uint8_t CTRL_REG3_I1_Boot_BIT{6};
+  static constexpr uint8_t CTRL_REG3_H_Lactive_BIT{5};
+  static constexpr uint8_t CTRL_REG3_PP_OD_BIT{4};
+  static constexpr uint8_t CTRL_REG3_I2_DRDY_BIT{3};
+  static constexpr uint8_t CTRL_REG3_I2_WTM_BIT{2};
+  static constexpr uint8_t CTRL_REG3_I2_ORun_BIT{1};
+  static constexpr uint8_t CTRL_REG3_I2_Empty_BIT{0};
+  /* @} */
+
+  /** \defgroup L3GD20_CTRL_REG4_REG_DESC L3GD20 CTRL_REG4 register description
+   * @ingroup L3GD20_DESC
+   */
+  /* @{ */
+  // L3GD20 control register bits
+  static constexpr uint8_t CTRL_REG4_BDU_BIT{7};
+  static constexpr uint8_t CTRL_REG4_BLE_BIT{6};
+  static constexpr uint8_t CTRL_REG4_FS1_BIT{5};
+  static constexpr uint8_t CTRL_REG4_FS0_BIT{4};
+  static constexpr uint8_t CTRL_REG4_SIM_BIT{0};
+  /* @} */
+
+  /** \defgroup L3GD20_CTRL_REG5_REG_DESC L3GD20 CTRL_REG5 register description
+   * @ingroup L3GD20_DESC
+   */
+  /* @{ */
+  // L3GD20 control register bits
+  static constexpr uint8_t CTRL_REG5_BOOT_BIT{7};
+  static constexpr uint8_t CTRL_REG5_FIFO_EN_BIT{6};
+  static constexpr uint8_t CTRL_REG5_HPen_BIT{4};
+  static constexpr uint8_t CTRL_REG5_INT1_Sel1_BIT{3};
+  static constexpr uint8_t CTRL_REG5_INT1_Sel0_BIT{2};
+  static constexpr uint8_t CTRL_REG5_Out_Sel1_BIT{1};
+  static constexpr uint8_t CTRL_REG5_Out_Sel0_BIT{0};
+  /* @} */
+
+  /** \defgroup L3GD20_CTRL_STATUS_REG_DESC L3GD20 STATUS register description
+   * @ingroup L3GD20_DESC
+   */
+  /* @{ */
+  // L3GD20 status register bits
+  static constexpr uint8_t STATUS_REG_ZYXOR_BIT{7};
+  static constexpr uint8_t STATUS_REG_ZOR_BIT{6};
+  static constexpr uint8_t STATUS_REG_YOR_BIT{5};
+  static constexpr uint8_t STATUS_REG_XOR_BIT{4};
+  static constexpr uint8_t STATUS_REG_ZYXDA_BIT{3};
+  static constexpr uint8_t STATUS_REG_ZDA_BIT{2};
+  static constexpr uint8_t STATUS_REG_YDA_BIT{1};
+  static constexpr uint8_t STATUS_REG_XDA_BIT{0};
+  /* @} */
+
+  /** \defgroup L3GD20_INT1_CFG_REG_DESC L3GD20 INT1_CGF register description
+   * @ingroup L3GD20_DESC
+   */
+  /* @{ */
+  // L3GD20 INT1_CFG register bits
+  static constexpr uint8_t INT1_CFG_AND_OR_BIT{7};
+  static constexpr uint8_t INT1_CFG_LIR_BIT{6};
+  static constexpr uint8_t INT1_CFG_ZHIE_BIT{5};
+  static constexpr uint8_t INT1_CFG_ZLIE_BIT{4};
+  static constexpr uint8_t INT1_CFG_YHIE_BIT{3};
+  static constexpr uint8_t INT1_CFG_YLIE_BIT{2};
+  static constexpr uint8_t INT1_CFG_XHIE_BIT{1};
+  static constexpr uint8_t INT1_CFG_XLIE_BIT{0};
+  /* @} */
+
+  /** \defgroup L3GD20_REG_DEF L3GD20 Register address map
+   * @ingroup L3GD20_DESC
+   */
+  /* @{ */
+  static constexpr uint8_t REG_WHO_AM_I{0x0F};
+  static constexpr uint8_t REG_CTRL_REG1{0x20};
+  static constexpr uint8_t REG_CTRL_REG2{0x21};
+  static constexpr uint8_t REG_CTRL_REG3{0x22};
+  static constexpr uint8_t REG_CTRL_REG4{0x23};
+  static constexpr uint8_t REG_CTRL_REG5{0x24};
+  static constexpr uint8_t REG_REFERENCE{0x25};
+  static constexpr uint8_t REG_OUT_TEMP{0x26};
+  static constexpr uint8_t REG_STATUS_REG{0x27};
+  static constexpr uint8_t REG_OUT_X_L{0x28};
+  static constexpr uint8_t REG_OUT_X_H{0x29};
+  static constexpr uint8_t REG_OUT_Y_L{0x2A};
+  static constexpr uint8_t REG_OUT_Y_H{0x2B};
+  static constexpr uint8_t REG_OUT_Z_L{0x2C};
+  static constexpr uint8_t REG_OUT_Z_H{0x2D};
+  static constexpr uint8_t REG_FIFO_CTRL_REG{0x2E};
+  static constexpr uint8_t REG_FIFO_SRC_REG{0x2F};
+  static constexpr uint8_t REG_INT1_CFG{0x30};
+  static constexpr uint8_t REG_INT1_SRC{0x31};
+  static constexpr uint8_t REG_INT1_THS_XH{0x32};
+  static constexpr uint8_t REG_INT1_THS_XL{0x33};
+  static constexpr uint8_t REG_INT1_THS_YH{0x34};
+  static constexpr uint8_t REG_INT1_THS_YL{0x35};
+  static constexpr uint8_t REG_INT1_THS_ZH{0x36};
+  static constexpr uint8_t REG_INT1_THS_ZL{0x37};
+  static constexpr uint8_t REG_INT1_DURATION{0x38};
+  /* @} */
+
+  /** \defgroup L3GD20_HARDWARE_PARAMS L3GD20 hardware parameters
+   * @ingroup L3GD20_DESC
+   */
+  /* @{ */
+  /** ID of the device, stored in WHO_AM_I register */
+  static constexpr uint8_t DEVICE_ID{0xD4};
+  /** Size of the FIFO buffer in bytes. */
+  static constexpr uint8_t FIFO_SIZE_IN_BYTES{192};
+  /** Size of the FIFO in 16-bit values */
+  static constexpr uint8_t FIFO_SIZE_IN_RAW_VALUES{96};
+  /* @} */
+
 public:
   /**
    * \struct Config
@@ -277,16 +252,16 @@ public:
    * angular_rate_in_mdps() function.
    */
   struct Data {
-    int16_t FIFO[L3GD20_FIFO_SIZE_IN_RAW_VALUES] =
+    int16_t FIFO[FIFO_SIZE_IN_RAW_VALUES] =
         {}; /**< A buffer for the FIFO of the sensor */
     const int16_t &angular_rate_X =
-        FIFO[L3GD20_FIFO_SIZE_IN_RAW_VALUES -
+        FIFO[FIFO_SIZE_IN_RAW_VALUES -
              3]; /**< Reference for the latest measurement for the X-axis */
     const int16_t &angular_rate_Y =
-        FIFO[L3GD20_FIFO_SIZE_IN_RAW_VALUES -
+        FIFO[FIFO_SIZE_IN_RAW_VALUES -
              2]; /**< Reference for the latest measurement for the Y-axis */
     const int16_t &angular_rate_Z =
-        FIFO[L3GD20_FIFO_SIZE_IN_RAW_VALUES -
+        FIFO[FIFO_SIZE_IN_RAW_VALUES -
              1]; /**< Reference for the latest measurement for the Z-axis */
   } data;
 
@@ -315,10 +290,12 @@ private:
       0x00; /**< Holds the last value of the FIFO_CTRL_REG. */
 
 public:
+  L3GD20() = delete;
+
   /**
    * @brief A constructor.
    *
-   * @param[in] interface_type enum for selecting the communication interface of
+   * ram[in] interface_type enum for selecting the communication interface of
    * the sensor (I2C or SPI)
    * @param[in] bus_master_device pointer to the object that represents the
    * master of the bus where the sensor is connected
